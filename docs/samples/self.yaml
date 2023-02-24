@@ -1,0 +1,6 @@
+$id: self
+
+table:class: iolanta:File
+table:columns:
+  - table:self
+  - schema:url

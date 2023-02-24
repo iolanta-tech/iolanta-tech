@@ -1,0 +1,41 @@
+site_name: iolanta.tech
+site_url: https://iolanta.tech
+repo_url: https://github.com/iolanta-tech/iolanta-tech
+repo_name: iolanta-tech
+copyright: Copyright © 2023 iolanta.tech
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - attr_list
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+plugins:
+  - search
+  - awesome-pages
+  - iolanta
+  - mkdocstrings:
+      handlers:
+        python:
+          import:
+            - https://docs.python-requests.org/en/master/objects.inv
+  - macros:
+      on_error_fail: true
+      modules:
+        - mkdocs_iolanta.macros
+        - macros
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.indexes
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - content.code.annotate

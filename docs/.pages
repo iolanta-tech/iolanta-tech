@@ -1,0 +1,10 @@
+nav:
+    - mkdocs-iolanta:
+      - "mkdocs:":
+        - File.md
+        - title.md
+        - url.md
+      - ...
+
+    - tables
+    - jinja2
