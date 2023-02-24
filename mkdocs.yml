@@ -29,7 +29,6 @@ plugins:
       on_error_fail: true
       modules:
         - mkdocs_iolanta.macros
-        - macros
 
 theme:
   name: material
