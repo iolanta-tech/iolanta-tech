@@ -9,6 +9,7 @@ packages = [{include = "iolanta_tech"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+iolanta = "^1.0.8"
 
 [tool.poetry.group.dev.dependencies]
 jeeves-yeti-pyproject = "^0.2.12"

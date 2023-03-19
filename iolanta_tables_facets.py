@@ -3,8 +3,8 @@ from pathlib import Path
 import funcy
 from dominate.tags import code, table, td, tr
 from dominate.util import raw
-from iolanta.facet import Facet
-from iolanta.namespaces import LOCAL
+from iolanta.facets.html.base import HTMLFacet
+from iolanta.namespaces import LOCAL, IOLANTA
 
 CODE_TEMPLATE = """
 ```{language} title="{title}"
@@ -15,7 +15,7 @@ CODE_TEMPLATE = """
 """
 
 
-class SideBySide(Facet):
+class SideBySide(HTMLFacet):
     """YAML code and its rendering."""
 
     def show(self):
@@ -46,14 +46,14 @@ class SideBySide(Facet):
                             '',
                         ),
                     ),
-                    self.render(self.iri),
+                    self.render(self.iri, environments=[IOLANTA.html]),
                 ),
             ),
             data_facet='side-by-side',
         )
 
 
-class Code(Facet):
+class Code(HTMLFacet):
     """Print contents of a file in a code fence."""
 
     def show(self):
