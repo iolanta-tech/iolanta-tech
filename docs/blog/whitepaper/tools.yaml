@@ -1,0 +1,27 @@
+$included:
+  - $id: treemap
+    rdfs:label: ":material-chart-tree:"
+    rdfs:comment: "Tree Map"
+
+  - $id: hierarchical
+    rdfs:label: ":fontawesome-solid-folder-tree:"
+    rdfs:comment: Tree
+
+  - $id: visualization-types
+    rdfs:domain:
+      $id: VisualizationTool
+      rdfs:label: Tools
+
+  - rdfs:label: Rhizomer
+    $type: VisualizationTool
+    schema:url: https://rhizomik.net/rhizomer
+    year: 2006
+    numeric: yes
+    temporal: yes
+    spatial: yes
+    hierarchical: yes
+    graph: yes
+    chart: yes
+    map: yes
+    treemap: yes
+    timeline: yes

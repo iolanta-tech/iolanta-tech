@@ -1,0 +1,15 @@
+$id: tools-with-various-visualizations
+table:columns:
+  - table:self
+  - year
+  - numeric
+  - temporal
+  - spatial
+  - hierarchical
+  - graph
+  - chart
+  - map
+  - treemap
+  - timeline
+
+table:class: VisualizationTool

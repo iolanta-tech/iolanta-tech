@@ -4,7 +4,7 @@ import funcy
 from dominate.tags import code, table, td, tr
 from dominate.util import raw
 from iolanta.facets.html.base import HTMLFacet
-from iolanta.namespaces import LOCAL, IOLANTA
+from iolanta.namespaces import IOLANTA, LOCAL
 
 CODE_TEMPLATE = """
 ```{language} title="{title}"

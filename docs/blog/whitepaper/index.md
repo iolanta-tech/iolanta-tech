@@ -11,20 +11,50 @@ Linked Data ⋅ JSON-LD ⋅ YAML-LD ⋅ Data Visualization
 
 ## Introduction
 
+**As** a Semantic Web enthusiast, **I want** to see a wider adoption of Semantic Web technology **because** I believe it to be beneficial to humanity.
 
-Recent years have seen an increase of adoption for Linked Data technology [TODO see materials of conferences perhaps], but it is still far from the mainstream [TODO look into StackOverflow keyword statistics]. Wider, mainstream adoption among professionals, students, and general audience is the key [TODO] to unlock the full potential of this powerful technology stack for the benefit of humanity as a whole.
+As a software related technology, Semantic Web & Linked Data should be used, first and foremost, by software engineering professionals. StackOverflow[^stackoverflow], a top Q&A hub many developers around the world use, provides popularity statistics per question tag. An attempt to chart statistics for a few Semantic Web related tags yields[^stackoverflow-trends] the chart below.
 
-Arguably one of the reasons of World Wide Web success was its potential to virality [TODO]: HTML was an easy enough language for technically savvy users to start develop new websites at the era of early Web. How to establish a similar virality for Linked Data?
+<figure markdown>
+  ![StackOverflow trends](stackoverflow-trends.svg)
+  <figcaption><strong>Figure 1.</strong> StackOverflow trends for a few Semantic Web related tags</figcaption>
+</figure>
 
-* Linked Data should be easy to author for technical users,
-* They should see a reason, a motivation for getting into authoring their own pieces of Linked Data: that should solve their problems, relieve their pains.
+[^stackoverflow]: https://stackoverflow.com
+[^stackoverflow-trends]: https://insights.stackoverflow.com/trends?tags=rdf%2Cowl%2Csparql
 
-[TODO why do we choose JSON-LD and YAML-LD as serialization formats? Compare editor support maybe]
+This chart highlights several issues catching the eye:
 
+1. Clearly, the wide software development community treats Semantic Web as a very niche technology: the popularity of the selected tags almost never exceeds 0.05% of all questions asked. SPARQL[^sparql] is the clear leader;
+2. StackOverflow has more related tags (such as `rdfs`, `linked-data`, `json-ld`), — but the Trends tool does not permit to select them, presumably due to them being even less popular than the ones we were able to render;
+3. Most concerning, however, is the fact that the interest to the highlighted tags **does not grow** over time.
 
-It would seem obvious that, if professionals in other areas are to utilize Linked Data technology in their work they cannot be expected to dive deep into the depths of raw triples, which are not very suitable for human consumption. Users would need tools to *visualize* the raw triples, converting them into a form better suitable for human eye.
+[^sparql]: SPARQL Query Language (TODO link)
 
-That need is met with Linked Data visualization tools — software systems which present Linked Data as
+There are probably multiple potential reasons to this situation, let us name a few of those:
+
+* Perhaps Semantic Web and Linked Data aren't that useful after all, maybe they are a technology for the sake of technology which no one really needs?
+* Or maybe Semantic Web really has potential but there are obstacles to its realization?
+  Among which may be, for instance:
+    * Lack of a clear problem or user pain that Linked Data can solve,
+    * Deficiencies of tooling to solve existing problems with Linked Data,
+        * Linked Data export ← from software systems,
+        * Linked Data import → into software systems,
+        * Reasoning on Linked Data,
+        * Linked Data Visualization for human eye
+          > ⬆️ This is the one this post looks into, by the way ☺
+    * Lack of viable commercial models for companies to profit from such solutions,
+    * Or maybe unwillingness of the wide community to try and play with the Linked Data approach.
+
+[TODO reference the Criticism about Semantic Web article I think]
+
+Each of these items might be a subject of a separate book or perhaps even a library but within this paper we will confine ourselves to one question only.
+
+## How do we visualize Linked Data?
+
+If professionals in software development or in other areas are to utilize Linked Data technology in their work they probably cannot be expected to dive deep into the depths of raw triples, which are not very suitable for human consumption. Users would need tools to *visualize* the raw triples, converting them into a form better suitable for human eye.
+
+That need is met with Linked Data visualization tools — software systems which present Linked Data as:
 
 * lists,
 * tables,
@@ -32,32 +62,46 @@ That need is met with Linked Data visualization tools — software systems which
 * maps,
 * trees,
 * graphs,
-* and a variety of subtypes of those [TODO: Visualization Methods Periodic Table].
+* and any other form[^data-visualizations-periodic-table] of data visualization known in the industry.
+
+[^data-visualizations-periodic-table]: https://www.visual-literacy.org/periodic_table/periodic_table.html 
 
 Data visualization is a way to help the user create a mental model [TODO], converting data into understanding; for each particular situation and use case a unique visualization might be needed.
 
-Linked Data Visualization book [TODO] provides a comprehensive review of state-of-the-art for Linked Data visualization tools as of 2020. The book lists 100500+ [TODO] software packages and compares them by a multitude of parameters. To present the results of analysis, the book uses tables [TODO], timelines [TODO], … and other visualization methods.
+**Linked Data Visualization** book[^ld-visualization-book] provides a comprehensive review of state-of-the-art for Linked Data visualization tools as of 2020. The book lists several dozen software tools, and compares them by multiple parameters.
+
+[^ld-visualization-book]: Linked Data Visualization: Techniques, Tools and Big Data. — Laura Po, Nikos Bikakis, Federico Desimoni, and George Papastefanatos | Morgan & Claypool, 2020 http://www.linkeddatavisualization.com/
+
+The book features a number of data visualizations: tables, timelines, and charts, — but curiously enough, it never mentions that these visualizations were **authored** using one or multiple tools the book explores.
+
+## Criteria for a Linked Data visualization system
+
+What kind of visualization tool can be actually used to aid building such a book, or perhaps, this article?
+
+### Which category should it belong to?
+
+Visualization tools categories are listed below.
+
+
+The instruments are categorized into a few groups explored below.
+
+<figure markdown>
+  {{ render("whitepaper-categories") }}
+  <figcaption><strong>Figure 2.</strong> Visualization tools categories.</figcaption>
+</figure>
+
+### State of the art: existing tools
+
+To present the analysis results, the book uses tables. For instance, Table 3.1 compares a number of tools that enjoy multiple visualization types each. We reproduce that table below.
+
+{{ render("tools-with-various-visualizations") }}
 
 Curiously, none of the tools analyzed in the book was actually used to generate any of the data visualizations it posesses. At least that is what we have to assume: otherwise the authors would probably have mentioned the fact because it makes a point about usability and practical wortheness of Linked Data capable software.
 
 What kind of a visualizaion system could the Linked Data Visualization book authors use to help generate tables and diagrams in their book?
 
+
 ## Visualization system: criteria
-
-### Use case?
-
-[TODO]
-
-### Category
-
-The instruments are categorized into a few groups:
-
-1. browsers and exploratory tools [TODO],
-2. tools using multiple visualization types [TODO] — essential, since for preparing papers, presentations and any kind of information analysis, it is essential to be able to use any visualization method that is appropriate to the case at hand;
-3. graph-based visualization tools [TODO] is a special category because Linked Data is graph data by nature; but we cannot ,
-4. domain and vocabulary specific, and device oriented tools [TODO],
-5. ontology visualization tools [TODO] — can be probably excluded because an ontology is just one possible subject for data visualization, and probably not its focus in most use cases.
-
 
 ### Self-hostedness
 
@@ -297,3 +341,4 @@ TODO a diagram of how the browser works
     * JSON-RPC [TODO] controlled plugins;
 * Improve the experience of browsing remote networks;
 * …
+
