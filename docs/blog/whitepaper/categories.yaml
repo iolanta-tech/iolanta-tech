@@ -2,7 +2,7 @@ $id: whitepaper-categories
 table:columns:
   - table:self
   - $id: good
-    rdfs:label: Good?
+    rdfs:label: "Good?"
   - notes
 table:rows:
   - rdfs:label: Browsers & exploratory tools

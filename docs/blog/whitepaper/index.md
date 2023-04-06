@@ -5,9 +5,21 @@ hide:
   - navigation
 ---
 
+<style>
+.no-min-width th {
+  min-width: auto !important;
+}
+</style>
+
 Linked Data ⋅ JSON-LD ⋅ YAML-LD ⋅ Data Visualization
 
-> TODO: abstract
+> **Purpose:** Linked Data in its raw form, as a collection of triples (or quads) — is arguably not easily comprehensible for a human being. Linked Data visualization is a conversion from triples to a visual form (a table, a chart, et cetera) — a form that we humans can easily read, understand, and interact with. The method and particular details of a visualization very much depend on the purpose data is visualized for.
+
+> **Methodology:** A minimalistic yet extendable vocabulary is proposed to guide visualization based on the data and to allow customization of the visual form via the knowledge graph itself. A plugin based visualization software architecture implementing the vocabulary is proposed and its main algorithm is described. A software tool implementing the proposed principles is built and published as an open source project. A few plugins for it (implementing a few visualization types and integrations) are also provided.
+
+> **Findings:** A significant portion of this paper has been built from Linked Data using the software being demonstrated. Documentation pages for the software were also partially generated from knowledge expressed as Linked Data. It is believed that the toolset facilitates productivity and aids reuse of knowledge.
+
+> **Value:** Knowledge reuse and wider adoption of Linked Data as lingua franca among professionals from various fields promises to improve decision making quality humanity can afford, which should improve our ability as a species to tackle the difficult issues we are facing. This is an attempt to make a small step forward in this direction.
 
 ## Introduction
 
@@ -85,16 +97,19 @@ Visualization tools categories are listed below.
 
 The instruments are categorized into a few groups explored below.
 
-<figure markdown>
+<figure>
   {{ render("whitepaper-categories") }}
   <figcaption><strong>Figure 2.</strong> Visualization tools categories.</figcaption>
 </figure>
 
 ### State of the art: existing tools
 
-To present the analysis results, the book uses tables. For instance, Table 3.1 compares a number of tools that enjoy multiple visualization types each. We reproduce that table below.
+To present the analysis results, the book uses tables. For instance, Table 3.1 compares a number of tools that enjoy multiple visualization types each. We reproduce that table below plus section 3.2 (browsers).
 
-{{ render("tools-with-various-visualizations") }}
+<figure class="no-min-width">
+  {{ render("tools-with-various-visualizations") }}
+  <figcaption><strong>Figure 3.</strong> Visualization tools comparison.</figcaption>
+</figure>
 
 Curiously, none of the tools analyzed in the book was actually used to generate any of the data visualizations it posesses. At least that is what we have to assume: otherwise the authors would probably have mentioned the fact because it makes a point about usability and practical wortheness of Linked Data capable software.
 

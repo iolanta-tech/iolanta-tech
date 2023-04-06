@@ -1,12 +1,4 @@
 $included:
-  - $id: treemap
-    rdfs:label: ":material-chart-tree:"
-    rdfs:comment: "Tree Map"
-
-  - $id: hierarchical
-    rdfs:label: ":fontawesome-solid-folder-tree:"
-    rdfs:comment: Tree
-
   - $id: visualization-types
     rdfs:domain:
       $id: VisualizationTool
@@ -20,6 +12,7 @@ $included:
     temporal: yes
     spatial: yes
     hierarchical: yes
+    table: "?"
     graph: yes
     chart: yes
     map: yes
