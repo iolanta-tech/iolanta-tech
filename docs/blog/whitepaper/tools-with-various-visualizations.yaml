@@ -41,10 +41,25 @@ table:columns:
         rdfs:comment: Chart
         rdfs:label: " "
 
+      - $id: pie-chart
+        mkdocs-material:icon: material/chart-pie.svg
+        rdfs:comment: Pie Chart
+        rdfs:label: " "
+
+      - $id: bubble-chart
+        mkdocs-material:icon: material/chart-bubble.svg
+        rdfs:comment: Bubble Chart
+        rdfs:label: " "
+
       - $id: map
         mkdocs-material:icon: material/map.svg
         rdfs:comment: Map
         rdfs:label: " "
+
+      - $id: tree
+        mkdocs-material:icon: material/file-tree.svg
+        rdfs:label: " "
+        rdfs:comment: Tree
 
       - $id: treemap
         mkdocs-material:icon: material/chart-tree.svg
@@ -57,3 +72,5 @@ table:columns:
         rdfs:comment: Timeline
 
 table:class: VisualizationTool
+table:order-by:
+  - year

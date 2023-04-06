@@ -3,23 +3,25 @@ title: "Iolanta: Linked Data authoring and ontology-based visualization system"
 date: "2023-03-19"
 hide:
   - navigation
+  - toc
 ---
 
 <style>
 .no-min-width th {
-  min-width: auto !important;
+  min-width: 2rem !important;
 }
 </style>
 
 Linked Data ⋅ JSON-LD ⋅ YAML-LD ⋅ Data Visualization
 
-> **Purpose:** Linked Data in its raw form, as a collection of triples (or quads) — is arguably not easily comprehensible for a human being. Linked Data visualization is a conversion from triples to a visual form (a table, a chart, et cetera) — a form that we humans can easily read, understand, and interact with. The method and particular details of a visualization very much depend on the purpose data is visualized for.
-
-> **Methodology:** A minimalistic yet extendable vocabulary is proposed to guide visualization based on the data and to allow customization of the visual form via the knowledge graph itself. A plugin based visualization software architecture implementing the vocabulary is proposed and its main algorithm is described. A software tool implementing the proposed principles is built and published as an open source project. A few plugins for it (implementing a few visualization types and integrations) are also provided.
-
-> **Findings:** A significant portion of this paper has been built from Linked Data using the software being demonstrated. Documentation pages for the software were also partially generated from knowledge expressed as Linked Data. It is believed that the toolset facilitates productivity and aids reuse of knowledge.
-
-> **Value:** Knowledge reuse and wider adoption of Linked Data as lingua franca among professionals from various fields promises to improve decision making quality humanity can afford, which should improve our ability as a species to tackle the difficult issues we are facing. This is an attempt to make a small step forward in this direction.
+!!! info "Abstract"
+    **Purpose:** Linked Data in its raw form, as a collection of triples (or quads) — is arguably not easily comprehensible for a human being. Linked Data visualization is a conversion from triples to a visual form (a table, a chart, et cetera) — a form that we humans can easily read, understand, and interact with. The method and particular details of a visualization very much depend on the purpose data is visualized for.
+    
+    **Methodology:** A minimalistic yet extendable vocabulary is proposed to guide visualization based on the data and to allow customization of the visual form via the knowledge graph itself. A plugin based visualization software architecture implementing the vocabulary is proposed and its main algorithm is described. A software tool implementing the proposed principles is built and published as an open source project. A few plugins for it (implementing a few visualization types and integrations) are also provided.
+    
+    **Findings:** A significant portion of this paper has been built from Linked Data using the software being demonstrated. Documentation pages for the software were also partially generated from knowledge expressed as Linked Data. It is believed that the toolset facilitates productivity and aids reuse of knowledge.
+    
+    **Value:** Knowledge reuse and wider adoption of Linked Data as lingua franca among professionals from various fields promises to improve decision making quality humanity can afford, which should improve our ability as a species to tackle the difficult issues we are facing. This is an attempt to make a small step forward in this direction.
 
 ## Introduction
 
@@ -80,43 +82,80 @@ That need is met with Linked Data visualization tools — software systems which
 
 Data visualization is a way to help the user create a mental model [TODO], converting data into understanding; for each particular situation and use case a unique visualization might be needed.
 
-**Linked Data Visualization** book[^ld-visualization-book] provides a comprehensive review of state-of-the-art for Linked Data visualization tools as of 2020. The book lists several dozen software tools, and compares them by multiple parameters.
+**Linked Data Visualization** book[^ld-visualization-book] provides a comprehensive review of state-of-the-art for Linked Data visualization tools as of 2020. The book lists several dozen software tools and compares them by multiple parameters.
 
 [^ld-visualization-book]: Linked Data Visualization: Techniques, Tools and Big Data. — Laura Po, Nikos Bikakis, Federico Desimoni, and George Papastefanatos | Morgan & Claypool, 2020 http://www.linkeddatavisualization.com/
 
 The book features a number of data visualizations: tables, timelines, and charts, — but curiously enough, it never mentions that these visualizations were **authored** using one or multiple tools the book explores.
 
-## Criteria for a Linked Data visualization system
+The authors had put an immense effort into setting up, comparing and analysing Linked Data visualization software, but none of the tools they tried gave them an impression that it can aid them in the complex and tedious task of authoring a book, — a process solely focused on analysing, managing and distilling information, a kind of work that Linked Data should be most useful for.
 
-What kind of visualization tool can be actually used to aid building such a book, or perhaps, this article?
+This sounds like a shortcoming.
 
-### Which category should it belong to?
+## Can we do better?
 
-Visualization tools categories are listed below.
+Can we build a Linked Data visualization tool which could help prepare visualizations for publications like
 
+* Linked Data Visualization book we mentioned before
+* or, say, this article?
 
-The instruments are categorized into a few groups explored below.
+What criteria should such a tool satisfy?
+
+### Categories
+
+In Figure 2 we reproduce the categories of Linked Data visualization tools that Blomquist at al indicate, and select the particular categories we will be interested in.
 
 <figure>
   {{ render("whitepaper-categories") }}
-  <figcaption><strong>Figure 2.</strong> Visualization tools categories.</figcaption>
+  <figcaption><strong>Figure 2.</strong> Visualization tools categories</figcaption>
 </figure>
 
-### State of the art: existing tools
+Let's examine the two categories which look promising.
 
-To present the analysis results, the book uses tables. For instance, Table 3.1 compares a number of tools that enjoy multiple visualization types each. We reproduce that table below plus section 3.2 (browsers).
+#### Multiple visualization types
+
+To present analysis results for this category, Table 3.1[^ld-visualization-book] summarizes capabilities which those tools have. We reproduce that table below with a few modifications:
+
+* Tools which were not marked as Available are excluded because, for practical purposes, they no longer exist;
+* The `Setting` and `Application Type` columns are omitted because they say "Generic" and "Web" respectively for all elements;
+* The original table used single-character codes to denote data and visualization types (for instance, `C` for "chart"), — we use icons instead. Please hover over an icon to see a tooltip explaining its meaning;
+* We add a new column :material-table: for tabular visualization and fill in its values.
 
 <figure class="no-min-width">
   {{ render("tools-with-various-visualizations") }}
-  <figcaption><strong>Figure 3.</strong> Visualization tools comparison.</figcaption>
+  <figcaption><strong>Figure 3.</strong> Visualization tools supporting multiple visualizations</figcaption>
 </figure>
 
-Curiously, none of the tools analyzed in the book was actually used to generate any of the data visualizations it posesses. At least that is what we have to assume: otherwise the authors would probably have mentioned the fact because it makes a point about usability and practical wortheness of Linked Data capable software.
+!!! danger "TODO"
+    Not all necessary columns are rendered, fix that
 
-What kind of a visualizaion system could the Linked Data Visualization book authors use to help generate tables and diagrams in their book?
+It is immediately obvious why Figure 3 (or its prototype, Table 3.1 in the book) itself could not be generated using any of these tools: none of them **supports a tabular visualization**.
 
+!!! danger "TODO"
+    is that right?
 
-## Visualization system: criteria
+While it was likely a deliberate design decision, tables are a comparatively simple yet extremely useful form of presenting information, ubiquitous in all kinds of publications. Hence we end up with first Criterion for our target visualization system:
+
+!!! info "Criterion 1"
+    Visualization tool must be capable of generating tables.
+
+#### Browsers
+
+!!! danger "TODO"
+    Document browsers here.
+
+### Plugin support
+
+The range of available visualizations is infinite, and it would be impossible to accommodate any possible use case in one software package. Users might want to create their own visualizations for their very specific needs. These thoughts call for a plugin approach [TODO], where a visualization toolkit can be extended using predefined hooks via third-party plugins.
+
+!!! danger "TODO"
+    Show that none of these tools supports plugins. Or do they?
+
+!!! info "Criterion 2"
+    Visualization tool must be extendable via plugins implementing various data types and visualization types.
+
+!!! danger "TODO"
+    Write in these criteria as LD to reuse them.
 
 ### Self-hostedness
 
@@ -133,11 +172,6 @@ Applying the 5-star model of Linked Data [TODO: https://www.w3.org/2011/gld/wiki
 Self-hosted Linked Data visualizations should be extremely easy to share and to use for professionals in other areas of human activity, from aerospace engineering to fine arts.
 
 [TODO: target this better to the book writing use case]
-
-### Plugin support
-
-The range of available visualizations is infinite, and it would be impossible to accommodate any possible use case in one software package. Users might want to create their own visualizations for their very specific needs. These thoughts call for a plugin approach [TODO], where a visualization toolkit can be extended using predefined hooks via third-party plugins.
-
 
 ### Embeddability
 

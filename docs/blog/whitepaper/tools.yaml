@@ -1,4 +1,22 @@
 $included:
+  - $id: input-formats
+    table:columns:
+      - $id: rdf-xml
+        rdfs:label: RDF/XML
+      - $id: n3
+        rdfs:label: N3
+      - $id: turtle
+        rdfs:label: Turtle
+      - $id: json-ld
+        rdfs:label: JSON-LD
+      - $id: yaml-ld
+        rdfs:label: YAML-LD
+  - $id: open-source
+  - $id: plugin-support
+    rdfs:label: Supports plugins
+  - $id: self-hosted
+    rdfs:label: Self-hosted
+
   - $id: visualization-types
     rdfs:domain:
       $id: VisualizationTool
@@ -12,9 +30,99 @@ $included:
     temporal: yes
     spatial: yes
     hierarchical: yes
-    table: "?"
     graph: yes
     chart: yes
     map: yes
     treemap: yes
     timeline: yes
+
+  - rdfs:label: LDVizWiz
+    $type: VisualizationTool
+    schema:url: https://www.researchgate.net/publication/269390887_Towards_a_Linked-Data_based_Visualization_Wizard
+    year: 2014
+    spatial: yes
+    hierarchical: yes
+    graph: yes
+    map: yes
+    pie-chart: yes
+    tree: yes
+
+  - rdfs:label: SynopsViz
+    $type: VisualizationTool
+    schema:url: https://www.researchgate.net/publication/264790753_rdfSynopsViz_-_A_Framework_for_Hierarchical_Linked_Data_Visual_Exploration_and_Analysis
+    year: 2014
+    numeric: yes
+    temporal: yes
+    hierarchical: yes
+    chart: yes
+    pie-chart: yes
+    treemap: yes
+    timeline: yes
+
+  - rdfs:label: VisWizard
+    $type: VisualizationTool
+    schema:url: https://www.researchgate.net/publication/267512822_Discovery_and_Visual_Analysis_of_Linked_Data_for_Humans
+    year: 2014
+    numeric: yes
+    temporal: yes
+    spatial: yes
+    bubble-chart: yes
+    chart: yes
+    map: yes
+    pie-chart: yes
+    # FIXME not supported
+    parallel-coordinates: yes
+    # FIXME not supported
+    steam-graph: yes
+
+  - rdfs:label: Balloon
+    $type: VisualizationTool
+    schema:url: https://schlegel.github.io/balloon/
+    year: 2014
+    numeric: true
+    temporal: yes
+    spatial: yes
+    graph: yes
+    map: yes
+
+  - rdfs:label: LP-Vis
+    $type: VisualizationTool
+    year: 2016
+    spatial: yes
+    hierarchical: yes
+    graph: yes
+
+    # FIXME
+    circles: yes
+
+    bubble-chart: yes
+    map: yes
+    treemap: yes
+    tree: yes
+
+  - rdfs:label: YDS
+    $type: VisualizationTool
+    year: 2017
+    numeric: yes
+    temporal: yes
+    spatial: yes
+    hierarchical: yes
+    chart: yes
+    circles: yes
+    graph: yes
+    map: yes
+    treemap: yes
+    timeline: yes
+    pie-chart: yes
+
+  - rdfs:label: LPVA
+    $type: VisualizationTool
+    year: 2017
+    spatial: yes
+    hierarchical: yes
+    graph: yes
+    circles: yes
+    bubble-chart: yes
+    map: yes
+    treemap: yes
+    tree: yes
