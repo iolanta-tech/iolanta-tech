@@ -6,5 +6,6 @@ nav:
         - url.md
       - ...
 
+    - blog
     - tables
     - jinja2

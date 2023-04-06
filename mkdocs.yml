@@ -8,8 +8,10 @@ markdown_extensions:
   - admonition
   - codehilite
   - attr_list
+  - md_in_html
   - pymdownx.superfences
   - pymdownx.details
+  - footnotes
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.emoji:
@@ -28,7 +30,6 @@ plugins:
   - macros:
       on_error_fail: true
       modules:
-        - mkdocs_iolanta.macros
         - macros
 
 theme:
