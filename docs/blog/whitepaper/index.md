@@ -43,7 +43,7 @@ This chart highlights several issues catching the eye:
 2. StackOverflow has more related tags (such as `rdfs`, `linked-data`, `json-ld`), — but the Trends tool does not permit to select them, presumably due to them being even less popular than the ones we were able to render;
 3. Most concerning, however, is the fact that the interest to the highlighted tags **does not grow** over time.
 
-[^sparql]: SPARQL Query Language (TODO link)
+[^sparql]: SPARQL Query Language {# todo: provide a link #}
 
 There are probably multiple potential reasons to this situation, let us name a few of those:
 
@@ -60,7 +60,9 @@ There are probably multiple potential reasons to this situation, let us name a f
     * Lack of viable commercial models for companies to profit from such solutions,
     * Or maybe unwillingness of the wide community to try and play with the Linked Data approach.
 
-[TODO reference the Criticism about Semantic Web article I think]
+{# todo: Draw the list above as an `iolanta-roadmap` diagram perhaps. #}
+
+{# todo: reference the Criticism about Semantic Web article I think #}
 
 Each of these items might be a subject of a separate book or perhaps even a library but within this paper we will confine ourselves to one question only.
 
@@ -80,7 +82,7 @@ That need is met with Linked Data visualization tools — software systems which
 
 [^data-visualizations-periodic-table]: https://www.visual-literacy.org/periodic_table/periodic_table.html 
 
-Data visualization is a way to help the user create a mental model [TODO], converting data into understanding; for each particular situation and use case a unique visualization might be needed.
+Data visualization is a way to help the user create a mental model {# todo: link #}, converting data into understanding; for each particular situation and use case a unique visualization might be needed.
 
 **Linked Data Visualization** book[^ld-visualization-book] provides a comprehensive review of state-of-the-art for Linked Data visualization tools as of 2020. The book lists several dozen software tools and compares them by multiple parameters.
 
@@ -126,13 +128,11 @@ To present analysis results for this category, Table 3.1[^ld-visualization-book]
   <figcaption><strong>Figure 3.</strong> Visualization tools supporting multiple visualizations</figcaption>
 </figure>
 
-!!! danger "TODO"
-    Not all necessary columns are rendered, fix that
+{# todo: Not all necessary columns are rendered, fix that #}
 
 It is immediately obvious why Figure 3 (or its prototype, Table 3.1 in the book) itself could not be generated using any of these tools: none of them **supports a tabular visualization**.
 
-!!! danger "TODO"
-    is that right?
+{# todo: is that right? #}
 
 While it was likely a deliberate design decision, tables are a comparatively simple yet extremely useful form of presenting information, ubiquitous in all kinds of publications. Hence we end up with first Criterion for our target visualization system:
 
@@ -141,27 +141,24 @@ While it was likely a deliberate design decision, tables are a comparatively sim
 
 #### Browsers
 
-!!! danger "TODO"
-    Document browsers here.
+{# todo: Document browsers here. #}
 
 ### Plugin support
 
-The range of available visualizations is infinite, and it would be impossible to accommodate any possible use case in one software package. Users might want to create their own visualizations for their very specific needs. These thoughts call for a plugin approach [TODO], where a visualization toolkit can be extended using predefined hooks via third-party plugins.
+The range of available visualizations is infinite, and it would be impossible to accommodate any possible use case in one software package. Users might want to create their own visualizations for their very specific needs. These thoughts call for a plugin approach {# todo: link for that #}, where a visualization toolkit can be extended using predefined hooks via third-party plugins.
 
-!!! danger "TODO"
-    Show that none of these tools supports plugins. Or do they?
+{# todo: Show that none of these tools supports plugins. Or do they? #}
 
 !!! info "Criterion 2"
     Visualization tool must be extendable via plugins implementing various data types and visualization types.
 
-!!! danger "TODO"
-    Write in these criteria as LD to reuse them.
+{# todo: Write in these criteria as LD to reuse them. #}
 
 ### Self-hostedness
 
-In software compilers industry, a self-hosted compiler is a compiler which is capable of compiling itself from source code [TODO]. Can a visualization of Linked Data be self-hosted — in other words, can it be described *as Linked Data*?
+In software compilers industry, a self-hosted compiler is a compiler which is capable of compiling itself from source code {# todo: source #}. Can a visualization of Linked Data be self-hosted — in other words, can it be described *as Linked Data*?
 
-Applying the 5-star model of Linked Data [TODO: https://www.w3.org/2011/gld/wiki/5\_Star\_Linked\_Data] to visualizations themselves seems to promise a few valuable benefits:
+Applying the 5-star model of Linked Data {# todo: https://www.w3.org/2011/gld/wiki/5\_Star\_Linked\_Data]  #} to visualizations themselves seems to promise a few valuable benefits:
 
 * *Visualization is available on the Web* which enables anyone to retrieve and enjoy applying to to the data,
 * *Visualization is available as machine-readable structured data* and can be not only reused but easily customized,
@@ -169,9 +166,11 @@ Applying the 5-star model of Linked Data [TODO: https://www.w3.org/2011/gld/wiki
 * *Published using open standards from the W3C*, which JSON-LD is,
 * *All of the above and links to other Linked Open Data* — which it does because a visualization must reference certain aspects of source data to specify how to visualize that.
 
+{# todo: Format the above somehow nicely #}
+
 Self-hosted Linked Data visualizations should be extremely easy to share and to use for professionals in other areas of human activity, from aerospace engineering to fine arts.
 
-[TODO: target this better to the book writing use case]
+{# todo: target this better to the book writing use case #}
 
 ### Embeddability
 
@@ -193,11 +192,11 @@ The ideal Linked Data visualization system should easily and seamlessly integrat
 
 ### Plain files
 
-[TODO]
+{# todo: write this #}
 
 ## Iolanta: tutorial
 
-To solve the issues outlined above, we propose an open source visualization tool by the name of `iolanta`, build in Python programming language. In order to reduce development time and sooner arrive at a minimum viable prototype [TODO] this version of the tool is restricted to two usage scenarios:
+To solve the issues outlined above, we propose an open source visualization tool by the name of `iolanta`, build in Python programming language. In order to reduce development time and sooner arrive at a minimum viable prototype {# todo: link #} this version of the tool is restricted to two usage scenarios:
 
 * Python-specific application user interface (API),
 * Command line interface (CLI).
@@ -241,7 +240,7 @@ Fresnel Vocabulary [https://www.w3.org/2005/04/fresnel-info/] is a browser-indep
     * and hooks to CSS [http://www.w3.org/Style/CSS/].
 
 
-The visualization process Fresnel uses is described in see [TODO Figure: Fresnel vocab]).
+The visualization process Fresnel uses is described in see {# todo: Figure — Fresnel vocab #}).
 
 ![fresnel.png](fresnel.png)
 
@@ -266,7 +265,7 @@ Fresnel vocabulary is used by a number of tools:
 
 Prefix we use is `iolanta:`, and it resolves to https://iolanta.tech/.
 
-[TODO: visualize Iolanta ontology as a graph]
+{# todo: visualize Iolanta ontology as a graph #}
 
 ### Class: `iolanta:Environment`
 
@@ -282,23 +281,23 @@ Data visualization might be performed in various contexts, which we call Environ
 
 ### Class: `Facet`
 
-[TODO! what is a facet, anyway?]
+{# todo: what is a facet, anyway? #}
 
-[TODO! what faceted visualization tools already exist?]
+{# todo: what faceted visualization tools already exist? #}
 
 Facet is a unit of executable program code used to visualize RDF nodes in an environment. Generally speaking, facet can be described as a black box which has three inputs:
 
 
 * Identifier of an RDF `node` to visualize (an IRI, a Blank Node, or a Literal);
 * Identifier of an `environment` (IRI or Blank Node) which the node must be visualized within;
-* `iolanta` instance, which contains the current graph queryable via SPARQL [TODO: cite].
+* `iolanta` instance, which contains the current graph queryable via SPARQL {# todo: cite #}.
 
 
 Facet can run arbitrary SPARQL queries against `iolanta` graph to retrieve any information about the `node` it might require. The simplest of all is `iolanta.facets.Link` facet targeted at `iolanta:html` environment.
 
 Current version of `iolanta` supports only one kind of Facets: Python classes which are subclasses of `iolanta.Facet` abstract base class.
 
-[TODO: visualize Facet class in class diagram format or WTF]
+{# todo: visualize Facet class in class diagram format or WTF #}
 
 ### Property: `iolanta:supports`
 
@@ -320,9 +319,9 @@ This property might be attached to any IRI or BNode in an RDF graph. If we decid
 
 From this example, it is evident how we identify facets. These are import paths native for Python programming language, which we define by `python://` protocol.
 
-[TODO: This example should be closer to real life]
+{# todo: This example should be closer to real life #}
 
-[TODO: Visualize this as a graph!]
+{# todo: Visualize this as a graph! #}
 
 ### Property: `iolanta:hasInstanceFacet`
 
@@ -342,7 +341,7 @@ If neither `iolanta:facet` nor `iolanta:hasInstanceFacet` provide a suitable `io
 
 ## Facet search algorithm
 
-[TODO: draw this algorithm as a flow chart]
+{# todo: draw this algorithm as a flow chart #}
 
 `Iolanta.render()` method accepts arguments:
 
@@ -359,7 +358,7 @@ Given that information, we need to find a facet in our graph and execute that fa
 
 Iolanta browser is an open source tool built in Python programming language in attempt to illustrate the principles of this article and pave a way to a powerful, versatile Linked Data visualization system.
 
-TODO a diagram of how the browser works
+{# todo: a diagram of how the browser works #}
 
 ### Facet API
 
@@ -382,12 +381,11 @@ TODO a diagram of how the browser works
 
 * Implement more plugins for various use cases, such as:
     * drawing roadmaps and network planning,
-    * drawing C4 [TODO] architecture diagrams,
+    * drawing C4 {# todo: source #} architecture diagrams,
     * and more;
 * Provide interactive browsing experience;
 * Implement more facet types, such as:
     * Web components,
-    * JSON-RPC [TODO] controlled plugins;
+    * JSON-RPC {# todo: source #} controlled plugins;
 * Improve the experience of browsing remote networks;
 * …
-
