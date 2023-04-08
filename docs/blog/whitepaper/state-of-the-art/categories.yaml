@@ -7,7 +7,7 @@ table:columns:
 table:rows:
   - rdfs:label: Browsers & exploratory tools
     good: yes
-    notes: A browser might be used to explore the data, and then to export the result as a visualization for publication.
+    notes: A browser is an interactive tool to explore Linked Data. It might be also able to re-use an existing Linked Data visualization and possibly customize it before said visualization is reused in a book or in an article, — like this one. We should look at existing Linked Data browsers to see if that is possible.
   - rdfs:label: Tools using multiple visualization types
     good: yes
     notes: For each particular task, a different visualization might be required, — thus, it is necessary for the visualization system to support more than one visualization type.

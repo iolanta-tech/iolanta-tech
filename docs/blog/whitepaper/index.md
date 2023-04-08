@@ -25,7 +25,7 @@ Linked Data ⋅ JSON-LD ⋅ YAML-LD ⋅ Data Visualization
 
 ## Introduction
 
-**As** a Semantic Web enthusiast, **I want** to see a wider adoption of Semantic Web technology **because** I believe it to be beneficial to humanity.
+**As** a Semantic Web enthusiast, **I want** to see a wider adoption of Semantic Web technology **because** I believe it to be beneficial to humanity. {# todo: link to this kind of use case template #}
 
 As a software related technology, Semantic Web & Linked Data should be used, first and foremost, by software engineering professionals. StackOverflow[^stackoverflow], a top Q&A hub many developers around the world use, provides popularity statistics per question tag. An attempt to chart statistics for a few Semantic Web related tags yields[^stackoverflow-trends] the chart below.
 
@@ -33,6 +33,8 @@ As a software related technology, Semantic Web & Linked Data should be used, fir
   ![StackOverflow trends](stackoverflow-trends.svg)
   <figcaption><strong>Figure 1.</strong> StackOverflow trends for a few Semantic Web related tags</figcaption>
 </figure>
+
+{# todo: link to YAML source on GitHub #}
 
 [^stackoverflow]: https://stackoverflow.com
 [^stackoverflow-trends]: https://insights.stackoverflow.com/trends?tags=rdf%2Cowl%2Csparql
@@ -112,6 +114,8 @@ In Figure 2 we reproduce the categories of Linked Data visualization tools that 
   <figcaption><strong>Figure 2.</strong> Visualization tools categories</figcaption>
 </figure>
 
+{# todo: link to YAML source on GitHub #}
+
 Let's examine the two categories which look promising.
 
 #### Multiple visualization types
@@ -141,7 +145,14 @@ While it was likely a deliberate design decision, tables are a comparatively sim
 
 #### Browsers
 
-{# todo: Document browsers here. #}
+<figure>
+  {{ render("browsers") }}
+  <figcaption><strong>Figure 4.</strong> Linked Data browsers</figcaption>
+</figure>
+
+{# todo: "#### Publication systems" #}
+{# todo: MetaFactory #}
+{# todo: kg mkdocs plugin #}
 
 ### Plugin support
 
