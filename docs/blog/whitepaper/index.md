@@ -290,8 +290,6 @@ $ iolanta render schema:Person
 
 ### Visualize a table with something
 
-### Generate a LaTeX table
-
 ### Visualize stuff in MkDocs
 
 ### Retrieve information from GitHub
@@ -299,67 +297,73 @@ $ iolanta render schema:Person
 ### Retrieve information from program text
 
 
-### Vocabulary for self-hosted visualizations
-
-Description of visualizations requires some meta-vocabulary which should be useful regardless of data type and of visualization type to use. Such a vocabulary should aid the Semantic Web browser orchestrating the visualizations and choosing which visualization type to utilize at any given situation.
-
-
 ## `iolanta` vocabulary
 
-`iolanta` operation is based on a simple vocabulary which is bundled with the application. Iolanta vocabulary defines a few classes and a few properties connecting them to each other.
+`iolanta` operation is based on a simple vocabulary, bundled with the application. Iolanta vocabulary defines a few classes and a few properties connecting classes to each other.
 
 Prefix we use is `iolanta:`, and it resolves to https://iolanta.tech/.
 
-{# todo: visualize Iolanta ontology as a graph #}
+<figure>
+  <img alt="Iolanta vocabulary" src="iolanta-vocabulary.png" />
+  <figcaption><strong>Figure X.</strong> <code>iolanta:</code> vocabulary (Drawn by hand)</figcaption>
+</figure>
 
 ### Class: `iolanta:Environment`
 
 Data visualization might be performed in various contexts, which we call Environments. Iolanta defines a few instances of this class:
 
-
 * `iolanta:html` calls for HTML output;
 * `iolanta:cli` is for rendering in the command line;
-* `iolanta:tex` is for \LaTeX documents (such as this paper itself).
+* `iolanta:tex` is for $$\LaTeX$$ documents.
 
-
-`iolanta` plugins might define more environments, for that it is enough to define them as `rdf:type iolanta:Environment`.
+`iolanta` plugins usually define more environments, as it will be illustrated below for `iolanta-tables` plugin.
 
 ### Class: `Facet`
 
-{# todo: what is a facet, anyway? #}
+The word *facet* is defined[^facet-dictionary] by Cambridge Dictionary as:
 
-{# todo: what faceted visualization tools already exist? #}
+[^facet-dictionary]: https://dictionary.cambridge.org/dictionary/english/facet
 
-Facet is a unit of executable program code used to visualize RDF nodes in an environment. Generally speaking, facet can be described as a black box which has three inputs:
+> one part of a subject, situation, etc. that has many parts
 
+or
+
+> one of the parts or features of something
+
+The same notion or piece of data might be visualized as a list, a table, or maybe an interactive 3D landscape, but none of those changes the nature of the object being represented. It might be said every representation of an object is another way of looking at it, a new angle, feature, a facet of the object.
+
+{# todo: Examples needed here #}
+
+In Iolanta terminology, Facet is a unit of executable program code used to visualize RDF nodes in an [Environment](#class-iolantaenvironment). Generally speaking, facet can be described as a black box which has three inputs:
 
 * Identifier of an RDF `node` to visualize (an IRI, a Blank Node, or a Literal);
 * Identifier of an `environment` (IRI or Blank Node) which the node must be visualized within;
 * `iolanta` instance, which contains the current graph queryable via SPARQL {# todo: cite #}.
 
-
-Facet can run arbitrary SPARQL queries against `iolanta` graph to retrieve any information about the `node` it might require. The simplest of all is `iolanta.facets.Link` facet targeted at `iolanta:html` environment.
+Facet can run arbitrary SPARQL queries against `iolanta` graph to retrieve any information about the `node` it might require.
 
 Current version of `iolanta` supports only one kind of Facets: Python classes which are subclasses of `iolanta.Facet` abstract base class.
 
-{# todo: visualize Facet class in class diagram format or WTF #}
+We do not store program code in the graph itself; that seems both inconvenient and insecure. Instead, in the graph facets are addressed via IRIs. For instance, `python://iolanta.facets.generic.BoolLiteral` is the facet that renders an `xsd:boolean` value as a Unicode icon.
+
+{# todo: examples! #}
 
 ### Property: `iolanta:supports`
 
-* [Domain] `iolanta:Facet`
-* [Range] `iolanta:Environment`
-* [Inverse] `iolanta:isSupportedBy`
+* Domain: [`iolanta:Facet`](#class-facet)
+* Range: [`iolanta:Environment`](#class-iolantaenvironment)
+* Inverse: `iolanta:isSupportedBy`
 
 Not every facet suits every possible environment. For instance, if a facet returns a string that contains HTML code that result would be next to useless for a \LaTeX document, and vice versa. Thus, it is necessary to describe for every facet which environment(s) it is suitable for. We use `iolanta:supports` for that.
 
 ### Property: `iolanta:facet`
 
-* [Range] `iolanta:Facet`
+* Range: [`iolanta:Facet`](#class-facet)
 
 This property might be attached to any IRI or BNode in an RDF graph. If we decidedly know which facet to use for a particular node we can explicitly connect the node and the facet in our RDF graph. For example:
 
 ```
-    :something iolanta:facet <python://iolanta.facets.Link> .
+    :something iolanta:facet <python://iolanta.facets.html.Default> .
 ```
 
 From this example, it is evident how we identify facets. These are import paths native for Python programming language, which we define by `python://` protocol.
@@ -370,17 +374,17 @@ From this example, it is evident how we identify facets. These are import paths 
 
 ### Property: `iolanta:hasInstanceFacet`
 
-*[Domain] `rdfs:Class`
-*[Range] `iolanta:Facet`
-*[Inverse] `iolanta:isInstanceFacetOf`
+* Domain: `rdfs:Class`
+* Range: [`iolanta:Facet`](#class-facet)
+* Inverse: `iolanta:isInstanceFacetOf`
 
 It would be tedious to attach `iolanta:facet` to *each and every* node this facet might be able to render; oftentimes, it is sufficient to attach a facet to a whole class of nodes. That's what `iolanta:hasInstanceFacet` is for: `iolanta` will find the facet by classes the node is attached to.
 
 ### Property: `iolanta:hasDefaultFacet`
 
-* [Domain] `iolanta:Environment`
-* [Range] `iolanta:Facet`
-* [Inverse] `iolanta:isDefaultFacetOf`
+* Domain [`iolanta:Environment`](#class-iolantaenvironment)
+* Range [`iolanta:Facet`](#class-facet)
+* Inverse: `iolanta:isDefaultFacetOf`
 
 If neither `iolanta:facet` nor `iolanta:hasInstanceFacet` provide a suitable `iolanta:Facet` then we look into the `iolanta:Environment` the rendering is targeted at. The environment can define a default facet used for that environment.
 
@@ -390,14 +394,17 @@ If neither `iolanta:facet` nor `iolanta:hasInstanceFacet` provide a suitable `io
 
 `Iolanta.render()` method accepts arguments:
 
-* [node] is an RDF node to render;
-* [environments] is a **list** of `iolanta:Environment` instance references.
+{# todo: Generate the function description instead of writing stuff by hand #}
+
+* `node` is an RDF node to render;
+* `environments` is a **list** of `iolanta:Environment` instance references.
 
 Given that information, we need to find a facet in our graph and execute that facet to construct a visualization for our node in one of these environments.
 
 
 * Look for `iolanta:facet` link such that `\$node iolanta:facet ?facet . ?facet iolanta:supports ?environment` .
 
+{# todo: describe iolanta-tables vocabulary with examples and illustrations #}
 
 ## Iolanta browser
 
