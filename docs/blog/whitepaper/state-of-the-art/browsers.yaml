@@ -35,7 +35,8 @@ table:class:
 
       - rdfs:label: LESS
         year: 2010
-        schema:url: https://www.researchgate.net/publication/220854250_LESS_-_Template-Based_Syndication_and_Presentation_of_Linked_Data
+        available: no
+        schema:url: http://aksw.org/Projects/LESS
 
       - rdfs:label: Tabulator
         year: 2006

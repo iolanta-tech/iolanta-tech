@@ -143,6 +143,8 @@ While it was likely a deliberate design decision, tables are a comparatively sim
 !!! info "Criterion 1"
     Visualization tool must be capable of generating tables.
 
+{# todo: SHACL! #}
+
 #### Browsers
 
 <figure>
@@ -154,16 +156,76 @@ While it was likely a deliberate design decision, tables are a comparatively sim
 {# todo: MetaFactory #}
 {# todo: kg mkdocs plugin #}
 
-### Plugin support
+!!! info "Criterion X"
+    Visualizations must be customizable: for instance, when building a table, we should be able to choose what columns to render, in what order, and how to sort and/or group the data.
 
-The range of available visualizations is infinite, and it would be impossible to accommodate any possible use case in one software package. Users might want to create their own visualizations for their very specific needs. These thoughts call for a plugin approach {# todo: link for that #}, where a visualization toolkit can be extended using predefined hooks via third-party plugins.
+#### LESS
+
+LESS[^less] is a Linked Data browser which seems to satisfy that requirement.
+
+[^less]: Auer, Sören & Doehring, Raphael & Tramp, Sebastian. (2010). LESS - Template-Based Syndication and Presentation of Linked Data. 6089. 211-224. 10.1007/978-3-642-13489-0_15.
+
+LESS is based on a template language inspired by Smarty[^smarty] PHP templates. An interactive template editor aids the user in crafting a template for their particular needs; then, the resulting template can be published on a LESS Repository online and then embedded into various third-party applications:
+
+[^smarty]: https://smarty.net
+
+> …a blogger writing about a recent trip to Berlin can easily integrate a nicely formatted fact box with important information about Berlin obtained from Wikipedia into her blog post. A community of science fiction fans can integrate lists on a recent BBC programming matching their preferences into their community portal.
+
+With Smarty (or any other template language), template reuse seems to pose a challenge. `schema:url` property on an object will always mean that the object has a hypertext link associated with it. The author of every template out there will have to remember that, — there is no way to say that `schema:url` in HTML context is always rendered as an `<a>` tag. Which seems to be a reason of a lot of repetition among templates. Can we leverage the information already contained in the Linked Data to reduce that kind of repetition? 
+
+!!! info "Criterion"
+    Visualization method appropriate for a particular node depends on the node itself, its properties, and a context (environment) the node is visualized within. Visualization system should be aware of this relationship and be able to select an appropriate visualization mode based on the data.
+
+The dataset might specify certain details of visualizations using special vocabularies. For instance, for tabular visualizations those can be:
+
+* list of columns to render,
+* property associated with each column,
+* sorting and grouping of rows.
+
+If the visualization is to implement these requirements, it cannot be implemented in Smarty or another template language. Template languages are oftentimes inherently and purposefully limited compared to full scale Turing-complete programming languages.
+
+!!! info "Criterion"
+    Visualizations should be implemented in a Turing complete general purpose programming language.
+
+The range of imaginable visualizations is infinite, and it would be impossible to accommodate any possible use case in one software package. Users might want to create their own visualizations for their very specific needs. These thoughts call for a plugin approach {# todo: link for that #}, where a visualization toolkit can be extended using predefined hooks via third-party plugins.
 
 {# todo: Show that none of these tools supports plugins. Or do they? #}
 
-!!! info "Criterion 2"
+!!! info "Criterion"
     Visualization tool must be extendable via plugins implementing various data types and visualization types.
 
 {# todo: Write in these criteria as LD to reuse them. #}
+
+
+#### Fresnel vocabulary
+
+Fresnel Vocabulary [https://www.w3.org/2005/04/fresnel-info/] is a browser-independent vocabulary to specify how to render an RDF model. Fresnel's two foundational concepts are as follows:
+
+* *lenses* define which properties of an RDF resource to display and how to order them,
+* *formats* define how to render those properties using
+    * RDF-specific formatting attributes
+    * and hooks to CSS [http://www.w3.org/Style/CSS/].
+
+
+The visualization process Fresnel uses is described in see {# todo: Figure — Fresnel vocab #}).
+
+![fresnel.png](fresnel.png)
+
+> Stages of RDF Fresnel rendering process.
+
+While Fresnel aims to be platform independent, it still has a binding to CSS, thus making HTML and SVG kind of preferred formats.
+
+Fresnel vocabulary is used by a number of tools:
+
+* IsaViz [https://www.w3.org/2001/11/IsaViz/],
+* Longwell / Piggy Bank (SIMILE/W3C/MIT) [http://simile.mit.edu/longwell/] and [http://simile.mit.edu/piggy-bank/],
+* Horus [http://www.wiwiss.fu-berlin.de/suhl/bizer/rdfapi/tutorial/horus/index.htm],
+* LENA browser [http://isweb.uni-koblenz.de/Research/lena],
+* OAT: OpenLink AJAX Toolkit (OpenLink Software) [http://sourceforge.net/projects/oat],
+* Marbles [http://mes.github.io/marbles].
+
+…
+
 
 ### Self-hostedness
 
@@ -240,34 +302,6 @@ $ iolanta render schema:Person
 ### Vocabulary for self-hosted visualizations
 
 Description of visualizations requires some meta-vocabulary which should be useful regardless of data type and of visualization type to use. Such a vocabulary should aid the Semantic Web browser orchestrating the visualizations and choosing which visualization type to utilize at any given situation.
-
-#### Fresnel vocabulary
-
-Fresnel Vocabulary [https://www.w3.org/2005/04/fresnel-info/] is a browser-independent vocabulary to specify how to render an RDF model. Fresnel's two foundational concepts are as follows:
-
-* *lenses* define which properties of an RDF resource to display and how to order them,
-* *formats* define how to render those properties using
-    * RDF-specific formatting attributes
-    * and hooks to CSS [http://www.w3.org/Style/CSS/].
-
-
-The visualization process Fresnel uses is described in see {# todo: Figure — Fresnel vocab #}).
-
-![fresnel.png](fresnel.png)
-
-> Stages of RDF Fresnel rendering process.
-
-While Fresnel aims to be platform independent, it still has a binding to CSS, thus making HTML and SVG kind of preferred formats.
-
-Fresnel vocabulary is used by a number of tools:
-
-
-* IsaViz [https://www.w3.org/2001/11/IsaViz/],
-* Longwell / Piggy Bank (SIMILE/W3C/MIT) [http://simile.mit.edu/longwell/] and [http://simile.mit.edu/piggy-bank/],
-* Horus [http://www.wiwiss.fu-berlin.de/suhl/bizer/rdfapi/tutorial/horus/index.htm],
-* LENA browser [http://isweb.uni-koblenz.de/Research/lena],
-* OAT: OpenLink AJAX Toolkit (OpenLink Software) [http://sourceforge.net/projects/oat],
-* Marbles [http://mes.github.io/marbles].
 
 
 ## `iolanta` vocabulary
