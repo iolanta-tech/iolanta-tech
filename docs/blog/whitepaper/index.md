@@ -299,12 +299,11 @@ where:
 
 <figure markdown>
   <div style="text-align: left">
-    {{ render('various-visualizations-v1', environments='side-by-side') }}
+    {{ code('blog/whitepaper/state-of-the-art/various-visualizations-v1.yaml', language='yaml', title='various-visualizations-v1.yaml') }}
   </div>
   <figcaption><strong>Figure X.</strong> Table definition v1</figcaption>
 </figure>
 
-{# todo: use Side By Side format #}
 {# todo: Draw graph of the table structure #}
 
 <figure markdown>
@@ -315,7 +314,19 @@ where:
 !!! success "Criterion 1 is satisfied"
     {{ render('criterion1') }}
 
-…
+<figure markdown>
+  <div style="text-align: left">
+    {{ code('blog/whitepaper/state-of-the-art/various-visualizations-v2.yaml', language='yaml', title='various-visualizations-v2.yaml') }}
+  </div>
+  <figcaption><strong>Figure X.</strong> Table definition v2</figcaption>
+</figure>
+
+{# todo: Draw graph of the table structure #}
+
+<figure markdown>
+  {{ render('various-visualizations-v2') }}
+  <figcaption><strong>Figure X.</strong> Table v2</figcaption>
+</figure>
 
 !!! success "Criterion 2 is satisfied"
     {{ render('criterion2') }}

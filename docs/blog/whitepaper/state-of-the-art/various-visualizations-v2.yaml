@@ -1,0 +1,7 @@
+$id: various-visualizations-v2
+$type: table:Table
+table:columns:
+  - table:self
+  - year
+
+table:class: VisualizationTool
