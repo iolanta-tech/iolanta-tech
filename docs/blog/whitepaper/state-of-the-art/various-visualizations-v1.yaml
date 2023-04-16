@@ -1,0 +1,8 @@
+$id: various-visualizations-v1
+$type: table:Table
+table:columns:
+  - rdfs:label
+  - schema:url
+  - year
+
+table:class: VisualizationTool

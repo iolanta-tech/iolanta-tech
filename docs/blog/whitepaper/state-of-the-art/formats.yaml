@@ -1,0 +1,12 @@
+$id: input-formats
+table:columns:
+  - $id: rdf-xml
+    rdfs:label: RDF/XML
+  - $id: n3
+    rdfs:label: N3
+  - $id: turtle
+    rdfs:label: Turtle
+  - $id: json-ld
+    rdfs:label: JSON-LD
+  - $id: yaml-ld
+    rdfs:label: YAML-LD

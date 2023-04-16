@@ -141,7 +141,7 @@ It is immediately obvious why Figure 3 (or its prototype, Table 3.1 in the book)
 While it was likely a deliberate design decision, tables are a comparatively simple yet extremely useful form of presenting information, ubiquitous in all kinds of publications. Hence we end up with first Criterion for our target visualization system:
 
 !!! info "Criterion 1"
-    Visualization tool must be capable of generating tables.
+    {{ render('criterion1') }}
 
 {# todo: SHACL! #}
 
@@ -156,8 +156,8 @@ While it was likely a deliberate design decision, tables are a comparatively sim
 {# todo: MetaFactory #}
 {# todo: kg mkdocs plugin #}
 
-!!! info "Criterion X"
-    Visualizations must be customizable: for instance, when building a table, we should be able to choose what columns to render, in what order, and how to sort and/or group the data.
+!!! info "Criterion 2"
+    {{ render('criterion2') }}
 
 #### LESS
 
@@ -173,8 +173,8 @@ LESS is based on a template language inspired by Smarty[^smarty] PHP templates. 
 
 With Smarty (or any other template language), template reuse seems to pose a challenge. `schema:url` property on an object will always mean that the object has a hypertext link associated with it. The author of every template out there will have to remember that, — there is no way to say that `schema:url` in HTML context is always rendered as an `<a>` tag. Which seems to be a reason of a lot of repetition among templates. Can we leverage the information already contained in the Linked Data to reduce that kind of repetition? 
 
-!!! info "Criterion"
-    Visualization method appropriate for a particular node depends on the node itself, its properties, and a context (environment) the node is visualized within. Visualization system should be aware of this relationship and be able to select an appropriate visualization mode based on the data.
+!!! info "Criterion 3"
+    {{ render('criterion3') }}
 
 The dataset might specify certain details of visualizations using special vocabularies. For instance, for tabular visualizations those can be:
 
@@ -184,17 +184,15 @@ The dataset might specify certain details of visualizations using special vocabu
 
 If the visualization is to implement these requirements, it cannot be implemented in Smarty or another template language. Template languages are oftentimes inherently and purposefully limited compared to full scale Turing-complete programming languages.
 
-!!! info "Criterion"
-    Visualizations should be implemented in a Turing complete general purpose programming language.
+!!! info "Criterion 4"
+    {{ render('criterion4') }}
 
 The range of imaginable visualizations is infinite, and it would be impossible to accommodate any possible use case in one software package. Users might want to create their own visualizations for their very specific needs. These thoughts call for a plugin approach {# todo: link for that #}, where a visualization toolkit can be extended using predefined hooks via third-party plugins.
 
 {# todo: Show that none of these tools supports plugins. Or do they? #}
 
-!!! info "Criterion"
-    Visualization tool must be extendable via plugins implementing various data types and visualization types.
-
-{# todo: Write in these criteria as LD to reuse them. #}
+!!! info "Criterion 5"
+    {{ render('criterion5') }}
 
 
 #### Fresnel vocabulary
@@ -269,6 +267,17 @@ The ideal Linked Data visualization system should easily and seamlessly integrat
 
 ## Iolanta: tutorial
 
+The data for table 3 can be found in Supplementary material as [:material-github: `various-visualizations.yaml`](https://github.com/iolanta-tech/iolanta-tech/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml).
+
+<figure markdown>
+  <div style="text-align: left">
+    {{ code('blog/whitepaper/state-of-the-art/various-visualizations.yaml', title='various-visualizations.yaml', language='yaml', last_line=16) }}
+  </div>
+  <figcaption><strong>Figure X.</strong> Visualization tools file</figcaption>
+</figure>
+
+{# todo: write about YAML-LD #}
+
 To solve the issues outlined above, we propose an open source visualization tool by the name of `iolanta`, build in Python programming language. In order to reduce development time and sooner arrive at a minimum viable prototype {# todo: link #} this version of the tool is restricted to two usage scenarios:
 
 * Python-specific application user interface (API),
@@ -277,14 +286,48 @@ To solve the issues outlined above, we propose an open source visualization tool
 For installation, `iolanta` requires a working Python 3.10 environment. The installation is handled via `pip`:
 
 ```
-$ pip install iolanta iolanta-record iolanta-tables
+$ pip install iolanta iolanta-tables
 ```
 
-Here, we install not only `iolanta` itself but two of its plugins as well.
+where:
 
-```
-$ iolanta render schema:Person
-```
+* `iolanta` is the main application,
+* and `iolanta-tables` is a plugin that we will use to render table 3.
+
+!!! success "Criterion 5 is satisfied"
+    {{ render('criterion5') }}
+
+<figure markdown>
+  <div style="text-align: left">
+    {{ render('various-visualizations-v1', environments='side-by-side') }}
+  </div>
+  <figcaption><strong>Figure X.</strong> Table definition v1</figcaption>
+</figure>
+
+{# todo: use Side By Side format #}
+{# todo: Draw graph of the table structure #}
+
+<figure markdown>
+  {{ render('various-visualizations-v1') }}
+  <figcaption><strong>Figure X.</strong> Table v1</figcaption>
+</figure>
+
+!!! success "Criterion 1 is satisfied"
+    {{ render('criterion1') }}
+
+…
+
+!!! success "Criterion 2 is satisfied"
+    {{ render('criterion2') }}
+
+!!! success "Criterion 3 is satisfied"
+    {{ render('criterion3') }}
+
+!!! success "Criterion 4 is satisfied"
+    {{ render('criterion4') }}
+
+
+
 
 
 
@@ -405,6 +448,13 @@ Given that information, we need to find a facet in our graph and execute that fa
 * Look for `iolanta:facet` link such that `\$node iolanta:facet ?facet . ?facet iolanta:supports ?environment` .
 
 {# todo: describe iolanta-tables vocabulary with examples and illustrations #}
+
+## Architecture
+
+<figure markdown>
+  ![Iolanta architecture](architecture.png)
+  <figcaption><strong>Figure X.</strong> Iolanta architecture<br/><em>(drawn by hand)</em></figcaption>
+</figure>
 
 ## Iolanta browser
 
