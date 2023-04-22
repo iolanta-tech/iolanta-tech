@@ -1,0 +1,12 @@
+$id: various-visualizations-v3
+$type: table:Table
+table:columns:
+  - table:self
+  - year
+  - $id: table
+    mkdocs-material:icon: material/table.svg
+    rdfs:comment: Table
+    rdfs:label: " "
+
+table:class: VisualizationTool
+table:order-by: year

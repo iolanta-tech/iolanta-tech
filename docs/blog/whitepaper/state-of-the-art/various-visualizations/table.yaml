@@ -3,7 +3,7 @@ $type: table:Table
 table:columns:
   - table:self
   - year
-  - $id: data-types
+  - rdfs:label: Data Types
     table:columns:
       - $id: numeric
         mkdocs-material:icon: material/numeric.svg
@@ -24,7 +24,7 @@ table:columns:
         mkdocs-material:icon: fontawesome/solid/folder-tree.svg
         rdfs:label: " "
         rdfs:comment: Hierarchical
-  - $id: visualization-types
+  - rdfs:label: Visualization Types
     table:columns:
       - $id: table
         mkdocs-material:icon: material/table.svg
@@ -67,10 +67,9 @@ table:columns:
         rdfs:comment: Tree Map
 
       - $id: timeline
-        mkdocs-material:icon: "material/timeline.svg"
+        mkdocs-material:icon: material/timeline.svg
         rdfs:label: " "
         rdfs:comment: Timeline
 
 table:class: VisualizationTool
-table:order-by:
-  - year
+table:order-by: year

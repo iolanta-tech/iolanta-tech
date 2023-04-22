@@ -1,7 +1,8 @@
 $id: VisualizationTool
 $reverse:
   rdf:type:
-    - rdfs:label: Rhizomer
+    - $id: rhizomer
+      rdfs:label: Rhizomer
       schema:url: https://rhizomik.net/rhizomer
       year: 2006
       numeric: yes
