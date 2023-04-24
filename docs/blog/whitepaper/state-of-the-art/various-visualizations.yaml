@@ -107,7 +107,7 @@ $reverse:
 
     - rdfs:label: LPVA
       schema:url: https://www.researchgate.net/publication/318717427_Towards_easier_visualization_of_linked_data_for_lay_users
-      rdfs:comment:
+      rdfs:comment: …
       year: 2017
       spatial: yes
       hierarchical: yes

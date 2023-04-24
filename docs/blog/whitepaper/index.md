@@ -29,245 +29,161 @@ Linked Data ⋅ JSON-LD ⋅ YAML-LD ⋅ Data Visualization
 
 ## Introduction
 
-**As** a Semantic Web enthusiast, **I want** to see a wider adoption of Semantic Web technology **because** I believe it to be beneficial to humanity. {# todo: link to this kind of use case template #}
+If professionals in software development or in other areas are to utilize Linked Data technology in their work they probably cannot be expected to dive deep into the depths of raw triples, which are not very suitable for human consumption. Users would prefer to use tools capable of *visualizing* the raw triples, converting them into a form better suitable for human eye.
 
-As a software related technology, Semantic Web & Linked Data should be used, first and foremost, by software engineering professionals. StackOverflow[^stackoverflow], a top Q&A hub many developers around the world use, provides popularity statistics per question tag. An attempt to chart statistics for a few Semantic Web related tags yields[^stackoverflow-trends] the chart below.
-
-<figure markdown>
-  ![StackOverflow trends](stackoverflow-trends.svg)
-  <figcaption><strong>Figure 1.</strong> StackOverflow trends for a few Semantic Web related tags</figcaption>
-</figure>
-
-{# todo: Enumerate figures #}
-{# todo: link to YAML source on GitHub #}
-
-[^stackoverflow]: https://stackoverflow.com
-[^stackoverflow-trends]: https://insights.stackoverflow.com/trends?tags=rdf%2Cowl%2Csparql
-
-This chart highlights several issues catching the eye:
-
-1. Clearly, the wide software development community treats Semantic Web as a very niche technology: the popularity of the selected tags almost never exceeds 0.05% of all questions asked. SPARQL[^sparql] is the clear leader;
-2. StackOverflow has more related tags (such as `rdfs`, `linked-data`, `json-ld`), — but the Trends tool does not permit to select them, presumably due to them being even less popular than the ones we were able to render;
-3. Most concerning, however, is the fact that the interest to the highlighted tags **does not grow** over time.
-
-[^sparql]: SPARQL Query Language {# todo: provide a link #}
-
-There are probably multiple potential reasons to this situation, let us name a few of those:
-
-* Perhaps Semantic Web and Linked Data aren't that useful after all, maybe they are a technology for the sake of technology which no one really needs?
-* Or maybe Semantic Web really has potential but there are obstacles to its realization?
-  Among which may be, for instance:
-    * Lack of a clear problem or user pain that Linked Data can solve,
-    * Deficiencies of tooling to solve existing problems with Linked Data,
-        * Linked Data export ← from software systems,
-        * Linked Data import → into software systems,
-        * Reasoning on Linked Data,
-        * Linked Data Visualization for human eye
-          > ⬆️ This is the one this post looks into, by the way ☺
-    * Lack of viable commercial models for companies to profit from such solutions,
-    * Or maybe unwillingness of the wide community to try and play with the Linked Data approach.
-
-{# todo: Draw the list above as an `iolanta-roadmap` diagram perhaps. #}
-
-{# todo: reference the Criticism about Semantic Web article I think #}
-
-Each of these items might be a subject of a separate book or perhaps even a library but within this paper we will confine ourselves to one question only.
-
-## How do we visualize Linked Data?
-
-If professionals in software development or in other areas are to utilize Linked Data technology in their work they probably cannot be expected to dive deep into the depths of raw triples, which are not very suitable for human consumption. Users would need tools to *visualize* the raw triples, converting them into a form better suitable for human eye.
-
-That need is met with Linked Data visualization tools — software systems which present Linked Data as:
-
-* lists,
-* tables,
-* charts,
-* maps,
-* trees,
-* graphs,
-* and any other form[^data-visualizations-periodic-table] of data visualization known in the industry.
+That need is met with Linked Data visualization tools — software systems which present Linked Data as :material-view-list: lists, :material-table: tables, :material-chart-bar: charts, :material-map: maps, :material-file-tree: trees, :material-graph: graphs or any other form[^data-visualizations-periodic-table] of data visualization known to humanity.
 
 [^data-visualizations-periodic-table]: https://www.visual-literacy.org/periodic_table/periodic_table.html 
 
-Data visualization is a way to help the user create a mental model {# todo: link #}, converting data into understanding; for each particular situation and use case a unique visualization might be needed.
-
-**Linked Data Visualization** book[^ld-visualization-book] provides a comprehensive review of state-of-the-art for Linked Data visualization tools as of 2020. The book lists several dozen software tools and compares them by multiple parameters.
+Over last decades, significant efforts have been put into visualizing Linked Data. A comprehensive survey of methods and tools as of 2020 is available at the **Linked Data Visualization** book[^ld-visualization-book], authors of which list, evaluate and compare a handful of available visualization systems.
 
 [^ld-visualization-book]: Linked Data Visualization: Techniques, Tools and Big Data. — Laura Po, Nikos Bikakis, Federico Desimoni, and George Papastefanatos | Morgan & Claypool, 2020 http://www.linkeddatavisualization.com/
 
-The book features a number of data visualizations: tables, timelines, and charts, — but curiously enough, it never mentions that these visualizations were **authored** using one or multiple tools the book explores.
+As an illustration, we are reproducing Table 3.1 from the book here (figure X), which lists a number of visualization tools and shows which data types and visualization modes every tool supports. The table was slightly modified when reproducing here:
+
+* Tools which were not marked as **Available** in the original are excluded because, from a practical viewpoint of a working professional, they no longer exist;
+* The **Setting** and **Application Type** columns are omitted since they say "Generic" and "Web" respectively in every row of the table;
+* The original table used single-character codes to denote data and visualization types (for instance, `C` stands for "chart"), — we use icons instead. When viewing this paper as HTML, please hover over an icon to see a tooltip explaining its meaning.
+
+{# todo: Is this figure really necessary? Maybe we should tabulate Fresnel, Vega, Tal4RDF tools instead? #}
+
+<figure class="no-min-width" markdown>
+{{ render("tools-with-various-visualizations") }}
+<figcaption markdown>
+<strong>Figure 3.</strong>
+Visualization tools supporting multiple visualizations[^ldvisualization-book] (page 54).<br/>
+See [:material-github: data](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml)
+& [:material-github: table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations/table.yaml).
+</figcaption>
+</figure>
+
+## Shoemaker's son
+
+Table 3.1 describes only a subset of all visualization tools the book as a whole explores, and it itself is only one of multiple tables, charts, timelines the book contains. Nonetheless, none of the **data visualizations** the book enjoys are built with any of the **visualization tools** the book explores, or, at least, no mention of such could be found by me when reading the book.
 
 The authors had put an immense effort into setting up, comparing and analysing Linked Data visualization software, but none of the tools they tried gave them an impression that it can aid them in the complex and tedious task of authoring a book, — a process solely focused on analysing, managing and distilling information, a kind of work that Linked Data should be most useful for.
 
-This sounds like a shortcoming.
-
 ## Can we do better?
 
-Can we build a Linked Data visualization tool which could help prepare visualizations for publications like
+What kind of a visualization system would aid a task like preparing the Linked Data Visualization book, or, say, the paper you are so kind and forthcoming to be reading right now?
 
-* Linked Data Visualization book we mentioned before
-* or, say, this article?
-
-What criteria should such a tool satisfy?
-
-### Categories
-
-In Figure 2 we reproduce the categories of Linked Data visualization tools that Blomquist at al indicate, and select the particular categories we will be interested in.
-
-<figure>
-  {{ render("whitepaper-categories") }}
-  <figcaption><strong>Figure 2.</strong> Visualization tools categories</figcaption>
-</figure>
-
-{# todo: link to YAML source on GitHub #}
-
-Let's examine the two categories which look promising.
-
-#### Multiple visualization types
-
-To present analysis results for this category, Table 3.1[^ld-visualization-book] summarizes capabilities which those tools have. We reproduce that table below with a few modifications:
-
-* Tools which were not marked as Available are excluded because, for practical purposes, they no longer exist;
-* The `Setting` and `Application Type` columns are omitted because they say "Generic" and "Web" respectively for all elements;
-* The original table used single-character codes to denote data and visualization types (for instance, `C` for "chart"), — we use icons instead. Please hover over an icon to see a tooltip explaining its meaning.
-
-<figure class="no-min-width">
-  {{ render("tools-with-various-visualizations") }}
-  <figcaption><strong>Figure 3.</strong> Visualization tools supporting multiple visualizations</figcaption>
-</figure>
-
-{# todo: Not all necessary columns are rendered, fix that #}
-
-It is immediately obvious why Figure 3 (or its prototype, Table 3.1 in the book) itself could not be generated using any of these tools: none of them **supports a tabular visualization**.
-
-{# todo: is that right? #}
-
-While it was likely a deliberate design decision, tables are a comparatively simple yet extremely useful form of presenting information, ubiquitous in all kinds of publications. Hence we end up with first Criterion for our target visualization system:
+Tables, one of which is rendered on Figure X, are probably the most predominant methods of visualizing data, thus our dream visualizer should be capable of drawing tables.
 
 !!! info "Criterion 1"
     {{ render('criterion1') }}
 
-{# todo: SHACL! #}
+The same chunk of data can be rendered differently for different purposes. Check out Figure X1, which uses the same data as Figure X but shows it a little bit differently.
 
-#### Browsers
-
-<figure>
-  {{ render("browsers") }}
-  <figcaption><strong>Figure 4.</strong> Linked Data browsers</figcaption>
+<figure class="no-min-width" markdown>
+{{ render("tools-with-various-visualizations-augmented") }}
+<figcaption markdown>
+<strong>Figure X.</strong>
+Visualization tools supporting multiple visualizations[^ldvisualization-book] (page 54), with additions.<br/>
+See [:material-github: data](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml)
+& [:material-github: table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations/table-augmented.yaml).
+</figcaption>
 </figure>
 
-{# todo: "#### Publication systems" #}
-{# todo: MetaFactory #}
-{# todo: kg mkdocs plugin #}
+The original data was augmented:
+
+* **Last Update** column shows the date of last changes touching the software, observed as of spring 2023;
+* **Available** is the evaluation of the tools' availability as of spring 2023;
+* **Comment** offers some notes about how the first two were obtained.
+
+This table is different from the previous one, it highlights different aspects of the data and shows different columns, which brings about another criterion:
 
 !!! info "Criterion 2"
     {{ render('criterion2') }}
 
-#### LESS
+The list of visualization formats listed at Figure X is rather extensive but definitely not exhaustive. There might be narrow focused, domain specific visualizations, such as a DNA strand rendering or a chemical formula rendering. Other visualizations might be medium specific, for instance, an interactive representation of a table intended for viewing in virtual reality.
 
-LESS[^less] is a Linked Data browser which seems to satisfy that requirement.
-
-[^less]: Auer, Sören & Doehring, Raphael & Tramp, Sebastian. (2010). LESS - Template-Based Syndication and Presentation of Linked Data. 6089. 211-224. 10.1007/978-3-642-13489-0_15.
-
-LESS is based on a template language inspired by Smarty[^smarty] PHP templates. An interactive template editor aids the user in crafting a template for their particular needs; then, the resulting template can be published on a LESS Repository online and then embedded into various third-party applications:
-
-[^smarty]: https://smarty.net
-
-> …a blogger writing about a recent trip to Berlin can easily integrate a nicely formatted fact box with important information about Berlin obtained from Wikipedia into her blog post. A community of science fiction fans can integrate lists on a recent BBC programming matching their preferences into their community portal.
-
-With Smarty (or any other template language), template reuse seems to pose a challenge. `schema:url` property on an object will always mean that the object has a hypertext link associated with it. The author of every template out there will have to remember that, — there is no way to say that `schema:url` in HTML context is always rendered as an `<a>` tag. Which seems to be a reason of a lot of repetition among templates. Can we leverage the information already contained in the Linked Data to reduce that kind of repetition? 
-
-!!! info "Criterion 3"
-    {{ render('criterion3') }}
-
-The dataset might specify certain details of visualizations using special vocabularies. For instance, for tabular visualizations those can be:
-
-* list of columns to render,
-* property associated with each column,
-* sorting and grouping of rows.
-
-If the visualization is to implement these requirements, it cannot be implemented in Smarty or another template language. Template languages are oftentimes inherently and purposefully limited compared to full scale Turing-complete programming languages.
+We can't predict what kind of visualizations developers would want to build for our system, we should give them freedom to build whatever they want. A restricted, stripped-down language or notation for visualizations would undermine that purpose.
 
 !!! info "Criterion 4"
     {{ render('criterion4') }}
 
-The range of imaginable visualizations is infinite, and it would be impossible to accommodate any possible use case in one software package. Users might want to create their own visualizations for their very specific needs. These thoughts call for a plugin approach {# todo: link for that #}, where a visualization toolkit can be extended using predefined hooks via third-party plugins.
-
-{# todo: Show that none of these tools supports plugins. Or do they? #}
+One singular visualization system can't encompass all imaginable possibilities. A plugin mechanism is necessary to support independent developers writing new exciting visualizations.
 
 !!! info "Criterion 5"
     {{ render('criterion5') }}
 
+## Describe Linked Data visualizations in Linked Data itself
 
-#### Fresnel vocabulary
+The heading of this chapter captures the main idea of this paper.
 
-Fresnel Vocabulary [https://www.w3.org/2005/04/fresnel-info/] is a browser-independent vocabulary to specify how to render an RDF model. Fresnel's two foundational concepts are as follows:
+If we could describe a table like that on Figure Y as a piece of Linked Data targeted at visualizing another piece of Linked Data, we would have gained a number of immediate advantages.
 
-* *lenses* define which properties of an RDF resource to display and how to order them,
-* *formats* define how to render those properties using
-    * RDF-specific formatting attributes
-    * and hooks to CSS [http://www.w3.org/Style/CSS/].
+Applying the 5-star model of Linked Data[^5-star] to visualizations themselves seems to promise a few valuable benefits:
 
+[^5-star]: https://www.w3.org/2011/gld/wiki/5_Star_Linked_Data
 
-The visualization process Fresnel uses is described in see {# todo: Figure — Fresnel vocab #}).
-
-![fresnel.png](fresnel.png)
-
-> Stages of RDF Fresnel rendering process.
-
-While Fresnel aims to be platform independent, it still has a binding to CSS, thus making HTML and SVG kind of preferred formats.
-
-Fresnel vocabulary is used by a number of tools:
-
-* IsaViz [https://www.w3.org/2001/11/IsaViz/],
-* Longwell / Piggy Bank (SIMILE/W3C/MIT) [http://simile.mit.edu/longwell/] and [http://simile.mit.edu/piggy-bank/],
-* Horus [http://www.wiwiss.fu-berlin.de/suhl/bizer/rdfapi/tutorial/horus/index.htm],
-* LENA browser [http://isweb.uni-koblenz.de/Research/lena],
-* OAT: OpenLink AJAX Toolkit (OpenLink Software) [http://sourceforge.net/projects/oat],
-* Marbles [http://mes.github.io/marbles].
-
-…
-
-
-### Self-hostedness
-
-In software compilers industry, a self-hosted compiler is a compiler which is capable of compiling itself from source code {# todo: source #}. Can a visualization of Linked Data be self-hosted — in other words, can it be described *as Linked Data*?
-
-Applying the 5-star model of Linked Data {# todo: https://www.w3.org/2011/gld/wiki/5\_Star\_Linked\_Data]  #} to visualizations themselves seems to promise a few valuable benefits:
-
-* *Visualization is available on the Web* which enables anyone to retrieve and enjoy applying to to the data,
+* *Visualization is available on the Web* which enables anyone to retrieve and enjoy applying to the data,
 * *Visualization is available as machine-readable structured data* and can be not only reused but easily customized,
 * *Available in a non-proprietary format,* say as a JSON-LD (or any other RDF serialization) document,
 * *Published using open standards from the W3C*, which JSON-LD is,
 * *All of the above and links to other Linked Open Data* — which it does because a visualization must reference certain aspects of source data to specify how to visualize that.
 
-{# todo: Format the above somehow nicely #}
+{# todo: Format the 5-star list somehow nicely #}
 
-Self-hosted Linked Data visualizations should be extremely easy to share and to use for professionals in other areas of human activity, from aerospace engineering to fine arts.
+The role of the visualization system is to consume both data and visualization tied to it and output the rendered result — in our case, an HTML table. 
+ 
+What kind of vocabulary could be used to describe visualizations, then?
 
-{# todo: target this better to the book writing use case #}
+### Fresnel Vocabulary
 
-### Embeddability
+{# todo: Tabulate Fresnel based tools #}
 
-There are different information tools people utilize to prepare books, papers, presentations:
+Fresnel Vocabulary[^fresnel] is a browser-independent vocabulary to specify how to render an RDF model. Fresnel's two foundational concepts are as follows:
 
-* Static site builders,
-* LaTeX,
-* Presentations,
-* Word processors,
-* Spreadsheets,
-* …
+[^fresnel]: https://www.w3.org/2005/04/fresnel-info/
 
-The ideal Linked Data visualization system should easily and seamlessly integrate with popular information management and publishing tools.
+* *lenses* define which properties of an RDF resource to display and how to order them,
+* *formats* define how to render those properties using
+    * RDF-specific formatting attributes
+    * and hooks to CSS[^css].
 
+[^css]: http://www.w3.org/Style/CSS/
 
-### Open Source
+The visualization process Fresnel uses is described in Figure X.
 
-…
+<figure markdown>
+![fresnel.png](fresnel.png)
+<figcaption>
+<strong>Figure X.</strong>
+Fresnel visualization process.<br/> (Drawn by hand.)
+</figcaption>
+</figure>
 
-### Plain files
+While Fresnel aims to be platform independent, it still has a binding to CSS, thus making HTML and SVG kind of preferred formats.
 
-{# todo: write this #}
+Fresnel vocabulary is used by a number of tools:
+
+{# todo: Describe Fresnel tools better #}
+{# todo: Add more Fresnel tools, look into the book #}
+
+<figure class="no-min-width" markdown>
+{{ render("fresnel-tools") }}
+<figcaption markdown>
+<strong>Figure X.</strong>
+Visualization tools based on Fresnel vocabulary.<br/>
+See [:material-github: data & table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/fresnel.yaml)
+</figcaption>
+</figure>
+
+Can we have something more independent from the medium? {# todo: Expand while Fresnel is not so good #}
+
+### Tal4RDF
+
+{# todo: Explore Tal4RDF #}
+
+### Vega RDF
+
+{# todo: Explore Vega RDF #}
+
+[^sparql]: SPARQL Query Language {# todo: provide a link #}
+
+{# todo: Enumerate figures #}
+
 
 ## Iolanta
 
@@ -592,24 +508,62 @@ Iolanta browser is an open source tool built in Python programming language in a
 
 {# todo: a diagram of how the browser works #}
 
-### Facet API
 
-#### query
+## Categories
 
-#### show
+In Figure 2 we reproduce the categories of Linked Data visualization tools that Blomquist at al indicate, and select the particular categories we will be interested in.
 
-#### render
+<figure>
+  {{ render("whitepaper-categories") }}
+  <figcaption><strong>Figure 2.</strong> Visualization tools categories</figcaption>
+</figure>
 
-### Iolanta API
+{# todo: link to YAML source on GitHub #}
 
-## Iolanta plugins
+Let's examine the two categories which look promising.
 
-### iolanta-tables
+…
 
-### iolanta-jinja2
+{# todo: Not all necessary columns are rendered, fix that #}
+{# todo: SHACL! #}
 
-## Future directions
+#### Browsers
 
+<figure>
+  {{ render("browsers") }}
+  <figcaption><strong>Figure 4.</strong> Linked Data browsers</figcaption>
+</figure>
+
+{# todo: "#### Publication systems" #}
+{# todo: MetaFactory #}
+{# todo: kg mkdocs plugin #}
+
+
+#### LESS
+
+LESS[^less] is a Linked Data browser which seems to satisfy that requirement.
+
+[^less]: Auer, Sören & Doehring, Raphael & Tramp, Sebastian. (2010). LESS - Template-Based Syndication and Presentation of Linked Data. 6089. 211-224. 10.1007/978-3-642-13489-0_15.
+
+LESS is based on a template language inspired by Smarty[^smarty] PHP templates. An interactive template editor aids the user in crafting a template for their particular needs; then, the resulting template can be published on a LESS Repository online and then embedded into various third-party applications:
+
+[^smarty]: https://smarty.net
+
+> …a blogger writing about a recent trip to Berlin can easily integrate a nicely formatted fact box with important information about Berlin obtained from Wikipedia into her blog post. A community of science fiction fans can integrate lists on a recent BBC programming matching their preferences into their community portal.
+
+With Smarty (or any other template language), template reuse seems to pose a challenge. `schema:url` property on an object will always mean that the object has a hypertext link associated with it. The author of every template out there will have to remember that, — there is no way to say that `schema:url` in HTML context is always rendered as an `<a>` tag. Which seems to be a reason of a lot of repetition among templates. Can we leverage the information already contained in the Linked Data to reduce that kind of repetition? 
+
+The dataset might specify certain details of visualizations using special vocabularies. For instance, for tabular visualizations those can be:
+
+* list of columns to render,
+* property associated with each column,
+* sorting and grouping of rows.
+
+If the visualization is to implement these requirements, it cannot be implemented in Smarty or another template language. Template languages are oftentimes inherently and purposefully limited compared to full scale Turing-complete programming languages.
+
+{# todo: target this better to the book writing use case #}
+
+## Future research
 
 * Implement more plugins for various use cases, such as:
     * drawing roadmaps and network planning,

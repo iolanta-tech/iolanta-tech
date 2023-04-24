@@ -1,0 +1,24 @@
+$id: fresnel-tools
+$type: table:Table
+table:columns:
+  - table:self
+  - available
+  - last-update
+table:class:
+  $id: FresnelTool
+  $reverse:
+    rdf:type:
+      - rdfs:label: IsaViz
+        schema:url: https://www.w3.org/2001/11/IsaViz/
+      - rdfs:label: Longwell / Piggy Bank (SIMILE/W3C/MIT)
+        schema:url:
+          - http://simile.mit.edu/longwell/
+          - http://simile.mit.edu/piggy-bank
+      - rdfs:label: Horus
+        schema:url: http://www.wiwiss.fu-berlin.de/suhl/bizer/rdfapi/tutorial/horus/index.htm
+      - rdfs:label: LENA
+        schema:url: http://isweb.uni-koblenz.de/Research/lena
+      - rdfs:label: OAT OpenLink AJAX Toolkit (OpenLink Software)
+        schema:url: http://sourceforge.net/projects/oat
+      - rdfs:label: Marbles
+        schema:url: http://mes.github.io/marbles
