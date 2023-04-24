@@ -6,6 +6,7 @@ hide:
 #  - toc
 ---
 
+{# todo: Retrieve last updated time from Github #}
 {# todo: Format the Blog index page properly #}
 {# todo: Write README.md at iolanta-tech repo #}
 
@@ -128,8 +129,7 @@ To present analysis results for this category, Table 3.1[^ld-visualization-book]
 
 * Tools which were not marked as Available are excluded because, for practical purposes, they no longer exist;
 * The `Setting` and `Application Type` columns are omitted because they say "Generic" and "Web" respectively for all elements;
-* The original table used single-character codes to denote data and visualization types (for instance, `C` for "chart"), — we use icons instead. Please hover over an icon to see a tooltip explaining its meaning;
-* We add a new column :material-table: for tabular visualization and fill in its values.
+* The original table used single-character codes to denote data and visualization types (for instance, `C` for "chart"), — we use icons instead. Please hover over an icon to see a tooltip explaining its meaning.
 
 <figure class="no-min-width">
   {{ render("tools-with-various-visualizations") }}
@@ -517,6 +517,20 @@ Here, we use nested [`table:columns`](https://iolanta.tech/tables/columns) prope
 !!! success "Criterion 4 is satisfied"
     {{ render('criterion4') }}
 
+#### Property: `iolanta:facet`
+
+{# todo: Invent an example to illustrate iolanta:facet #}
+
+* Range: `iolanta:Facet`
+
+This property might be attached to any IRI or BNode in an RDF graph. If we decidedly know which facet to use for a particular node we can explicitly connect the node and the facet in our RDF graph. For example:
+
+```
+    :something iolanta:facet <python://iolanta.facets.html.Default> .
+```
+
+From this example, it is evident how we identify facets. These are import paths native for Python programming language, which we define by `python://` protocol.
+
 
 ## `iolanta` vocabulary
 
@@ -543,23 +557,6 @@ We do not store program code in the graph itself; that seems both inconvenient a
 
 Not every facet suits every possible environment. For instance, if a facet returns a string that contains HTML code that result would be next to useless for a \LaTeX document, and vice versa. Thus, it is necessary to describe for every facet which environment(s) it is suitable for. We use `iolanta:supports` for that.
 
-### Property: `iolanta:facet`
-
-* Range: [`iolanta:Facet`](#class-facet)
-
-This property might be attached to any IRI or BNode in an RDF graph. If we decidedly know which facet to use for a particular node we can explicitly connect the node and the facet in our RDF graph. For example:
-
-```
-    :something iolanta:facet <python://iolanta.facets.html.Default> .
-```
-
-From this example, it is evident how we identify facets. These are import paths native for Python programming language, which we define by `python://` protocol.
-
-{# todo: This example should be closer to real life #}
-
-{# todo: Visualize this as a graph! #}
-
-It would be tedious to attach `iolanta:facet` to *each and every* node this facet might be able to render; oftentimes, it is sufficient to attach a facet to a whole class of nodes. That's what `iolanta:hasInstanceFacet` is for: `iolanta` will find the facet by classes the node is attached to.
 
 ## Facet search algorithm
 

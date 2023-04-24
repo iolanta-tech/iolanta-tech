@@ -9,4 +9,5 @@ table:columns:
     rdfs:label: " "
 
 table:class: VisualizationTool
-table:order-by: year
+table:order-by:
+  - year

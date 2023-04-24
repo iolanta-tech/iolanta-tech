@@ -5,4 +5,5 @@ table:columns:
   - year
 
 table:class: VisualizationTool
-table:order-by: year
+table:order-by:
+  - year

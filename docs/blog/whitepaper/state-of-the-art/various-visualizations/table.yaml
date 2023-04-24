@@ -26,10 +26,10 @@ table:columns:
         rdfs:comment: Hierarchical
   - rdfs:label: Visualization Types
     table:columns:
-      - $id: table
-        mkdocs-material:icon: material/table.svg
-        rdfs:comment: Table
-        rdfs:label: " "
+#      - $id: tabular
+#        mkdocs-material:icon: material/table.svg
+#        rdfs:comment: Table
+#        rdfs:label: " "
 
       - $id: graph
         mkdocs-material:icon: material/graph.svg
@@ -72,4 +72,5 @@ table:columns:
         rdfs:comment: Timeline
 
 table:class: VisualizationTool
-table:order-by: year
+table:order-by:
+  - year

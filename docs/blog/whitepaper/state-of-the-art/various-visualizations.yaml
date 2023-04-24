@@ -2,8 +2,10 @@ $id: VisualizationTool
 $reverse:
   rdf:type:
     - $id: rhizomer
+      available: yes
       rdfs:label: Rhizomer
-      schema:url: https://rhizomik.net/rhizomer
+      schema:url: https://github.com/rhizomik/rhizomerEye
+      last-update: 2022-12-02
       year: 2006
       numeric: yes
       temporal: yes
@@ -14,9 +16,12 @@ $reverse:
       map: yes
       treemap: yes
       timeline: yes
+      tabular: no
 
     - rdfs:label: LDVizWiz
-      schema:url: https://www.researchgate.net/publication/269390887_Towards_a_Linked-Data_based_Visualization_Wizard
+      available: yes
+      schema:url: http://semantics.eurecom.fr/datalift/rdfViz/apps/
+      rdfs:comment: Could not get this to work. After entering the dbpedia endpoint address, a number of green active buttons appear but none of those reacts.
       year: 2014
       spatial: yes
       hierarchical: yes
@@ -24,9 +29,12 @@ $reverse:
       map: yes
       pie-chart: yes
       tree: yes
+      tabular: no
 
     - rdfs:label: SynopsViz
-      schema:url: https://www.researchgate.net/publication/264790753_rdfSynopsViz_-_A_Framework_for_Hierarchical_Linked_Data_Visual_Exploration_and_Analysis
+      schema:url: http://synopsviz.imis.athena-innovation.gr/
+      rdfs:comment: The URL is no longer available.
+      available: no
       year: 2014
       numeric: yes
       temporal: yes
@@ -37,7 +45,9 @@ $reverse:
       timeline: yes
 
     - rdfs:label: VisWizard
-      schema:url: https://www.researchgate.net/publication/267512822_Discovery_and_Visual_Analysis_of_Linked_Data_for_Humans
+      schema:url: http://code.know-center.tugraz.at/vis
+      rdfs:comment: The URL is no longer available.
+      available: no
       year: 2014
       numeric: yes
       temporal: yes
@@ -52,8 +62,9 @@ $reverse:
       steam-graph: yes
 
     - rdfs:label: Balloon
-      schema:url: https://schlegel.github.io/balloon/
+      schema:url: https://github.com/schlegel/balloon
       year: 2014
+      last-update: 2014-06-30
       numeric: true
       temporal: yes
       spatial: yes
@@ -62,6 +73,8 @@ $reverse:
 
     - rdfs:label: LP-Vis
       year: 2016
+      available: no
+      rdfs:comment: It proved difficult to find the location or information of this system.
       spatial: yes
       hierarchical: yes
       graph: yes
@@ -75,6 +88,9 @@ $reverse:
       tree: yes
 
     - rdfs:label: YDS
+      schema:url: https://yourdatastories.eu
+      last-update: 2018-03-01
+      available: yes
       year: 2017
       numeric: yes
       temporal: yes
@@ -87,8 +103,11 @@ $reverse:
       treemap: yes
       timeline: yes
       pie-chart: yes
+      tabular: yes
 
     - rdfs:label: LPVA
+      schema:url: https://www.researchgate.net/publication/318717427_Towards_easier_visualization_of_linked_data_for_lay_users
+      rdfs:comment:
       year: 2017
       spatial: yes
       hierarchical: yes
