@@ -9,5 +9,5 @@ table:columns:
 
 table:class: VisualizationTool
 table:order-by:
-  - last-update:
-      table:direction: desc
+  last-update:
+    table:direction: desc

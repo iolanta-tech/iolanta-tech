@@ -507,37 +507,11 @@ Given that information, we need to find a facet in our graph and execute that fa
 Iolanta browser is an open source tool built in Python programming language in attempt to illustrate the principles of this article and pave a way to a powerful, versatile Linked Data visualization system.
 
 {# todo: a diagram of how the browser works #}
-
-
-## Categories
-
-In Figure 2 we reproduce the categories of Linked Data visualization tools that Blomquist at al indicate, and select the particular categories we will be interested in.
-
-<figure>
-  {{ render("whitepaper-categories") }}
-  <figcaption><strong>Figure 2.</strong> Visualization tools categories</figcaption>
-</figure>
-
-{# todo: link to YAML source on GitHub #}
-
-Let's examine the two categories which look promising.
-
-…
-
 {# todo: Not all necessary columns are rendered, fix that #}
 {# todo: SHACL! #}
-
-#### Browsers
-
-<figure>
-  {{ render("browsers") }}
-  <figcaption><strong>Figure 4.</strong> Linked Data browsers</figcaption>
-</figure>
-
-{# todo: "#### Publication systems" #}
+{# todo: Publication systems #}
 {# todo: MetaFactory #}
 {# todo: kg mkdocs plugin #}
-
 
 #### LESS
 

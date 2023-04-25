@@ -72,5 +72,4 @@ table:columns:
         rdfs:comment: Timeline
 
 table:class: VisualizationTool
-table:order-by:
-  - year
+table:order-by: year
