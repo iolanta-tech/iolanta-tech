@@ -174,7 +174,55 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
 </figcaption>
 </figure>
 
+#### `fresnel:showProperties`
 
+`fresnel:showProperties` defines, as an RDF list which properties attached to the object to output in the visualization (see Figure X). This probably can be used to define which properties, and in which order, to output as table columns. 
+
+<figure style="text-align: left" markdown>
+```turtle
+:foafPersonShortLens rdf:type fresnel:Lens ;
+                     fresnel:classLensDomain foaf:Person ;
+                     fresnel:showProperties ( foaf:name
+                                              foaf:mbox
+                                              foaf:homepage ) .
+```
+<figcaption markdown><strong>Figure X.</strong> `fresnel:showProperties` example in Turtle.</figcaption>
+</figure>
+
+
+#### `fresnel:*Domain`
+
+Figure X lists the properties defined by Fresnel which help determine which lens and format to use for a particular node.
+
+<figure>
+  {{ render("fresnel-domain-properties") }}
+  <figcaption>
+    <strong>Figure X.</strong>
+    <code>fresnel:*Domain</code> properties.
+  </figcaption>
+</figure>
+
+**Fresnel Selector** can be one of:
+
+* Instance URI,
+* FSL (Fresnel Selector Language) expression as a string,
+* SPARQL query as a string.
+
+Fresnel Selector Language is a special expression language introduced by Fresnel which the client software has to implement. This language is not a widely used standard.
+
+Another potential challenge in Fresnel adoption in this regard is its ability to vary presentation among environments.
+
+{# todo: Choose presentation based on env, by example #}
+
+#### Plugins
+
+<figure>
+  {{ render("fresnel-tools-plugins") }}
+  <figcaption>
+    <strong>Figure X.</strong>
+    Fresnel-powered tools by their plugins support
+  </figcaption>
+</figure>
 
 ### Tal4RDF
 

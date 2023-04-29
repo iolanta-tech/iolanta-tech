@@ -1,5 +1,4 @@
 $id: browsers
-$type: table:Table
 table:columns:
   - table:self
   - last-update

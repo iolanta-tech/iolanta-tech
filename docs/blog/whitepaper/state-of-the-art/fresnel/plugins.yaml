@@ -1,0 +1,13 @@
+$id: fresnel-tools-plugins
+table:columns:
+  - table:self
+  - available
+  - last-update
+  - language
+  - plugin-support
+table:class: FresnelTool
+table:order-by:
+  - $id: available
+    table:direction: desc
+  - $id: last-update
+    table:direction: desc

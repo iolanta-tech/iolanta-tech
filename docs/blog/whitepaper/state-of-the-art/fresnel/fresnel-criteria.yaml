@@ -10,16 +10,21 @@ table:columns:
 table:rows:
   - criterion: criterion1
     satisfies: yes
-    notes: Fresnel can generate HTML
+    notes: Fresnel implies HTML generation, and HTML supports tables.
   - criterion: criterion2
     satisfies: yes
-    notes: Fresnel Lens can specify list of properties to show with fresnel:showProperties.
+    notes:
+      rdfs:label: fresnel:showProperties
+      schema:url: "#fresnelshowproperties"
   - criterion: criterion3
     satisfies: 🤔
-    notes: Partially; see below.
+    notes:
+      rdfs:label: fresnel:*Domain
+      schema:url: "#fresneldomain"
   - criterion: criterion4
-    satisfies: 🤔
-    notes: Code that performs the visualization is part of the Fresnel browser.
+    notes: "Not applicable: not specified by Fresnel."
   - criterion: criterion5
-    satisfies: "?"
-    notes: Depends on the browser.
+    satisfies: 🤔
+    notes:
+      rdfs:label: Depends on the browser
+      schema:url: "#plugins"

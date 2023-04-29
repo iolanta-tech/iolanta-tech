@@ -1,5 +1,4 @@
 $id: tools-with-various-visualizations-augmented
-$type: table:Table
 table:columns:
   - table:self
   - year
