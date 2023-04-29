@@ -15,6 +15,6 @@ def todo():
         for row in rows.split('\n')
     ]
 
-    for todo in todos:
-        if todo:
-            rich.print(f'▢ {todo}')
+    for todo_item in todos:
+        if todo_item:
+            rich.print(f'▢ {todo_item}')

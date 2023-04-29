@@ -131,9 +131,7 @@ What kind of vocabulary could be used to describe visualizations, then?
 
 ### Fresnel Vocabulary
 
-{# todo: Tabulate Fresnel based tools #}
-
-Fresnel Vocabulary[^fresnel] is a browser-independent vocabulary to specify how to render an RDF model. Fresnel's two foundational concepts are as follows:
+Fresnel[^fresnel], last updated in 2005, is a browser-independent vocabulary to specify how to render an RDF model. Fresnel's two foundational concepts are as follows:
 
 [^fresnel]: https://www.w3.org/2005/04/fresnel-info/
 
@@ -156,10 +154,7 @@ Fresnel visualization process.<br/> (Drawn by hand.)
 
 While Fresnel aims to be platform independent, it still has a binding to CSS, thus making HTML and SVG kind of preferred formats.
 
-Fresnel vocabulary is used by a number of tools:
-
-{# todo: Describe Fresnel tools better #}
-{# todo: Add more Fresnel tools, look into the book #}
+Fresnel vocabulary is used by a number of tools, a few of which are listed at Figure X.
 
 <figure class="no-min-width" markdown>
 {{ render("fresnel-tools") }}
@@ -170,7 +165,16 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
 </figcaption>
 </figure>
 
-Can we have something more independent from the medium? {# todo: Expand while Fresnel is not so good #}
+<figure class="no-min-width" markdown>
+{{ render("fresnel-criteria") }}
+<figcaption markdown>
+<strong>Figure X.</strong>
+Fresnel & criteria.<br/>
+See [:material-github: data & table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/fresnel/fresnel-criteria.yaml)
+</figcaption>
+</figure>
+
+
 
 ### Tal4RDF
 

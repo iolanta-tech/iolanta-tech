@@ -10,12 +10,15 @@ table:class:
     rdf:type:
       - rdfs:label: IsaViz
         schema:url: https://www.w3.org/2001/11/IsaViz/
+        language: Java
       - rdfs:label: Longwell / Piggy Bank (SIMILE/W3C/MIT)
+        language: Java
         schema:url:
           - http://simile.mit.edu/longwell/
           - http://simile.mit.edu/piggy-bank
       - rdfs:label: Horus
         schema:url: http://www.wiwiss.fu-berlin.de/suhl/bizer/rdfapi/tutorial/horus/index.htm
+        language: PHP
       - rdfs:label: LENA
         schema:url: http://isweb.uni-koblenz.de/Research/lena
       - rdfs:label: OAT OpenLink AJAX Toolkit (OpenLink Software)

@@ -1,0 +1,25 @@
+"@context":
+  criterion:
+    "@type": "@id"
+
+$id: fresnel-criteria
+table:columns:
+  - criterion
+  - satisfies
+  - notes
+table:rows:
+  - criterion: criterion1
+    satisfies: yes
+    notes: Fresnel can generate HTML
+  - criterion: criterion2
+    satisfies: yes
+    notes: Fresnel Lens can specify list of properties to show with fresnel:showProperties.
+  - criterion: criterion3
+    satisfies: 🤔
+    notes: Partially; see below.
+  - criterion: criterion4
+    satisfies: 🤔
+    notes: Code that performs the visualization is part of the Fresnel browser.
+  - criterion: criterion5
+    satisfies: "?"
+    notes: Depends on the browser.
