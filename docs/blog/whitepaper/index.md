@@ -6,7 +6,6 @@ hide:
 #  - toc
 ---
 
-{# todo: Retrieve last updated time from Github #}
 {# todo: Format the Blog index page properly #}
 {# todo: Write README.md at iolanta-tech repo #}
 
@@ -33,24 +32,22 @@ If professionals in software development or in other areas are to utilize Linked
 
 That need is met with Linked Data visualization tools — software systems which present Linked Data as :material-view-list: lists, :material-table: tables, :material-chart-bar: charts, :material-map: maps, :material-file-tree: trees, :material-graph: graphs or any other form[^data-visualizations-periodic-table] of data visualization known to humanity.
 
-[^data-visualizations-periodic-table]: https://www.visual-literacy.org/periodic_table/periodic_table.html 
+[^data-visualizations-periodic-table]: USI eLab: A periodic table of visualization methods. [https://www.visual-literacy.org/periodic_table/periodic_table.html](https://www.visual-literacy.org/periodic_table/periodic_table.html)
 
 Over last decades, significant efforts have been put into visualizing Linked Data. A comprehensive survey of methods and tools as of 2020 is available at the **Linked Data Visualization** book[^ld-visualization-book], authors of which list, evaluate and compare a handful of available visualization systems.
 
-[^ld-visualization-book]: Linked Data Visualization: Techniques, Tools and Big Data. — Laura Po, Nikos Bikakis, Federico Desimoni, and George Papastefanatos | Morgan & Claypool, 2020 http://www.linkeddatavisualization.com/
+[^ld-visualization-book]: Linked Data Visualization: Techniques, Tools and Big Data. — Laura Po, Nikos Bikakis, Federico Desimoni, and George Papastefanatos | Morgan & Claypool, 2020 [http://www.linkeddatavisualization.com](http://www.linkeddatavisualization.com)
 
-As an illustration, we are reproducing Table 3.1 from the book here (figure X), which lists a number of visualization tools and shows which data types and visualization modes every tool supports. The table was slightly modified when reproducing here:
+As an illustration, we are reproducing Table 3.1 from the book here ({{ render("fig-tools-with-various-visualizations") }}), which lists a number of visualization tools and shows which data types and visualization modes every tool supports. The table was slightly modified when reproducing here:
 
 * Tools which were not marked as **Available** in the original are excluded because, from a practical viewpoint of a working professional, they no longer exist;
 * The **Setting** and **Application Type** columns are omitted since they say "Generic" and "Web" respectively in every row of the table;
 * The original table used single-character codes to denote data and visualization types (for instance, `C` stands for "chart"), — we use icons instead. When viewing this paper as HTML, please hover over an icon to see a tooltip explaining its meaning.
 
-{# todo: Is this figure really necessary? Maybe we should tabulate Fresnel, Vega, Tal4RDF tools instead? #}
-
 <figure class="no-min-width" markdown>
 {{ render("tools-with-various-visualizations") }}
 <figcaption markdown>
-<strong>Figure 3.</strong>
+<strong>{{ render("fig-tools-with-various-visualizations") }}.</strong>
 Visualization tools supporting multiple visualizations[^ldvisualization-book] (page 54).<br/>
 See [:material-github: data](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml)
 & [:material-github: table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations/table.yaml).
@@ -67,17 +64,17 @@ The authors had put an immense effort into setting up, comparing and analysing L
 
 What kind of a visualization system would aid a task like preparing the Linked Data Visualization book, or, say, the paper you are so kind and forthcoming to be reading right now?
 
-Tables, one of which is rendered on Figure X, are probably the most predominant methods of visualizing data, thus our dream visualizer should be capable of drawing tables.
+Tables, one of which is rendered on {{ render("fig-tools-with-various-visualizations") }}, are probably the most predominant methods of visualizing data, thus our dream visualizer should be capable of drawing tables.
 
 !!! info "Criterion 1"
     {{ render('criterion1') }}
 
-The same chunk of data can be rendered differently for different purposes. Check out Figure X1, which uses the same data as Figure X but shows it a little bit differently.
+The same chunk of data can be rendered differently for different purposes. Check out {{ render("fig-tools-with-various-visualizations-augmented") }}, which uses the same data as {{ render("fig-tools-with-various-visualizations") }} but shows it a little bit differently.
 
 <figure class="no-min-width" markdown>
 {{ render("tools-with-various-visualizations-augmented") }}
 <figcaption markdown>
-<strong>Figure X.</strong>
+<strong>{{ render("fig-tools-with-various-visualizations-augmented") }}.</strong>
 Visualization tools supporting multiple visualizations[^ldvisualization-book] (page 54), with additions.<br/>
 See [:material-github: data](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml)
 & [:material-github: table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations/table-augmented.yaml).
@@ -95,7 +92,7 @@ This table is different from the previous one, it highlights different aspects o
 !!! info "Criterion 2"
     {{ render('criterion2') }}
 
-The list of visualization formats listed at Figure X is rather extensive but definitely not exhaustive. There might be narrow focused, domain specific visualizations, such as a DNA strand rendering or a chemical formula rendering. Other visualizations might be medium specific, for instance, an interactive representation of a table intended for viewing in virtual reality.
+The list of visualization formats listed as columns on {{ render("fig-tools-with-various-visualizations") }} is rather extensive but definitely not exhaustive. There might be narrow focused, domain specific visualizations, such as a DNA strand rendering or a chemical formula rendering. Other visualizations might be medium specific, for instance, an interactive representation of a table intended for viewing in virtual reality.
 
 We can't predict what kind of visualizations developers would want to build for our system, we should give them freedom to build whatever they want. A restricted, stripped-down language or notation for visualizations would undermine that purpose.
 
@@ -133,7 +130,7 @@ What kind of vocabulary could be used to describe visualizations, then?
 
 Fresnel[^fresnel], last updated in 2005, is a browser-independent vocabulary to specify how to render an RDF model. Fresnel's two foundational concepts are as follows:
 
-[^fresnel]: https://www.w3.org/2005/04/fresnel-info/
+[^fresnel]: Pietriga, E., Bizer, C., Karger, D., Lee, R. (2006). Fresnel: A Browser-Independent Presentation Vocabulary for RDF. In: , et al. The Semantic Web - ISWC 2006. ISWC 2006. Lecture Notes in Computer Science, vol 4273. Springer, Berlin, Heidelberg. https://doi.org/10.1007/11926078_12
 
 * *lenses* define which properties of an RDF resource to display and how to order them,
 * *formats* define how to render those properties using
@@ -142,24 +139,24 @@ Fresnel[^fresnel], last updated in 2005, is a browser-independent vocabulary to 
 
 [^css]: http://www.w3.org/Style/CSS/
 
-The visualization process Fresnel uses is described in Figure X.
+The visualization process Fresnel uses is described in {{ render("fig-fresnel-diagram") }}.
 
 <figure markdown>
 ![fresnel.png](fresnel.png)
 <figcaption>
-<strong>Figure X.</strong>
+<strong>{{ render("fig-fresnel-diagram") }}.</strong>
 Fresnel visualization process.<br/> (Drawn by hand.)
 </figcaption>
 </figure>
 
 While Fresnel aims to be platform independent, it still has a binding to CSS, thus making HTML and SVG kind of preferred formats.
 
-Fresnel vocabulary is used by a number of tools, a few of which are listed at Figure X.
+Fresnel vocabulary is used by a number of tools, a few of which are listed at {{ render("fig-fresnel-tools") }}.
 
 <figure class="no-min-width" markdown>
 {{ render("fresnel-tools") }}
 <figcaption markdown>
-<strong>Figure X.</strong>
+<strong>{{ render("fig-fresnel-tools") }}.</strong>
 Visualization tools based on Fresnel vocabulary.<br/>
 See [:material-github: data & table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/fresnel.yaml)
 </figcaption>
@@ -168,7 +165,7 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
 <figure class="no-min-width" markdown>
 {{ render("fresnel-criteria") }}
 <figcaption markdown>
-<strong>Figure X.</strong>
+<strong>{{ render("fig-fresnel-criteria") }}.</strong>
 Fresnel & criteria.<br/>
 See [:material-github: data & table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/fresnel/fresnel-criteria.yaml)
 </figcaption>
@@ -176,7 +173,7 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
 
 #### `fresnel:showProperties`
 
-`fresnel:showProperties` defines, as an RDF list which properties attached to the object to output in the visualization (see Figure X). This probably can be used to define which properties, and in which order, to output as table columns. 
+`fresnel:showProperties` defines, as an RDF list which properties attached to the object to output in the visualization (see {{ render("fig-show-properties") }}). This probably can be used to define which properties, and in which order, to output as table columns. 
 
 <figure style="text-align: left" markdown>
 ```turtle
@@ -186,18 +183,18 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
                                               foaf:mbox
                                               foaf:homepage ) .
 ```
-<figcaption markdown><strong>Figure X.</strong> `fresnel:showProperties` example in Turtle.</figcaption>
+<figcaption markdown><strong>{{ render("fig-show-properties") }}.</strong> `fresnel:showProperties` example in Turtle.</figcaption>
 </figure>
 
 
 #### `fresnel:*Domain`
 
-Figure X lists the properties defined by Fresnel which help determine which lens and format to use for a particular node.
+{{ render("fig-fresnel-domain-properties") }} lists the properties defined by Fresnel which help determine which lens and format to use for a particular node.
 
 <figure>
   {{ render("fresnel-domain-properties") }}
   <figcaption>
-    <strong>Figure X.</strong>
+    <strong>{{ render("fig-fresnel-domain-properties") }}.</strong>
     <code>fresnel:*Domain</code> properties.
   </figcaption>
 </figure>
@@ -216,23 +213,76 @@ Another potential challenge in Fresnel adoption in this regard is its ability to
 
 #### Plugins
 
+A number of RDF visualization tools powered by Fresnel vocabulary has been developed; the list of tools we could find available is provided at {{ render("fig-fresnel-tools-plugins") }}.
+
 <figure>
   {{ render("fresnel-tools-plugins") }}
   <figcaption>
-    <strong>Figure X.</strong>
+    <strong>{{ render("fig-fresnel-tools-plugins") }}.</strong>
     Fresnel-powered tools by their plugins support
   </figcaption>
 </figure>
 
+As far as it is evident from the tools' documentation, none of them has a plugin system.
+
 ### Tal4RDF
 
-{# todo: Explore Tal4RDF #}
+Tal4RDF[^tal] is a special purpose template language which serves two distinct goals:
 
-### Vega RDF
+* Generate textual content from RDF, primarily XML and HTML because TAL4RDF, as its platform technology TAL, employs special attributes for XML tags;
+* Traverse the RDF graph right from within the template.
 
-{# todo: Explore Vega RDF #}
+Example TAL4RDF source is on {{ render("fig-tal4rdf") }}. Comparing TAL4RDF to Fresnel, author says that
 
-[^sparql]: SPARQL Query Language {# todo: provide a link #}
+> Compared to T4R, the strengths of Fresnel are also its weaknesses. Its model is quite complex and not practical for rapid prototyping of templates. Furthermore, the mapping from the abstract box model to concrete syntaxes being not specified in Fresnel, it is not a "ready to use" solution for application developers. In fact, we believe that T4R could be used to implement this missing step between Fresnel and concrete formats.
+
+TAL4RDF does not implement discovery of particular template to use for a given RDF node. This is an extension to Fresnel or another visualization framework but not such a framework itself.
+
+<figure style="text-align: left" markdown>
+```html
+<ul tal:define="global t4rns:foaf string:http://xmlns.com/foaf/0.1/">
+  <li tal:repeat="pe foaf:knows">
+    <span tal:content="pe/id">someone I know</span> works on:
+    <ul>
+      <li tal:repeat="pr pe/foaf:currentProject">
+        <a tal:attributes="href pr/foaf:homepage" tal:content="pr/id">a project</a>
+      </li>
+    </ul>
+    <span tal:define="past pe/foaf:pastProject" tal:condition="past">
+      and also worked on <span tal:content="past/count">n</span> project(s) in the past.
+    </span>
+  </li>
+</ul>
+```
+<figcaption><strong>{{ render("fig-tal4rdf") }}.</strong> Tal4RDF example</figcaption>
+</figure>
+
+[^tal]: Champin, P. A. (2009). Tal4Rdf: Lightweight Presentation for the Semantic Web. In SFSW@ ESWC. — https://ceur-ws.org/Vol-449/Paper1.pdf
+
+[^sparql]: Prud’hommeaux, E., Seaborne, A.: SPARQL query language for RDF. W3C recommendation, W3C (2008) http://www.w3.org/TR/rdf-sparql-query/.
+
+### LESS
+
+LESS[^less] is a Linked Data browser which seems to satisfy that requirement.
+
+[^less]: Auer, Sören & Doehring, Raphael & Tramp, Sebastian. (2010). LESS - Template-Based Syndication and Presentation of Linked Data. 6089. 211-224. 10.1007/978-3-642-13489-0_15.
+
+LESS is based on a template language inspired by Smarty[^smarty] PHP templates. An interactive template editor aids the user in crafting a template for their particular needs; then, the resulting template can be published on a LESS Repository online and then embedded into various third-party applications:
+
+[^smarty]: https://smarty.net
+
+> …a blogger writing about a recent trip to Berlin can easily integrate a nicely formatted fact box with important information about Berlin obtained from Wikipedia into her blog post. A community of science fiction fans can integrate lists on a recent BBC programming matching their preferences into their community portal.
+
+With Smarty (or any other template language), template reuse seems to pose a challenge. `schema:url` property on an object will always mean that the object has a hypertext link associated with it. The author of every template out there will have to remember that, — there is no way to say that `schema:url` in HTML context is always rendered as an `<a>` tag. Which seems to be a reason of a lot of repetition among templates. Can we leverage the information already contained in the Linked Data to reduce that kind of repetition? 
+
+The dataset might specify certain details of visualizations using special vocabularies. For instance, for tabular visualizations those can be:
+
+* list of columns to render,
+* property associated with each column,
+* sorting and grouping of rows.
+
+If the visualization is to implement these requirements, it cannot be implemented in Smarty or another template language. Template languages are oftentimes inherently and purposefully limited compared to full scale Turing-complete programming languages.
+ 
 
 {# todo: Enumerate figures #}
 
@@ -250,11 +300,13 @@ Henceforth, we will demonstrate step-by-step how to describe data about Linked D
 
 ### Provide data
 
+{{ render("fig-various-visualizations") }} shows a piece of code describing the data.
+
 <figure markdown>
   <div style="text-align: left" markdown>
     {{ code('blog/whitepaper/state-of-the-art/various-visualizations.yaml', title='various-visualizations.yaml', language='yaml', last_line=16) }}
   </div>
-  <figcaption markdown><strong>Figure X.</strong> Visualization tools file. See [:material-github: `various-visualizations.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml) in the Supplementary Material.</figcaption>
+  <figcaption markdown><strong>{{ render("fig-various-visualizations") }}.</strong> Visualization tools file. See [:material-github: `various-visualizations.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml) in the Supplementary Material.</figcaption>
 </figure>
 
 **What file format is this?** This is YAML[^yaml]. To be more precise, this is YAML-LD[^yaml-ld], a mapping of JSON-LD[^json-ld] from JSON[^json] to YAML.
@@ -305,11 +357,11 @@ or
 
 The same notion or piece of data might be visualized as a list, a table, or maybe an interactive 3D landscape, but none of those changes the nature of the object being represented. It might be said every representation of an object is another way of looking at it, a new angle, feature, a facet of the object.
 
-In Iolanta terminology, facet is a piece of executable computer code which is called to visualize a particular node in the RDF graph. It can be described as a black box with inputs and outputs charted on Figure X.
+In Iolanta terminology, facet is a piece of executable computer code which is called to visualize a particular node in the RDF graph. It can be described as a black box with inputs and outputs charted on {{ render("fig-facet") }}.
 
 <figure markdown>
   ![Facet as a black box](facet.png)
-  <figcaption><strong>Figure X.</strong> Facet as a black box (drawn by hand)</figcaption>
+  <figcaption><strong>{{ render("fig-facet") }}.</strong> Facet as a black box (drawn by hand)</figcaption>
 </figure>
 
 ### What is `environment` for?
@@ -375,11 +427,13 @@ which renders to: {{ render('rhizomer') }}. As we can see, HTML markup generated
 
 {# todo: Draw graph of the table structure v1 #}
 
+The first version of the table is described at {{ render("fig-v1-code") }}.
+
 <figure markdown>
   <div style="text-align: left">
     {{ code('blog/whitepaper/state-of-the-art/various-visualizations/v1.yaml', language='yaml', title='various-visualizations-v1.yaml') }}
   </div>
-  <figcaption><strong>Figure X.</strong> Table definition v1</figcaption>
+  <figcaption><strong>{{ render("fig-v1-code") }}.</strong> Table definition v1</figcaption>
 </figure>
 
 * `various-visualizations-v1` is the RDF node that describes this table;
@@ -391,11 +445,11 @@ Using this kind of markup, we store the table description in the RDF graph itsel
 !!! success "Criterion 2 is satisfied"
     {{ render('criterion2') }}
 
-Figure X shows how this table is rendered via {% raw %}`{{ render('various-visualizations-v1') }}`{% endraw %} template call.
+{{ render("fig-v1") }} shows how this table is rendered via {% raw %}`{{ render('various-visualizations-v1') }}`{% endraw %} template call.
 
 <figure markdown>
   {{ render('various-visualizations-v1') }}
-  <figcaption><strong>Figure X.</strong> Table v1</figcaption>
+  <figcaption><strong>{{ render("fig-v1") }}.</strong> Table v1</figcaption>
 </figure>
 
 We rendered this as a table now!
@@ -405,7 +459,7 @@ We rendered this as a table now!
 
 How did it work though?
 
-The table rendered at figure X is represented by the node `various-visualizations-v1`, which (via the `$type` property) as an instance of `table:Table`. The [`table:`](https://iolanta.tech/tables/) prefix is defined by `iolanta-tables`[^iolanta-tables] plugin.
+The table rendered at {{ render("fig-v1") }} is represented by the node `various-visualizations-v1`, which (via the `$type` property) as an instance of `table:Table`. The [`table:`](https://iolanta.tech/tables/) prefix is defined by `iolanta-tables`[^iolanta-tables] plugin.
 
 !!! success "Criterion 5 is satisfied"
     {{ render('criterion5') }}
@@ -445,10 +499,10 @@ iolanta:hasInstanceFacet:
 
 <figure markdown>
   {{ render('various-visualizations-v2', environments='side-by-side') }}
-  <figcaption><strong>Figure X.</strong> Table v2</figcaption>
+  <figcaption><strong>{{ render("fig-v2") }}.</strong> Table v2</figcaption>
 </figure>
 
-In this snippet, we introduced a new `table:self` column. That's not a property, say, `rhizomer` has; it means that we render the node itself (the `rhizomer` node) — and for that the `Default` facet we already know will be employed, — which will be presented as a clickable HTML link.
+In the snippet on {{ render("fig-v2") }}, we introduced a new `table:self` column. That's not a property, say, `rhizomer` has; it means that we render the node itself (the `rhizomer` node) — and for that the `Default` facet we already know will be employed, — which will be presented as a clickable HTML link.
 
 In addition, we use [`table:order-by`](https://iolanta.tech/tables/order-by) to sort the table by year.
 
@@ -459,20 +513,20 @@ In addition, we use [`table:order-by`](https://iolanta.tech/tables/order-by) to 
 
 <figure markdown class="no-min-width">
   {{ render('various-visualizations-v3', environments='side-by-side') }}
-  <figcaption><strong>Figure X.</strong> Table v3</figcaption>
+  <figcaption><strong>{{ render("fig-v3") }}.</strong> Table v3</figcaption>
 </figure>
 
-In this snippet, we define [`mkdocs-material:icon`](https://mkdocs.iolanta.tech/material/icon) property to use mkdocs[^mkdocs] specific icon as column header.
+On the snippet at {{ render("fig-v3") }}, we define [`mkdocs-material:icon`](https://mkdocs.iolanta.tech/material/icon) property to use mkdocs[^mkdocs] specific icon as column header.
 
 ## The final table
 
-Figure X is visualized from the following description:
+{{ render("fig-tools-with-various-visualizations") }} is visualized from the description on {{ render("fig-table") }}:
 
 <figure markdown>
   <div style="text-align: left">
     {{ code('blog/whitepaper/state-of-the-art/various-visualizations/table.yaml', title='table.yaml', language='yaml', last_line=16) }}
   </div>
-  <figcaption><strong>Figure X.</strong> Visualization tools table file</figcaption>
+  <figcaption><strong>{{ render("fig-table") }}.</strong> Visualization tools table file</figcaption>
 </figure>
 
 {# todo: There is a rogue </td> printed above. #}
@@ -502,13 +556,13 @@ From this example, it is evident how we identify facets. These are import paths 
 
 ## `iolanta` vocabulary
 
-`iolanta` operation is based on a simple vocabulary, bundled with the application. Iolanta vocabulary defines a few classes and a few properties connecting classes to each other.
+`iolanta` operation is based on a simple vocabulary, bundled with the application and drawn, as a diagram, on {{ render("fig-iolanta-vocabulary") }}. Iolanta vocabulary defines a few classes and a few properties connecting classes to each other.
 
 Prefix we use is `iolanta:`, and it resolves to https://iolanta.tech/.
 
 <figure>
   <img alt="Iolanta vocabulary" src="iolanta-vocabulary.png" />
-  <figcaption><strong>Figure X.</strong> <code>iolanta:</code> vocabulary (Drawn by hand)</figcaption>
+  <figcaption><strong>{{ render("fig-iolanta-vocabulary") }}.</strong> <code>iolanta:</code> vocabulary (Drawn by hand)</figcaption>
 </figure>
 
 In Iolanta terminology, Facet is a unit of executable program code used to visualize RDF nodes in an [Environment](#class-iolantaenvironment). Generally speaking, facet can be described as a black box which has three inputs:
@@ -528,9 +582,11 @@ Not every facet suits every possible environment. For instance, if a facet retur
 
 ## Facet search algorithm
 
+{{ render("fig-algorithm") }} describes the facet search algorithm.
+
 <figure markdown style="text-align: center">
   <img src="algorithm.png" style="width: 50%">
-  <figcaption><strong>Figure X.</strong> Iolanta facet search algorithm<br/><em>(drawn by hand)</em></figcaption>
+  <figcaption><strong>{{ render("fig-algorithm") }}.</strong> Iolanta facet search algorithm<br/><em>(drawn by hand)</em></figcaption>
 </figure>
 
 `Iolanta.render()` method accepts arguments:
@@ -549,9 +605,11 @@ Given that information, we need to find a facet in our graph and execute that fa
 
 ## Architecture
 
+{{ render("fig-architecture") }} describes system architecture.
+
 <figure markdown>
   ![Iolanta architecture](architecture.png)
-  <figcaption><strong>Figure X.</strong> Iolanta architecture<br/><em>(drawn by hand)</em></figcaption>
+  <figcaption><strong>{{ render("fig-architecture") }}.</strong> Iolanta architecture<br/><em>(drawn by hand)</em></figcaption>
 </figure>
 
 ## Iolanta browser
@@ -564,30 +622,6 @@ Iolanta browser is an open source tool built in Python programming language in a
 {# todo: Publication systems #}
 {# todo: MetaFactory #}
 {# todo: kg mkdocs plugin #}
-
-#### LESS
-
-LESS[^less] is a Linked Data browser which seems to satisfy that requirement.
-
-[^less]: Auer, Sören & Doehring, Raphael & Tramp, Sebastian. (2010). LESS - Template-Based Syndication and Presentation of Linked Data. 6089. 211-224. 10.1007/978-3-642-13489-0_15.
-
-LESS is based on a template language inspired by Smarty[^smarty] PHP templates. An interactive template editor aids the user in crafting a template for their particular needs; then, the resulting template can be published on a LESS Repository online and then embedded into various third-party applications:
-
-[^smarty]: https://smarty.net
-
-> …a blogger writing about a recent trip to Berlin can easily integrate a nicely formatted fact box with important information about Berlin obtained from Wikipedia into her blog post. A community of science fiction fans can integrate lists on a recent BBC programming matching their preferences into their community portal.
-
-With Smarty (or any other template language), template reuse seems to pose a challenge. `schema:url` property on an object will always mean that the object has a hypertext link associated with it. The author of every template out there will have to remember that, — there is no way to say that `schema:url` in HTML context is always rendered as an `<a>` tag. Which seems to be a reason of a lot of repetition among templates. Can we leverage the information already contained in the Linked Data to reduce that kind of repetition? 
-
-The dataset might specify certain details of visualizations using special vocabularies. For instance, for tabular visualizations those can be:
-
-* list of columns to render,
-* property associated with each column,
-* sorting and grouping of rows.
-
-If the visualization is to implement these requirements, it cannot be implemented in Smarty or another template language. Template languages are oftentimes inherently and purposefully limited compared to full scale Turing-complete programming languages.
-
-{# todo: target this better to the book writing use case #}
 
 ## Future research
 
