@@ -1,0 +1,6 @@
+- $id: rdfs:comment
+  rdfs:label: Comment
+- $id: rdfs:label
+  rdfs:label: Label
+- $id: schema:url
+  rdfs:label: URL

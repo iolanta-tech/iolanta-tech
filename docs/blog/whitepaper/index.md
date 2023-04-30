@@ -559,13 +559,15 @@ Here, we use nested [`table:columns`](https://iolanta.tech/tables/columns) prope
 
 {{ render('criterion-turing', environments='satisfied') }}
 
-#### Property: `iolanta:facet`
+!!! info `iolanta:facet`
+    Facet assigned by particular node. This property might be attached to any IRI or BNode in an RDF graph.
+    
+    * Range: `iolanta:Facet`
+    * Inverse: `iolanta:isFacetOf`
 
 {# todo: Invent an example to illustrate iolanta:facet #}
 
-* Range: `iolanta:Facet`
-
-This property might be attached to any IRI or BNode in an RDF graph. If we decidedly know which facet to use for a particular node we can explicitly connect the node and the facet in our RDF graph. For example:
+If we decidedly know which facet to use for a particular node we can explicitly connect the node and the facet in our RDF graph. For example:
 
 ```
     :something iolanta:facet <python://iolanta.facets.html.Default> .
