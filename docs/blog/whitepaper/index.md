@@ -647,6 +647,7 @@ Given that information, we need to find a facet in our graph and execute that fa
     * LaTeX,
     * CLI;
 * Integrate with remote datasets like DBPedia[^dbpedia];
+* Integrate with IPFS;
 * Provide interactive browsing experience.
 
 
