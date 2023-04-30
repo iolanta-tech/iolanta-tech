@@ -1,18 +1,7 @@
-from pathlib import Path
-
 import funcy
-from dominate.tags import code, table, td, tr
-from dominate.util import raw
+from dominate.tags import table, tr, td, code
 from iolanta.facets.html.base import HTMLFacet
-from iolanta.namespaces import IOLANTA, LOCAL
-
-CODE_TEMPLATE = """
-```{language} title="{title}"
-{code}
-```
-
-{annotations}
-"""
+from iolanta.namespaces import LOCAL, IOLANTA
 
 
 class SideBySide(HTMLFacet):
@@ -50,20 +39,4 @@ class SideBySide(HTMLFacet):
                 ),
             ),
             data_facet='side-by-side',
-        )
-
-
-class Code(HTMLFacet):
-    """Print contents of a file in a code fence."""
-
-    def show(self):
-        """Render code as HTML."""
-        path = Path(str(self.iri).replace('file://', ''))
-        return raw(
-            CODE_TEMPLATE.format(
-                language='yaml',
-                code=path.read_text(),
-                title=path.name,
-                annotations='',
-            ),
         )

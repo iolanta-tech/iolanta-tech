@@ -1,14 +1,34 @@
 $id: Criterion
+iolanta:hasInstanceFacet:
+  - $id: python://iolanta_tech.facets.Criterion
+    iolanta:supports:
+      - $id: iolanta:html
+      - $id: local:satisfied
+      - $id: local:failed
+  - $id: python://iolanta.facets.html.Default
+    iolanta:supports:
+      $id: table:td
+
+
 $reverse:
   rdf:type:
-    - $id: criterion1
+    - $id: criterion-table
+      number: 1
       rdfs:label: Visualization tool must be capable of generating tables.
-    - $id: criterion2
+    - $id: criterion-customize
+      number: 2
       rdfs:label: "Visualizations must be customizable: for instance, when building a table, we should be able to choose what columns to render, in what order, and how to sort and/or group the data."
-    - $id: criterion3
-      rdfs:label: "Visualization method appropriate for a particular node depends on the node itself, its properties, and a context (environment) the node is visualized within. Visualization system should be aware of this relationship and be able to select an appropriate visualization mode based on the data."
-    - $id: criterion4
-      rdfs:label: Visualizations should be implemented in a Turing complete general purpose programming language.
-    - $id: criterion5
-      rdfs:label: Visualization tool must be extendable via plugins implementing various data types and visualization types.
 
+    - $id: criterion-turing
+      number: 3
+      rdfs:label: Visualizations should be implementable in a Turing complete general purpose programming language.
+    - $id: criterion-plugins
+      number: 4
+      rdfs:label: Visualization tool must be extendable via plugins implementing various data types and visualization types.
+    - $id: criterion-self-hosted
+      number: 5
+      rdfs:label: Linked Data visualizations should be themselves expressible as Linked Data.
+
+    - $id: criterion-context
+      number: 6
+      rdfs:label: "Visualization method appropriate for a particular node depends on the node itself, its properties, and a context (environment) the node is visualized within. Visualization system should be aware of this relationship and be able to select an appropriate visualization mode based on the data."

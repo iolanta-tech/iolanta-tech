@@ -8,6 +8,7 @@ hide:
 
 {# todo: Format the Blog index page properly #}
 {# todo: Write README.md at iolanta-tech repo #}
+{# todo: Standardize the list of references #}
 
 <style>
 .no-min-width th {
@@ -17,7 +18,7 @@ hide:
 
 Linked Data ⋅ JSON-LD ⋅ YAML-LD ⋅ Data Visualization
 
-!!! info "Abstract"
+!!! abstract
     **Purpose:** Linked Data in its raw form, as a collection of triples (or quads) — is arguably not easily comprehensible for a human being. Linked Data visualization is a conversion from triples to a visual form (a table, a chart, et cetera) — a form that we humans can easily read, understand, and interact with. The method and particular details of a visualization very much depend on the purpose data is visualized for.
     
     **Methodology:** A minimalistic yet extendable vocabulary is proposed to guide visualization based on the data and to allow customization of the visual form via the knowledge graph itself. A plugin based visualization software architecture implementing the vocabulary is proposed and its main algorithm is described. A software tool implementing the proposed principles is built and published as an open source project. A few plugins for it (implementing a few visualization types and integrations) are also provided.
@@ -28,7 +29,12 @@ Linked Data ⋅ JSON-LD ⋅ YAML-LD ⋅ Data Visualization
 
 ## Introduction
 
-If professionals in software development or in other areas are to utilize Linked Data technology in their work they probably cannot be expected to dive deep into the depths of raw triples, which are not very suitable for human consumption. Users would prefer to use tools capable of *visualizing* the raw triples, converting them into a form better suitable for human eye.
+A person who is:
+
+* not a specialist in Linked Data per se,
+* but is attempting to leverage Linked Data as a tool for their work or hobby,
+
+— probably cannot be expected to dive deep into the depths of raw triples. Users would prefer to use tools capable of *visualizing* the raw triples, converting them into a form better suitable for human eye.
 
 That need is met with Linked Data visualization tools — software systems which present Linked Data as :material-view-list: lists, :material-table: tables, :material-chart-bar: charts, :material-map: maps, :material-file-tree: trees, :material-graph: graphs or any other form[^data-visualizations-periodic-table] of data visualization known to humanity.
 
@@ -38,17 +44,22 @@ Over last decades, significant efforts have been put into visualizing Linked Dat
 
 [^ld-visualization-book]: Linked Data Visualization: Techniques, Tools and Big Data. — Laura Po, Nikos Bikakis, Federico Desimoni, and George Papastefanatos | Morgan & Claypool, 2020 [http://www.linkeddatavisualization.com](http://www.linkeddatavisualization.com)
 
-As an illustration, we are reproducing Table 3.1 from the book here ({{ render("fig-tools-with-various-visualizations") }}), which lists a number of visualization tools and shows which data types and visualization modes every tool supports. The table was slightly modified when reproducing here:
+As an illustration, we are reproducing Table 3.1 from the book here ({{ render("fig-tools-with-various-visualizations") }}), which lists a number of visualization tools and shows which data types and visualization modes every tool supports. The table was slightly modified prior to reproduction:
 
 * Tools which were not marked as **Available** in the original are excluded because, from a practical viewpoint of a working professional, they no longer exist;
-* The **Setting** and **Application Type** columns are omitted since they say "Generic" and "Web" respectively in every row of the table;
-* The original table used single-character codes to denote data and visualization types (for instance, `C` stands for "chart"), — we use icons instead. When viewing this paper as HTML, please hover over an icon to see a tooltip explaining its meaning.
+* The **Setting** and **Application Type** columns are omitted, — since they say `Generic` and `Web` respectively in every row of the table;
+* The original table used single-character codes to denote data and visualization types (for instance, `C` stands for "chart"), — we create a separate column for each visualization type instead. When viewing this paper as HTML, please hover over an icon to see a tooltip explaining its meaning;
+* The **Year** column was omitted as it is not immediately informative to us.
 
 <figure class="no-min-width" markdown>
+<div markdown style="font-size: 75%">
 {{ render("tools-with-various-visualizations") }}
+</div>
+
 <figcaption markdown>
 <strong>{{ render("fig-tools-with-various-visualizations") }}.</strong>
-Visualization tools supporting multiple visualizations[^ldvisualization-book] (page 54).<br/>
+Visualization tools supporting multiple visualizations[^ld-visualization-book] (Table 3.1, page 54).<br/>
+
 See [:material-github: data](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml)
 & [:material-github: table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations/table.yaml).
 </figcaption>
@@ -56,32 +67,32 @@ See [:material-github: data](https://github.com/iolanta-tech/iolanta-tech/blob/m
 
 ## Shoemaker's son
 
-Table 3.1 describes only a subset of all visualization tools the book as a whole explores, and it itself is only one of multiple tables, charts, timelines the book contains. Nonetheless, none of the **data visualizations** the book enjoys are built with any of the **visualization tools** the book explores, or, at least, no mention of such could be found by me when reading the book.
+{{ render("fig-tools-with-various-visualizations") }} describes only a subset of all visualization tools the book as a whole explores, and it itself is only one of multiple tables, charts, timelines the book contains. Nonetheless, none of the **data visualizations** the book contains are built with any of the **visualization tools** the book explores, or, at least, no mention of such could be found.
 
 The authors had put an immense effort into setting up, comparing and analysing Linked Data visualization software, but none of the tools they tried gave them an impression that it can aid them in the complex and tedious task of authoring a book, — a process solely focused on analysing, managing and distilling information, a kind of work that Linked Data should be most useful for.
 
 ## Can we do better?
 
-What kind of a visualization system would aid a task like preparing the Linked Data Visualization book, or, say, the paper you are so kind and forthcoming to be reading right now?
+What kind of visualization system would aid a task like preparing the Linked Data Visualization book, or, say, the paper you are so kind and forthcoming to be reading right now?
 
-Tables, one of which is rendered on {{ render("fig-tools-with-various-visualizations") }}, are probably the most predominant methods of visualizing data, thus our dream visualizer should be capable of drawing tables.
+Tables, one of which is rendered on {{ render("fig-tools-with-various-visualizations") }}, are probably the most predominant methods of visualizing data; let us formulate this as a criterion the target visualization system has to satisfy.
 
-!!! info "Criterion 1"
-    {{ render('criterion1') }}
+{{ render('criterion-table') }}
 
-The same chunk of data can be rendered differently for different purposes. Check out {{ render("fig-tools-with-various-visualizations-augmented") }}, which uses the same data as {{ render("fig-tools-with-various-visualizations") }} but shows it a little bit differently.
+The same chunk of data can be rendered differently for different purposes. {{ render("fig-tools-with-various-visualizations-augmented") }}, uses the same data as {{ render("fig-tools-with-various-visualizations") }} but shows it a little bit differently.
 
 <figure class="no-min-width" markdown>
 {{ render("tools-with-various-visualizations-augmented") }}
 <figcaption markdown>
 <strong>{{ render("fig-tools-with-various-visualizations-augmented") }}.</strong>
-Visualization tools supporting multiple visualizations[^ldvisualization-book] (page 54), with additions.<br/>
+{{ render("fig-tools-with-various-visualizations") }} with availability information and notes.<br/>
+
 See [:material-github: data](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml)
-& [:material-github: table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations/table-augmented.yaml).
+& [:material-github: table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations/augmented.yaml).
 </figcaption>
 </figure>
 
-The original data was augmented:
+In particular,
 
 * **Last Update** column shows the date of last changes touching the software, observed as of spring 2023;
 * **Available** is the evaluation of the tools' availability as of spring 2023;
@@ -89,53 +100,38 @@ The original data was augmented:
 
 This table is different from the previous one, it highlights different aspects of the data and shows different columns, which brings about another criterion:
 
-!!! info "Criterion 2"
-    {{ render('criterion2') }}
+{{ render('criterion-customize') }}
 
 The list of visualization formats listed as columns on {{ render("fig-tools-with-various-visualizations") }} is rather extensive but definitely not exhaustive. There might be narrow focused, domain specific visualizations, such as a DNA strand rendering or a chemical formula rendering. Other visualizations might be medium specific, for instance, an interactive representation of a table intended for viewing in virtual reality.
 
 We can't predict what kind of visualizations developers would want to build for our system, we should give them freedom to build whatever they want. A restricted, stripped-down language or notation for visualizations would undermine that purpose.
 
-!!! info "Criterion 4"
-    {{ render('criterion4') }}
+{{ render('criterion-turing') }}
 
 One singular visualization system can't encompass all imaginable possibilities. A plugin mechanism is necessary to support independent developers writing new exciting visualizations.
 
-!!! info "Criterion 5"
-    {{ render('criterion5') }}
+{{ render('criterion-plugins') }}
 
-## Describe Linked Data visualizations in Linked Data itself
+We want to be able to share visualizations and reuse them, to easily change them if our purposes change. Probably we could use some kind of standardized textual format for that purpose. One of Linked Data formats, perhaps?
 
-The heading of this chapter captures the main idea of this paper.
+{{ render('criterion-self-hosted') }}
 
-If we could describe a table like that on Figure Y as a piece of Linked Data targeted at visualizing another piece of Linked Data, we would have gained a number of immediate advantages.
-
-Applying the 5-star model of Linked Data[^5-star] to visualizations themselves seems to promise a few valuable benefits:
-
-[^5-star]: https://www.w3.org/2011/gld/wiki/5_Star_Linked_Data
-
-* *Visualization is available on the Web* which enables anyone to retrieve and enjoy applying to the data,
-* *Visualization is available as machine-readable structured data* and can be not only reused but easily customized,
-* *Available in a non-proprietary format,* say as a JSON-LD (or any other RDF serialization) document,
-* *Published using open standards from the W3C*, which JSON-LD is,
-* *All of the above and links to other Linked Open Data* — which it does because a visualization must reference certain aspects of source data to specify how to visualize that.
-
-{# todo: Format the 5-star list somehow nicely #}
-
-The role of the visualization system is to consume both data and visualization tied to it and output the rendered result — in our case, an HTML table. 
+Thus, the role of the visualization system is to consume both data and visualization tied to it and output the rendered result — in our case, an HTML table. 
  
 What kind of vocabulary could be used to describe visualizations, then?
 
-### Fresnel Vocabulary
+## Fresnel Vocabulary
 
 Fresnel[^fresnel], last updated in 2005, is a browser-independent vocabulary to specify how to render an RDF model. Fresnel's two foundational concepts are as follows:
 
 [^fresnel]: Pietriga, E., Bizer, C., Karger, D., Lee, R. (2006). Fresnel: A Browser-Independent Presentation Vocabulary for RDF. In: , et al. The Semantic Web - ISWC 2006. ISWC 2006. Lecture Notes in Computer Science, vol 4273. Springer, Berlin, Heidelberg. https://doi.org/10.1007/11926078_12
 
-* *lenses* define which properties of an RDF resource to display and how to order them,
+* *lenses*, which might contain nested *sublenses*, define which properties of an RDF resource to display, and how to order them,
 * *formats* define how to render those properties using
     * RDF-specific formatting attributes
     * and hooks to CSS[^css].
+
+Formats do not output a usable visualization though, they only produce an abstract tree of components known as *Abstract Display Model* which then can be converted to HTML, XML, PDF, or anything else, — given that we implement a tool for such conversion.
 
 [^css]: http://www.w3.org/Style/CSS/
 
@@ -149,31 +145,21 @@ Fresnel visualization process.<br/> (Drawn by hand.)
 </figcaption>
 </figure>
 
-While Fresnel aims to be platform independent, it still has a binding to CSS, thus making HTML and SVG kind of preferred formats.
-
-Fresnel vocabulary is used by a number of tools, a few of which are listed at {{ render("fig-fresnel-tools") }}.
-
-<figure class="no-min-width" markdown>
-{{ render("fresnel-tools") }}
-<figcaption markdown>
-<strong>{{ render("fig-fresnel-tools") }}.</strong>
-Visualization tools based on Fresnel vocabulary.<br/>
-See [:material-github: data & table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/fresnel.yaml)
-</figcaption>
-</figure>
+Let us analyze, on {{ render("fig-fresnel-criteria") }}, how Fresnel fits our 6 visualization tool criteria.
 
 <figure class="no-min-width" markdown>
 {{ render("fresnel-criteria") }}
 <figcaption markdown>
 <strong>{{ render("fig-fresnel-criteria") }}.</strong>
 Fresnel & criteria.<br/>
+
 See [:material-github: data & table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/fresnel/fresnel-criteria.yaml)
 </figcaption>
 </figure>
 
-#### `fresnel:showProperties`
+### `fresnel:showProperties`
 
-`fresnel:showProperties` defines, as an RDF list which properties attached to the object to output in the visualization (see {{ render("fig-show-properties") }}). This probably can be used to define which properties, and in which order, to output as table columns. 
+`fresnel:showProperties` defines an RDF list of properties values of which will be included in the visualization (see {{ render("fig-show-properties") }}). For our table example, this might be leveraged to define list of table columns and their order. 
 
 <figure style="text-align: left" markdown>
 ```turtle
@@ -183,11 +169,12 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
                                               foaf:mbox
                                               foaf:homepage ) .
 ```
-<figcaption markdown><strong>{{ render("fig-show-properties") }}.</strong> `fresnel:showProperties` example in Turtle.</figcaption>
+<figcaption markdown><strong>{{ render("fig-show-properties") }}.</strong> `fresnel:showProperties` example in Turtle[^turtle].</figcaption>
 </figure>
 
+[^turtle]: Beckett, D., Berners-Lee, T., Prud’hommeaux, E., & Carothers, G. (2014). RDF 1.1 Turtle. World Wide Web Consortium, 18-31.
 
-#### `fresnel:*Domain`
+### `fresnel:*Domain`
 
 {{ render("fig-fresnel-domain-properties") }} lists the properties defined by Fresnel which help determine which lens and format to use for a particular node.
 
@@ -203,15 +190,27 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
 
 * Instance URI,
 * FSL (Fresnel Selector Language) expression as a string,
-* SPARQL query as a string.
+* SPARQL[^sparql] query as a string.
 
-Fresnel Selector Language is a special expression language introduced by Fresnel which the client software has to implement. This language is not a widely used standard.
+### Environments
 
-Another potential challenge in Fresnel adoption in this regard is its ability to vary presentation among environments.
+Generally, rendering of an object depends on the **environment** the object is rendered within. The easiest example would be HTML vs LaTeX output; for a more practical example, it might be considered how this paper renders the criteria for a visualization system differently depending on context:
 
-{# todo: Choose presentation based on env, by example #}
+* as plain text within a table cell at {{ render("fig-fresnel-criteria") }},
+* or a block (called an *admonition*) within the body of the article itself:
 
-#### Plugins
+{{ render("criterion-context") }}
+
+Within Fresnel, this can be solved using `fresnel:sublens` property:
+
+* The `Paper` lens will specify that `Criterion` object has to be rendered with `Admonition` sub-lens,
+* while the `TableCell` lens will render it using `Label` sub-lens.
+
+This calls for a huge tree of lenses to define rendering of the whole paper — or the whole book. Is it really necessary?
+
+We will touch on an alternative approach later.
+
+### Plugins
 
 A number of RDF visualization tools powered by Fresnel vocabulary has been developed; the list of tools we could find available is provided at {{ render("fig-fresnel-tools-plugins") }}.
 
@@ -225,20 +224,23 @@ A number of RDF visualization tools powered by Fresnel vocabulary has been devel
 
 As far as it is evident from the tools' documentation, none of them has a plugin system.
 
-### Tal4RDF
+### Template based visualization tools
 
-Tal4RDF[^tal] is a special purpose template language which serves two distinct goals:
+#### TAL4RDF
+
+TAL4RDF[^tal], or T4R, is a special purpose template language which serves two distinct goals:
 
 * Generate textual content from RDF, primarily XML and HTML because TAL4RDF, as its platform technology TAL, employs special attributes for XML tags;
 * Traverse the RDF graph right from within the template.
 
-Example TAL4RDF source is on {{ render("fig-tal4rdf") }}. Comparing TAL4RDF to Fresnel, author says that
+Example TAL4RDF source is on {{ render("fig-tal4rdf") }}. Author says:
 
 > Compared to T4R, the strengths of Fresnel are also its weaknesses. Its model is quite complex and not practical for rapid prototyping of templates. Furthermore, the mapping from the abstract box model to concrete syntaxes being not specified in Fresnel, it is not a "ready to use" solution for application developers. In fact, we believe that T4R could be used to implement this missing step between Fresnel and concrete formats.
 
 TAL4RDF does not implement discovery of particular template to use for a given RDF node. This is an extension to Fresnel or another visualization framework but not such a framework itself.
 
-<figure style="text-align: left" markdown>
+<figure markdown>
+<div style="text-align: left" markdown>
 ```html
 <ul tal:define="global t4rns:foaf string:http://xmlns.com/foaf/0.1/">
   <li tal:repeat="pe foaf:knows">
@@ -254,6 +256,7 @@ TAL4RDF does not implement discovery of particular template to use for a given R
   </li>
 </ul>
 ```
+</div>
 <figcaption><strong>{{ render("fig-tal4rdf") }}.</strong> Tal4RDF example</figcaption>
 </figure>
 
@@ -261,13 +264,11 @@ TAL4RDF does not implement discovery of particular template to use for a given R
 
 [^sparql]: Prud’hommeaux, E., Seaborne, A.: SPARQL query language for RDF. W3C recommendation, W3C (2008) http://www.w3.org/TR/rdf-sparql-query/.
 
-### LESS
+#### LESS
 
-LESS[^less] is a Linked Data browser which seems to satisfy that requirement.
+LESS[^less] is a Linked Data browser based on a template language inspired by Smarty[^smarty] PHP templates. An interactive template editor aids the user in crafting a template for their particular needs; then, the resulting template can be published on a LESS Repository online and then embedded into various third-party applications:
 
 [^less]: Auer, Sören & Doehring, Raphael & Tramp, Sebastian. (2010). LESS - Template-Based Syndication and Presentation of Linked Data. 6089. 211-224. 10.1007/978-3-642-13489-0_15.
-
-LESS is based on a template language inspired by Smarty[^smarty] PHP templates. An interactive template editor aids the user in crafting a template for their particular needs; then, the resulting template can be published on a LESS Repository online and then embedded into various third-party applications:
 
 [^smarty]: https://smarty.net
 
@@ -284,10 +285,9 @@ The dataset might specify certain details of visualizations using special vocabu
 If the visualization is to implement these requirements, it cannot be implemented in Smarty or another template language. Template languages are oftentimes inherently and purposefully limited compared to full scale Turing-complete programming languages.
  
 
-{# todo: Enumerate figures #}
-
-
 ## Iolanta
+
+{# todo: Why do we care about environments? Show an example and illustrate it against Fresnel #}
 
 To solve the issues outlined above, we propose an open source visualization tool by the name of `iolanta`, build in Python programming language. Iolanta is used to build this paper, and the website the paper is published at: [:globe_with_meridians: iolanta.tech](https://iolanta.tech), in combination with [:book: mkdocs](https://mkdocs.org) static site generator.
 
@@ -443,7 +443,7 @@ The first version of the table is described at {{ render("fig-v1-code") }}.
 Using this kind of markup, we store the table description in the RDF graph itself.
 
 !!! success "Criterion 2 is satisfied"
-    {{ render('criterion2') }}
+    {{ render('criterion-customize') }}
 
 {{ render("fig-v1") }} shows how this table is rendered via {% raw %}`{{ render('various-visualizations-v1') }}`{% endraw %} template call.
 
@@ -455,14 +455,14 @@ Using this kind of markup, we store the table description in the RDF graph itsel
 We rendered this as a table now!
 
 !!! success "Criterion 1 is satisfied"
-    {{ render('criterion1') }}
+    {{ render('criterion-table') }}
 
 How did it work though?
 
 The table rendered at {{ render("fig-v1") }} is represented by the node `various-visualizations-v1`, which (via the `$type` property) as an instance of `table:Table`. The [`table:`](https://iolanta.tech/tables/) prefix is defined by `iolanta-tables`[^iolanta-tables] plugin.
 
 !!! success "Criterion 5 is satisfied"
-    {{ render('criterion5') }}
+    {{ render('criterion-plugins') }}
 
 [^iolanta-tables]: https://iolanta.tech/tables
 
@@ -534,10 +534,10 @@ On the snippet at {{ render("fig-v3") }}, we define [`mkdocs-material:icon`](htt
 Here, we use nested [`table:columns`](https://iolanta.tech/tables/columns) properties to group columns.
 
 !!! success "Criterion 3 is satisfied"
-    {{ render('criterion3') }}
+    {{ render('criterion-context') }}
 
 !!! success "Criterion 4 is satisfied"
-    {{ render('criterion4') }}
+    {{ render('criterion-turing') }}
 
 #### Property: `iolanta:facet`
 

@@ -1,7 +1,6 @@
 $id: tools-with-various-visualizations
 table:columns:
   - table:self
-  - year
   - rdfs:label: Data Types
     table:columns:
       - $id: numeric
