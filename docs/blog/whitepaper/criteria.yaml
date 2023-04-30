@@ -6,9 +6,6 @@ iolanta:hasInstanceFacet:
       - $id: local:satisfied
       - $id: local:failed
   - $id: python://iolanta.facets.html.Default
-    iolanta:supports:
-      $id: table:td
-
 
 $reverse:
   rdf:type:

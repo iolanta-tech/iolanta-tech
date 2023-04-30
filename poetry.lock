@@ -858,14 +858,14 @@ Jinja2 = ">=3.1.2,<4.0.0"
 
 [[package]]
 name = "iolanta-tables"
-version = "0.1.6"
+version = "0.1.7"
 description = "Linked Data as tables"
 category = "dev"
 optional = false
 python-versions = ">=3.10,<4.0"
 files = [
-    {file = "iolanta_tables-0.1.6-py3-none-any.whl", hash = "sha256:48a59a071e29af248fa9130d6a49188e72dffcbb0b70c5308311675c449ca4f0"},
-    {file = "iolanta_tables-0.1.6.tar.gz", hash = "sha256:cfb30b87237fcd13809071e063c576298e0a288809fec1492bbbeef9d038128e"},
+    {file = "iolanta_tables-0.1.7-py3-none-any.whl", hash = "sha256:43940134bcca71b52e0ad3d98302c7c3f035da6e3029359a20fc3295492e969d"},
+    {file = "iolanta_tables-0.1.7.tar.gz", hash = "sha256:1b4b65ca886e3a2d0f57e9eda9a0b6db5c8aa4c0768329c2d61ffa78f0a32199"},
 ]
 
 [package.dependencies]

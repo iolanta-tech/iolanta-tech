@@ -98,11 +98,11 @@ In particular,
 * **Available** is the evaluation of the tools' availability as of spring 2023;
 * **Comment** offers some notes about how the first two were obtained.
 
-This table is different from the previous one, it highlights different aspects of the data and shows different columns, which brings about another criterion:
+This table is different from the previous one, it highlights different aspects of the data and shows different columns, which brings about another condition:
 
 {{ render('criterion-customize') }}
 
-The list of visualization formats listed as columns on {{ render("fig-tools-with-various-visualizations") }} is rather extensive but definitely not exhaustive. There might be narrow focused, domain specific visualizations, such as a DNA strand rendering or a chemical formula rendering. Other visualizations might be medium specific, for instance, an interactive representation of a table intended for viewing in virtual reality.
+The list of visualization formats listed as columns on {{ render("fig-tools-with-various-visualizations") }} is rather extensive but definitely not exhaustive. There might be narrow focused, domain specific visualizations, such as a DNA strand rendering or a chemical formula graph. Other visualizations might be medium specific, for instance, an interactive representation of a table intended for viewing in virtual reality.
 
 We can't predict what kind of visualizations developers would want to build for our system, we should give them freedom to build whatever they want. A restricted, stripped-down language or notation for visualizations would undermine that purpose.
 
@@ -224,9 +224,9 @@ A number of RDF visualization tools powered by Fresnel vocabulary has been devel
 
 As far as it is evident from the tools' documentation, none of them has a plugin system.
 
-### Template based visualization tools
+## Template based visualization tools
 
-#### TAL4RDF
+### TAL4RDF
 
 TAL4RDF[^tal], or T4R, is a special purpose template language which serves two distinct goals:
 
@@ -264,7 +264,7 @@ TAL4RDF does not implement discovery of particular template to use for a given R
 
 [^sparql]: Prud’hommeaux, E., Seaborne, A.: SPARQL query language for RDF. W3C recommendation, W3C (2008) http://www.w3.org/TR/rdf-sparql-query/.
 
-#### LESS
+### LESS
 
 LESS[^less] is a Linked Data browser based on a template language inspired by Smarty[^smarty] PHP templates. An interactive template editor aids the user in crafting a template for their particular needs; then, the resulting template can be published on a LESS Repository online and then embedded into various third-party applications:
 
@@ -276,27 +276,24 @@ LESS[^less] is a Linked Data browser based on a template language inspired by Sm
 
 With Smarty (or any other template language), template reuse seems to pose a challenge. `schema:url` property on an object will always mean that the object has a hypertext link associated with it. The author of every template out there will have to remember that, — there is no way to say that `schema:url` in HTML context is always rendered as an `<a>` tag. Which seems to be a reason of a lot of repetition among templates. Can we leverage the information already contained in the Linked Data to reduce that kind of repetition? 
 
-The dataset might specify certain details of visualizations using special vocabularies. For instance, for tabular visualizations those can be:
-
-* list of columns to render,
-* property associated with each column,
-* sorting and grouping of rows.
-
-If the visualization is to implement these requirements, it cannot be implemented in Smarty or another template language. Template languages are oftentimes inherently and purposefully limited compared to full scale Turing-complete programming languages.
- 
 
 ## Iolanta
 
-{# todo: Why do we care about environments? Show an example and illustrate it against Fresnel #}
+To summarize the previous chapters,
 
-To solve the issues outlined above, we propose an open source visualization tool by the name of `iolanta`, build in Python programming language. Iolanta is used to build this paper, and the website the paper is published at: [:globe_with_meridians: iolanta.tech](https://iolanta.tech), in combination with [:book: mkdocs](https://mkdocs.org) static site generator.
+* Purely template-based tools do not allow to specify, via the Linked Data graph itself, which visualization to choose;
+* Fresnel vocabulary allows to do that but requires creation of a large tree of lenses so that we can choose particular visualization for even the deepest levels of the tree.
+
+We propose an open source visualization tool by the name of `iolanta`, build in Python programming language. Iolanta is used to build this paper, and the website the paper is published at: [:globe_with_meridians: iolanta.tech](https://iolanta.tech), in combination with [:book: mkdocs](https://mkdocs.org)[^mkdocs] static site generator.
+
+[^mkdocs]: mkdocs.org
 
 The code is published on GitHub as [:material-github: iolanta-tech/iolanta-tech](https://github.com/iolanta-tech). The repository is equipped with a [:simple-markdown: `README.md`](https://github.com/iolanta-tech/iolanta-tech/blob/master/README.md) file which explains how to clone the repository and run the site locally. That provides:
 
 * a full locally accessible snapshot of `iolanta` documentation,
 * and a readily available sandbox to play with the system.
 
-Henceforth, we will demonstrate step-by-step how to describe data about Linked Data visualization tools — and render them in the form illustrated by Figure 3.
+Henceforth, we will demonstrate step-by-step how to describe data about Linked Data visualization tools — and render them in the form illustrated by {{ render("fig-tools-with-various-visualizations") }}.
 
 ### Provide data
 
@@ -313,7 +310,7 @@ Henceforth, we will demonstrate step-by-step how to describe data about Linked D
 
 **What does `$id` mean?** This is an alias of [`@id`](https://www.w3.org/TR/json-ld/#node-identifiers) JSON-LD keyword. The alias itself is defined in YAML-LD [:material-github: Convenience Context](https://github.com/json-ld/convenience-context), which maps `@`-keywords of JSON-LD to `$`-keywords of YAML-LD. That's done because `@` is a reserved character in YAML, and identifiers starting with `@` have to be surrounded by quotes.
 
-**What is `VisualizationTool`?** That is name of an `rdfs:Class` we're going to use to describe every visualization tool we list in Table 3. We will refer to that class when we render the table. Base `iolanta` vocabulary contains `"@base": "local:"` definition; therefore, when converting to RDF, this will be mapped to an IRI node `local:VisualizationTool`.
+**What is `VisualizationTool`?** That is name of an `rdfs:Class` we're going to use to describe every visualization tool we list in {{ render("fig-tools-with-various-visualizations") }}. We will refer to that class when we render the table. Default `iolanta` JSON-LD context contains `"@base": "local:"` definition; therefore, when converting to RDF, this will be mapped to an IRI node `local:VisualizationTool`.
 
 **What is `$reverse`?** As with `$id`, it is an aliased JSON-LD [`$reverse`](https://www.w3.org/TR/json-ld/#reverse-properties) keyword. It has one field, in this case `rdf:type`; and `rdf:type` can have multiple children, each of which will be assigned `VisualizationTool` class via an `rdf:type` edge. This allows us to avoid specifying `$type: VisualizationTool` for every single item we want to describe.
 
@@ -326,15 +323,43 @@ Henceforth, we will demonstrate step-by-step how to describe data about Linked D
 
 Having cloned the repository and installed Iolanta, we can `cd` to the root directory for the repo and run the following shell command:    
 
-```html title="$ iolanta render rhizomer --as iolanta:html"
-<a href="https://rhizomik.net/rhizomer">Rhizomer</a>
+``` title="$ iolanta render criterion-context"
+{{ render("criterion-context", environments="iolanta:cli") }}
 ```
 
 This will:
 
 * Read all `.yaml`, `.json` and `.md` files in the repository,
 * Load them into an in-memory Iolanta RDF graph,
-* And try to visualize the particular node we asked for, which in this example is `$id: rhizomer`.
+* And try to visualize the particular node we asked for, in this case — `local:criterion-context`.
+
+{# todo: insert the content of criteria.yaml file here #}
+
+This is the default rendition of an object used for the command line interface (CLI). It simply prints the `rdfs:label` of the object, if such exists. In this case, criteria are described as potrayed on {{ render("fig-criteria-code") }}.
+
+<figure markdown>
+<div style="text-align: left">
+{{ code('blog/whitepaper/criteria.yaml', language='yaml', title='criteria.yaml', last_line=15) }}
+</div>
+<figcaption markdown>
+<strong>{{ render("fig-criteria-code") }}.</strong>
+Criteria code. See [:material-github: `criteria.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/criteria.yaml)
+</figcaption>
+</figure>
+
+Let's try something different:
+
+``` title="$ iolanta render criterion-context --as iolanta:html"
+{{ render("criterion-context") }}
+```
+
+`iolanta:html` is the default environment for HTML output. To build this paper, we use MkDocs[^mkdocs] static site generator, which understands both HTML and Markdown, that's why `mkdocs-iolanta`[^mkdocs-iolanta] — the integration layer between Iolanta and MkDocs — uses `iolanta:html` as default environment.
+
+This rendition of the object is implemented by a custom plugin, say, for a static site like one which generates this paper. The output is actually Markdown markup for admonitions[^admonitions] markdown extension, rendered by MkDocs[^mkdocs] as:
+
+[^admonitions]: https://squidfunk.github.io/mkdocs-material/reference/admonitions/
+
+{{ render("criterion-context") }}
 
 As we can see, it renders a piece of HTML code that represents a hyperlink. The text of the hyperlink is incidentally equivalent to the value of `rdfs:label` property for the `rhizomer` node, and the link address is equivalent to `schema:url` property value.
 
@@ -442,8 +467,7 @@ The first version of the table is described at {{ render("fig-v1-code") }}.
 
 Using this kind of markup, we store the table description in the RDF graph itself.
 
-!!! success "Criterion 2 is satisfied"
-    {{ render('criterion-customize') }}
+{{ render('criterion-customize', environments='satisfied') }}
 
 {{ render("fig-v1") }} shows how this table is rendered via {% raw %}`{{ render('various-visualizations-v1') }}`{% endraw %} template call.
 
@@ -454,15 +478,13 @@ Using this kind of markup, we store the table description in the RDF graph itsel
 
 We rendered this as a table now!
 
-!!! success "Criterion 1 is satisfied"
-    {{ render('criterion-table') }}
+{{ render('criterion-table', environments='satisfied') }}
 
 How did it work though?
 
 The table rendered at {{ render("fig-v1") }} is represented by the node `various-visualizations-v1`, which (via the `$type` property) as an instance of `table:Table`. The [`table:`](https://iolanta.tech/tables/) prefix is defined by `iolanta-tables`[^iolanta-tables] plugin.
 
-!!! success "Criterion 5 is satisfied"
-    {{ render('criterion-plugins') }}
+{{ render('criterion-plugins', environments='satisfied') }}
 
 [^iolanta-tables]: https://iolanta.tech/tables
 
@@ -533,11 +555,9 @@ On the snippet at {{ render("fig-v3") }}, we define [`mkdocs-material:icon`](htt
 
 Here, we use nested [`table:columns`](https://iolanta.tech/tables/columns) properties to group columns.
 
-!!! success "Criterion 3 is satisfied"
-    {{ render('criterion-context') }}
+{{ render('criterion-context', environments='satisfied') }}
 
-!!! success "Criterion 4 is satisfied"
-    {{ render('criterion-turing') }}
+{{ render('criterion-turing', environments='satisfied') }}
 
 #### Property: `iolanta:facet`
 
@@ -599,7 +619,7 @@ Not every facet suits every possible environment. For instance, if a facet retur
 Given that information, we need to find a facet in our graph and execute that facet to construct a visualization for our node in one of these environments.
 
 
-* Look for `iolanta:facet` link such that `\$node iolanta:facet ?facet . ?facet iolanta:supports ?environment` .
+* Look for `iolanta:facet` link such that `$node iolanta:facet ?facet . ?facet iolanta:supports ?environment` .
 
 {# todo: describe iolanta-tables vocabulary with examples and illustrations #}
 
@@ -612,26 +632,20 @@ Given that information, we need to find a facet in our graph and execute that fa
   <figcaption><strong>{{ render("fig-architecture") }}.</strong> Iolanta architecture<br/><em>(drawn by hand)</em></figcaption>
 </figure>
 
-## Iolanta browser
-
-Iolanta browser is an open source tool built in Python programming language in attempt to illustrate the principles of this article and pave a way to a powerful, versatile Linked Data visualization system.
-
-{# todo: a diagram of how the browser works #}
-{# todo: Not all necessary columns are rendered, fix that #}
-{# todo: SHACL! #}
-{# todo: Publication systems #}
 {# todo: MetaFactory #}
-{# todo: kg mkdocs plugin #}
+{# todo: Describe 5-star data model relating to visualizations #}
 
 ## Future research
 
 * Implement more plugins for various use cases, such as:
-    * drawing roadmaps and network planning,
-    * drawing C4 {# todo: source #} architecture diagrams,
+    * roadmaps & network planning,
+    * software architecture diagrams,
     * and more;
-* Provide interactive browsing experience;
-* Implement more facet types, such as:
-    * Web components,
-    * JSON-RPC {# todo: source #} controlled plugins;
-* Improve the experience of browsing remote networks;
-* …
+* Implement more environments, such as:
+    * LaTeX,
+    * CLI;
+* Integrate with remote datasets like DBPedia[^dbpedia];
+* Provide interactive browsing experience.
+
+
+[^dbpedia]: Auer, S., Bizer, C., Kobilarov, G., Lehmann, J., Cyganiak, R., & Ives, Z. (2007). Dbpedia: A nucleus for a web of open data. In The Semantic Web: 6th International Semantic Web Conference, 2nd Asian Semantic Web Conference, ISWC 2007+ ASWC 2007, Busan, Korea, November 11-15, 2007. Proceedings (pp. 722-735). Springer Berlin Heidelberg.

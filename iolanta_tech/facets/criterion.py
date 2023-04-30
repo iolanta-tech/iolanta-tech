@@ -1,5 +1,4 @@
 import funcy
-from dominate import dom_tag
 from iolanta.facets.html.base import HTMLFacet
 from iolanta.namespaces import IOLANTA, LOCAL
 from iolanta_tables.models import TABLE

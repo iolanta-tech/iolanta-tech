@@ -4,19 +4,20 @@
   rdfs:label: Figure 2
 - $id: fig-fresnel-diagram
   rdfs:label: Figure 3
-- $id: fig-fresnel-tools
-  rdfs:label: Figure 4
+
 - $id: fig-fresnel-criteria
-  rdfs:label: Figure 5
+  rdfs:label: Figure 4
 - $id: fig-show-properties
-  rdfs:label: Figure 6
+  rdfs:label: Figure 5
 - $id: fig-fresnel-domain-properties
-  rdfs:label: Figure 7
+  rdfs:label: Figure 6
 - $id: fig-fresnel-tools-plugins
-  rdfs:label: Figure 8
+  rdfs:label: Figure 7
 - $id: fig-tal4rdf
-  rdfs:label: Figure 9
+  rdfs:label: Figure 8
 - $id: fig-various-visualizations
+  rdfs:label: Figure 9
+- $id: fig-criteria-code
   rdfs:label: Figure 10
 - $id: fig-facet
   rdfs:label: Figure 11
