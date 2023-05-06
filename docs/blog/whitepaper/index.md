@@ -7,12 +7,16 @@ hide:
 ---
 
 {# todo: Format the Blog index page properly #}
-{# todo: Write README.md at iolanta-tech repo #}
 {# todo: Standardize the list of references #}
 
 <style>
 .no-min-width th {
   min-width: 2rem !important;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-break: keep-all
 }
 </style>
 
@@ -329,7 +333,7 @@ Having cloned the repository and installed Iolanta, we can `cd` to the root dire
 
 This will:
 
-* Read all `.yaml`, `.json` and `.md` files in the repository,
+* Read all :simple-yaml: `.yaml`, :simple-json: `.json` and :simple-markdown: `.md` files in the repository,
 * Load them into an in-memory Iolanta RDF graph,
 * And try to visualize the particular node we asked for, in this case — `local:criterion-context`.
 
@@ -559,9 +563,9 @@ Here, we use nested [`table:columns`](https://iolanta.tech/tables/columns) prope
 
 {{ render('criterion-turing', environments='satisfied') }}
 
-!!! info `iolanta:facet`
+!!! info "iolanta:facet"
     Facet assigned by particular node. This property might be attached to any IRI or BNode in an RDF graph.
-    
+
     * Range: `iolanta:Facet`
     * Inverse: `iolanta:isFacetOf`
 
