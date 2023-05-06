@@ -281,7 +281,7 @@ LESS[^less] is a Linked Data browser based on a template language inspired by Sm
 With Smarty (or any other template language), template reuse seems to pose a challenge. `schema:url` property on an object will always mean that the object has a hypertext link associated with it. The author of every template out there will have to remember that, — there is no way to say that `schema:url` in HTML context is always rendered as an `<a>` tag. Which seems to be a reason of a lot of repetition among templates. Can we leverage the information already contained in the Linked Data to reduce that kind of repetition? 
 
 
-## Iolanta
+## Iolanta: Render Criteria
 
 To summarize the previous chapters,
 
@@ -301,20 +301,23 @@ Henceforth, we will demonstrate step-by-step how to describe data about Linked D
 
 ### Provide data
 
-{{ render("fig-various-visualizations") }} shows a piece of code describing the data.
+Criteria are described as shown on {{ render("fig-criteria-code") }}.
 
 <figure markdown>
-  <div style="text-align: left" markdown>
-    {{ code('blog/whitepaper/state-of-the-art/various-visualizations.yaml', title='various-visualizations.yaml', language='yaml', last_line=16) }}
-  </div>
-  <figcaption markdown><strong>{{ render("fig-various-visualizations") }}.</strong> Visualization tools file. See [:material-github: `various-visualizations.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml) in the Supplementary Material.</figcaption>
+<div style="text-align: left">
+{{ code('blog/whitepaper/criteria/criterion.yaml', language='yaml', title='criteria.yaml', last_line=15) }}
+</div>
+<figcaption markdown>
+<strong>{{ render("fig-criteria-code") }}.</strong>
+Criteria code. See [:material-github: `criteria.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/criteria.yaml)
+</figcaption>
 </figure>
 
 **What file format is this?** This is YAML[^yaml]. To be more precise, this is YAML-LD[^yaml-ld], a mapping of JSON-LD[^json-ld] from JSON[^json] to YAML.
 
 **What does `$id` mean?** This is an alias of [`@id`](https://www.w3.org/TR/json-ld/#node-identifiers) JSON-LD keyword. The alias itself is defined in YAML-LD [:material-github: Convenience Context](https://github.com/json-ld/convenience-context), which maps `@`-keywords of JSON-LD to `$`-keywords of YAML-LD. That's done because `@` is a reserved character in YAML, and identifiers starting with `@` have to be surrounded by quotes.
 
-**What is `VisualizationTool`?** That is name of an `rdfs:Class` we're going to use to describe every visualization tool we list in {{ render("fig-tools-with-various-visualizations") }}. We will refer to that class when we render the table. Default `iolanta` JSON-LD context contains `"@base": "local:"` definition; therefore, when converting to RDF, this will be mapped to an IRI node `local:VisualizationTool`.
+**What is `Criterion`?** That is name of an `rdfs:Class` we're going to use to describe every visualization tool we list in {{ render("fig-tools-with-various-visualizations") }}. We will refer to that class when we render the table. Default `iolanta` JSON-LD context contains `"@base": "local:"` definition; therefore, when converting to RDF, this will be mapped to an IRI node `local:Criterion`.
 
 **What is `$reverse`?** As with `$id`, it is an aliased JSON-LD [`$reverse`](https://www.w3.org/TR/json-ld/#reverse-properties) keyword. It has one field, in this case `rdf:type`; and `rdf:type` can have multiple children, each of which will be assigned `VisualizationTool` class via an `rdf:type` edge. This allows us to avoid specifying `$type: VisualizationTool` for every single item we want to describe.
 
@@ -333,23 +336,13 @@ Having cloned the repository and installed Iolanta, we can `cd` to the root dire
 
 This will:
 
+{# todo: Describe this as architecture diagram or whatever #}
+
 * Read all :simple-yaml: `.yaml`, :simple-json: `.json` and :simple-markdown: `.md` files in the repository,
 * Load them into an in-memory Iolanta RDF graph,
 * And try to visualize the particular node we asked for, in this case — `local:criterion-context`.
 
-{# todo: insert the content of criteria.yaml file here #}
-
-This is the default rendition of an object used for the command line interface (CLI). It simply prints the `rdfs:label` of the object, if such exists. In this case, criteria are described as potrayed on {{ render("fig-criteria-code") }}.
-
-<figure markdown>
-<div style="text-align: left">
-{{ code('blog/whitepaper/criteria.yaml', language='yaml', title='criteria.yaml', last_line=15) }}
-</div>
-<figcaption markdown>
-<strong>{{ render("fig-criteria-code") }}.</strong>
-Criteria code. See [:material-github: `criteria.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/criteria.yaml)
-</figcaption>
-</figure>
+This is the default rendition of an object used for the command line interface (CLI). It simply prints the `rdfs:label` of the object, if such exists.
 
 Let's try something different:
 
@@ -452,6 +445,19 @@ which renders to: {{ render('rhizomer') }}. As we can see, HTML markup generated
 [^mkdocs-macros-plugin]: {# todo link to mkdocs-macros-plugin #} mkdocs-macros-plugin
 
 
+
+## Iolanta + tables = `iolanta-tables`
+
+{{ render("fig-various-visualizations") }} shows a piece of code describing the data.
+
+<figure markdown>
+  <div style="text-align: left" markdown>
+    {{ code('blog/whitepaper/state-of-the-art/various-visualizations.yaml', title='various-visualizations.yaml', language='yaml', last_line=16) }}
+  </div>
+  <figcaption markdown><strong>{{ render("fig-various-visualizations") }}.</strong> Visualization tools file. See [:material-github: `various-visualizations.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml) in the Supplementary Material.</figcaption>
+</figure>
+
+
 ### Let's render a table now
 
 {# todo: Draw graph of the table structure v1 #}
@@ -544,7 +550,8 @@ In addition, we use [`table:order-by`](https://iolanta.tech/tables/order-by) to 
 
 On the snippet at {{ render("fig-v3") }}, we define [`mkdocs-material:icon`](https://mkdocs.iolanta.tech/material/icon) property to use mkdocs[^mkdocs] specific icon as column header.
 
-## The final table
+
+### The final table
 
 {{ render("fig-tools-with-various-visualizations") }} is visualized from the description on {{ render("fig-table") }}:
 

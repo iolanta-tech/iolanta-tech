@@ -1,12 +1,4 @@
 $id: Criterion
-iolanta:hasInstanceFacet:
-  - $id: python://iolanta_tech.facets.Criterion
-    iolanta:supports:
-      - $id: iolanta:html
-      - $id: local:satisfied
-      - $id: local:failed
-  - $id: python://iolanta.facets.html.Default
-
 $reverse:
   rdf:type:
     - $id: criterion-table
