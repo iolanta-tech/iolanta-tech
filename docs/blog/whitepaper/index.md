@@ -178,7 +178,7 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
 
 [^turtle]: Beckett, D., Berners-Lee, T., Prud’hommeaux, E., & Carothers, G. (2014). RDF 1.1 Turtle. World Wide Web Consortium, 18-31.
 
-### `fresnel:*Domain`
+### Fresnel Domain properties
 
 {{ render("fig-fresnel-domain-properties") }} lists the properties defined by Fresnel which help determine which lens and format to use for a particular node.
 
@@ -186,7 +186,7 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
   {{ render("fresnel-domain-properties") }}
   <figcaption>
     <strong>{{ render("fig-fresnel-domain-properties") }}.</strong>
-    <code>fresnel:*Domain</code> properties.
+    Fresnel Domain properties.
   </figcaption>
 </figure>
 
@@ -280,75 +280,181 @@ LESS[^less] is a Linked Data browser based on a template language inspired by Sm
 
 With Smarty (or any other template language), template reuse seems to pose a challenge. `schema:url` property on an object will always mean that the object has a hypertext link associated with it. The author of every template out there will have to remember that, — there is no way to say that `schema:url` in HTML context is always rendered as an `<a>` tag. Which seems to be a reason of a lot of repetition among templates. Can we leverage the information already contained in the Linked Data to reduce that kind of repetition? 
 
-
-## Iolanta: Render Criteria
-
-To summarize the previous chapters,
+### Summary
 
 * Purely template-based tools do not allow to specify, via the Linked Data graph itself, which visualization to choose;
-* Fresnel vocabulary allows to do that but requires creation of a large tree of lenses so that we can choose particular visualization for even the deepest levels of the tree.
+* Fresnel vocabulary allows to do that — but requires creation of a large tree of lenses so that we can choose particular visualization for even the deepest levels of the tree.
 
-We propose an open source visualization tool by the name of `iolanta`, build in Python programming language. Iolanta is used to build this paper, and the website the paper is published at: [:globe_with_meridians: iolanta.tech](https://iolanta.tech), in combination with [:book: mkdocs](https://mkdocs.org)[^mkdocs] static site generator.
+## Yet another visualization system: Iolanta
 
-[^mkdocs]: mkdocs.org
+In this paper, an open source visualization tool by the name of `iolanta` is proposed — and, to some extent, used to build:
 
-The code is published on GitHub as [:material-github: iolanta-tech/iolanta-tech](https://github.com/iolanta-tech). The repository is equipped with a [:simple-markdown: `README.md`](https://github.com/iolanta-tech/iolanta-tech/blob/master/README.md) file which explains how to clone the repository and run the site locally. That provides:
+* this paper,
+* as well as the website the paper is published at: [:globe_with_meridians: iolanta.tech](https://iolanta.tech).
 
-* a full locally accessible snapshot of `iolanta` documentation,
-* and a readily available sandbox to play with the system.
+!!! info "Reproducibility"
+    The code can be found at [:material-github: iolanta-tech/iolanta-tech](https://github.com/iolanta-tech). The repository is equipped with a [:simple-markdown: `README.md`](https://github.com/iolanta-tech/iolanta-tech/blob/master/README.md) file which explains how to clone the repository and run the site locally, which provides full reproducibility of this paper.
 
-Henceforth, we will demonstrate step-by-step how to describe data about Linked Data visualization tools — and render them in the form illustrated by {{ render("fig-tools-with-various-visualizations") }}.
+Having cloned the repository and installed Iolanta, we can `cd` to the root directory for the repo, and run the following shell command:
 
-### Provide data
+``` title="$ iolanta render criterion-context"
+{{ render("criterion-context", environments="iolanta:cli") }}
+```
 
-Criteria are described as shown on {{ render("fig-criteria-code") }}.
+We've already seen this text in [Can we do better?](#can-we-do-better) section and on {{ render("fig-fresnel-criteria") }}. All of these sources were read from the same file, part of which is displayed on {{ render("fig-criteria-code") }}.
+
+{# todo: enumerate headings? #}
+
+{{ render("fig-architecture") }} describes how the criterion text is retrieved from source data stored in the repository — and displayed in the console, in broad terms.
+
+<figure markdown>
+  ![Iolanta architecture](architecture.png)
+  <figcaption><strong>{{ render("fig-architecture") }}.</strong> Iolanta rednering process<br/><em>(drawn by hand)</em></figcaption>
+</figure>
+
+Let's describe each of these steps in some more detail.
+
+### Loading data into graph
+
+Iolanta understands a few file formats:
+
+* :simple-yaml: `.yaml`
+* :simple-json: `.json`
+* :simple-markdown: `.md`
+
+Visualization system criteria are described in a text file; part of that file is shown on 
 
 <figure markdown>
 <div style="text-align: left">
-{{ code('blog/whitepaper/criteria/criterion.yaml', language='yaml', title='criteria.yaml', last_line=15) }}
+{{ code('blog/whitepaper/criteria/criterion.yaml', language='yaml', title='criterion.yaml', last_line=11) }}
 </div>
 <figcaption markdown>
 <strong>{{ render("fig-criteria-code") }}.</strong>
-Criteria code. See [:material-github: `criteria.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/criteria.yaml)
+Criteria code. See [:material-github: `criteria.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/criteria/criterion.yaml)
 </figcaption>
 </figure>
 
-**What file format is this?** This is YAML[^yaml]. To be more precise, this is YAML-LD[^yaml-ld], a mapping of JSON-LD[^json-ld] from JSON[^json] to YAML.
-
-**What does `$id` mean?** This is an alias of [`@id`](https://www.w3.org/TR/json-ld/#node-identifiers) JSON-LD keyword. The alias itself is defined in YAML-LD [:material-github: Convenience Context](https://github.com/json-ld/convenience-context), which maps `@`-keywords of JSON-LD to `$`-keywords of YAML-LD. That's done because `@` is a reserved character in YAML, and identifiers starting with `@` have to be surrounded by quotes.
-
-**What is `Criterion`?** That is name of an `rdfs:Class` we're going to use to describe every visualization tool we list in {{ render("fig-tools-with-various-visualizations") }}. We will refer to that class when we render the table. Default `iolanta` JSON-LD context contains `"@base": "local:"` definition; therefore, when converting to RDF, this will be mapped to an IRI node `local:Criterion`.
-
-**What is `$reverse`?** As with `$id`, it is an aliased JSON-LD [`$reverse`](https://www.w3.org/TR/json-ld/#reverse-properties) keyword. It has one field, in this case `rdf:type`; and `rdf:type` can have multiple children, each of which will be assigned `VisualizationTool` class via an `rdf:type` edge. This allows us to avoid specifying `$type: VisualizationTool` for every single item we want to describe.
+This file is written in YAML-LD[^yaml-ld], which is a mapping of JSON-LD[^json-ld] W3C standard from JSON[^json] to YAML[^yaml]. 
 
 [^yaml]: https://yaml.org/spec/1.2.2/
 [^yaml-ld]: :material-github: https://github.com/json-ld/yaml-ld
 [^json-ld]: https://json-ld.org
 [^json]: https://json.org
 
-### Render something
 
-Having cloned the repository and installed Iolanta, we can `cd` to the root directory for the repo and run the following shell command:    
+When reading the source files, Iolanta applies a default JSON-LD Context[^default-context], which provides a few default definitions.
 
-``` title="$ iolanta render criterion-context"
-{{ render("criterion-context", environments="iolanta:cli") }}
+For instance, `$id` is an alias of [`@id`](https://www.w3.org/TR/json-ld/#node-identifiers) JSON-LD keyword. As indicated in YAML-LD Specification, `@` character which defines JSON-LD keywords is a reserved character in YAML, which means using this character requires quoting, as shown on {{ render("fig-quoting") }}.
+
+[^default-context]: [:material-github: `iolanta/data/context.yaml`](https://github.com/iolanta-tech/iolanta/blob/master/iolanta/data/context.yaml)
+
+
+<figure markdown>
+<div style="text-align: left" markdown>
+```yaml
+"@id": criterion-context
 ```
+</div>
+<figcaption markdown>
+<strong>{{ render("fig-quoting") }}.</strong>
+`@id` keyword must be quoted.
+</figcaption>
+</figure>
 
-This will:
 
-{# todo: Describe this as architecture diagram or whatever #}
+It will read them, interpret them as YAML-LD and JSON-LD, — and load the retrieved data as RDF into in-memory graph powered by rdflib[^rdflib].
 
-* Read all :simple-yaml: `.yaml`, :simple-json: `.json` and :simple-markdown: `.md` files in the repository,
-* Load them into an in-memory Iolanta RDF graph,
-* And try to visualize the particular node we asked for, in this case — `local:criterion-context`.
+Iolanta plugins, which we will touch on later, can add more data to the graph.
 
-This is the default rendition of an object used for the command line interface (CLI). It simply prints the `rdfs:label` of the object, if such exists.
+[^rdflib]: https://rdflib.org
 
-Let's try something different:
+That graph will be used for the steps to follow.
+
+### Choosing a facet
+
+The word *facet* is defined by Cambridge Dictionary[^facet-dictionary] as:
+
+[^facet-dictionary]: https://dictionary.cambridge.org/dictionary/english/facet
+
+> one part of a subject, situation, etc. that has many parts
+
+or
+
+> one of the parts or features of something
+
+[^mkdocs]: mkdocs.org
+
+The same notion or piece of data might be visualized as a list, a table, or maybe an interactive 3D landscape, but none of those changes the nature of the object being represented. It might be said every representation of an object is another way of looking at it, a new angle, feature, a facet of the object.
+
+In Iolanta terminology, facet is a piece of executable computer code which is called to visualize a particular node in the RDF graph.
+
+In our particular case, the system uses `iolanta.facets.cli.default.Default` facet class which will do the following:
+
+* Via a SPARQL[^sparql] query, find out whether the node being rendered has an `rdfs:label` property;
+* If yes, print that property.
+
+That's how our we got our text printed in the console. Let's now try something different.
+
+### Environments
 
 ``` title="$ iolanta render criterion-context --as iolanta:html"
 {{ render("criterion-context") }}
 ```
+
+We added the `--as` argument, and our output has changed. It is a piece of extended Markdown markup suitable for Mkdocs[^mkdocs] static site generator with mkdocs-material[^mkdocs-material] theme. Indeed, inside Mkdocs it is rendered like this:
+
+{{ render("criterion-context") }}
+
+The facet responsible for it is `iolanta_tech.facets.criterion.Criterion`, and it has been chosen because we specified `iolanta:html` as the **environment** for rendering using the `--as` parameter.
+
+Thus, facet selection depends on the *environment* we are rendering a node within.
+
+* In our first example, we didn't specify `--as`, and Iolanta used its default environment known as `iolanta:cli` which serves printing to console;
+* In the second example, we specified `iolanta:html` explicitly.
+
+{{ render("fig-criteria-facets") }} illustrates the code that helps Iolanta choose the correct facet. We can see that `Criterion` class has two facets connected to it via `iolanta:hasInstanceFacet` property:
+
+* `Default` facet that's going to be used in table cells;
+* `Criterion` facet which will render Markdown markup. For that one, we explicitly specify a few environments it can be used within.
+
+<figure markdown>
+<div style="text-align: left">
+{{ code('blog/whitepaper/criteria/facets.yaml', language='yaml', title='facets.yaml') }}
+</div>
+<figcaption markdown>
+<strong>{{ render("fig-criteria-facets") }}.</strong>
+Criteria code. See [:material-github: `facets.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/criteria/facets.yaml)
+</figcaption>
+</figure>
+
+{{ render("fig-algorithm") }} describes the facet search algorithm.
+
+<figure markdown style="text-align: center">
+  <img src="algorithm.png" style="width: 50%">
+  <figcaption><strong>{{ render("fig-algorithm") }}.</strong> Iolanta facet search algorithm<br/><em>(drawn by hand)</em></figcaption>
+</figure>
+
+Facet can be described as a black box with inputs and outputs charted on {{ render("fig-facet") }}.
+
+<figure markdown>
+  ![Facet as a black box](facet.png)
+  <figcaption><strong>{{ render("fig-facet") }}.</strong> Facet as a black box (drawn by hand)</figcaption>
+</figure>
+
+### What is `environment` for?
+
+In this example, `rhizomer` is supplied as the `node`, and `iolanta` contains a queryable RDF graph composed from all files in the active directory that Iolanta can understand, — including the YAML-LD file describing what `rhizomer` is. What is `environment`?
+
+In this particular case, we supply [`iolanta:html`](https://iolanta.tech/html) as `environment` — via the argument `--as` to the command line call. There might be any number of environments, for instance, `iolanta:tex` or `iolanta:cli`, — that makes Iolanta usable for a multitude of contexts, not just HTML generation.
+
+!!! info "iolanta:Environment"
+    Data visualization might be performed in various contexts, which we call Environments. For instance:
+
+    * `iolanta:html` calls for HTML output;
+    * `iolanta:cli` is for rendering in the command line;
+    * `iolanta:tex` is for LaTeX documents.
+
+Environment influences generation, so that we don't output TeX markup into an HTML document, and vice versa, and it does that by influencing the **facet selection** for the particular node.
 
 `iolanta:html` is the default environment for HTML output. To build this paper, we use MkDocs[^mkdocs] static site generator, which understands both HTML and Markdown, that's why `mkdocs-iolanta`[^mkdocs-iolanta] — the integration layer between Iolanta and MkDocs — uses `iolanta:html` as default environment.
 
@@ -365,44 +471,12 @@ That's not a coincidence. This link was rendered by class `iolanta.facets.html.d
 * Execute a SPARQL[^sparql] query against Iolanta graph, retrieving `rdfs:label`, `schema:url` and few more properties;
 * Render an HTML `<a>` tag using the obtained information.
 
-### What is a facet, anyway?
 
-The word *facet* is defined by Cambridge Dictionary[^facet-dictionary] as:
 
-[^facet-dictionary]: https://dictionary.cambridge.org/dictionary/english/facet
 
-> one part of a subject, situation, etc. that has many parts
-
-or
-
-> one of the parts or features of something
-
-The same notion or piece of data might be visualized as a list, a table, or maybe an interactive 3D landscape, but none of those changes the nature of the object being represented. It might be said every representation of an object is another way of looking at it, a new angle, feature, a facet of the object.
-
-In Iolanta terminology, facet is a piece of executable computer code which is called to visualize a particular node in the RDF graph. It can be described as a black box with inputs and outputs charted on {{ render("fig-facet") }}.
-
-<figure markdown>
-  ![Facet as a black box](facet.png)
-  <figcaption><strong>{{ render("fig-facet") }}.</strong> Facet as a black box (drawn by hand)</figcaption>
-</figure>
-
-### What is `environment` for?
-
-In this example, `rhizomer` is supplied as the `node`, and `iolanta` contains a queryable RDF graph composed from all files in the active directory that Iolanta can understand, — including the YAML-LD file describing what `rhizomer` is. What is `environment`?
-
-In this particular case, we supply [`iolanta:html`](https://iolanta.tech/html) as `environment` — via the argument `--as` to the command line call. There might be any number of environments, for instance, `iolanta:tex` or `iolanta:cli`, — that makes Iolanta usable for a multitude of contexts, not just HTML generation.
 
 {# todo: implement iolanta.tech/html page so as this link isn't dead #}
 
-
-!!! info "iolanta:Environment"
-    Data visualization might be performed in various contexts, which we call Environments. For instance:
-
-    * `iolanta:html` calls for HTML output;
-    * `iolanta:cli` is for rendering in the command line;
-    * `iolanta:tex` is for LaTeX documents.
-
-Environment influences generation, so that we don't output TeX markup into an HTML document, and vice versa, and it does that by influencing the **facet selection** for the particular node.
 
 Indeed, here is a definition from Iolanta code:
 
@@ -430,6 +504,8 @@ That's why it was chosen for `rhizomer` in our example above.
 We will describe the facet selection algorithm in detail a little later.
 
 ### Render in MkDocs
+
+Henceforth, we will demonstrate step-by-step how to describe data about Linked Data visualization tools — and render them in the form illustrated by {{ render("fig-tools-with-various-visualizations") }}.
 
 `iolanta-tech` website is built with MkDocs[^mkdocs] static site generator, with which Iolanta can integrate via `mkdocs-iolanta`[^mkdocs-iolanta] plugin. This plugin, together with `mkdocs-macros-plugin`[^mkdocs-macros-plugin] introduces a Jinja2 template macro looking like this:
 
@@ -615,12 +691,7 @@ Not every facet suits every possible environment. For instance, if a facet retur
 
 ## Facet search algorithm
 
-{{ render("fig-algorithm") }} describes the facet search algorithm.
 
-<figure markdown style="text-align: center">
-  <img src="algorithm.png" style="width: 50%">
-  <figcaption><strong>{{ render("fig-algorithm") }}.</strong> Iolanta facet search algorithm<br/><em>(drawn by hand)</em></figcaption>
-</figure>
 
 `Iolanta.render()` method accepts arguments:
 
@@ -635,16 +706,6 @@ Given that information, we need to find a facet in our graph and execute that fa
 * Look for `iolanta:facet` link such that `$node iolanta:facet ?facet . ?facet iolanta:supports ?environment` .
 
 {# todo: describe iolanta-tables vocabulary with examples and illustrations #}
-
-## Architecture
-
-{{ render("fig-architecture") }} describes system architecture.
-
-<figure markdown>
-  ![Iolanta architecture](architecture.png)
-  <figcaption><strong>{{ render("fig-architecture") }}.</strong> Iolanta architecture<br/><em>(drawn by hand)</em></figcaption>
-</figure>
-
 {# todo: MetaFactory #}
 {# todo: Describe 5-star data model relating to visualizations #}
 

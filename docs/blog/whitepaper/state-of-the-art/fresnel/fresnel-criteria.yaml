@@ -20,7 +20,7 @@ table:rows:
     satisfies: 🤔
     notes:
       rdfs:label: fresnel:*Domain
-      schema:url: "#fresneldomain"
+      schema:url: "#fresneldomainproperties"
   - criterion: criterion-turing
     notes: "Not applicable: not specified by Fresnel."
   - criterion: criterion-plugins
