@@ -6,6 +6,7 @@ hide:
 #  - toc
 ---
 
+{# todo: enumerate headings? #}
 {# todo: Format the Blog index page properly #}
 {# todo: Standardize the list of references #}
 
@@ -40,7 +41,7 @@ A person who is:
 
 — probably cannot be expected to dive deep into the depths of raw triples. Users would prefer to use tools capable of *visualizing* the raw triples, converting them into a form better suitable for human eye.
 
-That need is met with Linked Data visualization tools — software systems which present Linked Data as :material-view-list: lists, :material-table: tables, :material-chart-bar: charts, :material-map: maps, :material-file-tree: trees, :material-graph: graphs or any other form[^data-visualizations-periodic-table] of data visualization known to humanity.
+That need is met with Linked Data visualization tools — software systems which present Linked Data as :material-view-list: lists, :material-table: tables, :material-chart-bar: charts, :material-map: maps, :material-file-tree: trees, :material-graph: graphs or any other form[^data-visualizations-periodic-table] of data visualization imaginable.
 
 [^data-visualizations-periodic-table]: USI eLab: A periodic table of visualization methods. [https://www.visual-literacy.org/periodic_table/periodic_table.html](https://www.visual-literacy.org/periodic_table/periodic_table.html)
 
@@ -118,6 +119,8 @@ One singular visualization system can't encompass all imaginable possibilities. 
 
 We want to be able to share visualizations and reuse them, to easily change them if our purposes change. Probably we could use some kind of standardized textual format for that purpose. One of Linked Data formats, perhaps?
 
+{# todo: Explain why use Linked Data for visualizations #}
+
 {{ render('criterion-self-hosted') }}
 
 Thus, the role of the visualization system is to consume both data and visualization tied to it and output the rendered result — in our case, an HTML table. 
@@ -126,11 +129,11 @@ What kind of vocabulary could be used to describe visualizations, then?
 
 ## Fresnel Vocabulary
 
-Fresnel[^fresnel], last updated in 2005, is a browser-independent vocabulary to specify how to render an RDF model. Fresnel's two foundational concepts are as follows:
+Fresnel[^fresnel], last updated in 2005, is a browser-independent vocabulary to specify how to render an RDF model. Fresnel's two foundational concepts are:
 
 [^fresnel]: Pietriga, E., Bizer, C., Karger, D., Lee, R. (2006). Fresnel: A Browser-Independent Presentation Vocabulary for RDF. In: , et al. The Semantic Web - ISWC 2006. ISWC 2006. Lecture Notes in Computer Science, vol 4273. Springer, Berlin, Heidelberg. https://doi.org/10.1007/11926078_12
 
-* *lenses*, which might contain nested *sublenses*, define which properties of an RDF resource to display, and how to order them,
+* *lenses*, which might contain nested *sublenses*, — define which properties of an RDF resource to display, and how to order them,
 * *formats* define how to render those properties using
     * RDF-specific formatting attributes
     * and hooks to CSS[^css].
@@ -156,6 +159,8 @@ Let us analyze, on {{ render("fig-fresnel-criteria") }}, how Fresnel fits our 6 
 <figcaption markdown>
 <strong>{{ render("fig-fresnel-criteria") }}.</strong>
 Fresnel & criteria.<br/>
+
+{# todo: Display criterion number on the fresnel criteria table. #}
 
 See [:material-github: data & table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/fresnel/fresnel-criteria.yaml)
 </figcaption>
@@ -198,6 +203,8 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
 
 ### Environments
 
+{# todo: Move the Environments section underneath Iolanta #}
+
 Generally, rendering of an object depends on the **environment** the object is rendered within. The easiest example would be HTML vs LaTeX output; for a more practical example, it might be considered how this paper renders the criteria for a visualization system differently depending on context:
 
 * as plain text within a table cell at {{ render("fig-fresnel-criteria") }},
@@ -216,7 +223,7 @@ We will touch on an alternative approach later.
 
 ### Plugins
 
-A number of RDF visualization tools powered by Fresnel vocabulary has been developed; the list of tools we could find available is provided at {{ render("fig-fresnel-tools-plugins") }}.
+A number of RDF visualization tools powered by Fresnel vocabulary has been developed, and a few of them are displayed on {{ render("fig-fresnel-tools-plugins") }}.
 
 <figure>
   {{ render("fresnel-tools-plugins") }}
@@ -226,9 +233,11 @@ A number of RDF visualization tools powered by Fresnel vocabulary has been devel
   </figcaption>
 </figure>
 
-As far as it is evident from the tools' documentation, none of them has a plugin system.
+The tools evaluated either are not available or do not show evidence of a plugin system.
 
 ## Template based visualization tools
+
+{# todo: condense the Templates section, it is not important #}
 
 ### TAL4RDF
 
@@ -287,13 +296,12 @@ With Smarty (or any other template language), template reuse seems to pose a cha
 
 ## Yet another visualization system: Iolanta
 
-In this paper, an open source visualization tool by the name of `iolanta` is proposed — and, to some extent, used to build:
-
-* this paper,
-* as well as the website the paper is published at: [:globe_with_meridians: iolanta.tech](https://iolanta.tech).
+This paper proposes an open source visualization tool by the name of `iolanta`. This tool is also used to build parts of this paper.
 
 !!! info "Reproducibility"
-    The code can be found at [:material-github: iolanta-tech/iolanta-tech](https://github.com/iolanta-tech). The repository is equipped with a [:simple-markdown: `README.md`](https://github.com/iolanta-tech/iolanta-tech/blob/master/README.md) file which explains how to clone the repository and run the site locally, which provides full reproducibility of this paper.
+     The paper is published on the Web at [:globe_with_meridians: iolanta.tech](https://iolanta.tech).
+
+    The source code can be found at [:material-github: iolanta-tech/iolanta-tech](https://github.com/iolanta-tech). The repository is equipped with a [:simple-markdown: `README.md`](https://github.com/iolanta-tech/iolanta-tech/blob/master/README.md) file which explains how to clone the repository and run the site locally. Thus, this paper is fully reproducible.
 
 Having cloned the repository and installed Iolanta, we can `cd` to the root directory for the repo, and run the following shell command:
 
@@ -301,11 +309,7 @@ Having cloned the repository and installed Iolanta, we can `cd` to the root dire
 {{ render("criterion-context", environments="iolanta:cli") }}
 ```
 
-We've already seen this text in [Can we do better?](#can-we-do-better) section and on {{ render("fig-fresnel-criteria") }}. All of these sources were read from the same file, part of which is displayed on {{ render("fig-criteria-code") }}.
-
-{# todo: enumerate headings? #}
-
-{{ render("fig-architecture") }} describes how the criterion text is retrieved from source data stored in the repository — and displayed in the console, in broad terms.
+We've already seen this text in [Can we do better?](#can-we-do-better) section and on {{ render("fig-fresnel-criteria") }}; copy-paste hasn't been involved; Iolanta rendering process is shown on {{ render("fig-architecture") }}.
 
 <figure markdown>
   ![Iolanta architecture](architecture.png)
@@ -316,13 +320,7 @@ Let's describe each of these steps in some more detail.
 
 ### Loading data into graph
 
-Iolanta understands a few file formats:
-
-* :simple-yaml: `.yaml`
-* :simple-json: `.json`
-* :simple-markdown: `.md`
-
-Visualization system criteria are described in a text file; part of that file is shown on 
+There is one central place, a text file shown on {{ render("fig-criteria-code") }}, where the visualization system criteria are sourced from.
 
 <figure markdown>
 <div style="text-align: left">
@@ -334,15 +332,16 @@ Criteria code. See [:material-github: `criteria.yaml`](https://github.com/iolant
 </figcaption>
 </figure>
 
-This file is written in YAML-LD[^yaml-ld], which is a mapping of JSON-LD[^json-ld] W3C standard from JSON[^json] to YAML[^yaml]. 
+This file is written in YAML-LD[^yaml-ld], which is a mapping of JSON-LD[^json-ld] W3C standard from JSON[^json] to YAML[^yaml]. This is one of file formats Iolanta can natively understand.
 
 [^yaml]: https://yaml.org/spec/1.2.2/
 [^yaml-ld]: :material-github: https://github.com/json-ld/yaml-ld
 [^json-ld]: https://json-ld.org
 [^json]: https://json.org
 
+When reading the source files, Iolanta applies a default JSON-LD Context[^default-context], which makes it easier to write those files.
 
-When reading the source files, Iolanta applies a default JSON-LD Context[^default-context], which provides a few default definitions.
+Default vocabulary and base IRI is set to `local:` IRI scheme. That's the scheme every QName is interpreted with.
 
 For instance, `$id` is an alias of [`@id`](https://www.w3.org/TR/json-ld/#node-identifiers) JSON-LD keyword. As indicated in YAML-LD Specification, `@` character which defines JSON-LD keywords is a reserved character in YAML, which means using this character requires quoting, as shown on {{ render("fig-quoting") }}.
 
@@ -361,16 +360,20 @@ For instance, `$id` is an alias of [`@id`](https://www.w3.org/TR/json-ld/#node-i
 </figcaption>
 </figure>
 
+Iolanta recursively reads all files in the current directory; supported file formats are JSON-LD, YAML-LD, and Markdown with YAML-LD frontmatter[^frontmatter]. Additional files might be supplied by the installed Iolanta plugins, which we will touch upon later. Anyway, every file Iolanta consumes is converted into RDF and loaded into Iolanta Graph — in-memory, transient RDF dataset.
 
-It will read them, interpret them as YAML-LD and JSON-LD, — and load the retrieved data as RDF into in-memory graph powered by rdflib[^rdflib].
+Operations on the dataset, henceforth known as Iolanta Graph, are handled with `rdflib`[^rdflib] Python library. 
 
-Iolanta plugins, which we will touch on later, can add more data to the graph.
-
+[^frontmatter]: frontmatter
 [^rdflib]: https://rdflib.org
 
-That graph will be used for the steps to follow.
+When each and every consumable file is consumed, OWL RL[^owlrl] logical inference rules are applied to the graph so that RDFS[^rdfs] and OWL[^owl] constructs take effect.
+
+From that point, the graph is essentially read only; during the next steps, it will be used as data source to build visualizations from.
 
 ### Choosing a facet
+
+{# todo: This section is here kind of abruptly. #}
 
 The word *facet* is defined by Cambridge Dictionary[^facet-dictionary] as:
 

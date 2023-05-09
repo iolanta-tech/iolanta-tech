@@ -19,8 +19,8 @@ table:rows:
   - criterion: criterion-context
     satisfies: 🤔
     notes:
-      rdfs:label: fresnel:*Domain
-      schema:url: "#fresneldomainproperties"
+      rdfs:label: Fresnel Domain Properties
+      schema:url: "#fresnel-domain-properties"
   - criterion: criterion-turing
     notes: "Not applicable: not specified by Fresnel."
   - criterion: criterion-plugins
