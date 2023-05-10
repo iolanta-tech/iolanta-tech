@@ -1,14 +1,10 @@
 $id: Criterion
-iolanta:hasInstanceFacet:
-  - $id: python://iolanta_tech.facets.Criterion
-    iolanta:supports:
-      - $id: iolanta:html
-      - $id: local:satisfied
-      - $id: local:failed
-  - $id: python://iolanta.facets.html.Default
-
 $reverse:
   rdf:type:
+    - $id: criterion-context
+      number: 6
+      rdfs:label: "Visualization method appropriate for a particular node depends on the node itself, its properties, and a context (environment) the node is visualized within. Visualization system should be aware of this relationship and be able to select an appropriate visualization mode based on the data."
+
     - $id: criterion-table
       number: 1
       rdfs:label: Visualization tool must be capable of generating tables.
@@ -25,7 +21,3 @@ $reverse:
     - $id: criterion-self-hosted
       number: 5
       rdfs:label: Linked Data visualizations should be themselves expressible as Linked Data.
-
-    - $id: criterion-context
-      number: 6
-      rdfs:label: "Visualization method appropriate for a particular node depends on the node itself, its properties, and a context (environment) the node is visualized within. Visualization system should be aware of this relationship and be able to select an appropriate visualization mode based on the data."

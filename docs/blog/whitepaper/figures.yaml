@@ -37,3 +37,7 @@
   rdfs:label: Figure 18
 - $id: fig-architecture
   rdfs:label: Figure 19
+- $id: fig-quoting
+  rdfs:label: Figure 20
+- $id: fig-criteria-facets
+  rdfs:label: Figure 21

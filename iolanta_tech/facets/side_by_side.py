@@ -1,5 +1,6 @@
 import funcy
 from dominate.tags import table, tr, td, code
+from dominate.util import raw
 from iolanta.facets.html.base import HTMLFacet
 from iolanta.namespaces import LOCAL, IOLANTA
 
