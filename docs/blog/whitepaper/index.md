@@ -117,9 +117,17 @@ One singular visualization system can't encompass all imaginable possibilities. 
 
 {{ render('criterion-plugins') }}
 
-We want to be able to share visualizations and reuse them, to easily change them if our purposes change. Probably we could use some kind of standardized textual format for that purpose. One of Linked Data formats, perhaps?
+While code that builds the visualization is written in an arbitrary programming language, its parameters should not be. For instance, if a chart is drawn by a Python program, the user shouldn't have to change Python code to modify the chart colors.
 
-{# todo: Explain why use Linked Data for visualizations #}
+What if we use Linked Data itself to describe such variable parameters?
+
+Indeed, that would open a number of appealing advantages. For instance,
+
+* Visualizations become easy to share,
+* Visualizations can be tied directly to the nodes they're visualizing,
+* Any additional meta data can be attached to visualizations very easily.
+
+Let's try to go down this path, formalizing it as the following statement.
 
 {{ render('criterion-self-hosted') }}
 
@@ -200,26 +208,6 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
 * Instance URI,
 * FSL (Fresnel Selector Language) expression as a string,
 * SPARQL[^sparql] query as a string.
-
-### Environments
-
-{# todo: Move the Environments section underneath Iolanta #}
-
-Generally, rendering of an object depends on the **environment** the object is rendered within. The easiest example would be HTML vs LaTeX output; for a more practical example, it might be considered how this paper renders the criteria for a visualization system differently depending on context:
-
-* as plain text within a table cell at {{ render("fig-fresnel-criteria") }},
-* or a block (called an *admonition*) within the body of the article itself:
-
-{{ render("criterion-context") }}
-
-Within Fresnel, this can be solved using `fresnel:sublens` property:
-
-* The `Paper` lens will specify that `Criterion` object has to be rendered with `Admonition` sub-lens,
-* while the `TableCell` lens will render it using `Label` sub-lens.
-
-This calls for a huge tree of lenses to define rendering of the whole paper — or the whole book. Is it really necessary?
-
-We will touch on an alternative approach later.
 
 ### Plugins
 
@@ -371,11 +359,16 @@ When each and every consumable file is consumed, OWL RL[^owlrl] logical inferenc
 
 From that point, the graph is essentially read only; during the next steps, it will be used as data source to build visualizations from.
 
-### Choosing a facet
+### Render as text
 
-{# todo: This section is here kind of abruptly. #}
+When `iolanta` command line application is invoked with `criterion-context` argument, how does it retrieve the corresponding criterion text as shown on {{ render("fig-criteria-code") }} to print it to the console? 
 
-The word *facet* is defined by Cambridge Dictionary[^facet-dictionary] as:
+To not tease the reader's curiosity too much, — the system calls `iolanta.facets.cli.default.Default` Python class here, which will do the following:
+
+* Via a SPARQL[^sparql] query, find out whether the node being rendered has an `rdfs:label` property;
+* If yes, print that property.
+
+We call such classes as this *facets*. The word *facet* is defined by Cambridge Dictionary[^facet-dictionary] as:
 
 [^facet-dictionary]: https://dictionary.cambridge.org/dictionary/english/facet
 
@@ -383,7 +376,7 @@ The word *facet* is defined by Cambridge Dictionary[^facet-dictionary] as:
 
 or
 
-> one of the parts or features of something
+> one of the parts or features of something.
 
 [^mkdocs]: mkdocs.org
 
@@ -391,14 +384,9 @@ The same notion or piece of data might be visualized as a list, a table, or mayb
 
 In Iolanta terminology, facet is a piece of executable computer code which is called to visualize a particular node in the RDF graph.
 
-In our particular case, the system uses `iolanta.facets.cli.default.Default` facet class which will do the following:
+Let's now try something different.
 
-* Via a SPARQL[^sparql] query, find out whether the node being rendered has an `rdfs:label` property;
-* If yes, print that property.
-
-That's how our we got our text printed in the console. Let's now try something different.
-
-### Environments
+## Visualize criterion in an admonition box
 
 ``` title="$ iolanta render criterion-context --as iolanta:html"
 {{ render("criterion-context") }}
@@ -406,19 +394,23 @@ That's how our we got our text printed in the console. Let's now try something d
 
 We added the `--as` argument, and our output has changed. It is a piece of extended Markdown markup suitable for Mkdocs[^mkdocs] static site generator with mkdocs-material[^mkdocs-material] theme. Indeed, inside Mkdocs it is rendered like this:
 
+[^mkdocs-material]: mkdocs-material
+
 {{ render("criterion-context") }}
 
 The facet responsible for it is `iolanta_tech.facets.criterion.Criterion`, and it has been chosen because we specified `iolanta:html` as the **environment** for rendering using the `--as` parameter.
 
-Thus, facet selection depends on the *environment* we are rendering a node within.
+This brings us to the question we silently ignored in the previous section: how is the particular facet for the given node selected?
 
-* In our first example, we didn't specify `--as`, and Iolanta used its default environment known as `iolanta:cli` which serves printing to console;
+Facet selection depends on the *environment* we are rendering a node within.
+
+* In our first example, we didn't specify `--as`, and Iolanta used its default environment — `iolanta:cli` — which serves printing to console;
 * In the second example, we specified `iolanta:html` explicitly.
 
-{{ render("fig-criteria-facets") }} illustrates the code that helps Iolanta choose the correct facet. We can see that `Criterion` class has two facets connected to it via `iolanta:hasInstanceFacet` property:
+{{ render("fig-criteria-facets") }} illustrates the piece of YAML-LD code that helps Iolanta choose the correct facet. We can see that `Criterion` class has two facets connected to it via `iolanta:hasInstanceFacet` property.
 
 * `Default` facet that's going to be used in table cells;
-* `Criterion` facet which will render Markdown markup. For that one, we explicitly specify a few environments it can be used within.
+* `Criterion` facet which will render Markdown markup.
 
 <figure markdown>
 <div style="text-align: left">
@@ -426,16 +418,25 @@ Thus, facet selection depends on the *environment* we are rendering a node withi
 </div>
 <figcaption markdown>
 <strong>{{ render("fig-criteria-facets") }}.</strong>
-Criteria code. See [:material-github: `facets.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/criteria/facets.yaml)
+Facet definitions for Criteria. See [:material-github: `facets.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/criteria/facets.yaml)
 </figcaption>
 </figure>
 
-{{ render("fig-algorithm") }} describes the facet search algorithm.
+!!! info "iolanta:hasInstanceFacet"
+    Facet assigned by node type.
 
-<figure markdown style="text-align: center">
-  <img src="algorithm.png" style="width: 50%">
-  <figcaption><strong>{{ render("fig-algorithm") }}.</strong> Iolanta facet search algorithm<br/><em>(drawn by hand)</em></figcaption>
-</figure>
+    * Domain: `rdfs:Class`
+    * Range: `iolanta:Facet`
+    * Inverse: `iolanta:isInstanceFacetOf`
+
+With `iolanta:supports`, we also define the environments given facet can operate in. `Criterion` facet rendering will look differently for the default `iolanta:html` environment versus special environments for `failed` and `satisfied` criteria.
+
+!!! info "iolanta:supports"
+    Specify that facet can work in the specific environment.
+
+    * Domain: `iolanta:Facet`
+    * Range: `iolanta:Environment`
+    * Inverse: `iolanta:isSupportedBy`
 
 Facet can be described as a black box with inputs and outputs charted on {{ render("fig-facet") }}.
 
@@ -444,11 +445,32 @@ Facet can be described as a black box with inputs and outputs charted on {{ rend
   <figcaption><strong>{{ render("fig-facet") }}.</strong> Facet as a black box (drawn by hand)</figcaption>
 </figure>
 
-### What is `environment` for?
+The facet can execute SPARQL queries against Iolanta Graph based on the node and the environment it has been called with. The facet output format is application specific; for instance, it might be plain text — or special objects like a DOM Tree.
 
-In this example, `rhizomer` is supplied as the `node`, and `iolanta` contains a queryable RDF graph composed from all files in the active directory that Iolanta can understand, — including the YAML-LD file describing what `rhizomer` is. What is `environment`?
+## Facet selection algorithm
 
-In this particular case, we supply [`iolanta:html`](https://iolanta.tech/html) as `environment` — via the argument `--as` to the command line call. There might be any number of environments, for instance, `iolanta:tex` or `iolanta:cli`, — that makes Iolanta usable for a multitude of contexts, not just HTML generation.
+Generally, rendering of an object depends on the **environment** the object is rendered within. The easiest example would be HTML vs LaTeX output; for a more practical example, it might be considered how this paper renders the criteria for a visualization system differently depending on context:
+
+* as plain text within a table cell at {{ render("fig-fresnel-criteria") }},
+* or a block (called an *admonition*) within the body of the article itself:
+
+{{ render("criterion-context") }}
+
+Within Fresnel, this can be solved using `fresnel:sublens` property:
+
+* The `Paper` lens will specify that `Criterion` object has to be rendered with `Admonition` sub-lens,
+* while the `TableCell` lens will render it using `Label` sub-lens.
+
+This calls for a huge tree of lenses to define rendering of the whole paper — or the whole book. Is it really necessary?
+
+{{ render("fig-algorithm") }} describes the facet search algorithm Iolanta is implementing.
+
+<figure markdown style="text-align: center">
+  <img src="algorithm.png" style="width: 50%">
+  <figcaption><strong>{{ render("fig-algorithm") }}.</strong> Iolanta facet search algorithm<br/><em>(drawn by hand)</em></figcaption>
+</figure>
+
+`Environment` is an `rdfs:Class` defined by Iolanta base vocabulary.
 
 !!! info "iolanta:Environment"
     Data visualization might be performed in various contexts, which we call Environments. For instance:
@@ -457,7 +479,7 @@ In this particular case, we supply [`iolanta:html`](https://iolanta.tech/html) a
     * `iolanta:cli` is for rendering in the command line;
     * `iolanta:tex` is for LaTeX documents.
 
-Environment influences generation, so that we don't output TeX markup into an HTML document, and vice versa, and it does that by influencing the **facet selection** for the particular node.
+    We will provide more examples for Environments later.
 
 `iolanta:html` is the default environment for HTML output. To build this paper, we use MkDocs[^mkdocs] static site generator, which understands both HTML and Markdown, that's why `mkdocs-iolanta`[^mkdocs-iolanta] — the integration layer between Iolanta and MkDocs — uses `iolanta:html` as default environment.
 
@@ -467,33 +489,15 @@ This rendition of the object is implemented by a custom plugin, say, for a stati
 
 {{ render("criterion-context") }}
 
-As we can see, it renders a piece of HTML code that represents a hyperlink. The text of the hyperlink is incidentally equivalent to the value of `rdfs:label` property for the `rhizomer` node, and the link address is equivalent to `schema:url` property value.
+As we can see, `iolanta:hasInstanceFacet` is not the only relation from objects to facets Iolanta cares about. The top priority is `iolanta:facet` which links an individual node, instead of a class, directly to the facet that should be used to render that particular node.
 
-That's not a coincidence. This link was rendered by class `iolanta.facets.html.default:Default`, inherited from `iolanta.facets.facet:Facet`. Facet will:
+!!! info "iolanta:facet"
+    Facet assigned by particular node. This property might be attached to any IRI or BNode in an RDF graph.
 
-* Execute a SPARQL[^sparql] query against Iolanta graph, retrieving `rdfs:label`, `schema:url` and few more properties;
-* Render an HTML `<a>` tag using the obtained information.
+    * Range: `iolanta:Facet`
+    * Inverse: `iolanta:isFacetOf`
 
-
-
-
-
-{# todo: implement iolanta.tech/html page so as this link isn't dead #}
-
-
-Indeed, here is a definition from Iolanta code:
-
-```yaml
-$id: iolanta:html
-$type: iolanta:Environment
-owl:sameAs:
-  $id: https://html.spec.whatwg.org/
-iolanta:hasDefaultFacet: python://iolanta.facets.html.Default
-```
-
-Here, `iolanta` resolves to `https://iolanta.tech/`, and `iolanta:hasDefaultFacet` defines that the `html.Default` class we've mentioned earlier is the default facet to render *anything* for `iolanta:html`.
-
-{# todo: Document hasDefaultFacet on iolanta.tech #}
+In case `iolanta:facet` and `iolanta:hasInstanceFacet` weren't found for the node in question, we fall back to the default facet assigned to the Environment. That's how our first CLI example worked: `Default` facet is configured as `
 
 !!! info "iolanta:hasDefaultFacet"
     Define a default facet used for that environment.
@@ -502,30 +506,32 @@ Here, `iolanta` resolves to `https://iolanta.tech/`, and `iolanta:hasDefaultFace
     * Range: `iolanta:Facet`
     * Inverse: `iolanta:isDefaultFacetOf`
 
-That's why it was chosen for `rhizomer` in our example above.
+## Render something in MkDocs
 
-We will describe the facet selection algorithm in detail a little later.
+Printing visualizations in the console might be fun — but not too useful if we want to embed them into a book or in a paper, like this one.
 
-### Render in MkDocs
-
-Henceforth, we will demonstrate step-by-step how to describe data about Linked Data visualization tools — and render them in the form illustrated by {{ render("fig-tools-with-various-visualizations") }}.
-
-`iolanta-tech` website is built with MkDocs[^mkdocs] static site generator, with which Iolanta can integrate via `mkdocs-iolanta`[^mkdocs-iolanta] plugin. This plugin, together with `mkdocs-macros-plugin`[^mkdocs-macros-plugin] introduces a Jinja2 template macro looking like this:
+For that purpose, we have `mkdocs-iolanta`[^mkdocs-iolanta] plugin which integrates Iolanta with MkDocs[^mkdocs] static site generator. Syntax for embedding visualizations is provided by Jinja2[^jinja2] template engine and looks like this:
 
 {% raw %}
 ```jinja2
-{{ render('rhizomer') }}
+{{ render('criterion-context', environments=['satisfied']) }}
 ```
 {% endraw %}
 
-which renders to: {{ render('rhizomer') }}. As we can see, HTML markup generated by Iolanta is now rendered in the page itself as its integral part. We will use that to render an HTML table in the next section.
+which renders as:
+
+{{ render('criterion-context', environments=['satisfied']) }}
+
+## Plugin: `iolanta-tables`
+
+The Criteria 1-6 we used as an example of rendering are quite simple to work with; they feature no nested environments, for example.
+
+`iolanta-tables`[^iolanta-tables] is an Iolanta plugin that implements more complex structures. We used it to render {{ render("fig-tools-with-various-visualizations") }} and {{ render("fig-fresnel-criteria") }} from YAML-LD definitions.
+
+It has its own vocabulary to define tables.
 
 [^mkdocs-iolanta]: :material-github: https://github.com/iolanta-tech/mkdocs-iolanta
 [^mkdocs-macros-plugin]: {# todo link to mkdocs-macros-plugin #} mkdocs-macros-plugin
-
-
-
-## Iolanta + tables = `iolanta-tables`
 
 {{ render("fig-various-visualizations") }} shows a piece of code describing the data.
 
@@ -537,36 +543,7 @@ which renders to: {{ render('rhizomer') }}. As we can see, HTML markup generated
 </figure>
 
 
-### Let's render a table now
-
-{# todo: Draw graph of the table structure v1 #}
-
-The first version of the table is described at {{ render("fig-v1-code") }}.
-
-<figure markdown>
-  <div style="text-align: left">
-    {{ code('blog/whitepaper/state-of-the-art/various-visualizations/v1.yaml', language='yaml', title='various-visualizations-v1.yaml') }}
-  </div>
-  <figcaption><strong>{{ render("fig-v1-code") }}.</strong> Table definition v1</figcaption>
-</figure>
-
-* `various-visualizations-v1` is the RDF node that describes this table;
-* `table:columns` defines the list of RDF properties to render as columns of the table;
-* `table:class` is the `rdfs:Class` instances of which will be converted to table rows.
-
-Using this kind of markup, we store the table description in the RDF graph itself.
-
 {{ render('criterion-customize', environments='satisfied') }}
-
-{{ render("fig-v1") }} shows how this table is rendered via {% raw %}`{{ render('various-visualizations-v1') }}`{% endraw %} template call.
-
-<figure markdown>
-  {{ render('various-visualizations-v1') }}
-  <figcaption><strong>{{ render("fig-v1") }}.</strong> Table v1</figcaption>
-</figure>
-
-We rendered this as a table now!
-
 {{ render('criterion-table', environments='satisfied') }}
 
 How did it work though?
@@ -590,21 +567,8 @@ iolanta:hasInstanceFacet:
 
 [`iolanta:hasInstanceFacet`](https://iolanta.tech/hasInstanceFacet) property tells us that every node of `table:Table` type can be rendered by `html.Table` facet.
 
-!!! info "iolanta:hasInstanceFacet"
-    Facet assigned by node type.
-
-    * Domain: `rdfs:Class`
-    * Range: `iolanta:Facet`
-    * Inverse: `iolanta:isInstanceFacetOf`
-
 `iolanta:supports` property also specifies that `html.Table` facet can work in `iolanta:html` environment, — to distinguish it from facets which render tables in `iolanta:tex` or `iolanta:cli`.
 
-!!! info "iolanta:supports"
-    Specify that facet can work in the specific environment.
-
-    * Domain: `iolanta:Facet`
-    * Range: `iolanta:Environment`
-    * Inverse: `iolanta:isSupportedBy`
 
 ### Prettify the table
 
@@ -648,12 +612,6 @@ Here, we use nested [`table:columns`](https://iolanta.tech/tables/columns) prope
 {{ render('criterion-context', environments='satisfied') }}
 
 {{ render('criterion-turing', environments='satisfied') }}
-
-!!! info "iolanta:facet"
-    Facet assigned by particular node. This property might be attached to any IRI or BNode in an RDF graph.
-
-    * Range: `iolanta:Facet`
-    * Inverse: `iolanta:isFacetOf`
 
 {# todo: Invent an example to illustrate iolanta:facet #}
 
