@@ -365,6 +365,8 @@ From that point, the graph is essentially read only; during the next steps, it w
 
 ### 6.2 Render as text
 
+{# todo: distribute the Satisfied Criteria over the text properly #}
+
 When `iolanta` command line application is invoked with `criterion-context` argument, how does it retrieve the corresponding criterion text as shown on {{ render("fig-criteria-code") }} to print it to the console? 
 
 To not tease the reader's curiosity too much, — the system calls `iolanta.facets.cli.default.Default` Python class here, which will do the following:
@@ -613,6 +615,8 @@ Here, we use nested [`table:columns`](https://iolanta.tech/tables/columns) prope
 {{ render('criterion-turing', environments='satisfied') }}
 
 ## 10 Facet search algorithm
+
+{# todo: Facet search algorithm section is almost empty #}
 
 `Iolanta.render()` method accepts arguments:
 

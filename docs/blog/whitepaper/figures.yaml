@@ -15,12 +15,10 @@
   rdfs:label: Figure 7
 - $id: fig-tal4rdf
   rdfs:label: Figure 8
-- $id: fig-various-visualizations
-  rdfs:label: Figure 9
+
 - $id: fig-criteria-code
   rdfs:label: Figure 10
-- $id: fig-facet
-  rdfs:label: Figure 11
+
 - $id: fig-v1-code
   rdfs:label: Figure 12
 - $id: fig-v1
@@ -29,15 +27,28 @@
   rdfs:label: Figure 14
 - $id: fig-v3
   rdfs:label: Figure 15
-- $id: fig-table
-  rdfs:label: Figure 16
-- $id: fig-iolanta-vocabulary
-  rdfs:label: Figure 17
-- $id: fig-algorithm
-  rdfs:label: Figure 18
+
+
 - $id: fig-architecture
-  rdfs:label: Figure 19
+  rdfs:label: Figure 9
+
 - $id: fig-quoting
-  rdfs:label: Figure 20
+  rdfs:label: Figure 11
+
 - $id: fig-criteria-facets
-  rdfs:label: Figure 21
+  rdfs:label: Figure 12
+
+- $id: fig-facet
+  rdfs:label: Figure 13
+
+- $id: fig-algorithm
+  rdfs:label: Figure 14
+
+- $id: fig-iolanta-vocabulary
+  rdfs:label: Figure 15
+
+- $id: fig-various-visualizations
+  rdfs:label: Figure 16
+
+- $id: fig-table
+  rdfs:label: Figure 17
