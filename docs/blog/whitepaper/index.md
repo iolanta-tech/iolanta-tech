@@ -6,8 +6,6 @@ hide:
 #  - toc
 ---
 
-{# todo: enumerate headings? #}
-{# todo: Format the Blog index page properly #}
 {# todo: Standardize the list of references #}
 
 <style>
@@ -32,7 +30,7 @@ Linked Data ⋅ JSON-LD ⋅ YAML-LD ⋅ Data Visualization
     
     **Value:** Knowledge reuse and wider adoption of Linked Data as lingua franca among professionals from various fields promises to improve decision making quality humanity can afford, which should improve our ability as a species to tackle the difficult issues we are facing. This is an attempt to make a small step forward in this direction.
 
-## Introduction
+## 1 Introduction
 
 A person who is:
 
@@ -43,7 +41,7 @@ A person who is:
 
 That need is met with Linked Data visualization tools — software systems which present Linked Data as :material-view-list: lists, :material-table: tables, :material-chart-bar: charts, :material-map: maps, :material-file-tree: trees, :material-graph: graphs or any other form[^data-visualizations-periodic-table] of data visualization imaginable.
 
-[^data-visualizations-periodic-table]: USI eLab: A periodic table of visualization methods. [https://www.visual-literacy.org/periodic_table/periodic_table.html](https://www.visual-literacy.org/periodic_table/periodic_table.html)
+[^data-visualizations-periodic-table]: USI eLab. A periodic table of visualization methods. [https://www.visual-literacy.org/periodic_table/periodic_table.html](https://www.visual-literacy.org/periodic_table/periodic_table.html)
 
 Over last decades, significant efforts have been put into visualizing Linked Data. A comprehensive survey of methods and tools as of 2020 is available at the **Linked Data Visualization** book[^ld-visualization-book], authors of which list, evaluate and compare a handful of available visualization systems.
 
@@ -55,6 +53,8 @@ As an illustration, we are reproducing Table 3.1 from the book here ({{ render("
 * The **Setting** and **Application Type** columns are omitted, — since they say `Generic` and `Web` respectively in every row of the table;
 * The original table used single-character codes to denote data and visualization types (for instance, `C` stands for "chart"), — we create a separate column for each visualization type instead. When viewing this paper as HTML, please hover over an icon to see a tooltip explaining its meaning;
 * The **Year** column was omitted as it is not immediately informative to us.
+
+{# todo: the tools table is too wide #}
 
 <figure class="no-min-width" markdown>
 <div markdown style="font-size: 75%">
@@ -70,13 +70,13 @@ See [:material-github: data](https://github.com/iolanta-tech/iolanta-tech/blob/m
 </figcaption>
 </figure>
 
-## Shoemaker's son
+## 2 Shoemaker's son
 
 {{ render("fig-tools-with-various-visualizations") }} describes only a subset of all visualization tools the book as a whole explores, and it itself is only one of multiple tables, charts, timelines the book contains. Nonetheless, none of the **data visualizations** the book contains are built with any of the **visualization tools** the book explores, or, at least, no mention of such could be found.
 
 The authors had put an immense effort into setting up, comparing and analysing Linked Data visualization software, but none of the tools they tried gave them an impression that it can aid them in the complex and tedious task of authoring a book, — a process solely focused on analysing, managing and distilling information, a kind of work that Linked Data should be most useful for.
 
-## Can we do better?
+## 3 Can we do better?
 
 What kind of visualization system would aid a task like preparing the Linked Data Visualization book, or, say, the paper you are so kind and forthcoming to be reading right now?
 
@@ -135,7 +135,7 @@ Thus, the role of the visualization system is to consume both data and visualiza
  
 What kind of vocabulary could be used to describe visualizations, then?
 
-## Fresnel Vocabulary
+## 4 Fresnel Vocabulary
 
 Fresnel[^fresnel], last updated in 2005, is a browser-independent vocabulary to specify how to render an RDF model. Fresnel's two foundational concepts are:
 
@@ -148,7 +148,7 @@ Fresnel[^fresnel], last updated in 2005, is a browser-independent vocabulary to 
 
 Formats do not output a usable visualization though, they only produce an abstract tree of components known as *Abstract Display Model* which then can be converted to HTML, XML, PDF, or anything else, — given that we implement a tool for such conversion.
 
-[^css]: http://www.w3.org/Style/CSS/
+[^css]: Cascading Style Sheets. [http://www.w3.org/Style/CSS/](http://www.w3.org/Style/CSS/)
 
 The visualization process Fresnel uses is described in {{ render("fig-fresnel-diagram") }}.
 
@@ -174,7 +174,7 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
 </figcaption>
 </figure>
 
-### `fresnel:showProperties`
+### 4.1 `fresnel:showProperties`
 
 `fresnel:showProperties` defines an RDF list of properties values of which will be included in the visualization (see {{ render("fig-show-properties") }}). For our table example, this might be leveraged to define list of table columns and their order. 
 
@@ -191,7 +191,7 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
 
 [^turtle]: Beckett, D., Berners-Lee, T., Prud’hommeaux, E., & Carothers, G. (2014). RDF 1.1 Turtle. World Wide Web Consortium, 18-31.
 
-### Fresnel Domain properties
+### 4.2 Fresnel Domain properties
 
 {{ render("fig-fresnel-domain-properties") }} lists the properties defined by Fresnel which help determine which lens and format to use for a particular node.
 
@@ -209,7 +209,7 @@ See [:material-github: data & table definition](https://github.com/iolanta-tech/
 * FSL (Fresnel Selector Language) expression as a string,
 * SPARQL[^sparql] query as a string.
 
-### Plugins
+### 4.3 Plugins
 
 A number of RDF visualization tools powered by Fresnel vocabulary has been developed, and a few of them are displayed on {{ render("fig-fresnel-tools-plugins") }}.
 
@@ -223,11 +223,11 @@ A number of RDF visualization tools powered by Fresnel vocabulary has been devel
 
 The tools evaluated either are not available or do not show evidence of a plugin system.
 
-## Template based visualization tools
+## 5 Template based visualization tools
 
 {# todo: condense the Templates section, it is not important #}
 
-### TAL4RDF
+### 5.1 TAL4RDF
 
 TAL4RDF[^tal], or T4R, is a special purpose template language which serves two distinct goals:
 
@@ -265,24 +265,24 @@ TAL4RDF does not implement discovery of particular template to use for a given R
 
 [^sparql]: Prud’hommeaux, E., Seaborne, A.: SPARQL query language for RDF. W3C recommendation, W3C (2008) http://www.w3.org/TR/rdf-sparql-query/.
 
-### LESS
+### 5.2 LESS
 
 LESS[^less] is a Linked Data browser based on a template language inspired by Smarty[^smarty] PHP templates. An interactive template editor aids the user in crafting a template for their particular needs; then, the resulting template can be published on a LESS Repository online and then embedded into various third-party applications:
 
 [^less]: Auer, Sören & Doehring, Raphael & Tramp, Sebastian. (2010). LESS - Template-Based Syndication and Presentation of Linked Data. 6089. 211-224. 10.1007/978-3-642-13489-0_15.
 
-[^smarty]: https://smarty.net
+[^smarty]: Smarty templating engine. [https://smarty.net](https://smarty.net)
 
 > …a blogger writing about a recent trip to Berlin can easily integrate a nicely formatted fact box with important information about Berlin obtained from Wikipedia into her blog post. A community of science fiction fans can integrate lists on a recent BBC programming matching their preferences into their community portal.
 
 With Smarty (or any other template language), template reuse seems to pose a challenge. `schema:url` property on an object will always mean that the object has a hypertext link associated with it. The author of every template out there will have to remember that, — there is no way to say that `schema:url` in HTML context is always rendered as an `<a>` tag. Which seems to be a reason of a lot of repetition among templates. Can we leverage the information already contained in the Linked Data to reduce that kind of repetition? 
 
-### Summary
+### 5.3 Summary
 
 * Purely template-based tools do not allow to specify, via the Linked Data graph itself, which visualization to choose;
 * Fresnel vocabulary allows to do that — but requires creation of a large tree of lenses so that we can choose particular visualization for even the deepest levels of the tree.
 
-## Yet another visualization system: Iolanta
+## 6 Yet another visualization system: Iolanta
 
 This paper proposes an open source visualization tool by the name of `iolanta`. This tool is also used to build parts of this paper.
 
@@ -306,7 +306,7 @@ We've already seen this text in [Can we do better?](#can-we-do-better) section a
 
 Let's describe each of these steps in some more detail.
 
-### Loading data into graph
+### 6.1 Loading data into graph
 
 There is one central place, a text file shown on {{ render("fig-criteria-code") }}, where the visualization system criteria are sourced from.
 
@@ -322,10 +322,10 @@ Criteria code. See [:material-github: `criteria.yaml`](https://github.com/iolant
 
 This file is written in YAML-LD[^yaml-ld], which is a mapping of JSON-LD[^json-ld] W3C standard from JSON[^json] to YAML[^yaml]. This is one of file formats Iolanta can natively understand.
 
-[^yaml]: https://yaml.org/spec/1.2.2/
-[^yaml-ld]: :material-github: https://github.com/json-ld/yaml-ld
-[^json-ld]: https://json-ld.org
-[^json]: https://json.org
+[^yaml]: YAML Ain’t Markup Language (YAML™) version 1.2. Revision 1.2.2 (2021-10-01). [https://yaml.org/spec/1.2.2](https://yaml.org/spec/1.2.2)
+[^yaml-ld]: [:material-github: `json-ld/yaml-ld`](https://github.com/json-ld/yaml-ld)
+[^json-ld]: JSON-LD. [https://json-ld.org](https://json-ld.org)
+[^json]: JSON. [https://json.org](https://json.org)
 
 When reading the source files, Iolanta applies a default JSON-LD Context[^default-context], which makes it easier to write those files.
 
@@ -352,14 +352,18 @@ Iolanta recursively reads all files in the current directory; supported file for
 
 Operations on the dataset, henceforth known as Iolanta Graph, are handled with `rdflib`[^rdflib] Python library. 
 
-[^frontmatter]: frontmatter
-[^rdflib]: https://rdflib.org
+[^frontmatter]: YAML Frontmatter. [https://jekyllrb.com/docs/front-matter/](https://jekyllrb.com/docs/front-matter/)
+[^rdflib]: [:material-github: `rdflib/rdflib`](https://github.com/RDFLib/rdflib)
 
 When each and every consumable file is consumed, OWL RL[^owlrl] logical inference rules are applied to the graph so that RDFS[^rdfs] and OWL[^owl] constructs take effect.
 
+[^owlrl]: [:material-github: `rdflib/owl-rl`](https://github.com/RDFLib/owl-rl)
+[^rdfs]: McBride, B. (2004). The resource description framework (RDF) and its vocabulary description language RDFS. Handbook on ontologies, 51-65.
+[^owl]: Motik, B., Patel-Schneider, P. F., Parsia, B., Bock, C., Fokoue, A., Haase, P., ... & Smith, M. (2009). OWL 2 web ontology language: Structural specification and functional-style syntax. W3C recommendation, 27(65), 159.
+
 From that point, the graph is essentially read only; during the next steps, it will be used as data source to build visualizations from.
 
-### Render as text
+### 6.2 Render as text
 
 When `iolanta` command line application is invoked with `criterion-context` argument, how does it retrieve the corresponding criterion text as shown on {{ render("fig-criteria-code") }} to print it to the console? 
 
@@ -370,7 +374,7 @@ To not tease the reader's curiosity too much, — the system calls `iolanta.face
 
 We call such classes as this *facets*. The word *facet* is defined by Cambridge Dictionary[^facet-dictionary] as:
 
-[^facet-dictionary]: https://dictionary.cambridge.org/dictionary/english/facet
+[^facet-dictionary]: Facet. Cambridge Dictionary. [https://dictionary.cambridge.org/dictionary/english/facet](https://dictionary.cambridge.org/dictionary/english/facet)
 
 > one part of a subject, situation, etc. that has many parts
 
@@ -378,7 +382,24 @@ or
 
 > one of the parts or features of something.
 
-[^mkdocs]: mkdocs.org
+[^mkdocs]: MkDocs. [mkdocs.org](https://mkdocs.org)
+
+In Iolanta terminology, Facet is a unit of executable program code used to visualize RDF nodes in an [Environment](#class-iolantaenvironment). Generally speaking, facet can be described as a black box which has three inputs:
+
+* Identifier of an RDF `node` to visualize (an IRI, a Blank Node, or a Literal);
+* Identifier of an `environment` (IRI or Blank Node) which the node must be visualized within;
+* `iolanta` instance, which contains the current graph queryable via SPARQL[^sparql]
+
+Facet can run arbitrary SPARQL queries against `iolanta` graph to retrieve any information about the `node` it might require.
+
+Current version of `iolanta` supports only one kind of Facets: Python classes which are subclasses of `iolanta.Facet` abstract base class.
+
+We do not store program code in the graph itself; that seems both inconvenient and insecure. Instead, in the graph facets are addressed via IRIs. For instance, `python://iolanta.facets.generic.BoolLiteral` is the facet that renders an `xsd:boolean` value as a Unicode icon.
+
+Not every facet suits every possible environment. For instance, if a facet returns a string that contains HTML code that result would be next to useless for a \LaTeX document, and vice versa. Thus, it is necessary to describe for every facet which environment(s) it is suitable for. We use `iolanta:supports` for that.
+
+
+From this example, it is evident how we identify facets. These are import paths native for Python programming language, which we define by `python://` protocol.
 
 The same notion or piece of data might be visualized as a list, a table, or maybe an interactive 3D landscape, but none of those changes the nature of the object being represented. It might be said every representation of an object is another way of looking at it, a new angle, feature, a facet of the object.
 
@@ -386,7 +407,7 @@ In Iolanta terminology, facet is a piece of executable computer code which is ca
 
 Let's now try something different.
 
-## Visualize criterion in an admonition box
+## 6.3 Visualize criterion in an admonition box
 
 ``` title="$ iolanta render criterion-context --as iolanta:html"
 {{ render("criterion-context") }}
@@ -394,7 +415,7 @@ Let's now try something different.
 
 We added the `--as` argument, and our output has changed. It is a piece of extended Markdown markup suitable for Mkdocs[^mkdocs] static site generator with mkdocs-material[^mkdocs-material] theme. Indeed, inside Mkdocs it is rendered like this:
 
-[^mkdocs-material]: mkdocs-material
+[^mkdocs-material]: mkdocs-material. [https://squidfunk.github.io/mkdocs-material/](https://squidfunk.github.io/mkdocs-material/)
 
 {{ render("criterion-context") }}
 
@@ -447,7 +468,7 @@ Facet can be described as a black box with inputs and outputs charted on {{ rend
 
 The facet can execute SPARQL queries against Iolanta Graph based on the node and the environment it has been called with. The facet output format is application specific; for instance, it might be plain text — or special objects like a DOM Tree.
 
-## Facet selection algorithm
+## 7 Facet selection algorithm
 
 Generally, rendering of an object depends on the **environment** the object is rendered within. The easiest example would be HTML vs LaTeX output; for a more practical example, it might be considered how this paper renders the criteria for a visualization system differently depending on context:
 
@@ -485,8 +506,7 @@ This calls for a huge tree of lenses to define rendering of the whole paper — 
 
 This rendition of the object is implemented by a custom plugin, say, for a static site like one which generates this paper. The output is actually Markdown markup for admonitions[^admonitions] markdown extension, rendered by MkDocs[^mkdocs] as:
 
-[^admonitions]: https://squidfunk.github.io/mkdocs-material/reference/admonitions/
-
+[^admonitions]: Admonitions. [https://squidfunk.github.io/mkdocs-material/reference/admonitions/](https://squidfunk.github.io/mkdocs-material/reference/admonitions/)
 {{ render("criterion-context") }}
 
 As we can see, `iolanta:hasInstanceFacet` is not the only relation from objects to facets Iolanta cares about. The top priority is `iolanta:facet` which links an individual node, instead of a class, directly to the facet that should be used to render that particular node.
@@ -497,6 +517,10 @@ As we can see, `iolanta:hasInstanceFacet` is not the only relation from objects 
     * Range: `iolanta:Facet`
     * Inverse: `iolanta:isFacetOf`
 
+```
+    :something iolanta:facet <python://iolanta.facets.html.Default> .
+```
+
 In case `iolanta:facet` and `iolanta:hasInstanceFacet` weren't found for the node in question, we fall back to the default facet assigned to the Environment. That's how our first CLI example worked: `Default` facet is configured as `
 
 !!! info "iolanta:hasDefaultFacet"
@@ -506,11 +530,22 @@ In case `iolanta:facet` and `iolanta:hasInstanceFacet` weren't found for the nod
     * Range: `iolanta:Facet`
     * Inverse: `iolanta:isDefaultFacetOf`
 
-## Render something in MkDocs
+`iolanta` operation is based on a simple vocabulary, bundled with the application and drawn, as a diagram, on {{ render("fig-iolanta-vocabulary") }}. Iolanta vocabulary defines a few classes and a few properties connecting classes to each other.
+
+Prefix we use is `iolanta:`, and it resolves to https://iolanta.tech/.
+
+<figure>
+  <img alt="Iolanta vocabulary" src="iolanta-vocabulary.png" />
+  <figcaption><strong>{{ render("fig-iolanta-vocabulary") }}.</strong> <code>iolanta:</code> vocabulary (Drawn by hand)</figcaption>
+</figure>
+
+## 8 Render something in MkDocs
 
 Printing visualizations in the console might be fun — but not too useful if we want to embed them into a book or in a paper, like this one.
 
 For that purpose, we have `mkdocs-iolanta`[^mkdocs-iolanta] plugin which integrates Iolanta with MkDocs[^mkdocs] static site generator. Syntax for embedding visualizations is provided by Jinja2[^jinja2] template engine and looks like this:
+
+[^jinja2]: Jinja. [https://jinja.palletsprojects.com](https://jinja.palletsprojects.com)
 
 {% raw %}
 ```jinja2
@@ -522,7 +557,7 @@ which renders as:
 
 {{ render('criterion-context', environments=['satisfied']) }}
 
-## Plugin: `iolanta-tables`
+## 9 Plugin: `iolanta-tables`
 
 The Criteria 1-6 we used as an example of rendering are quite simple to work with; they feature no nested environments, for example.
 
@@ -530,8 +565,8 @@ The Criteria 1-6 we used as an example of rendering are quite simple to work wit
 
 It has its own vocabulary to define tables.
 
-[^mkdocs-iolanta]: :material-github: https://github.com/iolanta-tech/mkdocs-iolanta
-[^mkdocs-macros-plugin]: {# todo link to mkdocs-macros-plugin #} mkdocs-macros-plugin
+[^mkdocs-iolanta]: [:material-github: `iolanta-tech/mkdocs-iolanta`](https://github.com/iolanta-tech/mkdocs-iolanta)
+[^mkdocs-macros-plugin]: [:material-github: `fralau/mkdocs_macros_plugin`](https://github.com/fralau/mkdocs_macros_plugin)
 
 {{ render("fig-various-visualizations") }} shows a piece of code describing the data.
 
@@ -546,15 +581,7 @@ It has its own vocabulary to define tables.
 {{ render('criterion-customize', environments='satisfied') }}
 {{ render('criterion-table', environments='satisfied') }}
 
-How did it work though?
-
-The table rendered at {{ render("fig-v1") }} is represented by the node `various-visualizations-v1`, which (via the `$type` property) as an instance of `table:Table`. The [`table:`](https://iolanta.tech/tables/) prefix is defined by `iolanta-tables`[^iolanta-tables] plugin.
-
-{{ render('criterion-plugins', environments='satisfied') }}
-
-[^iolanta-tables]: https://iolanta.tech/tables
-
-`iolanta-tables` defines the following:
+[^iolanta-tables]: Iolanta Tables. [https://iolanta.tech/tables](https://iolanta.tech/tables)
 
 ```yaml
 $id: table:Table
@@ -565,36 +592,9 @@ iolanta:hasInstanceFacet:
       $id: iolanta:html
 ```
 
-[`iolanta:hasInstanceFacet`](https://iolanta.tech/hasInstanceFacet) property tells us that every node of `table:Table` type can be rendered by `html.Table` facet.
-
-`iolanta:supports` property also specifies that `html.Table` facet can work in `iolanta:html` environment, — to distinguish it from facets which render tables in `iolanta:tex` or `iolanta:cli`.
-
-
-### Prettify the table
-
-<figure markdown>
-  {{ render('various-visualizations-v2', environments='side-by-side') }}
-  <figcaption><strong>{{ render("fig-v2") }}.</strong> Table v2</figcaption>
-</figure>
-
 In the snippet on {{ render("fig-v2") }}, we introduced a new `table:self` column. That's not a property, say, `rhizomer` has; it means that we render the node itself (the `rhizomer` node) — and for that the `Default` facet we already know will be employed, — which will be presented as a clickable HTML link.
 
-In addition, we use [`table:order-by`](https://iolanta.tech/tables/order-by) to sort the table by year.
-
-{# todo: table:order-by does not work, table is not sorted. #}
-{# todo: table v2 is too long, render only tools which can render tables #}
-
-### Prettify the table again
-
-<figure markdown class="no-min-width">
-  {{ render('various-visualizations-v3', environments='side-by-side') }}
-  <figcaption><strong>{{ render("fig-v3") }}.</strong> Table v3</figcaption>
-</figure>
-
 On the snippet at {{ render("fig-v3") }}, we define [`mkdocs-material:icon`](https://mkdocs.iolanta.tech/material/icon) property to use mkdocs[^mkdocs] specific icon as column header.
-
-
-### The final table
 
 {{ render("fig-tools-with-various-visualizations") }} is visualized from the description on {{ render("fig-table") }}:
 
@@ -610,49 +610,9 @@ On the snippet at {{ render("fig-v3") }}, we define [`mkdocs-material:icon`](htt
 Here, we use nested [`table:columns`](https://iolanta.tech/tables/columns) properties to group columns.
 
 {{ render('criterion-context', environments='satisfied') }}
-
 {{ render('criterion-turing', environments='satisfied') }}
 
-{# todo: Invent an example to illustrate iolanta:facet #}
-
-If we decidedly know which facet to use for a particular node we can explicitly connect the node and the facet in our RDF graph. For example:
-
-```
-    :something iolanta:facet <python://iolanta.facets.html.Default> .
-```
-
-From this example, it is evident how we identify facets. These are import paths native for Python programming language, which we define by `python://` protocol.
-
-
-## `iolanta` vocabulary
-
-`iolanta` operation is based on a simple vocabulary, bundled with the application and drawn, as a diagram, on {{ render("fig-iolanta-vocabulary") }}. Iolanta vocabulary defines a few classes and a few properties connecting classes to each other.
-
-Prefix we use is `iolanta:`, and it resolves to https://iolanta.tech/.
-
-<figure>
-  <img alt="Iolanta vocabulary" src="iolanta-vocabulary.png" />
-  <figcaption><strong>{{ render("fig-iolanta-vocabulary") }}.</strong> <code>iolanta:</code> vocabulary (Drawn by hand)</figcaption>
-</figure>
-
-In Iolanta terminology, Facet is a unit of executable program code used to visualize RDF nodes in an [Environment](#class-iolantaenvironment). Generally speaking, facet can be described as a black box which has three inputs:
-
-* Identifier of an RDF `node` to visualize (an IRI, a Blank Node, or a Literal);
-* Identifier of an `environment` (IRI or Blank Node) which the node must be visualized within;
-* `iolanta` instance, which contains the current graph queryable via SPARQL {# todo: cite #}.
-
-Facet can run arbitrary SPARQL queries against `iolanta` graph to retrieve any information about the `node` it might require.
-
-Current version of `iolanta` supports only one kind of Facets: Python classes which are subclasses of `iolanta.Facet` abstract base class.
-
-We do not store program code in the graph itself; that seems both inconvenient and insecure. Instead, in the graph facets are addressed via IRIs. For instance, `python://iolanta.facets.generic.BoolLiteral` is the facet that renders an `xsd:boolean` value as a Unicode icon.
-
-Not every facet suits every possible environment. For instance, if a facet returns a string that contains HTML code that result would be next to useless for a \LaTeX document, and vice versa. Thus, it is necessary to describe for every facet which environment(s) it is suitable for. We use `iolanta:supports` for that.
-
-
-## Facet search algorithm
-
-
+## 10 Facet search algorithm
 
 `Iolanta.render()` method accepts arguments:
 
@@ -663,14 +623,13 @@ Not every facet suits every possible environment. For instance, if a facet retur
 
 Given that information, we need to find a facet in our graph and execute that facet to construct a visualization for our node in one of these environments.
 
+## 11 Conclusions
 
-* Look for `iolanta:facet` link such that `$node iolanta:facet ?facet . ?facet iolanta:supports ?environment` .
+We have presented the Iolanta visualization system and provided a few examples of how it works on real data. We also have shown how it integrates with other systems — for instance, to aid in building this paper.
 
-{# todo: describe iolanta-tables vocabulary with examples and illustrations #}
-{# todo: MetaFactory #}
-{# todo: Describe 5-star data model relating to visualizations #}
+We have shown a few plugins currently built for Iolanta.
 
-## Future research
+Directions for future research might include:
 
 * Implement more plugins for various use cases, such as:
     * roadmaps & network planning,
