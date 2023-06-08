@@ -4,25 +4,37 @@ hide:
   - toc
 ---
 
-While Markdown is a very readable and lightweight document format, one of its weak points are **tables**. Markdown table formatting is hard, and a table once written is hard to change. Some Markdown users even give up and write their tables in HTML.
+<div class="grid cards" markdown>
 
-This plugin for [MkDocs](https://mkdocs.org) provides facilities to specify table data and formats using simple [YAML](https://yaml.org) markup.
+-   :material-language-markdown:{ .lg .middle } __Markdown rocks!__
 
-## Demo
+    ---
 
-I've got two cats.
+    It is a simple, readable, lightweight text formatting language, widely used to build, for instance, static sites and project documentation.
 
-{{ render("my-cats", environments='side-by-side') }}
+-   :material-table:{ .lg .middle } __…but its tables do not ☹__
 
+    ---
 
-Let's look deeper into the code underneath that table.
+    Markdown has syntax for tables, but it is a pain to write, read, and especially maintain.
 
-{{ code("samples/simple.yaml", language="yaml", annotations=[
-    "Unique ID of your table. By this ID, you can call the table at any place on the site.",
-    "List of columns in its simplest form. Order of columns is preserved.",
-    "Data to build the table from. Order is **not** preserved.",
-    "Column(s) to order the data by."
-]) }}
+-   :simple-yaml:{ .lg .middle } __Generate them from YAML with Iolanta!__
 
+    ---
 
-Want some more? See {{ render('install') }}.
+    Write your table definition as a YAML file and get an HTML table rendered for you.
+
+</div>
+
+## Like this:
+
+{{ render("earth-like-planets", environments="side-by-side") }}
+
+## Installation
+
+```
+pip install iolanta-tables
+```
+
+!!! info "MkDocs"
+    For integration with MkDocs, see [mkdocs.iolanta.tech](https://mkdocs.iolanta.tech).

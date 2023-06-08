@@ -1,5 +1,13 @@
 nav:
   - index.md
-  - install.md
-  - "table:":
-    - ...
+  - Columns:
+    - columns.md
+    - self.md
+  - Data:
+    - rows.md
+    - class.md
+  - Ordering:
+    - order-by.md
+    - direction.md
+    - empty-values.md
+  - ...

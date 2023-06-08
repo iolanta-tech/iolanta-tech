@@ -12,14 +12,13 @@ python = "^3.11"
 iolanta = "^1.0.15"
 iolanta-jinja2 = "^0.1.4"
 iolanta-roadmap = "^0.1.0"
+mkdocs-awesome-pages-plugin = "^2.8.0"
+mkdocs-iolanta = "^0.1.1"
+mkdocstrings-python = "^0.8.3"
+iolanta-tables = "^0.1.0"
 
 [tool.poetry.group.dev.dependencies]
 jeeves-yeti-pyproject = "^0.2.12"
-mkdocs-awesome-pages-plugin = "^2.8.0"
-mkdocs-iolanta = "^0.1.1"
-iolanta = "^1.0.6"
-mkdocstrings-python = "^0.8.3"
-iolanta-tables = "^0.1.0"
 
 [build-system]
 requires = ["poetry-core"]

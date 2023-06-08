@@ -1,11 +1,4 @@
 nav:
-    - mkdocs-iolanta:
-      - "mkdocs:":
-        - File.md
-        - title.md
-        - url.md
-      - ...
-
-    - blog
-    - tables
-    - jinja2
+  - index.md
+  - tables
+  - vocabularies

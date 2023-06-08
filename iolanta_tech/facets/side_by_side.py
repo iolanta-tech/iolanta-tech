@@ -1,5 +1,5 @@
 import funcy
-from dominate.tags import table, tr, td, code, div
+from dominate.tags import table, tr, td, code, div, body
 from dominate.util import raw
 from iolanta.facets.html.base import HTMLFacet
 from iolanta.namespaces import LOCAL, IOLANTA
@@ -17,12 +17,13 @@ class SideBySide(HTMLFacet):
 
         page = funcy.first(rows)['page']
 
+        renderable = self.render(self.iri, environments=[IOLANTA.html])
         return div(
             self.render(
                 page,
                 environments=[LOCAL.term('code')],
             ),
-            self.render(self.iri, environments=[IOLANTA.html]),
+            div(raw(renderable)) if isinstance(renderable, str) else renderable,
             data_facet='side-by-side',
             cls='grid',
             markdown='markdown',

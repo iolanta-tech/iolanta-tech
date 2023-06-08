@@ -3,10 +3,63 @@ roadmap:roadmap:
     is-blocked-by:
       - title: Release iolanta.tech
         is-blocked-by:
-          - title: side-by-side uses tables
+          - title: Roadmap link from the front page is broken
+            is-blocked-by:
+              - title: Implement roadmap/index.md
+
+          - title: table:columns page does not document nested columns
             bug: true
 
-          - title: Do the home page with cards
+          - title: Show how to use $reverse
+            is-blocked-by:
+              - title: rdf:type page is missing
+                bug: true
+
+          - title: table:self page has a non-active link
+            bug: true
+          - title: table:self uses iolanta:File which is not documented
+            bug: true
+          - title: table:self page does not reference what rdfs:label and schema:url are
+            bug: true
+            is-blocked-by:
+              - title: rdfs:label page is empty
+                bug: true
+              - title: $id page is inadequate
+                bug: true
+              - title: schema:url page is empty
+                bug: true
+
+          - title: Vocabularies home page is empty
+          - title: Deletion of a file crashes iolanta
+            bug: true
+
+          - title: Try editing iolanta-tables data with JSON Schema
+            is-blocked-by:
+              - title: Write a JSON Schema for iolanta-tables
+              - title: Choose an appropriate editor
+                branches:
+                  - title: PyCharm
+                  - title: Fleet
+                  - title: VS Code
+                    description: Preferable due to Codespaces
+                  - title: Sublime Text
+                  - title: Any online editors?
+                  - title: …
+
+          - title: Write a page for rdfs:label
+          - title: Write a page for $id
+
+          - title: Split tables reference pages into categories
+
+          - title: Need a picture on iolanta.tech home page
+          - title: Document how to use iolanta-tables with mkdocs.iolanta.tech
+            is-blocked-by:
+              - title: Update installation instructions on mkdocs.iolanta.tech
+
+          - title: Too many lines in YAML snippets on the home page
+            is-blocked-by:
+              - title: Cut lines based on information in a viewpoint node
+
           - title: Make proper blog page
           - title: Do ADRs using built-in tools of mkdocs-material
           - title: Mark rows as green
