@@ -19,7 +19,7 @@ jobs:
         with:
           repository: iolanta-tech/mkdocs-material-insiders
           path: mkdocs-material-insiders
-          # token: ${{ secrets.INSIDERS_TOKEN }}
+          token: ${{ secrets.INSIDERS_TOKEN }}
 
       - run: j install-graphviz
       - run: j install-mkdocs-insiders
