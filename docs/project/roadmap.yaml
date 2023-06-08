@@ -1,0 +1,16 @@
+roadmap:roadmap:
+  - title: Get feedback for iolanta.tech
+    is-blocked-by:
+      - title: Release iolanta.tech
+        is-blocked-by:
+          - title: side-by-side uses tables
+            bug: true
+
+          - title: Do the home page with cards
+          - title: Make proper blog page
+          - title: Do ADRs using built-in tools of mkdocs-material
+          - title: Mark rows as green
+          - title: How to customize HTML attributes
+          - title: Is there an RDF vocabulary for HTML to use for environments and stuff?
+
+          - title: Find an alternative to graphviz for iolanta-roadmap

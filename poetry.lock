@@ -771,6 +771,23 @@ files = [
 gitdb = ">=4.0.1,<5"
 
 [[package]]
+name = "graphviz"
+version = "0.20.1"
+description = "Simple Python interface for Graphviz"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "graphviz-0.20.1-py3-none-any.whl", hash = "sha256:587c58a223b51611c0cf461132da386edd896a029524ca61a1462b880bf97977"},
+    {file = "graphviz-0.20.1.zip", hash = "sha256:8c58f14adaa3b947daf26c19bc1e98c4e0702cdc31cf99153e6f06904d492bf8"},
+]
+
+[package.extras]
+dev = ["flake8", "pep8-naming", "tox (>=3)", "twine", "wheel"]
+docs = ["sphinx (>=5)", "sphinx-autodoc-typehints", "sphinx-rtd-theme"]
+test = ["coverage", "mock (>=4)", "pytest (>=7)", "pytest-cov", "pytest-mock (>=3)"]
+
+[[package]]
 name = "griffe"
 version = "0.27.3"
 description = "Signatures for entire Python programs. Extract the structure, the frame, the skeleton of your project, to generate API documentation or find breaking changes in your API."
@@ -852,6 +869,22 @@ files = [
 [package.dependencies]
 iolanta = ">=1.0.12,<2.0.0"
 Jinja2 = ">=3.1.2,<4.0.0"
+
+[[package]]
+name = "iolanta-roadmap"
+version = "0.1.0"
+description = "Structured Roadmaps"
+category = "main"
+optional = false
+python-versions = ">=3.10,<4.0"
+files = [
+    {file = "iolanta_roadmap-0.1.0-py3-none-any.whl", hash = "sha256:f8ce73d0548573fc1999591010c2250dd6cdc20dc5f4818c7462a628795b3d06"},
+    {file = "iolanta_roadmap-0.1.0.tar.gz", hash = "sha256:fcbf8bc337a70ed5505d9529dbfff6cc3b88a42ffdb0a60d0be295823dba84d9"},
+]
+
+[package.dependencies]
+graphviz = ">=0.20.1,<0.21.0"
+iolanta = ">=1.0.7,<2.0.0"
 
 [[package]]
 name = "iolanta-tables"
@@ -1300,14 +1333,14 @@ test = ["mkdocs-include-markdown-plugin", "mkdocs-macros-test", "mkdocs-material
 
 [[package]]
 name = "mkdocs-material"
-version = "9.1.9"
+version = "9.1.15"
 description = "Documentation that simply works"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "mkdocs_material-9.1.9-py3-none-any.whl", hash = "sha256:7db24261cb17400e132c46d17eea712bfe71056d892a9beba32cf68210297141"},
-    {file = "mkdocs_material-9.1.9.tar.gz", hash = "sha256:74d8da1371ab3a326868fe47bae3cbc4aa22e93c048b4ca5117e6817b88bd734"},
+    {file = "mkdocs_material-9.1.15-py3-none-any.whl", hash = "sha256:b49e12869ab464558e2dd3c5792da5b748a7e0c48ee83b4d05715f98125a7a39"},
+    {file = "mkdocs_material-9.1.15.tar.gz", hash = "sha256:8513ab847c9a541ed3d11a3a7eed556caf72991ee786c31c5aac6691a121088a"},
 ]
 
 [package.dependencies]
@@ -2287,4 +2320,4 @@ typing_extensions = ">=4.0,<5.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "ea44c3ce5374dd9466419d5c437efa6ceb8f4ce965bc15d905d3c05326b4b002"
+content-hash = "47e3a5cd8e1955af6f7eedeecff27cc095ad449e057bc13b38419438190daec2"

@@ -1,0 +1,7 @@
+roadmap:roadmap:
+  - title: Render as 3D Force graph
+    is-blocked-by:
+      - title: By RDF graph
+      - title: By node
+      - title: Exclude certain links
+      - title: Do not render oprhan nodes

@@ -411,6 +411,8 @@ Let's now try something different.
 
 ## 6.3 Visualize criterion in an admonition box
 
+{# todo: Section 6.3 enumerated incorrectly #}
+
 ``` title="$ iolanta render criterion-context --as iolanta:html"
 {{ render("criterion-context") }}
 ```

@@ -1,10 +1,32 @@
+from pathlib import Path
+
 import rich
-from sh import grep, mkdocs
+
+import sh
+
+
+def install_mkdocs_insiders():
+    """Install Insiders version of `mkdocs-material` theme."""
+    name = 'mkdocs-material-insiders'
+
+    if not (Path.cwd() / name).is_dir():
+        sh.gh.repo.clone(f'iolanta-tech/{name}')
+
+    sh.pip.install('-e', name)
+
+
+def deploy_to_github_pages():
+    """Build the docs & deploy → gh-pages branch."""
+    sh.mkdocs('gh-deploy', '--force', '--clean', '--verbose')
+
+
+def install_graphviz():
+    sh.sudo('apt-get', 'install', '-y', 'graphviz')
 
 
 def todo():
     """Print TODOs."""
-    rows: str = grep(
+    rows: str = sh.grep(
         '-oP',
         r'\{# todo: (\K[^#]+) #\}',
         'docs/blog/whitepaper/index.md',
@@ -26,7 +48,7 @@ def serve():
 
     The site will be available at http://localhost:9841
     """
-    mkdocs.serve(
+    sh.mkdocs.serve(
         '-a', 'localhost:6451',
         _fg=True,
     )

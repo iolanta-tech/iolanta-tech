@@ -1,0 +1,22 @@
+$id: earth-like-planets
+table:columns:
+  - name
+  - radius
+  - rdfs:label: Weather
+    table:columns:
+      - atmosphere
+      - $id: temperatures
+        rdfs:label: "t (°C)"
+table:rows:
+  - name: Mercury
+    radius: 2439
+    atmosphere: no
+    temperatures: -20…430
+  - name: Venus
+    radius: 6051
+    atmosphere: yes
+    temperatures: 438…482
+  - name: Earth
+    radius: 6371
+    atmosphere: yes
+    temperatures: -89…56

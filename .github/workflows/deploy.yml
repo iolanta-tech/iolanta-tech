@@ -8,12 +8,19 @@ jobs:
     name: Deploy to GitHub pages
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
           python-version: 3.11
-      - run: sudo apt-get install graphviz-dev
       - run: pip install -q poetry
       - run: poetry config virtualenvs.create false --local
       - run: poetry install
-      - run: mkdocs gh-deploy --force --clean --verbose
+      - uses: actions/checkout@v3
+        with:
+          repository: iolanta-tech/mkdocs-material-insiders
+          path: mkdocs-material-insiders
+          token: ${{ secrets.INSIDERS_TOKEN }}
+
+      - run: j install-graphviz
+      - run: j install-mkdocs-insiders
+      - run: j deploy-to-github-pages

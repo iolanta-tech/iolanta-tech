@@ -5,9 +5,6 @@
       description: https://localhost:9000/local:planets
       is-blocked-by: iolanta-whitepaper
 
-- title: Choose editor for Iolanta
-  document: and document that
-
 - title: Remove empty-values because they do not work
 
 - title: "`table:order-by` does not work with `table:class`"
