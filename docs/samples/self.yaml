@@ -1,6 +1,8 @@
 $id: self
-
-table:class: iolanta:File
 table:columns:
   - table:self
-  - schema:url
+table:rows:
+  - rdfs:label: iolanta.tech
+    schema:url: https://iolanta.tech
+  - rdfs:label: mkdocs.iolanta.tech
+    schema:url: https://mkdocs.iolanta.tech

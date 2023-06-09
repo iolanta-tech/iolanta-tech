@@ -1,8 +1,153 @@
 roadmap:roadmap:
-  - title: Get feedback for iolanta.tech
-    is-blocked-by:
-      - title: Release iolanta.tech
+  - title: jeeves-generate-iolanta-github
+    is-blocked-by: jeeves-generate
+
+  - title: Combine different facets
+    branches:
+      - title: On a roadmap
+      - title: On a graph
+      - title: In a presentation
         is-blocked-by:
+          title: Iolanta builder of HTML presentations
+
+  - title: Implement python.iolanta.tech
+  - title: Implement cli.iolanta.tech
+  - title: Implement gatsby.iolanta.tech
+
+  - title: Implement rdfs.iolanta.tech
+    is-blocked-by: jeeves-generate
+  - title: Implement owl.iolanta.tech
+    is-blocked-by: jeeves-generate
+
+  - title: Can we perhaps replace the UI of schema.org?
+    is-blocked-by:
+      - title: Implement schema.iolanta.tech
+        is-blocked-by:
+          - jeeves-generate
+          - title: OWL-RL is extremely slow
+            bug: true
+
+  - title: Exclude hidden directories by default
+  - title: Show a progress bar and indicator when processing files
+  - title: Show a more user friendly message if unknown JSON-LD prefix is found
+
+  - title: Use as Miro or Whimsical alternative
+    is-blocked-by:
+      - watch-option
+      - serve-command
+      - externalization
+
+  - title: Get feedback from Begtin
+    is-blocked-by:
+      - title: How to deal with externalization of thought?
+        branches:
+          - title: 2D mind map
+          - title: 3D graph
+            is-blocked-by: iolanta-graph
+
+  - title: Implement foaf.iolanta.tech
+    is-blocked-by: jeeves-generate
+
+  - title: jeeves-generate
+    $id: jeeves-generate
+    description: Auto generate multiple Markdown files
+
+  - title: Try iolanta-graph in VR
+    is-blocked-by: iolanta-graph
+
+  - title: Implement --watch in CLI
+    description: Most useful for iolanta-roadmap and iolanta-graph
+    $id: watch-option
+
+  - title: Implement iolanta-serve
+    description: Most useful for iolanta-roadmap and iolanta-graph
+    $id: serve-command
+
+  - title: Find an alternative JS based library for iolanta-roadmap
+  - title: Resolve --as values against a MIME type vocab
+
+  - title: Get feedback about iolanta-graph
+    is-blocked-by: iolanta-graph
+    each-of:
+      - title: Mikhail Katsnelson
+      - title: Stanislav Kralin
+      - title: YAML-LD community
+      - title: People from
+
+
+  - title: Externalization in software projects
+    $id: externalization
+    is-blocked-by:
+      - title: Explain to developers what we convert YAML into
+        is-blocked-by:
+          - title: Release iolanta-graph
+            $id: iolanta-graph
+            branches:
+              - title: iolanta-cyberspace
+              - title: iolanta-…
+
+  - title: Explore roadmap vocabularies
+  - title: "iolanta.add([…]) does not work"
+    bug: true
+
+  - title: Deletion of a file crashes iolanta
+    bug: true
+
+  - title: Try editing iolanta-tables data with JSON Schema
+    is-blocked-by:
+      - title: Write a JSON Schema for iolanta-tables
+      - title: Choose an appropriate editor
+        branches:
+          - title: PyCharm
+          - title: Fleet
+          - title: VS Code
+            description: Preferable due to Codespaces
+          - title: Sublime Text
+          - title: Any online editors?
+          - title: …
+
+  - title: Find an alternative to graphviz for iolanta-roadmap
+
+  - title: Get feedback for iolanta.tech from YAML-LD community
+    is-blocked-by:
+      - title: Submit iolanta.tech use case
+        is-blocked-by:
+          - title: Link to a page with $id does not render
+            is-blocked-by:
+              - title: Fix that in mkdocs-iolanta
+                is-blocked-by:
+                  - title: What does ChatGPT think of mkdocs.iolanta.tech?
+                  - title: Test the fix
+
+
+          - title: Refine iolanta.tech whitepaper
+          - title: Properly format the Blog page
+
+          - title: Add use cases to the front page — python, cli, and mkdocs
+
+          - title: tables/project/facets page is garbage
+            bug: true
+
+          - title: ChatGPT does not like the front page
+            is-blocked-by:
+              - title: Clear Introduction
+                description: The website could benefit from a more detailed introduction. While it's clear that "Iolanta" is a visualization framework, it's unclear what makes it unique or why someone should use it over other visualization frameworks. This could include its unique selling points, key features, or the problems it aims to solve.
+                is-blocked-by:
+                  - title: Document how data might be shared among visualizations
+
+              - title: Navigation
+                description: The navigation structure seems a bit complex. It might be helpful to simplify and make it more intuitive. For example, it's not immediately clear what the difference is between the first set of links (iolanta, Tables, Vocabularies) and the second set below it. If they serve different purposes or lead to different types of content, make sure that this is clear to the user.
+              - title: Visual Appeal
+                description: The website is currently quite text-heavy, and could be made more engaging with the use of visuals, especially given that it's a visualization framework. Using more visuals could also help to explain how Iolanta works and what it can do.
+              - title: Examples
+                description: The examples provided are very useful, but it may be beneficial to provide a bit more context around them. For example, for the "Tables" example, a brief explanation of what the example is demonstrating could be provided.
+              - title: Calls to Action
+                description: There doesn't seem to be a clear call to action. If the goal is for visitors to try Iolanta, download it, contribute to its development, or something else, this should be clearly and prominently stated on the front page.
+              - title: Design and Layout
+                description: The design and layout could use some refinement. The use of white space, text formatting (e.g., size, font, color), and other design elements could be improved to make the site more visually appealing and easy to read.
+              - title: Footer
+                description: The footer contains a copyright notice and a reference to the site being made with Material for MkDocs. This is good, but it might be helpful to also include links to important pages or resources, contact information, or a short site description.
+
           - title: Roadmap link from the front page is broken
             is-blocked-by:
               - title: Implement roadmap/index.md
@@ -30,21 +175,6 @@ roadmap:roadmap:
                 bug: true
 
           - title: Vocabularies home page is empty
-          - title: Deletion of a file crashes iolanta
-            bug: true
-
-          - title: Try editing iolanta-tables data with JSON Schema
-            is-blocked-by:
-              - title: Write a JSON Schema for iolanta-tables
-              - title: Choose an appropriate editor
-                branches:
-                  - title: PyCharm
-                  - title: Fleet
-                  - title: VS Code
-                    description: Preferable due to Codespaces
-                  - title: Sublime Text
-                  - title: Any online editors?
-                  - title: …
 
           - title: Write a page for rdfs:label
           - title: Write a page for $id
@@ -66,4 +196,3 @@ roadmap:roadmap:
           - title: How to customize HTML attributes
           - title: Is there an RDF vocabulary for HTML to use for environments and stuff?
 
-          - title: Find an alternative to graphviz for iolanta-roadmap

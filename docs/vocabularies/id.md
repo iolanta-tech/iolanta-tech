@@ -1,5 +1,6 @@
 ---
 title: "$id"
+$id: keyword-id
 ---
 
 Defines a unique identifier for something. Identifiers are case sensitive. For instance:
