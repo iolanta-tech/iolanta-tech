@@ -16,6 +16,7 @@ mkdocs-awesome-pages-plugin = "^2.8.0"
 mkdocs-iolanta = "^0.1.1"
 mkdocstrings-python = "^0.8.3"
 iolanta-tables = "^0.1.0"
+mkdocs-blogging-plugin = "^2.2.9"
 
 [tool.poetry.group.dev.dependencies]
 jeeves-yeti-pyproject = "^0.2.12"

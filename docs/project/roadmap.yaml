@@ -112,14 +112,6 @@ roadmap:roadmap:
     is-blocked-by:
       - title: Submit iolanta.tech use case
         is-blocked-by:
-          - title: Link to a page with $id does not render
-            is-blocked-by:
-              - title: Fix that in mkdocs-iolanta
-                is-blocked-by:
-                  - title: What does ChatGPT think of mkdocs.iolanta.tech?
-                  - title: Test the fix
-
-
           - title: Refine iolanta.tech whitepaper
           - title: Properly format the Blog page
 
@@ -160,39 +152,17 @@ roadmap:roadmap:
               - title: rdf:type page is missing
                 bug: true
 
-          - title: table:self page has a non-active link
-            bug: true
-          - title: table:self uses iolanta:File which is not documented
-            bug: true
-          - title: table:self page does not reference what rdfs:label and schema:url are
-            bug: true
-            is-blocked-by:
-              - title: rdfs:label page is empty
-                bug: true
-              - title: $id page is inadequate
-                bug: true
-              - title: schema:url page is empty
-                bug: true
-
           - title: Vocabularies home page is empty
 
-          - title: Write a page for rdfs:label
-          - title: Write a page for $id
-
-          - title: Split tables reference pages into categories
-
           - title: Need a picture on iolanta.tech home page
-          - title: Document how to use iolanta-tables with mkdocs.iolanta.tech
-            is-blocked-by:
-              - title: Update installation instructions on mkdocs.iolanta.tech
 
           - title: Too many lines in YAML snippets on the home page
             is-blocked-by:
               - title: Cut lines based on information in a viewpoint node
 
-          - title: Make proper blog page
           - title: Do ADRs using built-in tools of mkdocs-material
           - title: Mark rows as green
           - title: How to customize HTML attributes
           - title: Is there an RDF vocabulary for HTML to use for environments and stuff?
 
+          - title: Make proper blog page

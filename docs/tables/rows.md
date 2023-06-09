@@ -1,5 +1,6 @@
 ---
 title: "table:rows"
+$id: "table:rows"
 hide:
   - toc
 ---

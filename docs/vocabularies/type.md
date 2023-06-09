@@ -1,5 +1,6 @@
 ---
 title: "$type"
+$id: keyword-type
 ---
 
 Define type for something. This is most useful in conjunction with {{ render('table:class') }}:

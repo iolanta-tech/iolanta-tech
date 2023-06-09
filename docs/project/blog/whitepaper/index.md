@@ -4,6 +4,7 @@ date: "2023-03-19"
 hide:
   - navigation
 #  - toc
+description: Linked Data in its raw form, as a collection of triples (or quads) — is arguably not easily comprehensible for a human being. Linked Data visualization is a conversion from triples to a visual form (a table, a chart, et cetera) — a form that we humans can easily read, understand, and interact with. The method and particular details of a visualization very much depend on the purpose data is visualized for.
 ---
 
 {# todo: Standardize the list of references #}
@@ -22,7 +23,7 @@ pre {
 Linked Data ⋅ JSON-LD ⋅ YAML-LD ⋅ Data Visualization
 
 !!! abstract
-    **Purpose:** Linked Data in its raw form, as a collection of triples (or quads) — is arguably not easily comprehensible for a human being. Linked Data visualization is a conversion from triples to a visual form (a table, a chart, et cetera) — a form that we humans can easily read, understand, and interact with. The method and particular details of a visualization very much depend on the purpose data is visualized for.
+    **Purpose:** {{ page.meta.description }}
     
     **Methodology:** A minimalistic yet extendable vocabulary is proposed to guide visualization based on the data and to allow customization of the visual form via the knowledge graph itself. A plugin based visualization software architecture implementing the vocabulary is proposed and its main algorithm is described. A software tool implementing the proposed principles is built and published as an open source project. A few plugins for it (implementing a few visualization types and integrations) are also provided.
     
@@ -312,7 +313,7 @@ There is one central place, a text file shown on {{ render("fig-criteria-code") 
 
 <figure markdown>
 <div style="text-align: left">
-{{ code('blog/whitepaper/criteria/criterion.yaml', language='yaml', title='criterion.yaml', last_line=11) }}
+{{ code('project/blog/whitepaper/criteria/criterion.yaml', language='yaml', title='criterion.yaml', last_line=11) }}
 </div>
 <figcaption markdown>
 <strong>{{ render("fig-criteria-code") }}.</strong>
@@ -439,7 +440,7 @@ Facet selection depends on the *environment* we are rendering a node within.
 
 <figure markdown>
 <div style="text-align: left">
-{{ code('blog/whitepaper/criteria/facets.yaml', language='yaml', title='facets.yaml') }}
+{{ code('project/blog/whitepaper/criteria/facets.yaml', language='yaml', title='facets.yaml') }}
 </div>
 <figcaption markdown>
 <strong>{{ render("fig-criteria-facets") }}.</strong>
@@ -576,7 +577,7 @@ It has its own vocabulary to define tables.
 
 <figure markdown>
   <div style="text-align: left" markdown>
-    {{ code('blog/whitepaper/state-of-the-art/various-visualizations.yaml', title='various-visualizations.yaml', language='yaml', last_line=16) }}
+    {{ code('project/blog/whitepaper/state-of-the-art/various-visualizations.yaml', title='various-visualizations.yaml', language='yaml', last_line=16) }}
   </div>
   <figcaption markdown><strong>{{ render("fig-various-visualizations") }}.</strong> Visualization tools file. See [:material-github: `various-visualizations.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml) in the Supplementary Material.</figcaption>
 </figure>
@@ -604,7 +605,7 @@ On the snippet at {{ render("fig-v3") }}, we define [`mkdocs-material:icon`](htt
 
 <figure markdown>
   <div style="text-align: left">
-    {{ code('blog/whitepaper/state-of-the-art/various-visualizations/table.yaml', title='table.yaml', language='yaml', last_line=16) }}
+    {{ code('project/blog/whitepaper/state-of-the-art/various-visualizations/table.yaml', title='table.yaml', language='yaml', last_line=16) }}
   </div>
   <figcaption><strong>{{ render("fig-table") }}.</strong> Visualization tools table file</figcaption>
 </figure>
