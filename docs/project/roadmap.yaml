@@ -109,6 +109,7 @@ roadmap:roadmap:
   - title: Find an alternative to graphviz for iolanta-roadmap
 
   - title: Get feedback for iolanta.tech from YAML-LD community
+    $id: feedback-yaml-ld
     is-blocked-by:
       - title: Submit iolanta.tech use case
         is-blocked-by:

@@ -31,9 +31,6 @@ plugins:
       on_error_fail: true
       modules:
         - macros
-  - blogging:
-      dirs:
-        - project/blog
 
 theme:
   name: material

@@ -29,7 +29,7 @@ def todo():
     rows: str = sh.grep(
         '-oP',
         r'\{# todo: (\K[^#]+) #\}',
-        'docs/blog/whitepaper/index.md',
+        'docs/project/whitepaper/index.md',
     )
 
     todos = [

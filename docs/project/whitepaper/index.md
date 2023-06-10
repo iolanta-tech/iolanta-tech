@@ -1,9 +1,9 @@
 ---
 title: "Iolanta: Linked Data authoring and ontology-based visualization system"
+$id: whitepaper
 date: "2023-03-19"
 hide:
   - navigation
-#  - toc
 description: Linked Data in its raw form, as a collection of triples (or quads) — is arguably not easily comprehensible for a human being. Linked Data visualization is a conversion from triples to a visual form (a table, a chart, et cetera) — a form that we humans can easily read, understand, and interact with. The method and particular details of a visualization very much depend on the purpose data is visualized for.
 ---
 
@@ -66,8 +66,8 @@ As an illustration, we are reproducing Table 3.1 from the book here ({{ render("
 <strong>{{ render("fig-tools-with-various-visualizations") }}.</strong>
 Visualization tools supporting multiple visualizations[^ld-visualization-book] (Table 3.1, page 54).<br/>
 
-See [:material-github: data](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml)
-& [:material-github: table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations/table.yaml).
+See [:material-github: data](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/various-visualizations.yaml)
+& [:material-github: table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/various-visualizations/table.yaml).
 </figcaption>
 </figure>
 
@@ -93,8 +93,8 @@ The same chunk of data can be rendered differently for different purposes. {{ re
 <strong>{{ render("fig-tools-with-various-visualizations-augmented") }}.</strong>
 {{ render("fig-tools-with-various-visualizations") }} with availability information and notes.<br/>
 
-See [:material-github: data](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml)
-& [:material-github: table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations/augmented.yaml).
+See [:material-github: data](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/various-visualizations.yaml)
+& [:material-github: table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/various-visualizations/augmented.yaml).
 </figcaption>
 </figure>
 
@@ -171,7 +171,7 @@ Fresnel & criteria.<br/>
 
 {# todo: Display criterion number on the fresnel criteria table. #}
 
-See [:material-github: data & table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/fresnel/fresnel-criteria.yaml)
+See [:material-github: data & table definition](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/fresnel/fresnel-criteria.yaml)
 </figcaption>
 </figure>
 
@@ -313,11 +313,11 @@ There is one central place, a text file shown on {{ render("fig-criteria-code") 
 
 <figure markdown>
 <div style="text-align: left">
-{{ code('project/blog/whitepaper/criteria/criterion.yaml', language='yaml', title='criterion.yaml', last_line=11) }}
+{{ code('project/whitepaper/criteria/criterion.yaml', language='yaml', title='criterion.yaml', last_line=11) }}
 </div>
 <figcaption markdown>
 <strong>{{ render("fig-criteria-code") }}.</strong>
-Criteria code. See [:material-github: `criteria.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/criteria/criterion.yaml)
+Criteria code. See [:material-github: `criteria.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/criteria/criterion.yaml)
 </figcaption>
 </figure>
 
@@ -440,11 +440,11 @@ Facet selection depends on the *environment* we are rendering a node within.
 
 <figure markdown>
 <div style="text-align: left">
-{{ code('project/blog/whitepaper/criteria/facets.yaml', language='yaml', title='facets.yaml') }}
+{{ code('project/whitepaper/criteria/facets.yaml', language='yaml', title='facets.yaml') }}
 </div>
 <figcaption markdown>
 <strong>{{ render("fig-criteria-facets") }}.</strong>
-Facet definitions for Criteria. See [:material-github: `facets.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/criteria/facets.yaml)
+Facet definitions for Criteria. See [:material-github: `facets.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/criteria/facets.yaml)
 </figcaption>
 </figure>
 
@@ -577,9 +577,9 @@ It has its own vocabulary to define tables.
 
 <figure markdown>
   <div style="text-align: left" markdown>
-    {{ code('project/blog/whitepaper/state-of-the-art/various-visualizations.yaml', title='various-visualizations.yaml', language='yaml', last_line=16) }}
+    {{ code('project/whitepaper/state-of-the-art/various-visualizations.yaml', title='various-visualizations.yaml', language='yaml', last_line=16) }}
   </div>
-  <figcaption markdown><strong>{{ render("fig-various-visualizations") }}.</strong> Visualization tools file. See [:material-github: `various-visualizations.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/blog/whitepaper/state-of-the-art/various-visualizations.yaml) in the Supplementary Material.</figcaption>
+  <figcaption markdown><strong>{{ render("fig-various-visualizations") }}.</strong> Visualization tools file. See [:material-github: `various-visualizations.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/various-visualizations.yaml) in the Supplementary Material.</figcaption>
 </figure>
 
 
@@ -605,7 +605,7 @@ On the snippet at {{ render("fig-v3") }}, we define [`mkdocs-material:icon`](htt
 
 <figure markdown>
   <div style="text-align: left">
-    {{ code('project/blog/whitepaper/state-of-the-art/various-visualizations/table.yaml', title='table.yaml', language='yaml', last_line=16) }}
+    {{ code('project/whitepaper/state-of-the-art/various-visualizations/table.yaml', title='table.yaml', language='yaml', last_line=16) }}
   </div>
   <figcaption><strong>{{ render("fig-table") }}.</strong> Visualization tools table file</figcaption>
 </figure>
