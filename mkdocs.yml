@@ -1,13 +1,15 @@
 site_name: iolanta.tech
 site_url: https://iolanta.tech
 repo_url: https://github.com/iolanta-tech/iolanta-tech
-repo_name: iolanta-tech
+edit_uri: edit/master/docs/
+repo_name: iolanta-tech/iolanta-tech
 copyright: Copyright © 2023 iolanta.tech
 
 markdown_extensions:
   - admonition
   - codehilite
   - attr_list
+  - def_list
   - md_in_html
   - pymdownx.superfences
   - pymdownx.details
@@ -48,3 +50,4 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - content.code.annotate
+    - content.action.edit

@@ -1,4 +1,13 @@
 roadmap:roadmap:
+  - title: QNames in Fresnel Domain Properties table in the Whitepaper are not clickable
+    is-blocked-by:
+      - title: Find out how to assign QName facet to a column in a user friendly way, and document that
+      - title: Develop QName facet
+        is-blocked-by:
+          - title: Follow rdfs:isDefinedBy link to find the ontology
+          - title: Find or invent a property mapping ontology IRI → its contraction
+          - title: Render the QName is two separate links, each probably renderable with Default facet; schema:url takes precedence over the IRI itself
+
   - title: jeeves-generate-iolanta-github
     is-blocked-by: jeeves-generate
 
@@ -24,8 +33,19 @@ roadmap:roadmap:
       - title: Implement schema.iolanta.tech
         is-blocked-by:
           - jeeves-generate
-          - title: OWL-RL is extremely slow
-            bug: true
+          - title: Do an experiment to find out why processing Schema is slow
+            branches:
+              - title: Due to loading YAML-LD
+              - title: Due to OWL RL
+                is-blocked-by:
+                  - title: OWL-RL is extremely slow
+                    bug: true
+                  - title: Shall I fork OWL-RL?
+                    branches:
+                      - title: yes
+                        is-blocked-by:
+                          - title: Add performance testing as a constantly executed procedure on CI for OWL RL
+                      - title: no
 
   - title: Exclude hidden directories by default
   - title: Show a progress bar and indicator when processing files
@@ -113,7 +133,12 @@ roadmap:roadmap:
     is-blocked-by:
       - title: Submit iolanta.tech use case
         is-blocked-by:
+          - title: Add the edit buttons onto the site
           - title: Refine iolanta.tech whitepaper
+            is-blocked-by:
+              - title: Ask ChatGPT
+              - title: Ask Grammarly
+
           - title: Properly format the Blog page
 
           - title: Add use cases to the front page — python, cli, and mkdocs
