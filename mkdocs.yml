@@ -36,14 +36,6 @@ plugins:
 
 theme:
   name: material
-  icon:
-    admonitions:
-      1: material/numeric-1-circle
-      2: material/numeric-2-circle
-      3: material/numeric-3-circle
-      4: material/numeric-4-circle
-      5: material/numeric-5-circle
-      6: material/numeric-6-circle
   features:
     - navigation.sections
     - navigation.indexes

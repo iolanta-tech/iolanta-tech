@@ -1,0 +1,15 @@
+roadmap:roadmap:
+  - title: Rendered visualization
+    $id: algorithm-roadmap
+    is-blocked-by:
+      - title: "iolanta:hasDefaultFacet"
+        is-blocked-by: iolanta-has-instance-facet
+
+      - title: "iolanta:hasInstanceFacet"
+        $id: iolanta-has-instance-facet
+        is-blocked-by: iolanta-facet
+
+      - title: "iolanta:facet"
+        $id: iolanta-facet
+        is-blocked-by:
+          - title: How to render a given node?

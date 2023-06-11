@@ -421,7 +421,7 @@ To do that, the system will call `iolanta.facets.cli.default.Default` Python cla
 * Via a SPARQL[^sparql] query, find out whether the node being rendered has an `rdfs:label` property;
 * If yes, print that property.
 
-We call such classes as this *facets*. The word *facet* is defined by Cambridge Dictionary[^facet-dictionary] as:
+We call such classes *facets*. The word *facet* is defined by Cambridge Dictionary[^facet-dictionary] as:
 
 [^facet-dictionary]: Facet. Cambridge Dictionary. [https://dictionary.cambridge.org/dictionary/english/facet](https://dictionary.cambridge.org/dictionary/english/facet)
 
@@ -430,6 +430,8 @@ We call such classes as this *facets*. The word *facet* is defined by Cambridge 
 or
 
 > one of the parts or features of something.
+
+{{ render("criterion-turing", environments=["satisfied"]) }}
 
 [^mkdocs]: MkDocs. [mkdocs.org](https://mkdocs.org)
 
@@ -489,6 +491,8 @@ Facet selection depends on the *environment* we are rendering a node within.
 * In our first example, we didn't specify `--as`, and Iolanta used its default environment — `iolanta:cli` — which serves printing to console;
 * In the second example, we specified `iolanta:html` explicitly.
 
+## `7` Facet selection algorithm
+
 {{ render("fig-criteria-facets") }} illustrates the piece of YAML-LD code that helps Iolanta choose the correct facet. We can see that `Criterion` class has two facets connected to it via `iolanta:hasInstanceFacet` property.
 
 * `Default` facet that's going to be used in table cells;
@@ -520,8 +524,6 @@ With `iolanta:supports`, we also define the environments given facet can operate
     * Range: `iolanta:Environment`
     * Inverse: `iolanta:isSupportedBy`
 
-## `7` Facet selection algorithm
-
 Generally, rendering of an object depends on the **environment** the object is rendered within. The easiest example would be HTML vs LaTeX output; for a more practical example, it might be considered how this paper renders the criteria for a visualization system differently depending on context:
 
 * as plain text within a table cell at {{ render("fig-fresnel-criteria") }},
@@ -539,8 +541,8 @@ This calls for a huge tree of lenses to define rendering of the whole paper — 
 {{ render("fig-algorithm") }} describes the facet search algorithm Iolanta is implementing.
 
 <figure markdown style="text-align: center">
-  <img src="algorithm.png" style="width: 50%">
-  <figcaption><strong>{{ render("fig-algorithm") }}.</strong> Iolanta facet search algorithm<br/><em>(drawn by hand)</em></figcaption>
+<div>{{ render("algorithm-roadmap")|safe }}</div>
+<figcaption markdown><strong>{{ render("fig-algorithm") }}.</strong> Iolanta facet search algorithm<br/>See [:material-github: `algorithm.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/algorithm.yaml)</figcaption>
 </figure>
 
 `Environment` is an `rdfs:Class` defined by Iolanta base vocabulary.
@@ -554,13 +556,6 @@ This calls for a huge tree of lenses to define rendering of the whole paper — 
 
     We will provide more examples for Environments later.
 
-`iolanta:html` is the default environment for HTML output. To build this paper, we use MkDocs[^mkdocs] static site generator, which understands both HTML and Markdown, that's why `mkdocs-iolanta`[^mkdocs-iolanta] — the integration layer between Iolanta and MkDocs — uses `iolanta:html` as default environment.
-
-This rendition of the object is implemented by a custom plugin, say, for a static site like one which generates this paper. The output is actually Markdown markup for admonitions[^admonitions] markdown extension, rendered by MkDocs[^mkdocs] as:
-
-[^admonitions]: Admonitions. [https://squidfunk.github.io/mkdocs-material/reference/admonitions/](https://squidfunk.github.io/mkdocs-material/reference/admonitions/)
-{{ render("criterion-context") }}
-
 As we can see, `iolanta:hasInstanceFacet` is not the only relation from objects to facets Iolanta cares about. The top priority is `iolanta:facet` which links an individual node, instead of a class, directly to the facet that should be used to render that particular node.
 
 !!! info "iolanta:facet"
@@ -573,7 +568,7 @@ As we can see, `iolanta:hasInstanceFacet` is not the only relation from objects 
     :something iolanta:facet <python://iolanta.facets.html.Default> .
 ```
 
-In case `iolanta:facet` and `iolanta:hasInstanceFacet` weren't found for the node in question, we fall back to the default facet assigned to the Environment. That's how our first CLI example worked: `Default` facet is configured as `
+In case `iolanta:facet` and `iolanta:hasInstanceFacet` weren't found for the node in question, we fall back to the default facet assigned to the Environment. That's how our first CLI example worked: `Default` facet is configured as:
 
 !!! info "iolanta:hasDefaultFacet"
     Define a default facet used for that environment.
@@ -584,14 +579,22 @@ In case `iolanta:facet` and `iolanta:hasInstanceFacet` weren't found for the nod
 
 `iolanta` operation is based on a simple vocabulary, bundled with the application and drawn, as a diagram, on {{ render("fig-iolanta-vocabulary") }}. Iolanta vocabulary defines a few classes and a few properties connecting classes to each other.
 
-Prefix we use is `iolanta:`, and it resolves to https://iolanta.tech/.
+Prefix we use is `iolanta:`, and it resolves to [https://iolanta.tech/](https://iolanta.tech/).
 
 <figure>
   <img alt="Iolanta vocabulary" src="iolanta-vocabulary.png" />
-  <figcaption><strong>{{ render("fig-iolanta-vocabulary") }}.</strong> <code>iolanta:</code> vocabulary (Drawn by hand)</figcaption>
+  <figcaption><strong>{{ render("fig-iolanta-vocabulary") }}.</strong> <code>iolanta:</code> vocabulary (Drawn by hand ☹)</figcaption>
 </figure>
 
-## `8` Render something in MkDocs
+The existence of Iolanta vocabulary closes the following criterion.
+
+{{ render("criterion-self-hosted", environments=["satisfied"]) }}
+
+To conclude this section, — Iolanta facet search algorithm aims to satisfy one of the criteria we listed. Here it is:
+
+{{ render('criterion-context', environments=['satisfied']) }}
+
+## `8` Integration: MkDocs
 
 Printing visualizations in the console might be fun — but not too useful if we want to embed them into a book or in a paper, like this one.
 
@@ -605,11 +608,15 @@ For that purpose, we have `mkdocs-iolanta`[^mkdocs-iolanta] plugin which integra
 ```
 {% endraw %}
 
-which renders as:
+The output of this is an extension to Markdown markup known as Admonitions[^admonitions].
 
-{{ render('criterion-context', environments=['satisfied']) }}
+[^admonitions]: [Admonitions](https://squidfunk.github.io/mkdocs-material/reference/admonitions/) for `mkdocs-material`.
 
-## `9` Plugin: `iolanta-tables`
+## `9` :material-table: Plugin: `iolanta-tables`
+
+Iolanta _supports_ plugins, which aims to satisfy the following criterion.
+
+{{ render("criterion-plugins", environments=["satisfied"]) }}
 
 The Criteria 1-6 we used as an example of rendering are quite simple to work with; they feature no nested environments, for example.
 
@@ -628,10 +635,6 @@ It has its own vocabulary to define tables.
   </div>
   <figcaption markdown><strong>{{ render("fig-various-visualizations") }}.</strong> Visualization tools file. See [:material-github: `various-visualizations.yaml`](https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/various-visualizations.yaml) in the Supplementary Material.</figcaption>
 </figure>
-
-
-{{ render('criterion-customize', environments='satisfied') }}
-{{ render('criterion-table', environments='satisfied') }}
 
 [^iolanta-tables]: Iolanta Tables. [https://iolanta.tech/tables](https://iolanta.tech/tables)
 
@@ -661,23 +664,12 @@ On the snippet at {{ render("fig-v3") }}, we define [`mkdocs-material:icon`](htt
 
 Here, we use nested [`table:columns`](https://iolanta.tech/tables/columns) properties to group columns.
 
-{{ render('criterion-context', environments='satisfied') }}
-{{ render('criterion-turing', environments='satisfied') }}
+The following criterion is thus satisfied:
 
-## `10` Facet search algorithm
+{{ render('criterion-table', environments='satisfied') }}
 
-{# todo: Facet search algorithm section is almost empty #}
 
-`Iolanta.render()` method accepts arguments:
-
-{# todo: Generate the function description instead of writing stuff by hand #}
-
-* `node` is an RDF node to render;
-* `environments` is a **list** of `iolanta:Environment` instance references.
-
-Given that information, we need to find a facet in our graph and execute that facet to construct a visualization for our node in one of these environments.
-
-## `11` Conclusions
+## :material-stop: Conclusions
 
 We have presented the Iolanta visualization system and provided a few examples of how it works on real data. We also have shown how it integrates with other systems — for instance, to aid in building this paper.
 

@@ -128,18 +128,34 @@ roadmap:roadmap:
 
   - title: Find an alternative to graphviz for iolanta-roadmap
 
+  - title: Perhaps render raw RDF graphs in 2D or 3D for the paper
+  - title: Page for iolanta:hasInstanceFacet
+  - title: Page for iolanta:supports
+  - title: Page for iolanta:Environment
+  - title: Page for iolanta:hasDefaultFacet
+
   - title: Get feedback for iolanta.tech from YAML-LD community
     $id: feedback-yaml-ld
     is-blocked-by:
       - title: Submit iolanta.tech use case
         is-blocked-by:
-          - title: Add the edit buttons onto the site
+          - title: Section 6.3 has information about the Facet selection algorithm, move it to the next section
+            bug: true
+
+          - title: Tables and Roadmap must be under Plugins menu item
+
+          - title: Page for iolanta-jinja2 and link to it as to an integration
+            is-blocked-by:
+              - title: Section about Integrations
+          - title: Give hints about the iolanta-tables vocabulary to kind of circle back to the beginning of the paper
+          - title: Insert satisfied criteria references through sections 6 and/or 7
+          - title: Render the Facet selection algorithm as iolanta-roadmap
+          - title: Section 10 is named incorrectly — as Facet search algorithm
+
           - title: Refine iolanta.tech whitepaper
             is-blocked-by:
               - title: Ask ChatGPT
               - title: Ask Grammarly
-
-          - title: Properly format the Blog page
 
           - title: Add use cases to the front page — python, cli, and mkdocs
 
