@@ -21,7 +21,7 @@ $reverse:
     - rdfs:label: LDVizWiz
       available: yes
       schema:url: http://semantics.eurecom.fr/datalift/rdfViz/apps/
-      rdfs:comment: Could not get this to work. After entering the dbpedia endpoint address, a number of green active buttons appear but none of those reacts.
+      rdfs:comment: Could not get this to work. After entering the dbpedia endpoint address, several green active buttons appear but none of those reacts.
       year: 2014
       spatial: yes
       hierarchical: yes

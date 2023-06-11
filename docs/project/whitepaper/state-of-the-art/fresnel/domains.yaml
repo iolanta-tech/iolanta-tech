@@ -12,12 +12,12 @@ table:class:
         range:
           rdfs:label: Fresnel Selector
           $id: fresnel-selector
-        notes: Specify instances which can be viewed via this Lens
+        notes: Specify instances that can be viewed via this Lens
       - rdfs:label: fresnel:classLensDomain
         domain: fresnel:Lens
         range:
           $id: fresnel-selector
-        notes: Specify classes instances of which can be viewed via this Lens
+        notes: Specify classes instances of that can be viewed via this Lens
 
       - rdfs:label: fresnel:propertyFormatDomain
         domain: fresnel:Format
@@ -28,12 +28,12 @@ table:class:
         domain: fresnel:Format
         range:
           $id: fresnel-selector
-        notes: Specify instances which can be formatted with this Format
+        notes: Specify instances that can be formatted with this Format
       - rdfs:label: fresnel:instanceFormatDomain
         domain: fresnel:Format
         range:
           $id: fresnel-selector
-        notes: Specify classes instances of which can be formatted with this Format
+        notes: Specify classes instances of that can be formatted with this Format
       - rdfs:label: fresnel:sublens
         range: fresnel:Lens
-        notes: For a given property mentioned in Lens definition, specify which lens to use to render that property and its value.
+        notes: For a given property mentioned in the Lens definition, specify which lens to use to render that property and its value.
