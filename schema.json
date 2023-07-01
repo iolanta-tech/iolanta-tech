@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "roadmap:roadmap": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "$id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "is-blocked-by": {
+            "type": "array",
+            "description": "Tasks that this task is blocked by: https://roadmaps.iolanta.tech/is-blocked-by",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "is-blocked-by": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "branches": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "title"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "title"
+                  ]
+                }
+              ]
+            }
+          },
+          "blocks": {
+            "type": "array",
+            "description": "Tasks that this task is blocking.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "branches": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string"
+                      },
+                      "$id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "title"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    }
+  },
+  "required": [
+    "roadmap:roadmap"
+  ]
+}

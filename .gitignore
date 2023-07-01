@@ -219,3 +219,5 @@ site/
 .python-version
 
 mkdocs-material-insiders/
+.vscode/
+

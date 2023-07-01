@@ -24,6 +24,9 @@ plugins:
   - search
   - awesome-pages
   - iolanta
+  - blogging:
+      dirs:
+        - project/blog
   - mkdocstrings:
       handlers:
         python:

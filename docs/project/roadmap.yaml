@@ -1,15 +1,21 @@
 roadmap:roadmap:
+  - title: Need to wrap roadmap within a <div>
+    is-blocked-by:
+      - title: Find an alternative implementation for iolanta-roadmap
+
   - title: QNames in Fresnel Domain Properties table in the Whitepaper are not clickable
     is-blocked-by:
       - title: Find out how to assign QName facet to a column in a user friendly way, and document that
       - title: Develop QName facet
         is-blocked-by:
-          - title: Follow rdfs:isDefinedBy link to find the ontology
-          - title: Find or invent a property mapping ontology IRI → its contraction
-          - title: Render the QName is two separate links, each probably renderable with Default facet; schema:url takes precedence over the IRI itself
+          - title: "Follow rdfs:isDefinedBy link to find the ontology"
+          - title: "Find or invent a property mapping ontology IRI → its contraction"
+          - title: "Render the QName is two separate links, each probably renderable with Default facet; schema:url takes precedence over the IRI itself"
 
   - title: jeeves-generate-iolanta-github
     is-blocked-by: jeeves-generate
+
+  - title: Fill a section of an ADR document from a property
 
   - title: Combine different facets
     branches:
@@ -143,16 +149,54 @@ roadmap:roadmap:
       - title: "`code` macro → `include` facet → mkdocs-iolanta"
       - title: "`side-by-side` facet → mkdocs-iolanta I think... or where?"
 
+  - title: Publish LD in the HTML code of an MkDocs page from the $id of its main object
+    is-blocked-by:
+      - title: Page specific templates
+        branches:
+          - title: Roadmap
+          - title: Table
+        is-blocked-by:
+          - title: Implement support for page type specific templates in mkdocs-iolanta
+
+  - title: Front matter tool using data from LD to generate code
+    description: This tool needs to know block or line comment sequences for each file type it can work with. Probably built in Rust.
+
+  - title: Publish ∗-LD page
+    is-blocked-by:
+      - title: Render provenance information in table cell
+        is-blocked-by:
+          - title: Choose how to render
+            branches:
+              - title: Plain link
+              - title: Tooltip
+              - title: Reference link
+          - title: Where to define the context
+            branches:
+              - title: iolanta
+              - title: mkdocs-iolanta
+                description: If we use an mkdocs specific rendering; anyway this should be generic enough
+              - title: iolanta-prov
+
+      - title: table:self label is empty
+        bug: true
+
+      - title: Implement color coding for statistics
+        is-blocked-by:
+          - title: Display statistics in the tables
+            is-blocked-by:
+              - title: Generate statistics and trends, and write → repo
+                branches:
+                  - title: GitHub
+                  - title: Google Trends
+                  - title: StackOverflow Trends
+                is-blocked-by:
+                  title: Install jeeves-generate as it is ready
+
   - title: Get feedback for iolanta.tech from YAML-LD community
     $id: feedback-yaml-ld
     is-blocked-by:
       - title: Submit iolanta.tech use case
         is-blocked-by:
-          - title: Refine iolanta.tech whitepaper
-            is-blocked-by:
-              - title: Ask ChatGPT
-              - title: Ask Grammarly
-
           - title: Add use cases to the front page — python, cli, and mkdocs
 
           - title: tables/project/facets page is garbage
