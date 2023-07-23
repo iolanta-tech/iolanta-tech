@@ -9,7 +9,7 @@ packages = [{include = "iolanta_tech"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-iolanta = "^1.0.15"
+iolanta = "^1.0.16"
 iolanta-jinja2 = "^0.1.4"
 iolanta-roadmap = "^0.1.0"
 mkdocs-awesome-pages-plugin = "^2.8.0"
