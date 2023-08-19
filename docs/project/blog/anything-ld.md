@@ -1,6 +1,5 @@
 ---
 title: "∗-LD"
-exclude_from_blog: true
 description: Review of available & future serialization formats for Linked Data.
 $included:
   - $id: endemic-formats-table
