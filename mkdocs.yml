@@ -26,7 +26,7 @@ plugins:
   - iolanta
   - blogging:
       dirs:
-        - project/blog
+        - blog
   - mkdocstrings:
       handlers:
         python:
