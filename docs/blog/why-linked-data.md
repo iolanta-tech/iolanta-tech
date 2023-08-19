@@ -1,3 +1,5 @@
+---
+title: Why Linked Data?
 roadmap:roadmap:
   - title: Do large-scale long-term planning with RDF
     $id: long-term-planning
@@ -24,3 +26,9 @@ roadmap:roadmap:
       - title: ❌
         is-blocked-by:
           - title: Build The Library in RDF
+
+---
+
+<div>
+{{ render("survive-iii-millenium") }}
+</div>
