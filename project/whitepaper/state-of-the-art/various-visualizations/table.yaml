@@ -1,0 +1,73 @@
+$id: tools-with-various-visualizations
+table:columns:
+  - table:self
+  - rdfs:label: Data Types
+    table:columns:
+      - $id: numeric
+        mkdocs-material:icon: material/numeric.svg
+        rdfs:comment: "Numeric"
+        rdfs:label: " "
+
+      - $id: temporal
+        mkdocs-material:icon: material/timer-sand.svg
+        rdfs:comment: Temporal
+        rdfs:label: " "
+
+      - $id: spatial
+        mkdocs-material:icon: material/globe-model.svg
+        rdfs:comment: Spatial
+        rdfs:label: " "
+
+      - $id: hierarchical
+        mkdocs-material:icon: fontawesome/solid/folder-tree.svg
+        rdfs:label: " "
+        rdfs:comment: Hierarchical
+  - rdfs:label: Visualization Types
+    table:columns:
+#      - $id: tabular
+#        mkdocs-material:icon: material/table.svg
+#        rdfs:comment: Table
+#        rdfs:label: " "
+
+      - $id: graph
+        mkdocs-material:icon: material/graph.svg
+        rdfs:comment: Graph
+        rdfs:label: " "
+
+      - $id: chart
+        mkdocs-material:icon: material/chart-bar.svg
+        rdfs:comment: Chart
+        rdfs:label: " "
+
+      - $id: pie-chart
+        mkdocs-material:icon: material/chart-pie.svg
+        rdfs:comment: Pie Chart
+        rdfs:label: " "
+
+      - $id: bubble-chart
+        mkdocs-material:icon: material/chart-bubble.svg
+        rdfs:comment: Bubble Chart
+        rdfs:label: " "
+
+      - $id: map
+        mkdocs-material:icon: material/map.svg
+        rdfs:comment: Map
+        rdfs:label: " "
+
+      - $id: tree
+        mkdocs-material:icon: material/file-tree.svg
+        rdfs:label: " "
+        rdfs:comment: Tree
+
+      - $id: treemap
+        mkdocs-material:icon: material/chart-tree.svg
+        rdfs:label: " "
+        rdfs:comment: Tree Map
+
+      - $id: timeline
+        mkdocs-material:icon: material/timeline.svg
+        rdfs:label: " "
+        rdfs:comment: Timeline
+
+table:class: VisualizationTool
+table:order-by: year

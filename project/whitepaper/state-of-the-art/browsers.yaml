@@ -1,0 +1,84 @@
+$id: browsers
+table:columns:
+  - table:self
+  - last-update
+  - open-source
+  - $id: available
+    rdfs:label: "Available?"
+table:class:
+  $id: LDBrowser
+  $reverse:
+    rdf:type:
+      - rdfs:label: Haystack
+        year: 2004
+        schema:url: https://www.researchgate.net/publication/238122595_Haystack_A_Customizable_General-Purpose_Information_Management_Tool_for_End_Users_of_Semistructured_Data
+        available: no
+
+      - rdfs:label: Disco
+        schema:url: http://www4.wiwiss.fu-berlin.de/bizer/ng4j/disco
+        year: 2007
+        available: no
+        notes: I tried to download the source code, they link to a CVS repo which is not available.
+
+      - rdfs:label: Noadster
+        year: 2005
+        schema:url: https://www.researchgate.net/publication/221267084_Cruising_the_semantic_web_with_noadster
+        available: no
+        notes: The demo page addressed as http://media.cwi.nl/cocoon/cuypers/noadster/form is unavailable.
+
+      - rdfs:label: Piggy Bank
+        year: 2005
+        schema:url: https://www.researchgate.net/publication/222677536_Piggy_Bank_Experience_the_Semantic_Web_Inside_Your_Web_Browser
+        available: no
+        notes: Could not find a way to access this tool.
+
+      - rdfs:label: LESS
+        year: 2010
+        available: no
+        schema:url: http://aksw.org/Projects/LESS
+
+      - rdfs:label: Tabulator
+        year: 2006
+        schema:url: http://dig.csail.mit.edu/2006/Papers/SWUI06/tab
+      - rdfs:label: LENA
+        year: 2008
+        schema:url: https://www.semanticscholar.org/paper/LENA-Browsing-RDF-Data-More-Complex-Than-Foaf-Koch-Franz/1e05732de938b9a74b4df47b51dbcc68471c9955
+      - rdfs:label: Visor
+        year: 2011
+        schema:url: https://www.researchgate.net/publication/221467241_Connecting_the_Dots_A_Multi-pivot_Approach_to_Data_Exploration
+      - rdfs:label: phuzzy.link
+        plugins: yes
+      - rdfs:label: PepeSearch [Vega-Gorgojo et al., 2016]
+        year: 2016
+        schema:url: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0151573
+      - rdfs:label: RDFSurveyor
+        schema:url: https://www.researchgate.net/publication/337573834_Linked_Data_Exploration_with_RDF_Surveyor
+        year: 2017
+      - rdfs:label: /facet [Hildebrand et al., 2006]
+      - rdfs:label: BrowseRDF [Oren et al.,2006]
+      - rdfs:label: Explorator [Araújo et al., 2009]
+      - rdfs:label: Faceted Data Explorer [Erling and Mikhailov, 2009]
+      - rdfs:label: Faceted Wikipedia Search [Hahn et al., 2010]
+      - rdfs:label: Farbie [Fuenmayor et al., 2017]
+      - rdfs:label: Flamenco [Yee et al., 2003]
+      - rdfs:label: gFacet [Heim et al., 2010a]
+      - rdfs:label: GraFa [Moreno-Vega and Hogan, 2018] (Figure 3.4)
+      - rdfs:label: Humboldt [Kobilarov and Dickinson, 2008]
+      - rdfs:label: mSpace [Schraefel et al., 2005]
+      - rdfs:label: SemFacet [Arenas et al., 2014, Grau et al., 2016]
+      - rdfs:label: Sewelis [Ferré and Hermann, 2011]
+      - rdfs:label: Sparklis [Ferré, 2014]
+      - rdfs:label: tFacet [Brunk and Heim, 2011]
+      - rdfs:label: X-ENS [Fafalios and Tzitzikas, 2013]
+
+      - rdfs:label: Information Workbench
+        year: 2011
+      - rdfs:label: Marbles
+        schema:url: https://github.com/mes/marbles/
+        last-update: 2013-01-21
+        open-source: yes
+
+      - rdfs:label: URI Burner
+        schema:url: https://linkeddata.uriburner.com
+        last-update: '?'
+        open-source: no

@@ -1,0 +1,3330 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Linked Data in its raw form, as a collection of triples (or quads) — is arguably not easily comprehensible for a human being. **Linked Data visualization** is a conversion from triples to something more visual (table, chart, …) — something that we humans can easily read, understand, and interact with.">
+      
+      
+      
+        <link rel="canonical" href="https://iolanta.tech/project/whitepaper/">
+      
+      
+        <link rel="prev" href="../roadmap/">
+      
+      
+        <link rel="next" href="../../roadmap/project/decisions/choose-js-renderer/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.15+insiders-4.35.3">
+    
+    
+      
+        <title>Iolanta: Linked Data authoring and ontology-based visualization system - iolanta.tech</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.cac7c1ad.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="iolanta.tech" class="md-header__button md-logo" aria-label="iolanta.tech" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            iolanta.tech
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Iolanta: Linked Data authoring and ontology-based visualization system
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/iolanta-tech/iolanta-tech" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iolanta-tech/iolanta-tech
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  iolanta
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tables/" class="md-tabs__link">
+          
+  
+    
+  
+  Tables
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../vocabularies/" class="md-tabs__link">
+          
+  
+    
+  
+  Vocabularies
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../blog/" class="md-tabs__link">
+          
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="iolanta.tech" class="md-nav__button md-logo" aria-label="iolanta.tech" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    iolanta.tech
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/iolanta-tech/iolanta-tech" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iolanta-tech/iolanta-tech
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    iolanta
+  
+
+    
+      <br>
+      <small>data visualization framework</small>
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tables/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    
+  
+    Tables
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tables
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Columns
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Columns
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/columns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:columns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/self/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:self
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/rows/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:rows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/class/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Ordering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ordering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/order-by/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:order-by
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/direction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:direction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/empty-values/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:empty-values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/project/facets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Facets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../vocabularies/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    
+  
+    Vocabularies
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vocabularies
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Keywords
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Keywords
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vocabularies/id/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    $id
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vocabularies/type/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    $type
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Rdfs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Rdfs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vocabularies/rdfs/label/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    rdfs:label
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Schema
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vocabularies/schema/url/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    schema:url
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../blog/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/anything-ld/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    ∗-LD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/anytype/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Anytype
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/autocomplete/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Use … for autocomplete @ VS Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/jetbrains/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting up JetBrains IDEs for Iolanta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/pivot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Pivot: Visualization system → Knowledge As Code workspace
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/redocly/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Redocly
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/type/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    rdf:type vs "@type"/$type
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/why-linked-data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Why Linked Data?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-shoemakers-son" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2  Shoemaker's son
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-can-we-do-better" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Can we do better?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-fresnel-vocabulary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4  Fresnel Vocabulary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Fresnel Vocabulary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-fresnelshowproperties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 fresnel:showProperties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-fresnel-domain-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Fresnel Domain properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3  Plugins
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-template-based-visualization-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5  Template-based visualization tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Template-based visualization tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-tal4rdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 TAL4RDF
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-less" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 LESS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-iolanta-visualization-system-by-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6  Iolanta visualization system by example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Iolanta visualization system by example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-loading-data-into-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Loading data into graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-render-as-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Render as text
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-visualize-criterion-in-an-admonition-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Visualize criterion in an admonition box
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-facet-selection-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Facet selection algorithm
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-integration-mkdocs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 Integration: MkDocs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-plugin-iolanta-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9  Plugin: iolanta-tables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+         Conclusions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/iolanta-tech/iolanta-tech/edit/master/docs/project/whitepaper/index.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+  <h1>Iolanta: Linked Data authoring and ontology-based visualization system</h1>
+
+<style>
+.no-min-width th {
+  min-width: 2rem !important;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-break: keep-all
+}
+</style>
+
+<p>Linked Data ⋅ JSON-LD ⋅ YAML-LD ⋅ Data Visualization</p>
+<div class="admonition abstract">
+<p class="admonition-title">Abstract</p>
+<p><strong>Purpose:</strong> Linked Data in its raw form, as a collection of triples (or quads) — is arguably not easily comprehensible for a human being. <strong>Linked Data visualization</strong> is a conversion from triples to something more visual (table, chart, …) — something that we humans can easily read, understand, and interact with. The method and particular details of a visual rendering very much depend on the purpose for which data is visualized.</p>
+<p><strong>Methodology:</strong> A minimalistic yet extendable vocabulary is proposed to guide visualization based on the data and to allow customization of the visualization via the knowledge graph itself. A plugin-based visualization software <strong>architecture</strong> implementing the vocabulary is proposed and its main algorithm is described. A <strong>software tool</strong> implementing the proposed principles is built and published as an open-source project. A few plugins for it (implementing a few visualization types and integrations) are also provided.</p>
+<p><strong>Findings:</strong> A significant portion of this paper has been built from Linked Data using the software being demonstrated, as well as documentation pages for the said software. It is suggested that the toolset facilitates productivity and aids the reuse of knowledge.</p>
+<p><strong>Value:</strong> Knowledge reuse and wider adoption of Linked Data as lingua franca among professionals from various fields promises to improve the quality of making decisions that humanity can afford, which should enhance our ability as a species to tackle the difficult issues we are facing. This work is an attempt to make a small step forward in this direction.</p>
+</div>
+<h2 id="1-introduction"><code>1</code> Introduction</h2>
+<p>A person who is:</p>
+<ul>
+<li>not a specialist in Linked Data per se,</li>
+<li>but is attempting to leverage Linked Data as a tool for their work or hobby,</li>
+</ul>
+<p>— probably cannot be expected to dive deep into the depths of raw triples. Users would prefer to use tools capable of <em>visualizing</em> the raw triples, converting them into a form better suitable for the human eye.</p>
+<p>That need is met with Linked Data visualization tools — software systems that present Linked Data as <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 5v4h12V5M9 19h12v-4H9m0-1h12v-4H9M4 9h4V5H4m0 14h4v-4H4m0-1h4v-4H4v4Z"/></svg></span> lists, <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m0 4v4h6V8H5m8 0v4h6V8h-6m-8 6v4h6v-4H5m8 0v4h6v-4h-6Z"/></svg></span> tables, <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 21H2V3h2v16h2v-9h4v9h2V6h4v13h2v-5h4v7Z"/></svg></span> charts, <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m15 19-6-2.11V5l6 2.11M20.5 3h-.16L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5a.5.5 0 0 0 .5.5c.05 0 .11 0 .16-.03L9 18.9l6 2.1 5.64-1.9c.21-.1.36-.25.36-.48V3.5a.5.5 0 0 0-.5-.5Z"/></svg></span> maps, <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3h6v4H3V3m12 7h6v4h-6v-4m0 7h6v4h-6v-4m-2-4H7v5h6v2H5V9h2v2h6v2Z"/></svg></span> trees, <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 17c-.13 0-.26 0-.39.04l-1.61-3.25a2.5 2.5 0 0 0-1.75-4.29c-.13 0-.25 0-.39.04l-1.63-3.25c.48-.45.77-1.08.77-1.79a2.5 2.5 0 0 0-5 0c0 .71.29 1.34.76 1.79L8.64 9.54c-.14-.04-.26-.04-.39-.04a2.5 2.5 0 0 0-1.75 4.29l-1.61 3.25C4.76 17 4.63 17 4.5 17a2.5 2.5 0 0 0 0 5A2.5 2.5 0 0 0 7 19.5c0-.7-.29-1.34-.76-1.79l1.62-3.25c.14.04.26.04.39.04s.25 0 .39-.04l1.63 3.25c-.47.45-.77 1.09-.77 1.79a2.5 2.5 0 0 0 5 0A2.5 2.5 0 0 0 12 17c-.13 0-.26 0-.39.04L10 13.79c.46-.45.75-1.08.75-1.79s-.29-1.34-.75-1.79l1.61-3.25c.13.04.26.04.39.04s.26 0 .39-.04L14 10.21c-.45.45-.75 1.09-.75 1.79a2.5 2.5 0 0 0 2.5 2.5c.13 0 .25 0 .39-.04l1.63 3.25c-.47.45-.77 1.09-.77 1.79a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-2.5-2.5Z"/></svg></span> graphs, or any other form<sup id="fnref:data-visualizations-periodic-table"><a class="footnote-ref" href="#fn:data-visualizations-periodic-table">1</a></sup> of data visualization imaginable.</p>
+<p><img align="right" alt="Linked Data Visualization book" src="state-of-the-art/data_visualization_book_cover.jpg" style="max-width: 30%" /> </p>
+<p>Over the last decades, significant efforts have been put into visualizing Linked Data. A comprehensive survey of methods and tools as of 2020 is available in the <strong>Linked Data Visualization</strong> book<sup id="fnref:ld-visualization-book"><a class="footnote-ref" href="#fn:ld-visualization-book">2</a></sup>, the authors of which list, evaluate, and compare a handful of available visualization systems.</p>
+<p>As an illustration, we are reproducing <strong>Table 3.1</strong> from the book here (in Figure 1), which lists several visualization tools, and shows which data types and visualization modes every tool supports. The table was slightly modified before reproduction:</p>
+<ul>
+<li>Tools that were not marked as <strong>Available</strong> in the original are excluded because, from a practical viewpoint of a working professional, they no longer exist;</li>
+<li>The <strong>Setting</strong> and <strong>Application Type</strong> columns are omitted, — since they say <code>Generic</code> and <code>Web</code> respectively in every row of the table;</li>
+<li>The original table used single-character codes to denote data and visualization types (for instance, <code>C</code> stands for "chart"), — we create a separate column for each visualization type instead. When viewing this paper as HTML, please hover over an icon to see a tooltip explaining its meaning;</li>
+<li>The <strong>Year</strong> column was omitted as it is not immediately informative to us.</li>
+</ul>
+<figure class="no-min-width">
+<div style="font-size: 75%">
+<table>
+<thead>
+    <tr>
+      <th rowspan="2"></th>
+      <th colspan="4">Data Types</th>
+      <th colspan="8">Visualization Types</th>
+    </tr>
+    <tr>
+      <th>
+        <span title="Numeric"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 17V9H2V7h4v10H4m18-2a2 2 0 0 1-2 2h-4v-2h4v-2h-2v-2h2V9h-4V7h4a2 2 0 0 1 2 2v1.5a1.5 1.5 0 0 1-1.5 1.5 1.5 1.5 0 0 1 1.5 1.5V15m-8 0v2H8v-4a2 2 0 0 1 2-2h2V9H8V7h4a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2v2h4Z"/></svg></span>  </span>
+      </th>
+      <th>
+        <span title="Temporal"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 2h12v6l-4 4 4 4v6H6v-6l4-4-4-4V2m10 14.5-4-4-4 4V20h8v-3.5m-4-5 4-4V4H8v3.5l4 4M10 6h4v.75l-2 2-2-2V6Z"/></svg></span>  </span>
+      </th>
+      <th>
+        <span title="Spatial"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.36 2.64-1.41 1.42A6.978 6.978 0 0 1 18 9a7 7 0 0 1-7 7c-1.85 0-3.63-.74-4.94-2.05l-1.42 1.41A8.945 8.945 0 0 0 10 17.93V20H6v2h10v-2h-4v-2.06c4.55-.51 8-4.36 8-8.94 0-2.38-.95-4.67-2.64-6.36M11 3.5A5.5 5.5 0 0 0 5.5 9a5.5 5.5 0 0 0 5.5 5.5A5.5 5.5 0 0 0 16.5 9 5.5 5.5 0 0 0 11 3.5m0 2c1.94 0 3.5 1.57 3.5 3.5a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 7.5 9 3.5 3.5 0 0 1 11 5.5Z"/></svg></span>  </span>
+      </th>
+      <th>
+        <span title="Hierarchical"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32v352c0 35.3 28.7 64 64 64h192v-64H64V160h192V96H64V32zm224 160c0 17.7 14.3 32 32 32h224c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32h-98.7c-8.5 0-16.6-3.4-22.6-9.4L409.4 9.4c-6-6-14.1-9.4-22.6-9.4H320c-17.7 0-32 14.3-32 32v160zm0 288c0 17.7 14.3 32 32 32h224c17.7 0 32-14.3 32-32V352c0-17.7-14.3-32-32-32h-98.7c-8.5 0-16.6-3.4-22.6-9.4l-13.3-13.3c-6-6-14.1-9.4-22.6-9.4H320c-17.7 0-32 14.3-32 32V480z"/></svg></span>  </span>
+      </th>
+      <th>
+        <span title="Graph"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 17c-.13 0-.26 0-.39.04l-1.61-3.25a2.5 2.5 0 0 0-1.75-4.29c-.13 0-.25 0-.39.04l-1.63-3.25c.48-.45.77-1.08.77-1.79a2.5 2.5 0 0 0-5 0c0 .71.29 1.34.76 1.79L8.64 9.54c-.14-.04-.26-.04-.39-.04a2.5 2.5 0 0 0-1.75 4.29l-1.61 3.25C4.76 17 4.63 17 4.5 17a2.5 2.5 0 0 0 0 5A2.5 2.5 0 0 0 7 19.5c0-.7-.29-1.34-.76-1.79l1.62-3.25c.14.04.26.04.39.04s.25 0 .39-.04l1.63 3.25c-.47.45-.77 1.09-.77 1.79a2.5 2.5 0 0 0 5 0A2.5 2.5 0 0 0 12 17c-.13 0-.26 0-.39.04L10 13.79c.46-.45.75-1.08.75-1.79s-.29-1.34-.75-1.79l1.61-3.25c.13.04.26.04.39.04s.26 0 .39-.04L14 10.21c-.45.45-.75 1.09-.75 1.79a2.5 2.5 0 0 0 2.5 2.5c.13 0 .25 0 .39-.04l1.63 3.25c-.47.45-.77 1.09-.77 1.79a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-2.5-2.5Z"/></svg></span>  </span>
+      </th>
+      <th>
+        <span title="Chart"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 21H2V3h2v16h2v-9h4v9h2V6h4v13h2v-5h4v7Z"/></svg></span>  </span>
+      </th>
+      <th>
+        <span title="Pie Chart"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 2v20c-5.1-.5-9-4.8-9-10s3.9-9.5 9-10m2 0v9h9c-.5-4.8-4.2-8.5-9-9m0 11v9c4.7-.5 8.5-4.2 9-9h-9Z"/></svg></span>  </span>
+      </th>
+      <th>
+        <span title="Bubble Chart"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.2 11.2c1.77 0 3.2 1.43 3.2 3.2 0 1.77-1.43 3.2-3.2 3.2-1.77 0-3.2-1.43-3.2-3.2 0-1.77 1.43-3.2 3.2-3.2m7.6 4.8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m.4-12A4.8 4.8 0 0 1 20 8.8c0 2.65-2.15 4.8-4.8 4.8a4.8 4.8 0 0 1-4.8-4.8c0-2.65 2.15-4.8 4.8-4.8Z"/></svg></span>  </span>
+      </th>
+      <th>
+        <span title="Map"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m15 19-6-2.11V5l6 2.11M20.5 3h-.16L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5a.5.5 0 0 0 .5.5c.05 0 .11 0 .16-.03L9 18.9l6 2.1 5.64-1.9c.21-.1.36-.25.36-.48V3.5a.5.5 0 0 0-.5-.5Z"/></svg></span>  </span>
+      </th>
+      <th>
+        <span title="Tree"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3h6v4H3V3m12 7h6v4h-6v-4m0 7h6v4h-6v-4m-2-4H7v5h6v2H5V9h2v2h6v2Z"/></svg></span>  </span>
+      </th>
+      <th>
+        <span title="Tree Map"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 6h8v16h-8V6M2 4h20V2H2v2m0 4h10V6H2v2m7 14h3V10H9v12m-7 0h5V10H2v12Z"/></svg></span>  </span>
+      </th>
+      <th>
+        <span title="Timeline"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 2v6H2V2h2M2 22v-6h2v6H2m3-10c0 1.11-.89 2-2 2a2 2 0 1 1 2-2m19-6v12c0 1.11-.89 2-2 2H10a2 2 0 0 1-2-2v-4l-2-2 2-2V6a2 2 0 0 1 2-2h12c1.11 0 2 .89 2 2Z"/></svg></span>  </span>
+      </th>
+    </tr>
+  </thead>
+<tbody>
+    <tr>
+      <td>
+        <a href="https://github.com/rhizomik/rhizomerEye">Rhizomer</a>
+      </td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td></td>
+      <td></td>
+      <td>✔️</td>
+      <td></td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://semantics.eurecom.fr/datalift/rdfViz/apps/" title="Could not get this to work. After entering the dbpedia endpoint address, several green active buttons appear but none of those reacts.">
+          <span title="Could not get this to work. After entering the dbpedia endpoint address, several green active buttons appear but none of those reacts.">LDVizWiz</span>
+        </a>
+      </td>
+      <td></td>
+      <td></td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td></td>
+      <td>✔️</td>
+      <td></td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://synopsviz.imis.athena-innovation.gr/" title="The URL is no longer available.">
+          <span title="The URL is no longer available.">SynopsViz</span>
+        </a>
+      </td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td></td>
+      <td>✔️</td>
+      <td></td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://code.know-center.tugraz.at/vis" title="The URL is no longer available.">
+          <span title="The URL is no longer available.">VisWizard</span>
+        </a>
+      </td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td></td>
+      <td></td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/schlegel/balloon">Balloon</a>
+      </td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td></td>
+      <td>✔️</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>✔️</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <span title="It proved difficult to find the location or information of this system.">LP-Vis</span>
+      </td>
+      <td></td>
+      <td></td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td></td>
+      <td></td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://yourdatastories.eu">YDS</a>
+      </td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td></td>
+      <td>✔️</td>
+      <td></td>
+      <td>✔️</td>
+      <td>✔️</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://www.researchgate.net/publication/318717427_Towards_easier_visualization_of_linked_data_for_lay_users">LPVA</a>
+      </td>
+      <td></td>
+      <td></td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td></td>
+      <td></td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td>✔️</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<figcaption>
+<p><strong>Figure 1.</strong>
+Visualization tools support multiple visualizations<sup id="fnref2:ld-visualization-book"><a class="footnote-ref" href="#fn:ld-visualization-book">2</a></sup> (Table 3.1, page 54).<br/></p>
+<p>See <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/various-visualizations.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> data</a>
+&amp; <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/various-visualizations/table.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> table definition</a>.</p>
+</figcaption>
+</figure>
+<h2 id="2-shoemakers-son"><code>2</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 8h-.7l-.05-.03c-2.11-.13-3.87-.8-4.72-1.74L14 7c-.05.1-.11.19-.16.28.71.61 1.16 1.37 1.16 2.22 0 .33-.09.64-.21.95l-1.87-1.87c-.22.25-.45.49-.7.71l2.03 2.03c-.21.25-.45.47-.75.68l-2.07-2.09c-.29.2-.58.37-.88.54l2.03 2.05c-.33.13-.69.24-1.08.32l-1.91-1.91c-.34.14-.68.27-1.03.38l1.7 1.71H10c-1.5 0-2.8-.46-3.72-1.18-.82.13-1.6.18-2.28.18-2 0-2 3-2 3 0 1.11.89 2 2 2v1c0 .55.45 1 1 1s1-.45 1-1v-1h1v1c0 .55.45 1 1 1s1-.45 1-1v-1h1v1c0 .55.45 1 1 1s1-.45 1-1v-1h3v1c0 .55.45 1 1 1s1-.45 1-1v-1h1v1c0 .55.45 1 1 1s1-.45 1-1v-1h1s1 0 1-4.5C22 9 21 8 21 8Z"/></svg></span> Shoemaker's son</h2>
+<p><strong>Figure 1</strong> describes only a subset of all visualization tools the book as a whole explores, and it is only one of multiple tables, charts, and timelines the book contains. Nonetheless, none of the <strong>data visualizations</strong> the book contains are built with any of the <strong>visualization tools</strong>, or, at least, no mention of such could be found.</p>
+<p>The authors had put an immense effort into setting up, comparing, and analyzing Linked Data visualization software, but none of the tools they tried gave them an impression that it can aid them in the complex and tedious task of authoring a book, — a process solely focused on managing and distilling information, a kind of work that Linked Data should be most useful for.</p>
+<h2 id="3-can-we-do-better"><code>3</code> Can we do better?</h2>
+<p>What kind of visualization system would aid a task like preparing the Linked Data Visualization book, or, say, the paper you are so kind and forthcoming to be reading right now?</p>
+<p>Tables, one of which is rendered in Figure 1, probably constitute the most predominant method of visualizing data; let us formulate this as a <strong>criterion</strong> the target visualization system has to satisfy.</p>
+<div class="admonition question">
+<p class="admonition-title">Criterion 1</p>
+<p>The target visualization tool must be capable of generating tables.</p>
+</div>
+<p>The same chunk of data can be rendered differently for different purposes. Figure 2, uses the same data as Figure 1 but shows it a little bit differently.</p>
+<figure class="no-min-width">
+<table>
+<thead>
+    <tr>
+      <th></th>
+      <th>Year</th>
+      <th>Available?</th>
+      <th>Last update</th>
+      <th>Comment</th>
+    </tr>
+  </thead>
+<tbody>
+    <tr>
+      <td>
+        <a href="https://github.com/rhizomik/rhizomerEye">Rhizomer</a>
+      </td>
+      <td>2006</td>
+      <td>✔️</td>
+      <td>2022-12-02</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://yourdatastories.eu">YDS</a>
+      </td>
+      <td>2017</td>
+      <td>✔️</td>
+      <td>2018-03-01</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/schlegel/balloon">Balloon</a>
+      </td>
+      <td>2014</td>
+      <td></td>
+      <td>2014-06-30</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://semantics.eurecom.fr/datalift/rdfViz/apps/" title="Could not get this to work. After entering the dbpedia endpoint address, several green active buttons appear but none of those reacts.">
+          <span title="Could not get this to work. After entering the dbpedia endpoint address, several green active buttons appear but none of those reacts.">LDVizWiz</span>
+        </a>
+      </td>
+      <td>2014</td>
+      <td>✔️</td>
+      <td></td>
+      <td>Could not get this to work. After entering the dbpedia endpoint address, several green active buttons appear but none of those reacts.</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://synopsviz.imis.athena-innovation.gr/" title="The URL is no longer available.">
+          <span title="The URL is no longer available.">SynopsViz</span>
+        </a>
+      </td>
+      <td>2014</td>
+      <td>❌</td>
+      <td></td>
+      <td>The URL is no longer available.</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://code.know-center.tugraz.at/vis" title="The URL is no longer available.">
+          <span title="The URL is no longer available.">VisWizard</span>
+        </a>
+      </td>
+      <td>2014</td>
+      <td>❌</td>
+      <td></td>
+      <td>The URL is no longer available.</td>
+    </tr>
+    <tr>
+      <td>
+        <span title="It proved difficult to find the location or information of this system.">LP-Vis</span>
+      </td>
+      <td>2016</td>
+      <td>❌</td>
+      <td></td>
+      <td>It proved difficult to find the location or information of this system.</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://www.researchgate.net/publication/318717427_Towards_easier_visualization_of_linked_data_for_lay_users">LPVA</a>
+      </td>
+      <td>2017</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<figcaption>
+<p><strong>Figure 2.</strong>
+Figure 1 with availability information and notes.<br/></p>
+<p>See <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/various-visualizations.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> data</a>
+&amp; <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/various-visualizations/augmented.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> table definition</a>.</p>
+</figcaption>
+</figure>
+<p>In particular,</p>
+<ul>
+<li>The <strong>Last Update</strong> column shows the date of the last changes touching the software, observed as of Spring 2023;</li>
+<li>The <strong>Available</strong> column indicates the evaluation of the tools' availability as of Spring 2023;</li>
+<li>The <strong>Comment</strong> column offers some notes about how the first two were obtained.</li>
+</ul>
+<p>This table is different from the previous one, it highlights different aspects of the data and shows different columns, which brings about another condition:</p>
+<div class="admonition question">
+<p class="admonition-title">Criterion 2</p>
+<p>Visualizations must be customizable: for instance, when building a table, we should be able to choose what columns to render, in what order, and how to sort and/or group the data.</p>
+</div>
+<p>The list of visualization formats listed as columns in Figure 1 is rather extensive but not exhaustive. There might be narrow-focused, domain-specific visualizations, such as a DNA strand rendering or a chemical formula graph. Other visualizations might be medium-specific, for instance, an interactive representation of a table intended for viewing in virtual reality.</p>
+<p>We can't predict what kind of visualizations developers would want to build for our system, we should give them freedom to build whatever they want. A restricted, stripped-down language or notation for visualizations would undermine that purpose.</p>
+<div class="admonition question">
+<p class="admonition-title">Criterion 3</p>
+<p>Visualizations should be implementable in a Turing complete general-purpose programming language.</p>
+</div>
+<p>One singular visualization system can't encompass all imaginable possibilities. A plugin mechanism is necessary to support independent developers writing new exciting visualizations.</p>
+<div class="admonition question">
+<p class="admonition-title">Criterion 4</p>
+<p>The target visualization tool must be extendable via plugins implementing various data types and visualization types.</p>
+</div>
+<p>While the code that builds the visualization is written in an arbitrary programming language, the user should not be required to be proficient in that language. For instance, if a chart is drawn by a Python program, the user shouldn't have to change Python code to modify the chart colors. What if we <strong>use Linked Data itself</strong> to describe such variable parameters?</p>
+<p>Indeed, that would open several appealing advantages. For instance,</p>
+<ul>
+<li>Visualizations become easy to share,</li>
+<li>Visualizations can be tied directly to the nodes they're visualizing,</li>
+<li>Any additional metadata can be attached to visualizations very easily.</li>
+</ul>
+<p>Let's try to go down this path, formalizing it as the following statement.</p>
+<div class="admonition question">
+<p class="admonition-title">Criterion 5</p>
+<p>Linked Data visualizations should be themselves expressible as Linked Data.</p>
+</div>
+<p>Thus, the role of the visualization system is to consume both data and visualization tied to it and output the rendered result — in our case, an HTML table. </p>
+<p>What kind of vocabulary could be used to <strong>describe visualizations</strong> in Linked Data, then?</p>
+<h2 id="4-fresnel-vocabulary"><code>4</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.255 3.5H3.5v4.255l3.75 4.715ZM3.5 8.955v7.125h5.665ZM19.545 3.5H10.02L8.87 8.635Zm-.9 17H20.5v-8.4l-4.32-2.105Zm-5.79-12.95 7.645 3.72v-7.4ZM3.5 16.825V20.5h6.88l2.875-3.675zm7.83 3.675h6.545l-1.51-6.435zM0 0h24v24H0Z"/></svg></span> Fresnel Vocabulary</h2>
+<p>Fresnel<sup id="fnref:fresnel"><a class="footnote-ref" href="#fn:fresnel">3</a></sup>, last updated in 2005, is a browser-independent vocabulary able to specify how to render an RDF model. Fresnel's two foundational concepts are:</p>
+<ul>
+<li><em>lenses</em>, which might contain nested <em>sublenses</em>, — define which properties of an RDF resource to display, and how to order them,</li>
+<li><em>formats</em> define how to render those properties using<ul>
+<li>RDF-specific formatting attributes</li>
+<li>and hooks to <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z"/></svg></span> CSS<sup id="fnref:css"><a class="footnote-ref" href="#fn:css">4</a></sup>.</li>
+</ul>
+</li>
+</ul>
+<p>Formats do not output a usable visualization though, they only produce an abstract tree of components known as <em>Abstract Display Model</em> which then can be converted to <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 17.56 4.07-1.13.55-6.1H9.38L9.2 8.3h7.6l.2-1.99H7l.56 6.01h6.89l-.23 2.58-2.22.6-2.22-.6-.14-1.66h-2l.29 3.19L12 17.56M4.07 3h15.86L18.5 19.2 12 21l-6.5-1.8L4.07 3Z"/></svg></span> HTML, <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.89 3 1.96.4L11.11 21l-1.96-.4L12.89 3m6.7 9L16 8.41V5.58L22.42 12 16 18.41v-2.83L19.59 12M1.58 12 8 5.58v2.83L4.41 12 8 15.58v2.83L1.58 12Z"/></svg></span> XML, <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-9.5 8.5c0 .8-.7 1.5-1.5 1.5H7v2H5.5V9H8c.8 0 1.5.7 1.5 1.5v1m5 2c0 .8-.7 1.5-1.5 1.5h-2.5V9H13c.8 0 1.5.7 1.5 1.5v3m4-3H17v1h1.5V13H17v2h-1.5V9h3v1.5m-6.5 0h1v3h-1v-3m-5 0h1v1H7v-1Z"/></svg></span> PDF, or anything else, — given that a tool for such conversion exists.</p>
+<p>The visualization process Fresnel uses is described in Figure 3.</p>
+<figure>
+<p><img alt="fresnel.png" src="fresnel.png" /></p>
+<figcaption>
+<strong>Figure 3.</strong>
+Fresnel visualization process.<br/> (Drawn by hand ☹.)
+</figcaption>
+</figure>
+<p>Let us analyze, in Figure 4, how Fresnel fits our 6 visualization tool criteria.</p>
+<figure class="no-min-width">
+<table>
+<thead>
+    <tr>
+      <th>Criterion</th>
+      <th>Satisfies</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+<tbody>
+    <tr>
+      <td>The target visualization tool must be capable of generating tables.</td>
+      <td>✔️</td>
+      <td>Fresnel implies HTML generation, and HTML supports tables.</td>
+    </tr>
+    <tr>
+      <td>Visualizations must be customizable: for instance, when building a table, we should be able to choose what columns to render, in what order, and how to sort and/or group the data.</td>
+      <td>✔️</td>
+      <td>
+        <a href="#fresnelshowproperties">fresnel:showProperties</a>
+      </td>
+    </tr>
+    <tr>
+      <td>The visualization method appropriate for a particular node depends on the node itself, its properties, and the context (environment) the node is visualized within. The visualization system should be aware of this relationship and be able to select an appropriate visualization mode based on the data.</td>
+      <td>🤔</td>
+      <td>
+        <a href="#fresnel-domain-properties">Fresnel Domain Properties</a>
+      </td>
+    </tr>
+    <tr>
+      <td>Visualizations should be implementable in a Turing complete general-purpose programming language.</td>
+      <td></td>
+      <td>Not applicable: not specified by Fresnel.</td>
+    </tr>
+    <tr>
+      <td>The target visualization tool must be extendable via plugins implementing various data types and visualization types.</td>
+      <td>🤔</td>
+      <td>
+        <a href="#plugins">Depends on the browser</a>
+      </td>
+    </tr>
+    <tr>
+      <td>Linked Data visualizations should be themselves expressible as Linked Data.</td>
+      <td>✔️</td>
+      <td>Fresnel is an RDF-based visualization description vocabulary, it satisfies this criterion by definition</td>
+    </tr>
+  </tbody>
+</table>
+<figcaption>
+<p><strong>Figure 4.</strong>
+Fresnel &amp; criteria.<br/></p>
+<p>See <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/fresnel/fresnel-criteria.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> data &amp; table definition</a></p>
+</figcaption>
+</figure>
+<h3 id="41-fresnelshowproperties"><code>4.1</code> <code>fresnel:showProperties</code></h3>
+<p><code>fresnel:showProperties</code> defines an RDF list of properties. Values of these properties will be included in the visualization (see Figure 5). For our table example, this might be leveraged to define the list of table columns and their order. </p>
+<figure style="text-align: left">
+<div class="highlight"><pre><span></span><code><span class="p">:</span><span class="nt">foafPersonShortLens</span> <span class="nn">rdf</span><span class="p">:</span><span class="nt">type</span> <span class="nn">fresnel</span><span class="p">:</span><span class="nt">Lens</span> <span class="p">;</span>
+                     <span class="nn">fresnel</span><span class="p">:</span><span class="nt">classLensDomain</span> <span class="nn">foaf</span><span class="p">:</span><span class="nt">Person</span> <span class="p">;</span>
+                     <span class="nn">fresnel</span><span class="p">:</span><span class="nt">showProperties</span> <span class="p">(</span> <span class="nn">foaf</span><span class="p">:</span><span class="nt">name</span>
+                                              <span class="nn">foaf</span><span class="p">:</span><span class="nt">mbox</span>
+                                              <span class="nn">foaf</span><span class="p">:</span><span class="nt">homepage</span> <span class="p">)</span> <span class="p">.</span>
+</code></pre></div>
+<figcaption>
+<p><strong>Figure 5.</strong> <code>fresnel:showProperties</code> example in Turtle<sup id="fnref:turtle"><a class="footnote-ref" href="#fn:turtle">5</a></sup>.</p>
+</figcaption>
+</figure>
+<h3 id="42-fresnel-domain-properties"><code>4.2</code> Fresnel Domain properties</h3>
+<p>Figure 6 lists the properties defined by Fresnel which help determine which lens and format to use for a particular node.</p>
+<figure>
+<table>
+<thead>
+    <tr>
+      <th></th>
+      <th>Domain</th>
+      <th>Range</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+<tbody>
+    <tr>
+      <td>fresnel:instanceLensDomain</td>
+      <td>fresnel:Lens</td>
+      <td>Fresnel Selector</td>
+      <td>Specify instances that can be viewed via this Lens</td>
+    </tr>
+    <tr>
+      <td>fresnel:classLensDomain</td>
+      <td>fresnel:Lens</td>
+      <td>Fresnel Selector</td>
+      <td>Specify classes instances of that can be viewed via this Lens</td>
+    </tr>
+    <tr>
+      <td>fresnel:propertyFormatDomain</td>
+      <td>fresnel:Format</td>
+      <td>rdf:Property</td>
+      <td>Specify the set of properties to which a format is applicable</td>
+    </tr>
+    <tr>
+      <td>fresnel:classFormatDomain</td>
+      <td>fresnel:Format</td>
+      <td>Fresnel Selector</td>
+      <td>Specify instances that can be formatted with this Format</td>
+    </tr>
+    <tr>
+      <td>fresnel:instanceFormatDomain</td>
+      <td>fresnel:Format</td>
+      <td>Fresnel Selector</td>
+      <td>Specify classes instances of that can be formatted with this Format</td>
+    </tr>
+    <tr>
+      <td>fresnel:sublens</td>
+      <td></td>
+      <td>fresnel:Lens</td>
+      <td>For a given property mentioned in the Lens definition, specify which lens to use to render that property and its value.</td>
+    </tr>
+  </tbody>
+</table>
+<figcaption>
+<p><strong>Figure 6.</strong>
+  Fresnel Domain properties. <br/> See <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/fresnel/domains.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> data &amp; table definition</a></p>
+</figcaption>
+</figure>
+<p><strong>Fresnel Selector</strong> can be one of:</p>
+<ul>
+<li>Instance URI,</li>
+<li>FSL (Fresnel Selector Language) expression as a string,</li>
+<li><img alt="✨" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/2728.svg" title=":sparkles:" /> SPARQL<sup id="fnref3:sparql"><a class="footnote-ref" href="#fn:sparql">7</a></sup> query as a string.</li>
+</ul>
+<h3 id="43-plugins"><code>4.3</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 7V3h-2v4h-4V3H8v4C7 7 6 8 6 9v5.5L9.5 18v3h5v-3l3.5-3.5V9c0-1-1-2-2-2Z"/></svg></span> Plugins</h3>
+<p>Several RDF visualization tools powered by Fresnel vocabulary have been developed, and a few of them are displayed in Figure 7.</p>
+<figure>
+<table>
+<thead>
+    <tr>
+      <th></th>
+      <th>Available?</th>
+      <th>Last update</th>
+      <th>Language</th>
+      <th>Plugin support</th>
+    </tr>
+  </thead>
+<tbody>
+    <tr>
+      <td>
+        <a href="http://simile.mit.edu/longwell/">Longwell</a>
+      </td>
+      <td>❌</td>
+      <td></td>
+      <td>Java</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://simile.mit.edu/piggy-bank">Piggy Bank</a>
+      </td>
+      <td>❌</td>
+      <td></td>
+      <td>Java</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://www.wiwiss.fu-berlin.de/suhl/bizer/rdfapi/tutorial/horus/index.htm">Horus</a>
+      </td>
+      <td>❌</td>
+      <td></td>
+      <td>PHP</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://isweb.uni-koblenz.de/Research/lena">LENA</a>
+      </td>
+      <td>❌</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://www.w3.org/2001/11/IsaViz/">IsaViz</a>
+      </td>
+      <td>✔️</td>
+      <td>2007-10-21</td>
+      <td>Java</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="http://sourceforge.net/projects/oat">OAT OpenLink AJAX Toolkit (OpenLink Software)</a>
+      </td>
+      <td>✔️</td>
+      <td>2012-10-23</td>
+      <td>Javascript</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/mes/marbles/">Marbles</a>
+      </td>
+      <td>✔️</td>
+      <td>2013-01-13</td>
+      <td>Java</td>
+      <td>❌</td>
+    </tr>
+  </tbody>
+</table>
+<figcaption>
+<p><strong>Figure 7.</strong>
+  Fresnel-powered tools by their plugin support.<br/> 
+  See <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/fresnel/fresnel-tools.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> data</a>
+  &amp; <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/fresnel/plugins.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> table definition</a>.</p>
+</figcaption>
+</figure>
+<p>The tools evaluated either are not available or do not show evidence of a plugin system.</p>
+<h2 id="5-template-based-visualization-tools"><code>5</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.75 3.5a.25.25 0 0 0-.25.25v2.062a.75.75 0 1 1-1.5 0V3.75C2 2.783 2.783 2 3.75 2h2.062a.75.75 0 1 1 0 1.5Zm13.688-.75a.75.75 0 0 1 .75-.75h2.062c.966 0 1.75.783 1.75 1.75v2.062a.75.75 0 1 1-1.5 0V3.75a.25.25 0 0 0-.25-.25h-2.062a.75.75 0 0 1-.75-.75ZM2.75 17.438a.75.75 0 0 1 .75.75v2.062c0 .138.112.25.25.25h2.062a.75.75 0 1 1 0 1.5H3.75A1.75 1.75 0 0 1 2 20.25v-2.062a.75.75 0 0 1 .75-.75Zm18.5 0a.75.75 0 0 1 .75.75v2.062A1.75 1.75 0 0 1 20.25 22h-2.062a.75.75 0 1 1 0-1.5h2.062a.25.25 0 0 0 .25-.25v-2.062a.75.75 0 0 1 .75-.75Zm-18.5-8.25a.75.75 0 0 1 .75.75v4.124a.75.75 0 1 1-1.5 0V9.938a.75.75 0 0 1 .75-.75ZM9.188 2.75a.75.75 0 0 1 .75-.75h4.124a.75.75 0 1 1 0 1.5H9.938a.75.75 0 0 1-.75-.75Zm0 18.5a.75.75 0 0 1 .75-.75h4.124a.75.75 0 1 1 0 1.5H9.938a.75.75 0 0 1-.75-.75ZM21.25 9.188a.75.75 0 0 1 .75.75v4.124a.75.75 0 1 1-1.5 0V9.938a.75.75 0 0 1 .75-.75ZM3.75 8.25a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1-.75-.75Zm5.5 0A.75.75 0 0 1 10 7.5h2A.75.75 0 0 1 12 9h-2a.75.75 0 0 1-.75-.75Zm-1-4.5A.75.75 0 0 1 9 4.5v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 1 .75-.75Zm0 5.5A.75.75 0 0 1 9 10v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 1 .75-.75Zm0 4.75a.75.75 0 0 1 .75.75v4a.75.75 0 0 1-1.5 0v-4a.75.75 0 0 1 .75-.75ZM14 8.25a.75.75 0 0 1 .75-.75h4a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1-.75-.75Z"/></svg></span> Template-based visualization tools</h2>
+<h3 id="51-tal4rdf"><code>5.1</code> TAL4RDF</h3>
+<p>TAL4RDF<sup id="fnref:tal"><a class="footnote-ref" href="#fn:tal">6</a></sup>, or T4R, is a special-purpose template language that serves two distinct goals:</p>
+<ul>
+<li>Generate textual content from RDF — primarily XML and HTML, since TAL4RDF, as its platform technology TAL, employs special attributes for XML tags;</li>
+<li>Traverse the RDF graph right from within the template.</li>
+</ul>
+<p>Example TAL4RDF source is in Figure 8. Author says:</p>
+<blockquote>
+<p>Compared to T4R, the strengths of Fresnel are also its weaknesses. Its model is quite complex and not practical for rapid prototyping of templates. Furthermore, the mapping from the abstract box model to concrete syntaxes being not specified in Fresnel, it is not a "ready to use" solution for application developers. In fact, we believe that T4R could be used to implement this missing step between Fresnel and concrete formats.</p>
+</blockquote>
+<p>TAL4RDF does not implement the discovery of a particular template to use for a given RDF node. This is an extension of Fresnel or another visualization framework but not such a framework itself.</p>
+<figure>
+<div style="text-align: left">
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">tal:define</span><span class="o">=</span><span class="s">&quot;global t4rns:foaf string:http://xmlns.com/foaf/0.1/&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">tal:repeat</span><span class="o">=</span><span class="s">&quot;pe foaf:knows&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">tal:content</span><span class="o">=</span><span class="s">&quot;pe/id&quot;</span><span class="p">&gt;</span>someone I know<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> works on:
+    <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">li</span> <span class="na">tal:repeat</span><span class="o">=</span><span class="s">&quot;pr pe/foaf:currentProject&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">tal:attributes</span><span class="o">=</span><span class="s">&quot;href pr/foaf:homepage&quot;</span> <span class="na">tal:content</span><span class="o">=</span><span class="s">&quot;pr/id&quot;</span><span class="p">&gt;</span>a project<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">tal:define</span><span class="o">=</span><span class="s">&quot;past pe/foaf:pastProject&quot;</span> <span class="na">tal:condition</span><span class="o">=</span><span class="s">&quot;past&quot;</span><span class="p">&gt;</span>
+      and also worked on <span class="p">&lt;</span><span class="nt">span</span> <span class="na">tal:content</span><span class="o">=</span><span class="s">&quot;past/count&quot;</span><span class="p">&gt;</span>n<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> project(s) in the past.
+    <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+<figcaption><strong>Figure 8.</strong> Tal4RDF example</figcaption>
+</figure>
+<h3 id="52-less"><code>5.2</code> LESS</h3>
+<p>LESS<sup id="fnref:less"><a class="footnote-ref" href="#fn:less">8</a></sup> is a Linked Data browser based on a template language inspired by Smarty<sup id="fnref:smarty"><a class="footnote-ref" href="#fn:smarty">9</a></sup> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18.08c-6.63 0-12-2.72-12-6.08s5.37-6.08 12-6.08S24 8.64 24 12s-5.37 6.08-12 6.08m-5.19-7.95c.54 0 .91.1 1.09.31.18.2.22.56.13 1.03-.1.53-.29.87-.58 1.09-.28.22-.71.33-1.29.33h-.87l.53-2.76h.99m-3.5 5.55h1.44l.34-1.75h1.23c.54 0 .98-.06 1.33-.17.35-.12.67-.31.96-.58.24-.22.43-.46.58-.73.15-.26.26-.56.31-.88.16-.78.05-1.39-.33-1.82-.39-.44-.99-.65-1.82-.65H4.59l-1.28 6.58m7.25-8.33-1.28 6.58h1.42l.74-3.77h1.14c.36 0 .6.06.71.18.11.12.13.34.07.66l-.57 2.93h1.45l.59-3.07c.13-.62.03-1.07-.27-1.36-.3-.27-.85-.4-1.65-.4h-1.27L12 7.35h-1.44M18 10.13c.55 0 .91.1 1.09.31.18.2.22.56.13 1.03-.1.53-.29.87-.57 1.09-.29.22-.72.33-1.3.33h-.85l.5-2.76h1m-3.5 5.55h1.44l.34-1.75h1.22c.55 0 1-.06 1.35-.17.35-.12.65-.31.95-.58.24-.22.44-.46.58-.73.15-.26.26-.56.32-.88.15-.78.04-1.39-.34-1.82-.36-.44-.99-.65-1.82-.65h-2.75l-1.29 6.58Z"/></svg></span> PHP templates. An interactive template editor aids the user in crafting a template for their particular needs; then, the resulting template can be published on a LESS Repository online and then embedded into various third-party applications:</p>
+<blockquote>
+<p>…a blogger writing about a recent trip to Berlin can easily integrate a nicely formatted fact box with important information about Berlin obtained from Wikipedia into her blog post. A community of science fiction fans can integrate lists on a recent BBC programming matching their preferences into their community portal.</p>
+</blockquote>
+<p>With Smarty (or any other template language), template reuse seems to pose a challenge. <code>schema:url</code> property on an object will always mean that the object has a hypertext link associated with it. The author of every template out there will have to remember that, — there is no way to say that <code>schema:url</code> in HTML context is always rendered as an <code>&lt;a&gt;</code> tag. Which seems to be a reason for a lot of repetition among templates. Can we leverage the information already contained in the Linked Data to reduce that kind of repetition? </p>
+<h3 id="53-summary"><code>5.3</code> Summary</h3>
+<ul>
+<li>Purely template-based tools do not allow to specify, via the Linked Data graph itself, which visualization to choose;</li>
+<li>Fresnel vocabulary permits that — but requires the creation of a large tree of lenses so that we can choose particular visualization for even the deepest levels of the tree.</li>
+</ul>
+<h2 id="6-iolanta-visualization-system-by-example"><code>6</code> <img alt="👁" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f441.svg" title=":eye:" /> Iolanta visualization system by example</h2>
+<p>This paper proposes an open-source visualization tool by the name of <code>Iolanta</code>. This tool is also used to build parts of this paper.</p>
+<div class="admonition info">
+<p class="admonition-title">Reproducibility</p>
+<p>The paper is published on the Web at <a href="https://iolanta.tech"><img alt="🌐" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f310.svg" title=":globe_with_meridians:" /> iolanta.tech</a>.</p>
+<p>The source code can be found at <a href="https://github.com/iolanta-tech"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> iolanta-tech/iolanta-tech</a>. The repository is equipped with a <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/README.md"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.27 19.385H1.73A1.73 1.73 0 0 1 0 17.655V6.345a1.73 1.73 0 0 1 1.73-1.73h20.54A1.73 1.73 0 0 1 24 6.345v11.308a1.73 1.73 0 0 1-1.73 1.731zM5.769 15.923v-4.5l2.308 2.885 2.307-2.885v4.5h2.308V8.078h-2.308l-2.307 2.885-2.308-2.885H3.46v7.847zM21.232 12h-2.309V8.077h-2.307V12h-2.308l3.461 4.039z"/></svg></span> <code>README.md</code></a> file which explains how to clone the repository and run the site locally. Thus, this paper is fully reproducible.</p>
+</div>
+<p>Having cloned the repository and installed Iolanta, we can <code>cd</code> to the root directory for the repo, and run the following <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.25 12a.75.75 0 0 1-.22.53l-2.75 2.75a.75.75 0 0 1-1.06-1.06L7.44 12 5.22 9.78a.75.75 0 1 1 1.06-1.06l2.75 2.75c.141.14.22.331.22.53Zm2 2a.75.75 0 0 0 0 1.5h5a.75.75 0 0 0 0-1.5h-5Z"/><path d="M0 4.75C0 3.784.784 3 1.75 3h20.5c.966 0 1.75.784 1.75 1.75v14.5A1.75 1.75 0 0 1 22.25 21H1.75A1.75 1.75 0 0 1 0 19.25Zm1.75-.25a.25.25 0 0 0-.25.25v14.5c0 .138.112.25.25.25h20.5a.25.25 0 0 0 .25-.25V4.75a.25.25 0 0 0-.25-.25Z"/></svg></span> shell command:</p>
+<div class="highlight"><span class="filename">$ iolanta render criterion-context</span><pre><span></span><code>The visualization method appropriate for a particular node depends on the node itself, its properties, and the context (environment) the node is visualized within. The visualization system should be aware of this relationship and be able to select an appropriate visualization mode based on the data.
+</code></pre></div>
+<p>We've already seen this text in <a href="#3-can-we-do-better">3 Can we do better?</a> section and in Figure 4; copy-paste hasn't been involved.</p>
+<p>The Iolanta rendering process is shown in Figure 9.</p>
+<figure>
+<p><img alt="Iolanta architecture" src="architecture.png" />
+  </p>
+<figcaption><strong>Figure 9.</strong> Iolanta rednering process<br/><em>(drawn by hand ☹)</em></figcaption>
+</figure>
+<p>Let's describe each of these steps in more detail.</p>
+<h3 id="61-loading-data-into-graph"><code>6.1</code> Loading data into graph</h3>
+<p>There is one central place, a text file shown in Figure 10, where the visualization system criteria are sourced from.</p>
+<figure>
+<div style="text-align: left">
+
+<div class="highlight"><span class="filename">criterion.yaml</span><pre><span></span><code><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Criterion</span>
+<span class="nt">$reverse</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">rdf:type</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">criterion-context</span>
+<span class="w">      </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<span class="w">      </span><span class="nt">rdfs:label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;The</span><span class="nv"> </span><span class="s">visualization</span><span class="nv"> </span><span class="s">method</span><span class="nv"> </span><span class="s">appropriate</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">particular</span><span class="nv"> </span><span class="s">node</span><span class="nv"> </span><span class="s">depends</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">node</span><span class="nv"> </span><span class="s">itself,</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">properties,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">(environment)</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">node</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">visualized</span><span class="nv"> </span><span class="s">within.</span><span class="nv"> </span><span class="s">The</span><span class="nv"> </span><span class="s">visualization</span><span class="nv"> </span><span class="s">system</span><span class="nv"> </span><span class="s">should</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">aware</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">relationship</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">able</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">select</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">appropriate</span><span class="nv"> </span><span class="s">visualization</span><span class="nv"> </span><span class="s">mode</span><span class="nv"> </span><span class="s">based</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">data.&quot;</span>
+<span class="c1"># ✂ ⋯⋯⋯⋯⋯⋯⋯⋯⋯</span>
+</code></pre></div>
+
+
+
+</div>
+<figcaption>
+<p><strong>Figure 10.</strong>
+Criteria code. See <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/criteria/criterion.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> <code>criteria.yaml</code></a></p>
+</figcaption>
+</figure>
+<p>This file is written in YAML-LD, which is one of file formats Iolanta natively supports.</p>
+<div class="grid cards">
+<ul>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 3h2v2H5v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5h2v2H5c-1.07-.27-2-.9-2-2v-4a2 2 0 0 0-2-2H0v-2h1a2 2 0 0 0 2-2V5a2 2 0 0 1 2-2m14 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3h2m-7 12a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-4 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m8 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1Z"/></svg></span> <strong>JSON-LD<sup id="fnref:json-ld"><a class="footnote-ref" href="#fn:json-ld">13</a></sup></strong></p>
+<hr />
+<p>W3C standard to express Linked Data in JSON<sup id="fnref:json"><a class="footnote-ref" href="#fn:json">14</a></sup> data language, which is the de facto lingua franca of modern web technology. It supports conversion from JSON to RDF<sup id="fnref:rdf"><a class="footnote-ref" href="#fn:rdf">10</a></sup> and back.</p>
+<p>Extensions: <code>.json</code> <code>.jsonld</code></p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m0 .97 4.111 6.453v4.09h2.638v-4.09L11.053.969H8.214L5.58 5.125 2.965.969Zm12.093.024-4.47 10.544h2.114l.97-2.345h4.775l.804 2.345h2.26L14.255.994Zm1.133 2.225 1.463 3.87h-3.096zm3.06 9.475v10.29H24v-2.199h-5.454v-8.091zm-12.175.002v10.335h2.217v-7.129l2.32 4.792h1.746l2.4-4.96v7.295h2.127V12.696h-2.904L9.44 17.37l-2.455-4.674Z"/></svg></span> <strong>YAML-LD<sup id="fnref2:yaml-ld"><a class="footnote-ref" href="#fn:yaml-ld">12</a></sup></strong></p>
+<hr />
+<p>Draft (as of spring 2023) W3C Recommendation, which is actually a mapping of JSON-LD → YAML<sup id="fnref:yaml"><a class="footnote-ref" href="#fn:yaml">11</a></sup> data format language. YAML maps to JSON, but is much easier to write manually, — that's why it is widely used to describe configuration files, settings, container and cloud architectures, etc.</p>
+<p>Extensions: <code>.yaml</code> <code>.yamlld</code></p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.27 19.385H1.73A1.73 1.73 0 0 1 0 17.655V6.345a1.73 1.73 0 0 1 1.73-1.73h20.54A1.73 1.73 0 0 1 24 6.345v11.308a1.73 1.73 0 0 1-1.73 1.731zM5.769 15.923v-4.5l2.308 2.885 2.307-2.885v4.5h2.308V8.078h-2.308l-2.307 2.885-2.308-2.885H3.46v7.847zM21.232 12h-2.309V8.077h-2.307V12h-2.308l3.461 4.039z"/></svg></span> <strong>Markdown with YAML-LD<sup id="fnref:yaml-ld"><a class="footnote-ref" href="#fn:yaml-ld">12</a></sup> frontmatter<sup id="fnref:frontmatter"><a class="footnote-ref" href="#fn:frontmatter">16</a></sup></strong></p>
+<hr />
+<p>Markdown is a simple text format; YAML frontmatter is a piece of YAML located in the beginning of the file and surrounded by <code>---</code> lines.</p>
+<p>Extension: <code>.md</code></p>
+</li>
+</ul>
+</div>
+<p>The process of loading data is described in Figure 10.</p>
+<figure>
+<div><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+
+
+
+<!-- Title: %3 Pages: 1 -->
+
+
+<svg width="928pt" height="198pt"
+ viewBox="0.00 0.00 928.00 198.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 194)">
+<title>%3</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-194 924,-194 924,4 -4,4"/>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b1 -->
+
+
+<g id="node1" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b1</title>
+<path fill="#788897" stroke="#4b5d6c" d="M728,-124C728,-124 611,-124 611,-124 605,-124 599,-118 599,-112 599,-112 599,-64 599,-64 599,-58 605,-52 611,-52 611,-52 728,-52 728,-52 734,-52 740,-58 740,-64 740,-64 740,-112 740,-112 740,-118 734,-124 728,-124"/>
+<text text-anchor="start" x="621" y="-91.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Apply OWL RL</text>
+<text text-anchor="start" x="633" y="-77.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">processing</text>
+</g>
+
+<!-- local_loading&#45;into&#45;graph -->
+
+
+<g id="node6" class="node">
+<title>local_loading&#45;into&#45;graph</title>
+<path fill="#730fc3" stroke="#730fc3" d="M908,-124C908,-124 788,-124 788,-124 782,-124 776,-118 776,-112 776,-112 776,-64 776,-64 776,-58 782,-52 788,-52 788,-52 908,-52 908,-52 914,-52 920,-58 920,-64 920,-64 920,-112 920,-112 920,-118 914,-124 908,-124"/>
+<text text-anchor="start" x="798" y="-91.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Iolanta graph is</text>
+<text text-anchor="start" x="809" y="-77.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">constructed</text>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b1&#45;&gt;local_loading&#45;into&#45;graph -->
+
+
+<g id="edge1" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b1:e&#45;&gt;local_loading&#45;into&#45;graph:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M740,-88C752,-88 757.25,-88 765.88,-88"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="766,-91.5 776,-88 766,-84.5 766,-91.5"/>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b2 -->
+
+
+<g id="node2" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b2</title>
+<path fill="#788897" stroke="#4b5d6c" d="M551,-131C551,-131 412,-131 412,-131 406,-131 400,-125 400,-119 400,-119 400,-57 400,-57 400,-51 406,-45 412,-45 412,-45 551,-45 551,-45 557,-45 563,-51 563,-57 563,-57 563,-119 563,-119 563,-125 557,-131 551,-131"/>
+<text text-anchor="start" x="422" y="-98.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Load each file into</text>
+<text text-anchor="start" x="440" y="-84.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">its dedicated</text>
+<text text-anchor="start" x="450.5" y="-70.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">subgraph</text>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b2&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b1 -->
+
+
+<g id="edge2" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b2:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b1:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M563,-88C575,-88 580.25,-88 588.88,-88"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="589,-91.5 599,-88 589,-84.5 589,-91.5"/>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b3 -->
+
+
+<g id="node3" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b3</title>
+<path fill="#788897" stroke="#4b5d6c" d="M352,-138C352,-138 221,-138 221,-138 215,-138 209,-132 209,-126 209,-126 209,-50 209,-50 209,-44 215,-38 221,-38 221,-38 352,-38 352,-38 358,-38 364,-44 364,-50 364,-50 364,-126 364,-126 364,-132 358,-138 352,-138"/>
+<text text-anchor="start" x="233" y="-105.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Expand each file</text>
+<text text-anchor="start" x="231.5" y="-91.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">using the Default</text>
+<text text-anchor="start" x="234.5" y="-77.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Context + found</text>
+<text text-anchor="start" x="231" y="-63.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">context.json files</text>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b3&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b2 -->
+
+
+<g id="edge3" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b3:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b2:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M364,-88C376,-88 381.25,-88 389.88,-88"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="390,-91.5 400,-88 390,-84.5 390,-91.5"/>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b4 -->
+
+
+<g id="node4" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b4</title>
+<path fill="#788897" stroke="#4b5d6c" d="M161,-190C161,-190 12,-190 12,-190 6,-190 0,-184 0,-178 0,-178 0,-102 0,-102 0,-96 6,-90 12,-90 12,-90 161,-90 161,-90 167,-90 173,-96 173,-102 173,-102 173,-178 173,-178 173,-184 167,-190 161,-190"/>
+<text text-anchor="start" x="50" y="-157.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Each file of</text>
+<text text-anchor="start" x="22" y="-143.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">supported format in</text>
+<text text-anchor="start" x="48" y="-129.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">the working</text>
+<text text-anchor="start" x="57.5" y="-115.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">directory</text>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b4&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b3 -->
+
+
+<g id="edge4" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b4:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b3:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M173,-140C196.94,-140 185.83,-102.29 199.36,-91.1"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="200.55,-94.39 209,-88 198.41,-87.73 200.55,-94.39"/>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b5 -->
+
+
+<g id="node5" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b5</title>
+<path fill="#788897" stroke="#4b5d6c" d="M152.5,-72C152.5,-72 20.5,-72 20.5,-72 14.5,-72 8.5,-66 8.5,-60 8.5,-60 8.5,-12 8.5,-12 8.5,-6 14.5,0 20.5,0 20.5,0 152.5,0 152.5,0 158.5,0 164.5,-6 164.5,-12 164.5,-12 164.5,-60 164.5,-60 164.5,-66 158.5,-72 152.5,-72"/>
+<text text-anchor="start" x="30.5" y="-39.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Files provided by</text>
+<text text-anchor="start" x="38.5" y="-25.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Iolanta plugins</text>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b5&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b3 -->
+
+
+<g id="edge5" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b5:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/loading&#45;into&#45;graph.yaml/b3:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M165.5,-36C191.63,-36 182.49,-75.1 199.26,-85.49"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="198.44,-88.9 209,-88 200.19,-82.12 198.44,-88.9"/>
+</g>
+</g>
+</svg>
+</div>
+<figcaption>
+<p><strong>Figure 10.</strong>
+Workflow of loading data → Iolanta graph. See <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/loading-into-graph.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> <code>loading-into-graph.yaml</code></a></p>
+</figcaption>
+</figure>
+<p><strong>Loading files.</strong> Iolanta reads recursively each file of a supported format from the working directory, plus — files provided by installed plugins (we will touch on that again later).</p>
+<p><strong>Applying contexts.</strong> When reading the source files, Iolanta applies a default JSON-LD Context<sup id="fnref:default-context"><a class="footnote-ref" href="#fn:default-context">15</a></sup>, which implements two important mappings:</p>
+<ul>
+<li>Default vocabulary and base IRI is set to <code>local:</code> IRI scheme. That's the scheme every QName is interpreted with.</li>
+<li>Each <code>@</code>-keyword of JSON-LD (except <code>@context</code> which is not applicable) gains a synonym beginning with <code>$</code> instead.
+  For instance, <code>$id</code> is an alias of <a href="https://www.w3.org/TR/json-ld/#node-identifiers"><code>@id</code></a> JSON-LD keyword. As indicated in YAML-LD Specification, <code>@</code> character which defines JSON-LD keywords is a reserved character in YAML, which means using this character requires quoting, as shown in Figure 11.</li>
+</ul>
+<figure>
+<div style="text-align: left">
+<div class="highlight"><pre><span></span><code><span class="s">&quot;@id&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">criterion-context</span>
+</code></pre></div>
+</div>
+<figcaption>
+<p><strong>Figure 11.</strong>
+<code>@id</code> keyword must be quoted.</p>
+</figcaption>
+</figure>
+<p>In addition, a <code>context.json</code> file in a directory is applied to all files underneath it.</p>
+<p><strong>Loading into the graph.</strong> Every file Iolanta consumes is converted into RDF and loaded into Iolanta Graph — in-memory, transient RDF dataset. Operations on the dataset, henceforth known as Iolanta Graph, are handled with <code>rdflib</code><sup id="fnref:rdflib"><a class="footnote-ref" href="#fn:rdflib">17</a></sup> Python library. </p>
+<p><strong>OWL RL.</strong> When each and every consumable file is consumed, OWL RL<sup id="fnref:owlrl"><a class="footnote-ref" href="#fn:owlrl">18</a></sup> logical inference rules are applied to the graph so that RDFS<sup id="fnref:rdfs"><a class="footnote-ref" href="#fn:rdfs">19</a></sup> and OWL<sup id="fnref:owl"><a class="footnote-ref" href="#fn:owl">20</a></sup> constructs take effect.</p>
+<p>From that point, the graph is essentially read only; during the next steps, it will be used as data source to build visualizations from.</p>
+<h3 id="62-render-as-text"><code>6.2</code> Render as text</h3>
+<p>When <code>iolanta</code> command line application is invoked with <code>criterion-context</code> argument, how does it retrieve the corresponding criterion text as shown in Figure 10 to print it to the console? </p>
+<p>To do that, the system will call <code>iolanta.facets.cli.default.Default</code> Python class, which will do the following:</p>
+<ul>
+<li>Via a SPARQL<sup id="fnref2:sparql"><a class="footnote-ref" href="#fn:sparql">7</a></sup> query, find out whether the node being rendered has an <code>rdfs:label</code> property;</li>
+<li>If yes, print that property.</li>
+</ul>
+<p>We call such classes <em>facets</em>. The word <em>facet</em> is defined by Cambridge Dictionary<sup id="fnref:facet-dictionary"><a class="footnote-ref" href="#fn:facet-dictionary">21</a></sup> as:</p>
+<blockquote>
+<p>one part of a subject, situation, etc. that has many parts</p>
+</blockquote>
+<p>or</p>
+<blockquote>
+<p>one of the parts or features of something.</p>
+</blockquote>
+<div class="admonition success">
+<p class="admonition-title">Criterion 3</p>
+<p>Visualizations should be implementable in a Turing complete general-purpose programming language.</p>
+</div>
+<p>In Iolanta terminology, <code>Facet</code> is a unit of executable program code used to visualize RDF nodes in an <strong>Environment</strong>. Facet can be described as a black box as displayed in Figure 11.</p>
+<figure>
+<div><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+
+
+
+<!-- Title: %3 Pages: 1 -->
+
+
+<svg width="435pt" height="274pt"
+ viewBox="0.00 0.00 435.00 274.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 270)">
+<title>%3</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-270 431,-270 431,4 -4,4"/>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b1 -->
+
+
+<g id="node1" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b1</title>
+<path fill="#788897" stroke="#4b5d6c" d="M253,-155.5C253,-155.5 197,-155.5 197,-155.5 191,-155.5 185,-149.5 185,-143.5 185,-143.5 185,-108.5 185,-108.5 185,-102.5 191,-96.5 197,-96.5 197,-96.5 253,-96.5 253,-96.5 259,-96.5 265,-102.5 265,-108.5 265,-108.5 265,-143.5 265,-143.5 265,-149.5 259,-155.5 253,-155.5"/>
+<text text-anchor="start" x="207" y="-123.3" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Facet</text>
+</g>
+
+<!-- local_facet&#45;black&#45;box -->
+
+
+<g id="node5" class="node">
+<title>local_facet&#45;black&#45;box</title>
+<path fill="#730fc3" stroke="#730fc3" d="M415,-162C415,-162 313,-162 313,-162 307,-162 301,-156 301,-150 301,-150 301,-102 301,-102 301,-96 307,-90 313,-90 313,-90 415,-90 415,-90 421,-90 427,-96 427,-102 427,-102 427,-150 427,-150 427,-156 421,-162 415,-162"/>
+<text text-anchor="start" x="332.5" y="-129.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Rendered</text>
+<text text-anchor="start" x="323" y="-115.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">visualization</text>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b1&#45;&gt;local_facet&#45;black&#45;box -->
+
+
+<g id="edge1" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b1:e&#45;&gt;local_facet&#45;black&#45;box:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M265,-126C277,-126 282.25,-126 290.88,-126"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="291,-129.5 301,-126 291,-122.5 291,-129.5"/>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b2 -->
+
+
+<g id="node2" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b2</title>
+<path fill="#788897" stroke="#4b5d6c" d="M137,-266C137,-266 12,-266 12,-266 6,-266 0,-260 0,-254 0,-254 0,-192 0,-192 0,-186 6,-180 12,-180 12,-180 137,-180 137,-180 143,-180 149,-186 149,-192 149,-192 149,-254 149,-254 149,-260 143,-266 137,-266"/>
+<text text-anchor="start" x="25" y="-233.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">RDF node from</text>
+<text text-anchor="start" x="22" y="-219.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Iolanta Graph to</text>
+<text text-anchor="start" x="46" y="-205.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">visualize</text>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b2&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b1 -->
+
+
+<g id="edge2" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b2:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b1:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M149,-223C190.85,-223 148.25,-142.65 174.93,-128.21"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="175.98,-131.56 185,-126 174.48,-124.72 175.98,-131.56"/>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b3 -->
+
+
+<g id="node3" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b3</title>
+<path fill="#788897" stroke="#4b5d6c" d="M134.5,-162C134.5,-162 14.5,-162 14.5,-162 8.5,-162 2.5,-156 2.5,-150 2.5,-150 2.5,-102 2.5,-102 2.5,-96 8.5,-90 14.5,-90 14.5,-90 134.5,-90 134.5,-90 140.5,-90 146.5,-96 146.5,-102 146.5,-102 146.5,-150 146.5,-150 146.5,-156 140.5,-162 134.5,-162"/>
+<text text-anchor="start" x="24.5" y="-129.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Environment to</text>
+<text text-anchor="start" x="24.5" y="-115.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">visualize within</text>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b3&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b1 -->
+
+
+<g id="edge3" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b3:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b1:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M147.5,-126C160.13,-126 165.58,-126 174.74,-126"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="175,-129.5 185,-126 175,-122.5 175,-129.5"/>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b4 -->
+
+
+<g id="node4" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b4</title>
+<path fill="#788897" stroke="#4b5d6c" d="M136,-72C136,-72 13,-72 13,-72 7,-72 1,-66 1,-60 1,-60 1,-12 1,-12 1,-6 7,0 13,0 13,0 136,0 136,0 142,0 148,-6 148,-12 148,-12 148,-60 148,-60 148,-66 142,-72 136,-72"/>
+<text text-anchor="start" x="23" y="-39.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Iolanta instance</text>
+<text text-anchor="start" x="28.5" y="-25.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">with its Graph</text>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b4&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b1 -->
+
+
+<g id="edge4" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b4:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/facet&#45;black&#45;box.yaml/b1:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M149,-36C188.04,-36 150.5,-109.92 175.19,-123.78"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="174.47,-127.2 185,-126 176.02,-120.38 174.47,-127.2"/>
+</g>
+</g>
+</svg>
+</div>
+<figcaption>
+<p><strong>Figure 11.</strong>
+Facet as a black box, its inputs and output. See <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/facet-black-box.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> <code>facet-black-box.yaml</code></a></p>
+</figcaption>
+</figure>
+<dl>
+<dt>RDF Node to visualize</dt>
+<dd>
+<p>Identifier of the node we want to render, such as <code>local:criterion-context</code> on the example above.</p>
+</dd>
+<dt>Environment</dt>
+<dd>
+<p>Identifier of a node that identifies that environment. The Environment might signify:</p>
+<ul>
+<li>Type of output (HTML, SVG, …),</li>
+<li>Parent within which we are serializing (table cell, graph node, point on a line chart, …).</li>
+</ul>
+</dd>
+<dt>Iolanta instance</dt>
+<dd>
+<p>Contains SPARQL<sup id="fnref:sparql"><a class="footnote-ref" href="#fn:sparql">7</a></sup> queryable RDF graph that the Facet can use to retrieve necessary information about the node and the environment.</p>
+</dd>
+<dt>Facet</dt>
+<dd>
+<p>Current version of <code>iolanta</code> supports only one kind of Facets: Python classes which are subclasses of <code>iolanta.Facet</code> abstract base class.
+ We do not store program code of the facets in the graph itself; that seems both inconvenient and insecure. Instead, in the graph facets are addressed via IRIs. For instance, <code>python://iolanta.facets.generic.BoolLiteral</code> is the facet that renders an <code>xsd:boolean</code> value as a Unicode icon.
+ From this example, it is evident how we identify facets. These are import paths native for Python programming language, which we define by <code>python://</code> protocol.</p>
+</dd>
+</dl>
+<p>Not every facet suits every possible environment. For instance, if a facet returns a string that contains HTML code that result would be next to useless for a <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.176 2.814c.233.42.476.78.73 1.09.247-.013 1.132.456 1.312.523.508.282 1.063.63 1.567.966.505.337.96.662 1.272.9.156.12.278.218.352.286a.483.483 0 0 1 .078.082.08.08 0 0 1 .01.021.06.06 0 0 1-.004.047.057.057 0 0 1-.04.03.077.077 0 0 1-.028 0c-.057 0-.203-.163-.497-.415a23.474 23.474 0 0 0-2.759-1.827c-.504-.28-.956-.542-1.264-.613a2.322 2.322 0 0 0-.36-.025 2.706 2.706 0 0 0-.788.133c.494.414.91.716 1.28.949-.57-.182-1.182-.21-1.902.133.526.329.967.567 1.354.745 1.103.156 2.258.696 3.224 1.309.483.307.904.615 1.219.867.157.125.29.237.39.328.098.091.174.154.197.21.03.073-.019.104-.084.058-.032-.022-.088-.102-.184-.191a7.35 7.35 0 0 0-.384-.327 13.91 13.91 0 0 0-1.209-.857c-.893-.562-2.232-1.013-3.173-1.397a2.456 2.456 0 0 0-1.906.39c.449.2.837.349 1.182.463.812 0 1.892.365 2.935.922 1.042.556 2.04 1.214 2.523 1.774.066.077-.016.126-.074.07-.52-.495-1.463-1.204-2.498-1.756-.639-.337-2.153-1.01-2.886-1.01l.004.002c-.567.02-1.13.195-1.679.716.477.118.885.196 1.244.249-.44.088-.87.3-1.289.722.324.07.616.122.882.162a2.533 2.533 0 0 0-.923.78c.373.03.703.042 1 .044-.36.166-.696.43-.996.85.533.027.98.025 1.364.003-.422.172-.812.464-1.145.968.662.01 1.188-.022 1.628-.076l-.006.002c.99-.073 2.297.127 2.962.847.052.057-.024.118-.072.074-.648-.58-1.493-.827-2.89-.921h-.002c-.543.149-1.046.446-1.46 1.074.536.008.982-.013 1.366-.05-.469.257-.873.644-1.139 1.306.483-.092.888-.19 1.237-.292-.363.265-.668.636-.873 1.194.324-.072.612-.146.871-.221a2.519 2.519 0 0 0-.513 1.095c.352-.13.655-.254.926-.377-.257.3-.453.681-.55 1.19.495-.199.899-.388 1.238-.568-.31.333-.543.76-.635 1.356a11.816 11.816 0 0 0 1.442-.744c-.433.362-.764.843-.879 1.587.788-.348 1.339-.663 1.767-.955-.184.372-.282.806-.235 1.348.762-.584 1.243-1.056 1.602-1.473-.024.269-.003.56.077.884.546-.939 1.089-1.212 1.65-1.526-.895.451-.762.79-.762 1.184.683-.72 1.635-1.482 1.927-1.96-.39.585-.547 1.14-.65 1.63-1.993 1.054-3.207 1.329-4.568 1.75.528.194 1.093.383.859.652l-.624.622c.399-.124.805-.3 1.158-.059-.035.327-.447.492-.8.683.621-.224.756-.172.92-.12.081.393-.203.603-.388.862 1.565-1.19 3.606-2.13 5.044-2.522 2.022-.681 4.63-1.389 5.339-3.115l.712-2.847-.004.004c-.111-.034-.246-.063-.35-.133a.651.651 0 0 1-.235-.297c-.252.065-.44.03-.56-.088-.117-.117-.167-.296-.203-.491-.203.041-.362.016-.467-.077-.116-.101-.17-.26-.198-.444l-.008-.039.037-.015a.842.842 0 0 0 .302-.194.257.257 0 0 0 .07-.225l-.006-.037.03-.016c.163-.093.345-.169.428-.28a.274.274 0 0 0 .053-.21.88.88 0 0 0-.155-.357l-.027-.04.04-.027c.118-.09.244-.179.308-.26.032-.04.048-.076.047-.11 0-.033-.015-.07-.064-.117l-.098-.094.135.006c.213.01.395-.007.538-.053a.504.504 0 0 0 .274-.197c-.007-.033-.02-.063-.02-.098a.484.484 0 0 1 .967 0c0 .044-.015.084-.026.125.177.014.347.01.507-.06l.002.001.035-.013c.236-.085.334.045.72-.456-1.69-2.19-4.157-.635-4.977 1.622-.21.576-1.405.578-1.751 0-1.37-2.95-5.53-6.068-9.07-7.218zm.86 2.145c.906.293 1.913.782 2.77 1.328.43.273.813.543 1.114.779.301.236.566.473.62.575.054.102 0 .14-.082.06-.081-.078-.303-.32-.6-.553a14.27 14.27 0 0 0-1.106-.777c-.775-.49-1.982-.958-2.716-1.412zm-1.7 2.7c1.116.014 2.35.447 3.434.997a11.5 11.5 0 0 1 1.395.83c.372.263.672.524.734.657.061.134-.02.13-.087.055a4.401 4.401 0 0 0-.704-.626 11.47 11.47 0 0 0-1.385-.826C3.76 8.264 2.439 7.82 1.336 7.66zm14.916.772a.381.381 0 1 0 0 .762.381.381 0 0 0 0-.762zM1.7 8.478c.822.072 1.72.368 2.534.75 1.086.509 2.035 1.158 2.434 1.667.035.045-.014.131-.08.062-.428-.44-1.322-1.131-2.397-1.635-.913-.421-2.282-.87-3.262-.78.251-.03.497-.088.771-.064zm16.339.01c-.366.475-.53.423-.703.464.094.43.35.586.585.77l-.06.012c2.315-.447 4.186-.286 6.139-.236l-5.961-1.01zm-.178 1.246h-.002l-.004.016.006-.016zm-.625-.757a1.188 1.188 0 0 1-.563.059.477.477 0 0 1-.42.26.483.483 0 0 1-.435-.278.609.609 0 0 1-.274.188 1.587 1.587 0 0 1-.493.055c.02.035.054.068.055.104a.273.273 0 0 1-.069.174c-.073.092-.189.17-.295.248.087.141.137.26.149.362a.39.39 0 0 1-.07.284c-.106.14-.288.21-.439.293a.374.374 0 0 1-.09.268.89.89 0 0 1-.297.198c.027.156.074.283.154.354.086.076.211.103.425.047l.055-.014.01.055c.033.207.088.385.187.483.1.099.244.135.503.055l.049-.015.016.048a.52.52 0 0 0 .209.282c.087.06.247.112.358.147.798-.869 1.525-1.772 1.884-2.86-.225-.177-.506-.338-.609-.797zm-16.23.386c1.165-.08 2.283.196 3.202.626.92.43 1.658.939 1.974 1.307.075.087-.019.12-.072.072a8.187 8.187 0 0 0-1.947-1.29c-.904-.414-2.193-.644-3.157-.715zm.864.802c.61.02 1.24.155 1.806.352.756.262 1.421.614 1.747.98.045.05-.007.127-.074.069-.349-.304-.961-.693-1.706-.951-.574-.195-1.613-.369-2.268-.397.197-.022.292-.06.495-.053zm1.05 1.788c.423.034.886.133 1.341.407.043.026.049.136-.049.09-.856-.402-1.326-.49-2.457-.31.386-.128.74-.221 1.164-.187zm-.04.788c.4-.035.784-.002 1.297.204.044.018.08.126-.033.094-.857-.243-1.167-.328-2.287.104a1.84 1.84 0 0 1 1.023-.402zm1.285.687c.317-.023.635-.026.934.006.052.006.055.105-.006.102a7.87 7.87 0 0 0-1.837.115c-.243.046-.423.043-1.405.458.287-.233.794-.452 1.385-.56a8.91 8.91 0 0 1 .93-.12zm1.28.49c.099.003.062.104.006.103-.728-.01-1.304.132-1.875.295a9.78 9.78 0 0 0-1.318.525c.283-.23.713-.457 1.291-.622.579-.166 1.248-.326 1.896-.302zm.528.398c.036-.005.105.084.018.1-.73.137-1.244.267-1.794.454-.216.074-.58.207-1.243.587.26-.269.656-.492 1.213-.68a10.57 10.57 0 0 1 1.806-.46zm.311.507c.075-.012.097.087.02.102-1.217.241-1.76.556-2.54 1.144.504-.523 1.297-1.051 2.52-1.246zm.595.448c.087-.013.11.087.021.1-.872.13-1.477.553-2.255 1.33.295-.493 1.004-1.24 2.234-1.43zm.372.39c.046-.006.114.073.023.1a2.634 2.634 0 0 0-.669.3c-.182.118-.3.2-.597.507.111-.245.296-.434.542-.59.247-.157.509-.293.7-.317z"/></svg></span> LaTeX document, and vice versa.</p>
+<p>The same notion or piece of data might be visualized as a list, a table, or maybe an interactive 3D landscape, but none of those changes the nature of the object being represented. It might be said every representation of an object is another way of looking at it, a new angle, feature, a facet of the object. We want to support that kind of flexibility with Iolanta. To illustrate that, let's now try something different.</p>
+<h3 id="63-visualize-criterion-in-an-admonition-box"><code>6.3</code> Visualize criterion in an admonition box</h3>
+<div class="highlight"><span class="filename">$ iolanta render criterion-context --as iolanta:html</span><pre><span></span><code>!!! question &quot;Criterion 6&quot;
+    The visualization method appropriate for a particular node depends on the node itself, its properties, and the context (environment) the node is visualized within. The visualization system should be aware of this relationship and be able to select an appropriate visualization mode based on the data.
+</code></pre></div>
+<p>We added the <code>--as</code> argument, and our output has changed. It is a piece of extended Markdown markup suitable for Mkdocs<sup id="fnref:mkdocs"><a class="footnote-ref" href="#fn:mkdocs">22</a></sup> static site generator with mkdocs-material<sup id="fnref:mkdocs-material"><a class="footnote-ref" href="#fn:mkdocs-material">23</a></sup> theme. Indeed, inside Mkdocs it is rendered like this:</p>
+<div class="admonition question">
+<p class="admonition-title">Criterion 6</p>
+<p>The visualization method appropriate for a particular node depends on the node itself, its properties, and the context (environment) the node is visualized within. The visualization system should be aware of this relationship and be able to select an appropriate visualization mode based on the data.</p>
+</div>
+<p>The facet responsible for it is <code>iolanta_tech.facets.criterion.Criterion</code>, and it has been chosen because we specified <code>iolanta:html</code> as the <strong>environment</strong> for rendering using the <code>--as</code> parameter.</p>
+<p>This brings us to the question we silently ignored in the previous section: <strong>how is the particular facet for the given node selected?</strong></p>
+<p>Facet selection depends on the <em>environment</em> we are rendering a node within.</p>
+<ul>
+<li>In our first example, we didn't specify <code>--as</code>, and Iolanta used its default environment — <code>iolanta:cli</code> — which serves printing to console;</li>
+<li>In the second example, we specified <code>iolanta:html</code> explicitly.</li>
+</ul>
+<h2 id="7-facet-selection-algorithm"><code>7</code> Facet selection algorithm</h2>
+<p>Figure 12 illustrates the piece of YAML-LD code that helps Iolanta choose the correct facet. We can see that <code>Criterion</code> class has two facets connected to it via <code>iolanta:hasInstanceFacet</code> property.</p>
+<ul>
+<li><code>Default</code> facet that's going to be used in table cells;</li>
+<li><code>Criterion</code> facet which will render Markdown markup.</li>
+</ul>
+<figure>
+<div style="text-align: left">
+
+<div class="highlight"><span class="filename">facets.yaml</span><pre><span></span><code><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Criterion</span>
+<span class="nt">iolanta:hasInstanceFacet</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python://iolanta_tech.facets.Criterion</span>
+<span class="w">    </span><span class="nt">iolanta:supports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iolanta:html</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local:satisfied</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local:failed</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python://iolanta.facets.html.Default</span>
+</code></pre></div>
+
+
+
+</div>
+<figcaption>
+<p><strong>Figure 12.</strong>
+Facet definitions for Criteria. See <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/criteria/facets.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> <code>facets.yaml</code></a></p>
+</figcaption>
+</figure>
+<div class="admonition info">
+<p class="admonition-title">iolanta:hasInstanceFacet</p>
+<p>Facet assigned by node type.</p>
+<ul>
+<li>Domain: <code>rdfs:Class</code></li>
+<li>Range: <code>iolanta:Facet</code></li>
+<li>Inverse: <code>iolanta:isInstanceFacetOf</code></li>
+</ul>
+</div>
+<p>With <code>iolanta:supports</code>, we also define the environments given facet can operate in. <code>Criterion</code> facet rendering will look differently for the default <code>iolanta:html</code> environment versus special environments for <code>failed</code> and <code>satisfied</code> criteria.</p>
+<div class="admonition info">
+<p class="admonition-title">iolanta:supports</p>
+<p>Specify that facet can work in the specific environment.</p>
+<ul>
+<li>Domain: <code>iolanta:Facet</code></li>
+<li>Range: <code>iolanta:Environment</code></li>
+<li>Inverse: <code>iolanta:isSupportedBy</code></li>
+</ul>
+</div>
+<p>Generally, rendering of an object depends on the <strong>environment</strong> the object is rendered within. The easiest example would be HTML vs LaTeX output; for a more practical example, it might be considered how this paper renders the criteria for a visualization system differently depending on context:</p>
+<ul>
+<li>as plain text within a table cell at Figure 4,</li>
+<li>or a block (called an <em>admonition</em>) within the body of the article itself:</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">Criterion 6</p>
+<p>The visualization method appropriate for a particular node depends on the node itself, its properties, and the context (environment) the node is visualized within. The visualization system should be aware of this relationship and be able to select an appropriate visualization mode based on the data.</p>
+</div>
+<p>Within Fresnel, this can be solved using <code>fresnel:sublens</code> property:</p>
+<ul>
+<li>The <code>Paper</code> lens will specify that <code>Criterion</code> object has to be rendered with <code>Admonition</code> sub-lens,</li>
+<li>while the <code>TableCell</code> lens will render it using <code>Label</code> sub-lens.</li>
+</ul>
+<p>This calls for a huge tree of lenses to define rendering of the whole paper — or the whole book. Is it really necessary?</p>
+<p>Figure 14 describes the facet search algorithm Iolanta is implementing.</p>
+<figure style="text-align: center">
+<div><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+
+
+
+<!-- Title: %3 Pages: 1 -->
+
+
+<svg width="905pt" height="165pt"
+ viewBox="0.00 0.00 905.00 165.14" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 161.14)">
+<title>%3</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-161.14 901,-161.14 901,4 -4,4"/>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/algorithm.yaml/b1 -->
+
+
+<g id="node1" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/algorithm.yaml/b1</title>
+<path fill="#788897" stroke="#4b5d6c" d="M723,-106.56C723,-106.56 570,-106.56 570,-106.56 564,-106.56 558,-100.56 558,-94.56 558,-94.56 558,-46.56 558,-46.56 558,-40.56 564,-34.56 570,-34.56 570,-34.56 723,-34.56 723,-34.56 729,-34.56 735,-40.56 735,-46.56 735,-46.56 735,-94.56 735,-94.56 735,-100.56 729,-106.56 723,-106.56"/>
+<text text-anchor="start" x="580" y="-74.36" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">iolanta:hasDefaultFa</text>
+<text text-anchor="start" x="636.5" y="-60.36" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">cet</text>
+</g>
+
+<!-- local_algorithm&#45;roadmap -->
+
+
+<g id="node3" class="node">
+<title>local_algorithm&#45;roadmap</title>
+<path fill="#730fc3" stroke="#730fc3" d="M885,-106.56C885,-106.56 783,-106.56 783,-106.56 777,-106.56 771,-100.56 771,-94.56 771,-94.56 771,-46.56 771,-46.56 771,-40.56 777,-34.56 783,-34.56 783,-34.56 885,-34.56 885,-34.56 891,-34.56 897,-40.56 897,-46.56 897,-46.56 897,-94.56 897,-94.56 897,-100.56 891,-106.56 885,-106.56"/>
+<text text-anchor="start" x="802.5" y="-74.36" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Rendered</text>
+<text text-anchor="start" x="793" y="-60.36" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">visualization</text>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/algorithm.yaml/b1&#45;&gt;local_algorithm&#45;roadmap -->
+
+
+<g id="edge1" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/algorithm.yaml/b1:e&#45;&gt;local_algorithm&#45;roadmap:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M735,-70.56C747,-70.56 752.25,-70.56 760.88,-70.56"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="761,-74.06 771,-70.56 761,-67.06 761,-74.06"/>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/algorithm.yaml/b2 -->
+
+
+<g id="node2" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/algorithm.yaml/b2</title>
+<path fill="#788897" stroke="#4b5d6c" d="M135,-138.56C135,-138.56 12,-138.56 12,-138.56 6,-138.56 0,-132.56 0,-126.56 0,-126.56 0,-78.56 0,-78.56 0,-72.56 6,-66.56 12,-66.56 12,-66.56 135,-66.56 135,-66.56 141,-66.56 147,-72.56 147,-78.56 147,-78.56 147,-126.56 147,-126.56 147,-132.56 141,-138.56 135,-138.56"/>
+<text text-anchor="start" x="22" y="-106.36" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">How to render a</text>
+<text text-anchor="start" x="33.5" y="-92.36" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">given node?</text>
+</g>
+
+<!-- local_iolanta&#45;facet -->
+
+
+<g id="node4" class="node">
+<title>local_iolanta&#45;facet</title>
+<path fill="#788897" stroke="#4b5d6c" d="M295,-132.06C295,-132.06 195,-132.06 195,-132.06 189,-132.06 183,-126.06 183,-120.06 183,-120.06 183,-85.06 183,-85.06 183,-79.06 189,-73.06 195,-73.06 195,-73.06 295,-73.06 295,-73.06 301,-73.06 307,-79.06 307,-85.06 307,-85.06 307,-120.06 307,-120.06 307,-126.06 301,-132.06 295,-132.06"/>
+<text text-anchor="start" x="205" y="-99.86" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">iolanta:facet</text>
+</g>
+
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/algorithm.yaml/b2&#45;&gt;local_iolanta&#45;facet -->
+
+
+<g id="edge2" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/algorithm.yaml/b2:e&#45;&gt;local_iolanta&#45;facet:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M147,-102.56C159,-102.56 164.25,-102.56 172.88,-102.56"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="173,-106.06 183,-102.56 173,-99.06 173,-106.06"/>
+</g>
+
+<!-- local_iolanta&#45;facet&#45;&gt;local_algorithm&#45;roadmap -->
+
+
+<g id="edge3" class="edge">
+<title>local_iolanta&#45;facet:e&#45;&gt;local_algorithm&#45;roadmap:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M307,-102.56C324.01,-102.56 326.24,-112.63 343,-115.56 514.61,-145.59 577.97,-191.03 735,-115.56 754.3,-106.28 748.59,-81.07 761.16,-73.05"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="762.16,-76.4 771,-70.56 760.45,-69.62 762.16,-76.4"/>
+</g>
+
+<!-- local_iolanta&#45;has&#45;instance&#45;facet -->
+
+
+<g id="node5" class="node">
+<title>local_iolanta&#45;has&#45;instance&#45;facet</title>
+<path fill="#788897" stroke="#4b5d6c" d="M510,-106.56C510,-106.56 355,-106.56 355,-106.56 349,-106.56 343,-100.56 343,-94.56 343,-94.56 343,-46.56 343,-46.56 343,-40.56 349,-34.56 355,-34.56 355,-34.56 510,-34.56 510,-34.56 516,-34.56 522,-40.56 522,-46.56 522,-46.56 522,-94.56 522,-94.56 522,-100.56 516,-106.56 510,-106.56"/>
+<text text-anchor="start" x="365" y="-74.36" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">iolanta:hasInstanceF</text>
+<text text-anchor="start" x="418.5" y="-60.36" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">acet</text>
+</g>
+
+<!-- local_iolanta&#45;facet&#45;&gt;local_iolanta&#45;has&#45;instance&#45;facet -->
+
+
+<g id="edge4" class="edge">
+<title>local_iolanta&#45;facet:e&#45;&gt;local_iolanta&#45;has&#45;instance&#45;facet:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M307,-102.56C324.23,-102.56 323.18,-81.84 333.27,-73.74"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="334.58,-76.99 343,-70.56 332.41,-70.34 334.58,-76.99"/>
+</g>
+
+<!-- local_iolanta&#45;has&#45;instance&#45;facet&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/algorithm.yaml/b1 -->
+
+
+<g id="edge6" class="edge">
+<title>local_iolanta&#45;has&#45;instance&#45;facet:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/project/whitepaper/algorithm.yaml/b1:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M522,-70.56C534,-70.56 539.25,-70.56 547.88,-70.56"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="548,-74.06 558,-70.56 548,-67.06 548,-74.06"/>
+</g>
+
+<!-- local_iolanta&#45;has&#45;instance&#45;facet&#45;&gt;local_algorithm&#45;roadmap -->
+
+
+<g id="edge5" class="edge">
+<title>local_iolanta&#45;has&#45;instance&#45;facet:e&#45;&gt;local_algorithm&#45;roadmap:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M522,-70.56C547.61,-70.56 534.92,-36.65 558,-25.56 628.9,8.52 664.1,8.52 735,-25.56 754.3,-34.83 748.59,-60.05 761.16,-68.07"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="760.45,-71.5 771,-70.56 762.16,-64.71 760.45,-71.5"/>
+</g>
+</g>
+</svg>
+</div>
+<figcaption>
+<p><strong>Figure 14.</strong> Iolanta facet search algorithm<br/>See <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/algorithm.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> <code>algorithm.yaml</code></a></p>
+</figcaption>
+</figure>
+<p><code>Environment</code> is an <code>rdfs:Class</code> defined by Iolanta base vocabulary.</p>
+<div class="admonition info">
+<p class="admonition-title">iolanta:Environment</p>
+<p>Data visualization might be performed in various contexts, which we call Environments. For instance:</p>
+<ul>
+<li><code>iolanta:html</code> calls for HTML output;</li>
+<li><code>iolanta:cli</code> is for rendering in the command line;</li>
+<li><code>iolanta:tex</code> is for LaTeX documents.</li>
+</ul>
+<p>We will provide more examples for Environments later.</p>
+</div>
+<p>As we can see, <code>iolanta:hasInstanceFacet</code> is not the only relation from objects to facets Iolanta cares about. The top priority is <code>iolanta:facet</code> which links an individual node, instead of a class, directly to the facet that should be used to render that particular node.</p>
+<div class="admonition info">
+<p class="admonition-title">iolanta:facet</p>
+<p>Facet assigned by particular node. This property might be attached to any IRI or BNode in an RDF graph.</p>
+<ul>
+<li>Range: <code>iolanta:Facet</code></li>
+<li>Inverse: <code>iolanta:isFacetOf</code></li>
+</ul>
+</div>
+<div class="highlight"><pre><span></span><code>    :something iolanta:facet &lt;python://iolanta.facets.html.Default&gt; .
+</code></pre></div>
+<p>In case <code>iolanta:facet</code> and <code>iolanta:hasInstanceFacet</code> weren't found for the node in question, we fall back to the default facet assigned to the Environment. That's how our first CLI example worked: <code>Default</code> facet is configured as:</p>
+<div class="admonition info">
+<p class="admonition-title">iolanta:hasDefaultFacet</p>
+<p>Define a default facet used for that environment.</p>
+<ul>
+<li>Domain: <code>iolanta:Environment</code></li>
+<li>Range: <code>iolanta:Facet</code></li>
+<li>Inverse: <code>iolanta:isDefaultFacetOf</code></li>
+</ul>
+</div>
+<p><code>iolanta</code> operation is based on a simple vocabulary, bundled with the application and drawn, as a diagram, in Figure 15. Iolanta vocabulary defines a few classes and a few properties connecting classes to each other.</p>
+<p>Prefix we use is <code>iolanta:</code>, and it resolves to <a href="https://iolanta.tech/">https://iolanta.tech/</a>.</p>
+<figure>
+  <img alt="Iolanta vocabulary" src="iolanta-vocabulary.png" />
+  <figcaption><strong>Figure 15.</strong> <code>iolanta:</code> vocabulary (Drawn by hand ☹)</figcaption>
+</figure>
+
+<p>The existence of Iolanta vocabulary closes the following criterion.</p>
+<div class="admonition success">
+<p class="admonition-title">Criterion 5</p>
+<p>Linked Data visualizations should be themselves expressible as Linked Data.</p>
+</div>
+<p>To conclude this section, — Iolanta facet search algorithm aims to satisfy one of the criteria we listed. Here it is:</p>
+<div class="admonition success">
+<p class="admonition-title">Criterion 6</p>
+<p>The visualization method appropriate for a particular node depends on the node itself, its properties, and the context (environment) the node is visualized within. The visualization system should be aware of this relationship and be able to select an appropriate visualization mode based on the data.</p>
+</div>
+<h2 id="8-integration-mkdocs"><code>8</code> Integration: MkDocs</h2>
+<p>Printing visualizations in the console might be fun — but not too useful if we want to embed them into a book or in a paper, like this one.</p>
+<p>For that purpose, we have <code>mkdocs-iolanta</code><sup id="fnref:mkdocs-iolanta"><a class="footnote-ref" href="#fn:mkdocs-iolanta">26</a></sup> plugin which integrates Iolanta with MkDocs<sup id="fnref2:mkdocs"><a class="footnote-ref" href="#fn:mkdocs">22</a></sup> static site generator. Syntax for embedding visualizations is provided by Jinja2<sup id="fnref:jinja2"><a class="footnote-ref" href="#fn:jinja2">24</a></sup> template engine and looks like this:</p>
+<div class="highlight"><pre><span></span><code>{{ render(&#39;criterion-context&#39;, environments=[&#39;satisfied&#39;]) }}
+</code></pre></div>
+<p>The output of this is an extension to Markdown markup known as Admonitions<sup id="fnref:admonitions"><a class="footnote-ref" href="#fn:admonitions">25</a></sup>.</p>
+<h2 id="9-plugin-iolanta-tables"><code>9</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m0 4v4h6V8H5m8 0v4h6V8h-6m-8 6v4h6v-4H5m8 0v4h6v-4h-6Z"/></svg></span> Plugin: <code>iolanta-tables</code></h2>
+<p>Iolanta <em>supports</em> plugins, which aims to satisfy the following criterion.</p>
+<div class="admonition success">
+<p class="admonition-title">Criterion 4</p>
+<p>The target visualization tool must be extendable via plugins implementing various data types and visualization types.</p>
+</div>
+<p>The Criteria 1-6 we used as an example of rendering are quite simple to work with; they feature no nested environments, for example.</p>
+<p><code>iolanta-tables</code><sup id="fnref:iolanta-tables"><a class="footnote-ref" href="#fn:iolanta-tables">28</a></sup> is an Iolanta plugin that implements more complex structures. We used it to render Figure 1 and Figure 4 from YAML-LD definitions.</p>
+<p>It has its own vocabulary to define tables.</p>
+<p>Figure 16 shows a piece of code describing the data.</p>
+<figure>
+<div style="text-align: left">
+<div class="highlight"><span class="filename">various-visualizations.yaml</span><pre><span></span><code><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VisualizationTool</span>
+<span class="nt">$reverse</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">rdf:type</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rhizomer</span>
+<span class="w">      </span><span class="nt">available</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">      </span><span class="nt">rdfs:label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Rhizomer</span>
+<span class="w">      </span><span class="nt">schema:url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/rhizomik/rhizomerEye</span>
+<span class="w">      </span><span class="nt">last-update</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2022-12-02</span>
+<span class="w">      </span><span class="nt">year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2006</span>
+<span class="w">      </span><span class="nt">numeric</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">      </span><span class="nt">temporal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">      </span><span class="nt">spatial</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">      </span><span class="nt">hierarchical</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">      </span><span class="nt">graph</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">      </span><span class="nt">chart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">      </span><span class="nt">map</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="c1"># ✂ ⋯⋯⋯⋯⋯⋯⋯⋯⋯</span>
+</code></pre></div>
+</div>
+<figcaption>
+<p><strong>Figure 16.</strong> Visualization tools file. See <a href="https://github.com/iolanta-tech/iolanta-tech/blob/master/docs/project/whitepaper/state-of-the-art/various-visualizations.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> <code>various-visualizations.yaml</code></a> in the Supplementary Material.</p>
+</figcaption>
+</figure>
+<div class="highlight"><pre><span></span><code><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table:Table</span>
+<span class="nt">rdfs:comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Definition</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">table.&quot;</span>
+<span class="nt">iolanta:hasInstanceFacet</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python://iolanta_tables.facets.html.Table</span>
+<span class="w">    </span><span class="nt">iolanta:supports</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iolanta:html</span>
+</code></pre></div>
+<p>In the snippet in Figure 14, we introduced a new <code>table:self</code> column. That's not a property, say, <code>rhizomer</code> has; it means that we render the node itself (the <code>rhizomer</code> node) — and for that the <code>Default</code> facet we already know will be employed, — which will be presented as a clickable HTML link.</p>
+<p>On the snippet at Figure 15, we define <a href="https://mkdocs.iolanta.tech/material/icon"><code>mkdocs-material:icon</code></a> property to use mkdocs<sup id="fnref3:mkdocs"><a class="footnote-ref" href="#fn:mkdocs">22</a></sup> specific icon as column header.</p>
+<p>Figure 1 is visualized from the description in Figure 17:</p>
+<figure>
+<div style="text-align: left">
+
+<div class="highlight"><span class="filename">table.yaml</span><pre><span></span><code><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tools-with-various-visualizations</span>
+<span class="nt">table:columns</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table:self</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">rdfs:label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Data Types</span>
+<span class="w">    </span><span class="nt">table:columns</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numeric</span>
+<span class="w">        </span><span class="nt">mkdocs-material:icon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">material/numeric.svg</span>
+<span class="w">        </span><span class="nt">rdfs:comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Numeric&quot;</span>
+<span class="w">        </span><span class="nt">rdfs:label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="nv"> </span><span class="s">&quot;</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">temporal</span>
+<span class="w">        </span><span class="nt">mkdocs-material:icon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">material/timer-sand.svg</span>
+<span class="w">        </span><span class="nt">rdfs:comment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Temporal</span>
+<span class="w">        </span><span class="nt">rdfs:label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="nv"> </span><span class="s">&quot;</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">$id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spatial</span>
+<span class="c1"># ✂ ⋯⋯⋯⋯⋯⋯⋯⋯⋯</span>
+</code></pre></div>
+
+
+
+  </div>
+<figcaption><strong>Figure 17.</strong> Visualization tools table file</figcaption>
+</figure>
+<p>Here, we use nested <a href="https://iolanta.tech/tables/columns"><code>table:columns</code></a> properties to group columns.</p>
+<p>The following criterion is thus satisfied:</p>
+<div class="admonition success">
+<p class="admonition-title">Criterion 1</p>
+<p>The target visualization tool must be capable of generating tables.</p>
+</div>
+<h2 id="conclusions"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 18H6V6h12v12Z"/></svg></span> Conclusions</h2>
+<p>We have presented the Iolanta visualization system and provided a few examples of how it works on real data. We also have shown how it integrates with other systems — for instance, to aid in building this paper.</p>
+<p>We have shown a few plugins currently built for Iolanta.</p>
+<p>Directions for future research might include:</p>
+<ul>
+<li>Implement more plugins for various use cases, such as:<ul>
+<li>roadmaps &amp; network planning,</li>
+<li>software architecture diagrams,</li>
+<li>and more;</li>
+</ul>
+</li>
+<li>Implement more environments, such as:<ul>
+<li>LaTeX,</li>
+<li>CLI;</li>
+</ul>
+</li>
+<li>Integrate with remote datasets like DBPedia<sup id="fnref:dbpedia"><a class="footnote-ref" href="#fn:dbpedia">29</a></sup>;</li>
+<li>Integrate with IPFS;</li>
+<li>Provide interactive browsing experience.</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:data-visualizations-periodic-table">
+<p>USI eLab. A <a href="https://www.visual-literacy.org/periodic_table/periodic_table.html">periodic table</a> of visualization methods.&#160;<a class="footnote-backref" href="#fnref:data-visualizations-periodic-table" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:ld-visualization-book">
+<p><a href="http://www.linkeddatavisualization.com">Linked Data Visualization</a>: Techniques, Tools and Big Data. — Laura Po, Nikos Bikakis, Federico Desimoni, and George Papastefanatos | Morgan &amp; Claypool, 2020.&#160;<a class="footnote-backref" href="#fnref:ld-visualization-book" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:ld-visualization-book" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:fresnel">
+<p>Pietriga, E., Bizer, C., Karger, D., Lee, R. (2006). Fresnel: A Browser-Independent Presentation Vocabulary for RDF. In: , et al. The Semantic Web - ISWC 2006. ISWC 2006. Lecture Notes in Computer Science, vol 4273. Springer, Berlin, Heidelberg. https://doi.org/10.1007/11926078_12&#160;<a class="footnote-backref" href="#fnref:fresnel" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:css">
+<p><a href="http://www.w3.org/Style/CSS/">CSS</a>: Cascading Style Sheets language.&#160;<a class="footnote-backref" href="#fnref:css" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:turtle">
+<p>Beckett, D., Berners-Lee, T., Prud’hommeaux, E., &amp; Carothers, G. (2014). RDF 1.1 Turtle. World Wide Web Consortium, 18-31.&#160;<a class="footnote-backref" href="#fnref:turtle" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:tal">
+<p>Champin, P. A. (2009). Tal4Rdf: Lightweight Presentation for the Semantic Web. In SFSW@ ESWC. — https://ceur-ws.org/Vol-449/Paper1.pdf&#160;<a class="footnote-backref" href="#fnref:tal" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:sparql">
+<p>Prud’hommeaux, E., Seaborne, A.: SPARQL query language for RDF. W3C recommendation, W3C (2008) http://www.w3.org/TR/rdf-sparql-query/.&#160;<a class="footnote-backref" href="#fnref:sparql" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:sparql" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:sparql" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:less">
+<p>Auer, Sören &amp; Doehring, Raphael &amp; Tramp, Sebastian. (2010). LESS - Template-Based Syndication and Presentation of Linked Data. 6089. 211-224. 10.1007/978-3-642-13489-0_15.&#160;<a class="footnote-backref" href="#fnref:less" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:smarty">
+<p>Smarty templating engine. <a href="https://smarty.net">https://smarty.net</a>&#160;<a class="footnote-backref" href="#fnref:smarty" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:rdf">
+<p>RDF Working Group. (2014). <a href="https://www.w3.org/RDF">Resource Description Framework (RDF)</a>. Semantic Web Standards.&#160;<a class="footnote-backref" href="#fnref:rdf" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:yaml">
+<p>YAML Ain’t Markup Language (YAML™) version 1.2. Revision 1.2.2 (2021-10-01). <a href="https://yaml.org/spec/1.2.2">https://yaml.org/spec/1.2.2</a>&#160;<a class="footnote-backref" href="#fnref:yaml" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:yaml-ld">
+<p><a href="https://github.com/json-ld/yaml-ld"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> <code>json-ld/yaml-ld</code></a>&#160;<a class="footnote-backref" href="#fnref:yaml-ld" title="Jump back to footnote 12 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:yaml-ld" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:json-ld">
+<p>JSON-LD. <a href="https://json-ld.org">https://json-ld.org</a>&#160;<a class="footnote-backref" href="#fnref:json-ld" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:json">
+<p>JSON. <a href="https://json.org">https://json.org</a>&#160;<a class="footnote-backref" href="#fnref:json" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+<li id="fn:default-context">
+<p><a href="https://github.com/iolanta-tech/iolanta/blob/master/iolanta/data/context.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> <code>iolanta/data/context.yaml</code></a>&#160;<a class="footnote-backref" href="#fnref:default-context" title="Jump back to footnote 15 in the text">&#8617;</a></p>
+</li>
+<li id="fn:frontmatter">
+<p>YAML Frontmatter. <a href="https://jekyllrb.com/docs/front-matter/">https://jekyllrb.com/docs/front-matter/</a>&#160;<a class="footnote-backref" href="#fnref:frontmatter" title="Jump back to footnote 16 in the text">&#8617;</a></p>
+</li>
+<li id="fn:rdflib">
+<p><a href="https://github.com/RDFLib/rdflib"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> <code>rdflib/rdflib</code></a>&#160;<a class="footnote-backref" href="#fnref:rdflib" title="Jump back to footnote 17 in the text">&#8617;</a></p>
+</li>
+<li id="fn:owlrl">
+<p><a href="https://github.com/RDFLib/owl-rl"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> <code>rdflib/owl-rl</code></a>&#160;<a class="footnote-backref" href="#fnref:owlrl" title="Jump back to footnote 18 in the text">&#8617;</a></p>
+</li>
+<li id="fn:rdfs">
+<p>McBride, B. (2004). The resource description framework (RDF) and its vocabulary description language RDFS. Handbook on ontologies, 51-65.&#160;<a class="footnote-backref" href="#fnref:rdfs" title="Jump back to footnote 19 in the text">&#8617;</a></p>
+</li>
+<li id="fn:owl">
+<p>Motik, B., Patel-Schneider, P. F., Parsia, B., Bock, C., Fokoue, A., Haase, P., ... &amp; Smith, M. (2009). OWL 2 web ontology language: Structural specification and functional-style syntax. W3C recommendation, 27(65), 159.&#160;<a class="footnote-backref" href="#fnref:owl" title="Jump back to footnote 20 in the text">&#8617;</a></p>
+</li>
+<li id="fn:facet-dictionary">
+<p>Facet. Cambridge Dictionary. <a href="https://dictionary.cambridge.org/dictionary/english/facet">https://dictionary.cambridge.org/dictionary/english/facet</a>&#160;<a class="footnote-backref" href="#fnref:facet-dictionary" title="Jump back to footnote 21 in the text">&#8617;</a></p>
+</li>
+<li id="fn:mkdocs">
+<p>MkDocs. <a href="https://mkdocs.org">mkdocs.org</a>&#160;<a class="footnote-backref" href="#fnref:mkdocs" title="Jump back to footnote 22 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:mkdocs" title="Jump back to footnote 22 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:mkdocs" title="Jump back to footnote 22 in the text">&#8617;</a></p>
+</li>
+<li id="fn:mkdocs-material">
+<p>mkdocs-material. <a href="https://squidfunk.github.io/mkdocs-material/">https://squidfunk.github.io/mkdocs-material/</a>&#160;<a class="footnote-backref" href="#fnref:mkdocs-material" title="Jump back to footnote 23 in the text">&#8617;</a></p>
+</li>
+<li id="fn:jinja2">
+<p>Jinja. <a href="https://jinja.palletsprojects.com">https://jinja.palletsprojects.com</a>&#160;<a class="footnote-backref" href="#fnref:jinja2" title="Jump back to footnote 24 in the text">&#8617;</a></p>
+</li>
+<li id="fn:admonitions">
+<p><a href="https://squidfunk.github.io/mkdocs-material/reference/admonitions/">Admonitions</a> for <code>mkdocs-material</code>.&#160;<a class="footnote-backref" href="#fnref:admonitions" title="Jump back to footnote 25 in the text">&#8617;</a></p>
+</li>
+<li id="fn:mkdocs-iolanta">
+<p><a href="https://github.com/iolanta-tech/mkdocs-iolanta"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> <code>iolanta-tech/mkdocs-iolanta</code></a>&#160;<a class="footnote-backref" href="#fnref:mkdocs-iolanta" title="Jump back to footnote 26 in the text">&#8617;</a></p>
+</li>
+<li id="fn:mkdocs-macros-plugin">
+<p><a href="https://github.com/fralau/mkdocs_macros_plugin"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span> <code>fralau/mkdocs_macros_plugin</code></a>&#160;<a class="footnote-backref" href="#fnref:mkdocs-macros-plugin" title="Jump back to footnote 27 in the text">&#8617;</a></p>
+</li>
+<li id="fn:iolanta-tables">
+<p>Iolanta Tables. <a href="https://iolanta.tech/tables">https://iolanta.tech/tables</a>&#160;<a class="footnote-backref" href="#fnref:iolanta-tables" title="Jump back to footnote 28 in the text">&#8617;</a></p>
+</li>
+<li id="fn:dbpedia">
+<p>Auer, S., Bizer, C., Kobilarov, G., Lehmann, J., Cyganiak, R., &amp; Ives, Z. (2007). Dbpedia: A nucleus for a web of open data. In The Semantic Web: 6th International Semantic Web Conference, 2nd Asian Semantic Web Conference, ISWC 2007+ ASWC 2007, Busan, Korea, November 11-15, 2007. Proceedings (pp. 722-735). Springer Berlin Heidelberg.&#160;<a class="footnote-backref" href="#fnref:dbpedia" title="Jump back to footnote 29 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+  
+  
+
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 iolanta.tech
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs Insiders
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.indexes", "navigation.tabs", "navigation.tabs.sticky", "content.code.annotate", "content.action.edit"], "search": "../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.10c6cd24.min.js"></script>
+      
+    
+  </body>
+</html>

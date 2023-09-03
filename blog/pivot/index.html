@@ -1,0 +1,1801 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://iolanta.tech/blog/pivot/">
+      
+      
+        <link rel="prev" href="../jetbrains/">
+      
+      
+        <link rel="next" href="../redocly/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.15+insiders-4.35.3">
+    
+    
+      
+        <title>Pivot: Visualization system → Knowledge As Code workspace - iolanta.tech</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.cac7c1ad.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#context" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="iolanta.tech" class="md-header__button md-logo" aria-label="iolanta.tech" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            iolanta.tech
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Pivot: Visualization system → Knowledge As Code workspace
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/iolanta-tech/iolanta-tech" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iolanta-tech/iolanta-tech
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  iolanta
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tables/" class="md-tabs__link">
+          
+  
+    
+  
+  Tables
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../vocabularies/" class="md-tabs__link">
+          
+  
+    
+  
+  Vocabularies
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link md-tabs__link--active">
+          
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="iolanta.tech" class="md-nav__button md-logo" aria-label="iolanta.tech" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    iolanta.tech
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/iolanta-tech/iolanta-tech" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iolanta-tech/iolanta-tech
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    iolanta
+  
+
+    
+      <br>
+      <small>data visualization framework</small>
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tables/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    
+  
+    Tables
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tables
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Columns
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Columns
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/columns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:columns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/self/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:self
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/rows/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:rows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/class/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Ordering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ordering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/order-by/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:order-by
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/direction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:direction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/empty-values/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:empty-values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/project/facets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Facets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../vocabularies/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    
+  
+    Vocabularies
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vocabularies
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Keywords
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Keywords
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vocabularies/id/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    $id
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vocabularies/type/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    $type
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Rdfs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Rdfs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vocabularies/rdfs/label/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    rdfs:label
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Schema
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vocabularies/schema/url/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    schema:url
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anything-ld/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    ∗-LD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anytype/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Anytype
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autocomplete/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Use … for autocomplete @ VS Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jetbrains/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting up JetBrains IDEs for Iolanta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    
+  
+    Pivot: Visualization system → Knowledge As Code workspace
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Pivot: Visualization system → Knowledge As Code workspace
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consequences
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redocly/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Redocly
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../type/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    rdf:type vs "@type"/$type
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../why-linked-data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Why Linked Data?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consequences
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/iolanta-tech/iolanta-tech/edit/master/docs/blog/pivot.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+  <h1>Pivot: Visualization system → Knowledge As Code workspace</h1>
+
+<h2 id="context">Context</h2>
+<p>At this moment, Iolanta is called a "Linked Data visualization framework". From this name, no particular target audience is evident.</p>
+<ul>
+<li><strong>What is Linked Data?</strong> — pretty much no one knows, and those who know believe this is something esoteric</li>
+<li><strong>What is a visualization framework?</strong> — from these words, a software developer will infer a meaning which has nothing in common with what Iolanta actually is.</li>
+</ul>
+<h2 id="decision">Decision</h2>
+<p>Iolanta is now a <strong>Knowledge as Code</strong> workspace. Its nearest competitor is Notion. Its comparative advantage is that it manages knowledge in code rather than via ClickOps. Its primary use case <strong>at this point</strong> is documentation for software projects, because: </p>
+<ul>
+<li>Notion already has penetrated that space and we have a base to jump start from</li>
+<li>Software projects are managed by developers, and developers know why code rulez</li>
+</ul>
+<h2 id="consequences">Consequences</h2>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: %3 Pages: 1 -->
+<p><svg width="398pt" height="716pt"
+ viewBox="0.00 0.00 398.00 715.50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 711.5)">
+<title>%3</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-711.5 394,-711.5 394,4 -4,4"/></p>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b0 -->
+<p><g id="node1" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b0</title>
+<path fill="#788897" stroke="#4b5d6c" d="M165,-100C165,-100 21,-100 21,-100 15,-100 9,-94 9,-88 9,-88 9,-12 9,-12 9,-6 15,0 21,0 21,0 165,0 165,0 171,0 177,-6 177,-12 177,-12 177,-88 177,-88 177,-94 171,-100 165,-100"/>
+<text text-anchor="start" x="34" y="-67.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Research whether</text>
+<text text-anchor="start" x="31" y="-53.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">there are Notion As</text>
+<text text-anchor="start" x="47.5" y="-39.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Code projects</text>
+<text text-anchor="start" x="69" y="-25.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">already</text>
+</g></p>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b1 -->
+<p><g id="node2" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b1</title>
+<path fill="#788897" stroke="#4b5d6c" d="M169.5,-190C169.5,-190 16.5,-190 16.5,-190 10.5,-190 4.5,-184 4.5,-178 4.5,-178 4.5,-130 4.5,-130 4.5,-124 10.5,-118 16.5,-118 16.5,-118 169.5,-118 169.5,-118 175.5,-118 181.5,-124 181.5,-130 181.5,-130 181.5,-178 181.5,-178 181.5,-184 175.5,-190 169.5,-190"/>
+<text text-anchor="start" x="31" y="-157.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Choose Notion use</text>
+<text text-anchor="start" x="26.5" y="-143.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">case(s) to reproduce</text>
+</g></p>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b2 -->
+<p><g id="node3" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b2</title>
+<path fill="#788897" stroke="#4b5d6c" d="M174,-267.5C174,-267.5 12,-267.5 12,-267.5 6,-267.5 0,-261.5 0,-255.5 0,-255.5 0,-220.5 0,-220.5 0,-214.5 6,-208.5 12,-208.5 12,-208.5 174,-208.5 174,-208.5 180,-208.5 186,-214.5 186,-220.5 186,-220.5 186,-255.5 186,-255.5 186,-261.5 180,-267.5 174,-267.5"/>
+<text text-anchor="start" x="22" y="-235.3" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Abstract → AIST Conf</text>
+</g></p>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b3 -->
+<p><g id="node4" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b3</title>
+<path fill="#788897" stroke="#4b5d6c" d="M157.5,-358C157.5,-358 28.5,-358 28.5,-358 22.5,-358 16.5,-352 16.5,-346 16.5,-346 16.5,-298 16.5,-298 16.5,-292 22.5,-286 28.5,-286 28.5,-286 157.5,-286 157.5,-286 163.5,-286 169.5,-292 169.5,-298 169.5,-298 169.5,-346 169.5,-346 169.5,-352 163.5,-358 157.5,-358"/>
+<text text-anchor="start" x="38.5" y="-325.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Rebuild the front</text>
+<text text-anchor="start" x="77" y="-311.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">page</text>
+</g></p>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b4 -->
+<p><g id="node5" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b4</title>
+<path fill="#788897" stroke="#4b5d6c" d="M166.5,-462C166.5,-462 19.5,-462 19.5,-462 13.5,-462 7.5,-456 7.5,-450 7.5,-450 7.5,-388 7.5,-388 7.5,-382 13.5,-376 19.5,-376 19.5,-376 166.5,-376 166.5,-376 172.5,-376 178.5,-382 178.5,-388 178.5,-388 178.5,-450 178.5,-450 178.5,-456 172.5,-462 166.5,-462"/>
+<text text-anchor="start" x="39.5" y="-429.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white"><code>{{ render() }}</code> →</text>
+<text text-anchor="start" x="39" y="-415.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white"><code>{{ iolanta() }}</code> or</text>
+<text text-anchor="start" x="29.5" y="-401.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">some kind of a DSL</text>
+</g></p>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b5 -->
+<p><g id="node6" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b5</title>
+<path fill="#788897" stroke="#4b5d6c" d="M163.5,-539.5C163.5,-539.5 22.5,-539.5 22.5,-539.5 16.5,-539.5 10.5,-533.5 10.5,-527.5 10.5,-527.5 10.5,-492.5 10.5,-492.5 10.5,-486.5 16.5,-480.5 22.5,-480.5 22.5,-480.5 163.5,-480.5 163.5,-480.5 169.5,-480.5 175.5,-486.5 175.5,-492.5 175.5,-492.5 175.5,-527.5 175.5,-527.5 175.5,-533.5 169.5,-539.5 163.5,-539.5"/>
+<text text-anchor="start" x="32.5" y="-507.3" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Editing experience</text>
+</g></p>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b6 -->
+<p><g id="node7" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b6</title>
+<path fill="#788897" stroke="#4b5d6c" d="M164,-630C164,-630 22,-630 22,-630 16,-630 10,-624 10,-618 10,-618 10,-570 10,-570 10,-564 16,-558 22,-558 22,-558 164,-558 164,-558 170,-558 176,-564 176,-570 176,-570 176,-618 176,-618 176,-624 170,-630 164,-630"/>
+<text text-anchor="start" x="48" y="-597.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Shorthand for</text>
+<text text-anchor="start" x="32" y="-583.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">$reverse + rdf:type</text>
+</g></p>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b7 -->
+<p><g id="node8" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b7</title>
+<path fill="#788897" stroke="#4b5d6c" d="M378,-707.5C378,-707.5 234,-707.5 234,-707.5 228,-707.5 222,-701.5 222,-695.5 222,-695.5 222,-660.5 222,-660.5 222,-654.5 228,-648.5 234,-648.5 234,-648.5 378,-648.5 378,-648.5 384,-648.5 390,-654.5 390,-660.5 390,-660.5 390,-695.5 390,-695.5 390,-701.5 384,-707.5 378,-707.5"/>
+<text text-anchor="start" x="244" y="-675.3" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Import from Notion</text>
+</g></p>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b8 -->
+<p><g id="node9" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b8</title>
+<path fill="#788897" stroke="#4b5d6c" d="M156,-707.5C156,-707.5 30,-707.5 30,-707.5 24,-707.5 18,-701.5 18,-695.5 18,-695.5 18,-660.5 18,-660.5 18,-654.5 24,-648.5 30,-648.5 30,-648.5 156,-648.5 156,-648.5 162,-648.5 168,-654.5 168,-660.5 168,-660.5 168,-695.5 168,-695.5 168,-701.5 162,-707.5 156,-707.5"/>
+<text text-anchor="start" x="40" y="-675.3" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Support CSV&#45;LD</text>
+</g></p>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b8&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b7 -->
+<p><g id="edge1" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b8:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/pivot.md/b7:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M169,-678C188.69,-678 196.04,-678 211.68,-678"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="212,-681.5 222,-678 212,-674.5 212,-681.5"/>
+</g>
+</g>
+</svg></p>
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 iolanta.tech
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs Insiders
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.indexes", "navigation.tabs", "navigation.tabs.sticky", "content.code.annotate", "content.action.edit"], "search": "../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.10c6cd24.min.js"></script>
+      
+    
+  </body>
+</html>

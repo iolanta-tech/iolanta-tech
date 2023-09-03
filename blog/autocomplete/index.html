@@ -1,0 +1,1916 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://iolanta.tech/blog/autocomplete/">
+      
+      
+        <link rel="prev" href="../anytype/">
+      
+      
+        <link rel="next" href="../jetbrains/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.15+insiders-4.35.3">
+    
+    
+      
+        <title>Use … for autocomplete @ VS Code - iolanta.tech</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.cac7c1ad.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#context" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="iolanta.tech" class="md-header__button md-logo" aria-label="iolanta.tech" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            iolanta.tech
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Use … for autocomplete @ VS Code
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/iolanta-tech/iolanta-tech" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iolanta-tech/iolanta-tech
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  iolanta
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tables/" class="md-tabs__link">
+          
+  
+    
+  
+  Tables
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../vocabularies/" class="md-tabs__link">
+          
+  
+    
+  
+  Vocabularies
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link md-tabs__link--active">
+          
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="iolanta.tech" class="md-nav__button md-logo" aria-label="iolanta.tech" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    iolanta.tech
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/iolanta-tech/iolanta-tech" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iolanta-tech/iolanta-tech
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    iolanta
+  
+
+    
+      <br>
+      <small>data visualization framework</small>
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tables/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    
+  
+    Tables
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_2">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tables
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Columns
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Columns
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/columns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:columns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/self/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:self
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/rows/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:rows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/class/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Ordering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ordering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/order-by/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:order-by
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/direction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:direction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/empty-values/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    table:empty-values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tables/project/facets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Facets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../vocabularies/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    
+  
+    Vocabularies
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_3">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vocabularies
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Keywords
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Keywords
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vocabularies/id/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    $id
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vocabularies/type/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    $type
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Rdfs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Rdfs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vocabularies/rdfs/label/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    rdfs:label
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Schema
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vocabularies/schema/url/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    schema:url
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_4">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anything-ld/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    ∗-LD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anytype/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Anytype
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    
+  
+    Use … for autocomplete @ VS Code
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Use … for autocomplete @ VS Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consequences
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jetbrains/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Setting up JetBrains IDEs for Iolanta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pivot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Pivot: Visualization system → Knowledge As Code workspace
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redocly/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Redocly
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../type/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    rdf:type vs "@type"/$type
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../why-linked-data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Why Linked Data?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consequences
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/iolanta-tech/iolanta-tech/edit/master/docs/blog/autocomplete.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+  <h1>Use … for autocomplete @ VS Code</h1>
+
+<h2 id="context">Context</h2>
+<p>YAML autocomplete in VS Code is a requirement for any kind of an adequate developer experience. SaaS Clickops tools provide that kind of experience via sleek UIs, the option we, by design, do not have. We have to provide adequate code editing experience instead.</p>
+<div><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: %3 Pages: 1 -->
+<svg width="1271pt" height="594pt"
+ viewBox="0.00 0.00 1271.00 593.50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 589.5)">
+<title>%3</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-589.5 1267,-589.5 1267,4 -4,4"/>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9 -->
+<g id="node1" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9</title>
+<path fill="#788897" stroke="transparent" d="M471,-226C471,-226 683,-226 683,-226 689,-226 695,-232 695,-238 695,-238 695,-394 695,-394 695,-400 689,-406 683,-406 683,-406 471,-406 471,-406 465,-406 459,-400 459,-394 459,-394 459,-238 459,-238 459,-232 465,-226 471,-226"/>
+<text text-anchor="start" x="475" y="-356.8" font-family="Arial" font-weight="bold" font-size="24.00" fill="white">⊻</text>
+<text text-anchor="start" x="525" y="-379.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Before implementing</text>
+<text text-anchor="start" x="525" y="-365.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">LSP, use JSON Schema</text>
+<text text-anchor="start" x="525" y="-351.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">as an intermediate</text>
+<text text-anchor="start" x="525" y="-337.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">solution?</text>
+<polyline fill="none" stroke="#4b5d6c" points="460,-272 694,-272 "/>
+<polyline fill="none" stroke="#4b5d6c" points="694,-319 460,-319 "/>
+<text text-anchor="start" x="563" y="-291.8" font-family="Arial" font-size="14.00" fill="white">True</text>
+<text text-anchor="start" x="560" y="-245.8" font-family="Arial" font-size="14.00" fill="white">False</text>
+<path fill="none" stroke="#4b5d6c" d="M471,-226C471,-226 683,-226 683,-226 689,-226 695,-232 695,-238 695,-238 695,-394 695,-394 695,-400 689,-406 683,-406 683,-406 471,-406 471,-406 465,-406 459,-400 459,-394 459,-394 459,-238 459,-238 459,-232 465,-226 471,-226"/>
+</g>
+<!-- local_json&#45;ld&#45;lsp -->
+<g id="node13" class="node">
+<title>local_json&#45;ld&#45;lsp</title>
+<path fill="#788897" stroke="#4b5d6c" d="M862,-391.5C862,-391.5 751,-391.5 751,-391.5 745,-391.5 739,-385.5 739,-379.5 739,-379.5 739,-344.5 739,-344.5 739,-338.5 745,-332.5 751,-332.5 751,-332.5 862,-332.5 862,-332.5 868,-332.5 874,-338.5 874,-344.5 874,-344.5 874,-379.5 874,-379.5 874,-385.5 868,-391.5 862,-391.5"/>
+<text text-anchor="start" x="761" y="-359.3" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">JSON&#45;LD LSP</text>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9&#45;&gt;local_json&#45;ld&#45;lsp -->
+<g id="edge12" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9:e&#45;&gt;local_json&#45;ld&#45;lsp:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M695,-362C710.58,-362 716.85,-362 728.65,-362"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="729,-365.5 739,-362 729,-358.5 729,-365.5"/>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b1 -->
+<g id="node2" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b1</title>
+<path fill="#788897" stroke="#4b5d6c" d="M1038,-507.5C1038,-507.5 927,-507.5 927,-507.5 921,-507.5 915,-501.5 915,-495.5 915,-495.5 915,-460.5 915,-460.5 915,-454.5 921,-448.5 927,-448.5 927,-448.5 1038,-448.5 1038,-448.5 1044,-448.5 1050,-454.5 1050,-460.5 1050,-460.5 1050,-495.5 1050,-495.5 1050,-501.5 1044,-507.5 1038,-507.5"/>
+<text text-anchor="start" x="937" y="-475.3" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Autocomplete</text>
+</g>
+<!-- local_ultimate&#45;iolanta&#45;ide -->
+<g id="node14" class="node">
+<title>local_ultimate&#45;iolanta&#45;ide</title>
+<path fill="#730fc3" stroke="#730fc3" d="M1251,-430.5C1251,-430.5 1103,-430.5 1103,-430.5 1097,-430.5 1091,-424.5 1091,-418.5 1091,-418.5 1091,-383.5 1091,-383.5 1091,-377.5 1097,-371.5 1103,-371.5 1103,-371.5 1251,-371.5 1251,-371.5 1257,-371.5 1263,-377.5 1263,-383.5 1263,-383.5 1263,-418.5 1263,-418.5 1263,-424.5 1257,-430.5 1251,-430.5"/>
+<text text-anchor="start" x="1113" y="-398.3" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Ultimate Iolanta IDE</text>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b1&#45;&gt;local_ultimate&#45;iolanta&#45;ide -->
+<g id="edge1" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b1:e&#45;&gt;local_ultimate&#45;iolanta&#45;ide:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M1051.5,-478C1085.91,-478 1059.59,-416.39 1081.18,-403.39"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="1082.11,-406.77 1091,-401 1080.46,-399.96 1082.11,-406.77"/>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b11 -->
+<g id="node3" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b11</title>
+<path fill="#788897" stroke="#4b5d6c" d="M384,-508C384,-508 263,-508 263,-508 257,-508 251,-502 251,-496 251,-496 251,-434 251,-434 251,-428 257,-422 263,-422 263,-422 384,-422 384,-422 390,-422 396,-428 396,-434 396,-434 396,-496 396,-496 396,-502 390,-508 384,-508"/>
+<text text-anchor="start" x="273" y="-475.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Request having</text>
+<text text-anchor="start" x="278.5" y="-461.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">RedHat YAML</text>
+<text text-anchor="start" x="296" y="-447.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">insatlled</text>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b11&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9 -->
+<g id="edge2" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b11:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M397.5,-465C474.08,-465 387.56,-310.56 448.85,-296.09"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="449.43,-299.54 459,-295 448.68,-292.58 449.43,-299.54"/>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b12 -->
+<g id="node4" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b12</title>
+<path fill="#788897" stroke="#4b5d6c" d="M398.5,-404C398.5,-404 248.5,-404 248.5,-404 242.5,-404 236.5,-398 236.5,-392 236.5,-392 236.5,-316 236.5,-316 236.5,-310 242.5,-304 248.5,-304 248.5,-304 398.5,-304 398.5,-304 404.5,-304 410.5,-310 410.5,-316 410.5,-316 410.5,-392 410.5,-392 410.5,-398 404.5,-404 398.5,-404"/>
+<text text-anchor="start" x="258.5" y="-371.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Any luck with https:</text>
+<text text-anchor="start" x="264" y="-357.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">//blogs.pjjk.net/phi</text>
+<text text-anchor="start" x="264.5" y="-343.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">l/json&#45;schema&#45;for&#45;</text>
+<text text-anchor="start" x="299" y="-329.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">json&#45;ld/</text>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b12&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9 -->
+<g id="edge3" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b12:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M411.5,-354C441.22,-354 429.25,-308.02 449.2,-297.24"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="450.03,-300.64 459,-295 448.47,-293.82 450.03,-300.64"/>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b13 -->
+<g id="node5" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b13</title>
+<path fill="#788897" stroke="#4b5d6c" d="M398,-286C398,-286 249,-286 249,-286 243,-286 237,-280 237,-274 237,-274 237,-198 237,-198 237,-192 243,-186 249,-186 249,-186 398,-186 398,-186 404,-186 410,-192 410,-198 410,-198 410,-274 410,-274 410,-280 404,-286 398,-286"/>
+<text text-anchor="start" x="261.5" y="-253.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Try out remark&#45;lint&#45;</text>
+<text text-anchor="start" x="259" y="-239.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">frontmatter&#45;schema</text>
+<text text-anchor="start" x="278" y="-225.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">for Markdown</text>
+<text text-anchor="start" x="287" y="-211.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">frontmatter</text>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b13&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9 -->
+<g id="edge4" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b13:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M411.5,-236C441.22,-236 429.25,-281.98 449.2,-292.76"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="448.47,-296.18 459,-295 450.03,-289.36 448.47,-296.18"/>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b14 -->
+<g id="node6" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b14</title>
+<path fill="#788897" stroke="#4b5d6c" d="M400,-168C400,-168 247,-168 247,-168 241,-168 235,-162 235,-156 235,-156 235,-108 235,-108 235,-102 241,-96 247,-96 247,-96 400,-96 400,-96 406,-96 412,-102 412,-108 412,-108 412,-156 412,-156 412,-162 406,-168 400,-168"/>
+<text text-anchor="start" x="257" y="-135.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Automatically set up</text>
+<text text-anchor="start" x="300" y="-121.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">the IDE</text>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b14&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9 -->
+<g id="edge5" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b14:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M412.5,-132C484.01,-132 393.78,-278.87 448.86,-293.78"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="448.65,-297.28 459,-295 449.49,-290.33 448.65,-297.28"/>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b2 -->
+<g id="node7" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b2</title>
+<path fill="#788897" stroke="#4b5d6c" d="M159.5,-163.5C159.5,-163.5 36.5,-163.5 36.5,-163.5 30.5,-163.5 24.5,-157.5 24.5,-151.5 24.5,-151.5 24.5,-116.5 24.5,-116.5 24.5,-110.5 30.5,-104.5 36.5,-104.5 36.5,-104.5 159.5,-104.5 159.5,-104.5 165.5,-104.5 171.5,-110.5 171.5,-116.5 171.5,-116.5 171.5,-151.5 171.5,-151.5 171.5,-157.5 165.5,-163.5 159.5,-163.5"/>
+<text text-anchor="start" x="46.5" y="-131.3" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">jeeves&#45;generate</text>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b2&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b14 -->
+<g id="edge6" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b2:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b14:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M173,-134C196.61,-134 204.91,-132.51 224.33,-132.1"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="224.54,-135.6 234.5,-132 224.47,-128.6 224.54,-135.6"/>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b3 -->
+<g id="node8" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b3</title>
+<path fill="#788897" stroke="#4b5d6c" d="M399.5,-75.5C399.5,-75.5 247.5,-75.5 247.5,-75.5 241.5,-75.5 235.5,-69.5 235.5,-63.5 235.5,-63.5 235.5,-28.5 235.5,-28.5 235.5,-22.5 241.5,-16.5 247.5,-16.5 247.5,-16.5 399.5,-16.5 399.5,-16.5 405.5,-16.5 411.5,-22.5 411.5,-28.5 411.5,-28.5 411.5,-63.5 411.5,-63.5 411.5,-69.5 405.5,-75.5 399.5,-75.5"/>
+<text text-anchor="start" x="257.5" y="-43.3" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">iolanta&#45;json&#45;schema</text>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b3&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9 -->
+<g id="edge7" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b3:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M412.5,-46C521.45,-46 357.63,-279.21 449,-294.24"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="448.76,-297.73 459,-295 449.29,-290.75 448.76,-297.73"/>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b4 -->
+<g id="node9" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b4</title>
+<path fill="#788897" stroke="#4b5d6c" d="M184,-86C184,-86 12,-86 12,-86 6,-86 0,-80 0,-74 0,-74 0,-12 0,-12 0,-6 6,0 12,0 12,0 184,0 184,0 190,0 196,-6 196,-12 196,-12 196,-74 196,-74 196,-80 190,-86 184,-86"/>
+<text text-anchor="start" x="37" y="-53.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Look at https://gith</text>
+<text text-anchor="start" x="22" y="-39.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">ub.com/holodex/schem</text>
+<text text-anchor="start" x="45.5" y="-25.8" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">a&#45;jsonld&#45;context</text>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b4&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b3 -->
+<g id="edge8" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b4:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b3:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M196,-43C209.14,-43 214.67,-44.76 224.24,-45.58"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="224.37,-49.09 234.5,-46 224.65,-42.1 224.37,-49.09"/>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b6 -->
+<g id="node10" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b6</title>
+<path fill="#788897" stroke="#4b5d6c" d="M403,-585.5C403,-585.5 244,-585.5 244,-585.5 238,-585.5 232,-579.5 232,-573.5 232,-573.5 232,-538.5 232,-538.5 232,-532.5 238,-526.5 244,-526.5 244,-526.5 403,-526.5 403,-526.5 409,-526.5 415,-532.5 415,-538.5 415,-538.5 415,-573.5 415,-573.5 415,-579.5 409,-585.5 403,-585.5"/>
+<text text-anchor="start" x="254" y="-553.3" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Try out JSON&#45;LD LSP</text>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b6&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9 -->
+<g id="edge9" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b6:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b9:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M415,-556C499.61,-556 381.59,-378.31 448.79,-363.04"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="449.41,-366.5 459,-362 448.7,-359.54 449.41,-366.5"/>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b7 -->
+<g id="node11" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b7</title>
+<path fill="#788897" stroke="#4b5d6c" d="M1043,-430.5C1043,-430.5 922,-430.5 922,-430.5 916,-430.5 910,-424.5 910,-418.5 910,-418.5 910,-383.5 910,-383.5 910,-377.5 916,-371.5 922,-371.5 922,-371.5 1043,-371.5 1043,-371.5 1049,-371.5 1055,-377.5 1055,-383.5 1055,-383.5 1055,-418.5 1055,-418.5 1055,-424.5 1049,-430.5 1043,-430.5"/>
+<text text-anchor="start" x="932" y="-398.3" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Go to definition</text>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b7&#45;&gt;local_ultimate&#45;iolanta&#45;ide -->
+<g id="edge10" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b7:e&#45;&gt;local_ultimate&#45;iolanta&#45;ide:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M1055,-401C1067,-401 1072.25,-401 1080.88,-401"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="1081,-404.5 1091,-401 1081,-397.5 1081,-404.5"/>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b8 -->
+<g id="node12" class="node">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b8</title>
+<path fill="#788897" stroke="#4b5d6c" d="M1032,-353.5C1032,-353.5 933,-353.5 933,-353.5 927,-353.5 921,-347.5 921,-341.5 921,-341.5 921,-306.5 921,-306.5 921,-300.5 927,-294.5 933,-294.5 933,-294.5 1032,-294.5 1032,-294.5 1038,-294.5 1044,-300.5 1044,-306.5 1044,-306.5 1044,-341.5 1044,-341.5 1044,-347.5 1038,-353.5 1032,-353.5"/>
+<text text-anchor="start" x="943" y="-321.3" font-family="Arial" font-weight="bold" font-size="14.00" fill="white">Find usages</text>
+</g>
+<!-- file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b8&#45;&gt;local_ultimate&#45;iolanta&#45;ide -->
+<g id="edge11" class="edge">
+<title>file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b8:e&#45;&gt;local_ultimate&#45;iolanta&#45;ide:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M1045.5,-324C1081.21,-324 1057.4,-386.15 1081.02,-398.78"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="1080.48,-402.24 1091,-401 1082,-395.41 1080.48,-402.24"/>
+</g>
+<!-- local_json&#45;ld&#45;lsp&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b7 -->
+<g id="edge14" class="edge">
+<title>local_json&#45;ld&#45;lsp:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b7:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M874,-362C893.35,-362 889.31,-388.24 900.25,-397.67"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="899.41,-401.09 910,-401 901.66,-394.46 899.41,-401.09"/>
+</g>
+<!-- local_json&#45;ld&#45;lsp&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b8 -->
+<g id="edge13" class="edge">
+<title>local_json&#45;ld&#45;lsp:e&#45;&gt;file_///home/runner/work/iolanta&#45;tech/iolanta&#45;tech/docs/blog/autocomplete.md/b8:w</title>
+<path fill="none" stroke="#4b5d6c" stroke-width="2.5" d="M874,-362C896.23,-362 894.58,-334.95 909.35,-326.49"/>
+<polygon fill="#4b5d6c" stroke="#4b5d6c" stroke-width="2.5" points="910.62,-329.78 919.5,-324 908.95,-322.99 910.62,-329.78"/>
+</g>
+</g>
+</svg>
+</div>
+
+<h2 id="decision">Decision</h2>
+<p>…</p>
+<h2 id="consequences">Consequences</h2>
+<p>…</p>
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 iolanta.tech
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs Insiders
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.indexes", "navigation.tabs", "navigation.tabs.sticky", "content.code.annotate", "content.action.edit"], "search": "../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.10c6cd24.min.js"></script>
+      
+    
+  </body>
+</html>

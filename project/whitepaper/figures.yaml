@@ -1,0 +1,57 @@
+- $id: fig-tools-with-various-visualizations
+  rdfs:label: Figure 1
+- $id: fig-tools-with-various-visualizations-augmented
+  rdfs:label: Figure 2
+- $id: fig-fresnel-diagram
+  rdfs:label: Figure 3
+
+- $id: fig-fresnel-criteria
+  rdfs:label: Figure 4
+- $id: fig-show-properties
+  rdfs:label: Figure 5
+- $id: fig-fresnel-domain-properties
+  rdfs:label: Figure 6
+- $id: fig-fresnel-tools-plugins
+  rdfs:label: Figure 7
+- $id: fig-tal4rdf
+  rdfs:label: Figure 8
+
+- $id: fig-loading-data
+  rdfs:label: Figure 10
+
+- $id: fig-criteria-code
+  rdfs:label: Figure 10
+
+- $id: fig-facet-black-box
+  rdfs:label: Figure 11
+
+- $id: fig-v1-code
+  rdfs:label: Figure 12
+- $id: fig-v1
+  rdfs:label: Figure 13
+- $id: fig-v2
+  rdfs:label: Figure 14
+- $id: fig-v3
+  rdfs:label: Figure 15
+
+
+- $id: fig-architecture
+  rdfs:label: Figure 9
+
+- $id: fig-quoting
+  rdfs:label: Figure 11
+
+- $id: fig-criteria-facets
+  rdfs:label: Figure 12
+
+- $id: fig-algorithm
+  rdfs:label: Figure 14
+
+- $id: fig-iolanta-vocabulary
+  rdfs:label: Figure 15
+
+- $id: fig-various-visualizations
+  rdfs:label: Figure 16
+
+- $id: fig-table
+  rdfs:label: Figure 17

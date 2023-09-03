@@ -1,0 +1,12 @@
+roadmap:roadmap:
+  - title: Iolanta graph is constructed
+    $id: loading-into-graph
+    is-blocked-by:
+      - title: Apply OWL RL processing
+        is-blocked-by:
+          - title: Load each file into its dedicated subgraph
+            is-blocked-by:
+              - title: Expand each file using the Default Context + found context.json files
+                is-blocked-by:
+                  - title: Each file of supported format in the working directory
+                  - title: Files provided by Iolanta plugins

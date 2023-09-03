@@ -1,0 +1,24 @@
+roadmap:roadmap:
+  - $id: matrix
+    title: The End
+    is-blocked-by:
+      - title: Wake up in the Matrix
+        is-blocked-by: blue-pill
+      - title: Meet the Architect
+        is-blocked-by:
+          title: Save Morpheus
+          is-blocked-by:
+            - red-pill
+        branches:
+          - title: Back → Source — and Trinity dies
+          - title: Door → Matrix in hope to save Trinity
+
+  - title: Go down the rabbit hole
+    blocks:
+      - title: Take a pill
+        branches:
+          - title: Red
+            $id: red-pill
+          - title: Blue
+            $id: blue-pill
+

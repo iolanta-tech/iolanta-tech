@@ -1,0 +1,48 @@
+$id: fresnel-tools
+table:columns:
+  - table:self
+  - available
+  - last-update
+table:class:
+  $id: FresnelTool
+  $reverse:
+    rdf:type:
+      - rdfs:label: IsaViz
+        schema:url: https://www.w3.org/2001/11/IsaViz/
+        language: Java
+        last-update: 2007-10-21
+        plugin-support: no
+        available: yes
+
+      - rdfs:label: Longwell
+        language: Java
+        schema:url: http://simile.mit.edu/longwell/
+        available: no
+
+      - rdfs:label: Piggy Bank
+        language: Java
+        schema:url: http://simile.mit.edu/piggy-bank
+        available: no
+
+      - rdfs:label: Horus
+        schema:url: http://www.wiwiss.fu-berlin.de/suhl/bizer/rdfapi/tutorial/horus/index.htm
+        language: PHP
+        available: no
+
+      - rdfs:label: LENA
+        schema:url: http://isweb.uni-koblenz.de/Research/lena
+        available: no
+
+      - rdfs:label: OAT OpenLink AJAX Toolkit (OpenLink Software)
+        schema:url: http://sourceforge.net/projects/oat
+        last-update: 2012-10-23
+        plugin-support: no
+        language: Javascript
+        available: yes
+
+      - rdfs:label: Marbles
+        last-update: 2013-01-13
+        schema:url: https://github.com/mes/marbles/
+        language: Java
+        plugin-support: no
+        available: yes

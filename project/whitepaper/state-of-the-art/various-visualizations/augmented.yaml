@@ -1,0 +1,12 @@
+$id: tools-with-various-visualizations-augmented
+table:columns:
+  - table:self
+  - year
+  - available
+  - last-update
+  - rdfs:comment
+
+table:class: VisualizationTool
+table:order-by:
+  last-update:
+    table:direction: desc

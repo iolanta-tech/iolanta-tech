@@ -1,0 +1,34 @@
+"@context":
+  criterion:
+    "@type": "@id"
+
+$id: fresnel-criteria
+table:columns:
+  - criterion
+  - satisfies
+  - notes
+table:rows:
+  - criterion: criterion-table
+    satisfies: yes
+    notes: Fresnel implies HTML generation, and HTML supports tables.
+  - criterion: criterion-customize
+    satisfies: yes
+    notes:
+      rdfs:label: fresnel:showProperties
+      schema:url: "#fresnelshowproperties"
+  - criterion: criterion-context
+    satisfies: 🤔
+    notes:
+      rdfs:label: Fresnel Domain Properties
+      schema:url: "#fresnel-domain-properties"
+  - criterion: criterion-turing
+    notes: "Not applicable: not specified by Fresnel."
+  - criterion: criterion-plugins
+    satisfies: 🤔
+    notes:
+      rdfs:label: Depends on the browser
+      schema:url: "#plugins"
+
+  - criterion: criterion-self-hosted
+    satisfies: yes
+    notes: Fresnel is an RDF-based visualization description vocabulary, it satisfies this criterion by definition

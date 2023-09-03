@@ -1,0 +1,9 @@
+roadmap:roadmap:
+  - title: Rendered visualization
+    $id: facet-black-box
+    is-blocked-by:
+      - title: Facet
+        is-blocked-by:
+          - title: RDF node from Iolanta Graph to visualize
+          - title: Environment to visualize within
+          - title: Iolanta instance with its Graph

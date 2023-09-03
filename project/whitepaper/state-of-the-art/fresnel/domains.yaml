@@ -1,0 +1,39 @@
+$id: fresnel-domain-properties
+table:columns:
+  - table:self
+  - domain
+  - range
+  - notes
+table:class:
+  $reverse:
+    rdf:type:
+      - rdfs:label: fresnel:instanceLensDomain
+        domain: fresnel:Lens
+        range:
+          rdfs:label: Fresnel Selector
+          $id: fresnel-selector
+        notes: Specify instances that can be viewed via this Lens
+      - rdfs:label: fresnel:classLensDomain
+        domain: fresnel:Lens
+        range:
+          $id: fresnel-selector
+        notes: Specify classes instances of that can be viewed via this Lens
+
+      - rdfs:label: fresnel:propertyFormatDomain
+        domain: fresnel:Format
+        range: rdf:Property
+        notes: Specify the set of properties to which a format is applicable
+
+      - rdfs:label: fresnel:classFormatDomain
+        domain: fresnel:Format
+        range:
+          $id: fresnel-selector
+        notes: Specify instances that can be formatted with this Format
+      - rdfs:label: fresnel:instanceFormatDomain
+        domain: fresnel:Format
+        range:
+          $id: fresnel-selector
+        notes: Specify classes instances of that can be formatted with this Format
+      - rdfs:label: fresnel:sublens
+        range: fresnel:Lens
+        notes: For a given property mentioned in the Lens definition, specify which lens to use to render that property and its value.
